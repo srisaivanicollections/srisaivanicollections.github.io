@@ -10,16 +10,6 @@
     "availability": true
   },
   {
-    "id": 1791059649929,
-    "name": "saree",
-    "category": "Sarees",
-    "price": 10000,
-    "image": "assets/products/1791059646860-1000242369.jpg",
-    "newArrival": true,
-    "bestSeller": true,
-    "availability": true
-  },
-  {
     "id": 1,
     "name": "Royal Banarasi",
     "category": "Sarees",
