@@ -1882,3 +1882,31 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #admin .admin-toast.error{
   border-color:#b45309;
 }
+
+
+/* Final Admin Studio header compaction */
+#admin .panel-top{
+  padding-bottom:6px !important;
+  margin-bottom:5px !important;
+}
+
+#admin .panel-top h2{
+  font-size:32px !important;
+  line-height:.95 !important;
+}
+
+#admin .studio-nav{
+  margin-top:0 !important;
+  margin-bottom:7px !important;
+}
+
+#admin .studio-nav button[data-view]{
+  min-height:38px !important;
+  height:38px !important;
+  padding:5px 6px !important;
+  line-height:1 !important;
+}
+
+#admin .admin-logout{
+  padding:7px 12px !important;
+}
