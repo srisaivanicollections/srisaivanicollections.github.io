@@ -269,7 +269,7 @@ function edit(id){
     const btn=$("#deleteItem");
     if(btn)btn.disabled=true;
     try{
-      products=oldProducts.filter(x=>x.id!==id);
+      products=oldProducts.filter(x=>Number(x.id)!==Number(id));
       await deleteProductFromGithub(id);
       await load();
       render();
