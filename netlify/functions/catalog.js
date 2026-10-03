@@ -1,6 +1,6 @@
 const API = "https://api.github.com";
 const REPO = process.env.GITHUB_REPO || "vinith1111/premium_saree_website_libas";
-const BRANCH = process.env.GITHUB_BRANCH || "rebuild/premium-storefront";
+const BRANCH = process.env.GITHUB_BRANCH || "main";
 const TOKEN = process.env.GITHUB_TOKEN;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const PRODUCTS_PATH = "data/products.json";
@@ -54,6 +54,7 @@ exports.handler = async (event) => {
     const body=JSON.parse(event.body||"{}");
     if (!ADMIN_PASSWORD || body.password !== ADMIN_PASSWORD) return json(401,{error:"Unauthorized"});
     
+    if(body.action==="authenticate") return json(200,{ok:true});
     if(body.action==="saveProducts"){
       const current=await readJson(PRODUCTS_PATH,[]);
       await writeJson(PRODUCTS_PATH,body.products,current.sha,"Update product catalogue");
