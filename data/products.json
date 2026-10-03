@@ -24,18 +24,6 @@
     "availability": true
   },
   {
-    "id": 3,
-    "name": "Classic Kanchi",
-    "category": "Sarees",
-    "price": 6999,
-    "originalPrice": 7499,
-    "newArrival": false,
-    "bestSeller": true,
-    "image": "assets/saree-3.svg",
-    "description": "Classic Kanchi-inspired festive drape.",
-    "availability": true
-  },
-  {
     "id": 4,
     "name": "Festive Draped Dress",
     "category": "Dresses",
