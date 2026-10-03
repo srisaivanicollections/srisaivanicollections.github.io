@@ -915,3 +915,46 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   box-sizing:border-box!important;
   white-space:nowrap!important;
 }
+
+
+/* FINAL DESKTOP HERO CORRECTION */
+@media (min-width: 992px){
+  #shop .section-head{
+    width:100%!important;
+    max-width:1240px!important;
+    margin:0 auto 34px!important;
+    padding:3.25rem 2rem 2.75rem!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr)!important;
+    column-gap:4.5rem!important;
+    align-items:end!important;
+    box-sizing:border-box!important;
+    overflow:visible!important;
+  }
+  #shop .section-head > div{
+    min-width:0!important;
+    max-width:760px!important;
+  }
+  #shop .section-head .eyebrow{
+    margin:0 0 .8rem!important;
+    white-space:nowrap!important;
+  }
+  #shop .section-head h2{
+    width:auto!important;
+    max-width:760px!important;
+    margin:0!important;
+    font-size:clamp(3rem,4.1vw,4.15rem)!important;
+    line-height:1.02!important;
+    letter-spacing:-.025em!important;
+    overflow:visible!important;
+  }
+  #shop .section-head > p{
+    width:auto!important;
+    max-width:360px!important;
+    justify-self:end!important;
+    margin:0!important;
+    padding:0 0 8px!important;
+    font-size:1.05rem!important;
+    line-height:1.7!important;
+  }
+}
