@@ -640,3 +640,411 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
     letter-spacing:.13em;
   }
 }
+
+
+
+/* =========================================================
+   LUXURY BOUTIQUE FINAL POLISH
+   All new rules are section-scoped. No Admin styles touched.
+   ========================================================= */
+
+/* SHOP: badge collision and editorial card treatment */
+#shop .product-image .badges{
+  position:absolute;
+  top:10px;
+  left:10px;
+  right:auto;
+  bottom:auto;
+  z-index:4;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  pointer-events:none;
+}
+#shop .product-image .badges .badge{
+  position:static;
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:calc(100% - 20px);
+  min-height:0;
+  margin:0;
+  padding:5px 8px;
+  border:1px solid #C8A97E;
+  border-radius:1px;
+  background:rgba(250,247,242,.92);
+  color:#8C6D3F;
+  box-shadow:0 1px 8px rgba(28,25,23,.04);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  font-size:.62rem;
+  line-height:1;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+#shop .product-image .badges .badge.best{
+  color:#1C1917;
+}
+#shop .product-card:hover .product-image .badges .badge{
+  border-color:#B38E5D;
+}
+#shop .tabs button.active{
+  position:relative;
+  color:#1C1917;
+  border-bottom-color:transparent;
+}
+#shop .tabs button.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:2px;
+  background:#B38E5D;
+}
+#shop .search:focus-within,
+#shop .tools select:focus{
+  border-color:#C8A97E;
+  box-shadow:0 0 0 2px rgba(200,169,126,.1);
+}
+
+/* WHATSAPP: isolated concierge treatment */
+.whatsapp-banner-section{
+  background:#181513;
+  color:#FAF7F2;
+  border-top:1px solid rgba(179,142,93,.25);
+  border-bottom:1px solid rgba(179,142,93,.25);
+}
+.whatsapp-banner-section .wa-copy .eyebrow{
+  color:#B38E5D;
+}
+.whatsapp-banner-section .wa-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:48px;
+  background:#B38E5D;
+  color:#181513;
+  border:1px solid #B38E5D;
+  font-weight:600;
+  letter-spacing:.18em;
+}
+.whatsapp-banner-section .wa-btn:hover{
+  background:#C8A97E;
+  border-color:#C8A97E;
+  color:#181513;
+}
+.whatsapp-banner-section .wa-btn svg{
+  fill:currentColor;
+}
+
+/* CLIENT CHRONICLES: isolated editorial review system */
+#client-chronicles-section{
+  width:min(var(--container),100%);
+  margin-inline:auto;
+  padding:4.75rem 1.5rem;
+  box-sizing:border-box;
+  background:#FAF7F2;
+  border-top:1px solid #E7E0D8;
+  border-bottom:1px solid #E7E0D8;
+  text-align:center;
+}
+#client-chronicles-section .cc-header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 2rem;
+}
+#client-chronicles-section .cc-eyebrow{
+  display:block;
+  margin:0 0 .55rem;
+  color:#8C6D3F;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-title{
+  margin:0;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2rem,4vw,2.75rem);
+  line-height:1;
+  font-weight:400;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-subtitle{
+  margin:.45rem 0 0;
+  color:#78716C;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.05rem;
+  line-height:1.4;
+  font-style:italic;
+}
+#client-chronicles-section .cc-cards-container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+  width:100%;
+  max-width:580px;
+  margin:0 auto;
+}
+#client-chronicles-section .cc-card{
+  width:100%;
+  box-sizing:border-box;
+  padding:2.25rem 1.75rem;
+  margin:0;
+  background:#FFFFFF;
+  border:1px solid #E7E0D8;
+  border-radius:2px;
+  box-shadow:0 4px 20px rgba(28,25,23,.03);
+  text-align:center;
+}
+#client-chronicles-section .cc-quote-mark{
+  display:block;
+  margin:0 auto .45rem;
+  color:#B38E5D;
+  opacity:.78;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:2.5rem;
+  line-height:.9;
+}
+#client-chronicles-section .cc-card-stars{
+  display:block;
+  margin:0 0 .9rem;
+  color:#B38E5D;
+  font-family:Georgia,serif;
+  font-size:.9rem;
+  line-height:1;
+  letter-spacing:3px;
+}
+#client-chronicles-section .cc-quote-text{
+  max-width:470px;
+  margin:0 auto 1.25rem;
+  color:#292524;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.08rem;
+  line-height:1.72;
+  font-style:italic;
+}
+#client-chronicles-section .cc-author{
+  margin:0;
+  color:#78716C;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.72rem;
+  line-height:1.3;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-footer-cta{
+  display:flex;
+  justify-content:center;
+  width:100%;
+}
+#client-chronicles-section .cc-google-link{
+  display:inline-block;
+  margin-top:2rem;
+  padding-bottom:4px;
+  color:#1C1917;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.72rem;
+  line-height:1.3;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border-bottom:1px solid #1C1917;
+  transition:color .3s ease,border-color .3s ease;
+}
+#client-chronicles-section .cc-google-link:hover{
+  color:#B38E5D;
+  border-color:#B38E5D;
+}
+
+/* ATELIER VISIT: isolated store and map section */
+.atelier-visit-section{
+  width:100%;
+  box-sizing:border-box;
+  padding:5rem 1.5rem;
+  background:#FAF7F2;
+  border-top:1px solid #E7E0D8;
+}
+.atelier-visit-section .atelier-container{
+  width:min(var(--container),100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:3.5rem;
+  align-items:center;
+}
+.atelier-visit-section .atelier-details{
+  min-width:0;
+}
+.atelier-visit-section .atelier-eyebrow{
+  display:block;
+  margin:0 0 .75rem;
+  color:#8C6D3F;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+.atelier-visit-section .atelier-title{
+  max-width:560px;
+  margin:0 0 1.2rem;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2.1rem,4vw,3.3rem);
+  line-height:1.03;
+  font-weight:400;
+  letter-spacing:-.025em;
+}
+.atelier-visit-section .atelier-title em{
+  font-style:italic;
+}
+.atelier-visit-section .atelier-desc{
+  max-width:470px;
+  margin:0 0 2rem;
+  color:#57534E;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.9rem;
+  line-height:1.75;
+}
+.atelier-visit-section .atelier-meta{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+  margin:0 0 2rem;
+  padding-top:1.5rem;
+  border-top:1px solid #E7E0D8;
+}
+.atelier-visit-section .meta-block{
+  margin:0;
+}
+.atelier-visit-section .meta-label{
+  display:block;
+  margin:0 0 .35rem;
+  color:#B38E5D;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.64rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.atelier-visit-section .meta-text{
+  margin:0;
+  color:#1C1917;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.88rem;
+  line-height:1.5;
+}
+.atelier-visit-section .atelier-actions{
+  display:flex;
+  width:100%;
+}
+.atelier-visit-section .btn-maps-primary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:12px 22px;
+  background:#1C1917;
+  color:#FAF7F2;
+  border:1px solid #1C1917;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.7rem;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:.17em;
+  text-decoration:none;
+  transition:background .3s ease,color .3s ease,border-color .3s ease;
+}
+.atelier-visit-section .btn-maps-primary:hover{
+  background:#B38E5D;
+  color:#181513;
+  border-color:#B38E5D;
+}
+.atelier-visit-section .atelier-map-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:4 / 3;
+  overflow:hidden;
+  background:#F4EFEA;
+  border:1px solid #E7E0D8;
+  box-shadow:0 10px 30px rgba(28,25,23,.04);
+}
+.atelier-visit-section .atelier-map-frame iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  filter:grayscale(20%) contrast(95%);
+  transition:filter .4s ease;
+}
+.atelier-visit-section .atelier-map-frame:hover iframe{
+  filter:grayscale(0%) contrast(100%);
+}
+
+@media(max-width:900px){
+  #shop .products{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:32px 14px;
+  }
+  #shop .product-image .badges{
+    top:8px;
+    left:8px;
+    gap:4px;
+  }
+  #shop .product-image .badges .badge{
+    padding:4px 7px;
+    font-size:.55rem;
+    letter-spacing:.15em;
+  }
+  .atelier-visit-section{
+    padding:3.75rem 1.25rem;
+  }
+  .atelier-visit-section .atelier-container{
+    grid-template-columns:1fr;
+    gap:2.5rem;
+  }
+  .atelier-visit-section .atelier-map-frame{
+    aspect-ratio:16 / 10;
+  }
+}
+@media(max-width:600px){
+  #client-chronicles-section{
+    padding:3.5rem 1.25rem;
+  }
+  #client-chronicles-section .cc-title{
+    font-size:clamp(1.7rem,8vw,2.2rem);
+    letter-spacing:.09em;
+  }
+  #client-chronicles-section .cc-card{
+    padding:2rem 1.2rem;
+  }
+  #client-chronicles-section .cc-quote-text{
+    font-size:1rem;
+  }
+  #client-chronicles-section .cc-google-link{
+    font-size:.64rem;
+    letter-spacing:.12em;
+  }
+  .atelier-visit-section .atelier-title{
+    font-size:clamp(2rem,9vw,2.6rem);
+  }
+  .atelier-visit-section .btn-maps-primary{
+    width:100%;
+  }
+}
