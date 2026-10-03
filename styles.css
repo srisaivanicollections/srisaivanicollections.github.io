@@ -2203,3 +2203,68 @@ article .badge {
     padding:2px 5px !important;
   }
 }
+
+
+/* ===================================================
+   MICRO BADGES - ABSOLUTE FINAL OVERRIDE
+   =================================================== */
+#shop .product-card .product-image > .badges > .badge,
+#shop .product-card .product-image > .badges > .badge.new,
+#shop .product-card .product-image > .badges > .badge.best{
+  all:unset !important;
+  display:inline-block !important;
+  box-sizing:border-box !important;
+  width:auto !important;
+  max-width:max-content !important;
+  min-width:0 !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:3px 5px !important;
+  background:rgba(250,247,242,.82) !important;
+  color:#8C6D3F !important;
+  border:1px solid rgba(184,149,93,.55) !important;
+  border-radius:2px !important;
+  box-shadow:0 1px 4px rgba(0,0,0,.07) !important;
+  backdrop-filter:blur(6px) !important;
+  -webkit-backdrop-filter:blur(6px) !important;
+  font-family:"Montserrat",sans-serif !important;
+  font-size:7px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  letter-spacing:.10em !important;
+  text-align:left !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+  vertical-align:top !important;
+}
+
+#shop .product-card .product-image > .badges > .badge.best{
+  color:#44403C !important;
+  border-color:rgba(68,64,60,.30) !important;
+}
+
+#shop .product-card .product-image > .badges{
+  position:absolute !important;
+  top:7px !important;
+  left:7px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:3px !important;
+  width:max-content !important;
+  max-width:55% !important;
+  padding:0 !important;
+  margin:0 !important;
+  z-index:30 !important;
+}
+
+@media(max-width:600px){
+  #shop .product-card .product-image > .badges > .badge,
+  #shop .product-card .product-image > .badges > .badge.new,
+  #shop .product-card .product-image > .badges > .badge.best{
+    font-size:6px !important;
+    letter-spacing:.08em !important;
+    padding:2px 4px !important;
+  }
+}
