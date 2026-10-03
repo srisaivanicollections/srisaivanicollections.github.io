@@ -100,7 +100,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 /* Admin surface */
 .modal{position:fixed;inset:0;z-index:100;background:rgba(24,18,16,.76);display:grid;place-items:center;padding:24px;overflow:auto}
 .panel{width:min(920px,100%);max-height:calc(100vh - 48px);overflow:auto;padding:32px 36px;background:var(--paper);color:var(--ink);box-shadow:0 30px 90px rgba(0,0,0,.3)}
-.panel-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+.panel-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid var(--line)}
 .panel h2{margin:6px 0 0;font:500 42px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:-.02em}
 .panel-top button{border:0;background:none;color:var(--ink);font-size:28px;line-height:1}
 .panel input,.panel select{width:100%;height:44px;margin:8px 0;padding:0 12px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:12px}
@@ -112,7 +112,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   display:flex;
   align-items:stretch;
   gap:0;
-  margin-bottom:28px;
+  margin-bottom:18px;
   background:var(--paper);
   border-bottom:1px solid var(--line);
 }
@@ -1707,4 +1707,26 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   bottom:-1px;
   height:2px;
   background:var(--ink);
+}
+
+
+/* Admin Studio: tighter vertical rhythm on the settings/forms */
+#studioBody>p{
+  margin:0 0 2px;
+  line-height:1.35;
+}
+#studioBody>input,
+#studioBody>select{
+  height:42px;
+  margin:4px 0 10px;
+}
+#studioBody .btn{
+  margin-top:2px;
+}
+@media(max-width:600px){
+  #studioBody>input,
+  #studioBody>select{
+    height:40px;
+    margin:3px 0 9px;
+  }
 }
