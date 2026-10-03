@@ -1,5 +1,15 @@
 [
   {
+    "id": 1791059719221,
+    "name": "saree",
+    "category": "Sarees",
+    "price": 5000,
+    "image": "assets/products/1791059716979-1000242369.jpg",
+    "newArrival": true,
+    "bestSeller": true,
+    "availability": true
+  },
+  {
     "id": 1791059649929,
     "name": "saree",
     "category": "Sarees",
