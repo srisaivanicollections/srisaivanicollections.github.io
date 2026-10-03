@@ -1277,7 +1277,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   display:block;
   margin:0 0 .75rem;
   color:#8C6D3F;
-  font-family:"Inter",Arial,sans-serif;
+  font-family:'Montserrat',sans-serif;
   font-size:.68rem;
   line-height:1.2;
   font-weight:600;
@@ -1297,7 +1297,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   max-width:440px;
   margin:0 0 2rem;
   color:#57534E;
-  font-family:"Inter",Arial,sans-serif;
+  font-family:'Montserrat',sans-serif;
   font-size:.95rem;
   line-height:1.7;
 }
@@ -1316,7 +1316,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   display:block;
   margin:0 0 4px;
   color:#B38E5D;
-  font-family:"Inter",Arial,sans-serif;
+  font-family:'Montserrat',sans-serif;
   font-size:.65rem;
   line-height:1.2;
   font-weight:600;
@@ -1326,7 +1326,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 .atelier-visit-section .meta-text{
   margin:0;
   color:#1C1917;
-  font-family:"Inter",Arial,sans-serif;
+  font-family:'Montserrat',sans-serif;
   font-size:.9rem;
   line-height:1.5;
 }
@@ -1343,7 +1343,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   background:#1C1917;
   color:#FAF7F2;
   border:1px solid #1C1917;
-  font-family:"Inter",Arial,sans-serif;
+  font-family:'Montserrat',sans-serif;
   font-size:.72rem;
   line-height:1;
   font-weight:600;
