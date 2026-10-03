@@ -2115,3 +2115,91 @@ article .badge {
     letter-spacing:.14em !important;
   }
 }
+
+
+/* ===================================================
+   FINAL PRODUCT CARD BADGE MICRO-TAG REFINEMENT
+   =================================================== */
+#shop .product-image .badges,
+#shop .product-card .badges,
+#shop #products .badges,
+#products .product-image .badges,
+#products .product-card .badges {
+  position:absolute !important;
+  top:8px !important;
+  left:8px !important;
+  right:auto !important;
+  bottom:auto !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:flex-start !important;
+  gap:4px !important;
+  width:auto !important;
+  max-width:70% !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  z-index:5 !important;
+}
+
+#shop .product-image .badges .badge,
+#shop .product-card .badges .badge,
+#shop #products .badges .badge,
+#products .product-image .badges .badge,
+#products .product-card .badges .badge {
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:fit-content !important;
+  min-height:0 !important;
+  height:auto !important;
+  box-sizing:border-box !important;
+  background:rgba(250,247,242,.88) !important;
+  backdrop-filter:blur(6px) !important;
+  -webkit-backdrop-filter:blur(6px) !important;
+  color:#8C6D3F !important;
+  border:1px solid rgba(184,149,93,.45) !important;
+  font-family:"Montserrat",sans-serif !important;
+  font-size:.5rem !important;
+  font-weight:600 !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+  padding:2px 6px !important;
+  line-height:1.1 !important;
+  border-radius:2px !important;
+  box-shadow:0 1px 4px rgba(0,0,0,.08) !important;
+  margin:0 !important;
+  white-space:nowrap !important;
+}
+
+#shop .product-image .badges .badge.new,
+#shop .product-card .badges .badge.new,
+#products .product-image .badges .badge.new {
+  color:#8C6D3F !important;
+  border-color:rgba(184,149,93,.6) !important;
+}
+
+#shop .product-image .badges .badge.best,
+#shop .product-card .badges .badge.best,
+#products .product-image .badges .badge.best {
+  color:#44403C !important;
+  border-color:rgba(68,64,60,.35) !important;
+}
+
+@media(max-width:600px){
+  #shop .product-image .badges,
+  #products .product-image .badges {
+    top:8px !important;
+    left:8px !important;
+    gap:3px !important;
+  }
+  #shop .product-image .badges .badge,
+  #products .product-image .badges .badge {
+    font-size:.45rem !important;
+    letter-spacing:.12em !important;
+    padding:2px 5px !important;
+  }
+}
