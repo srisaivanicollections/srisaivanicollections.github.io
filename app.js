@@ -189,7 +189,54 @@ async function persistProducts(){
   await api({action:"saveProducts",password:adminPassword,products,removedIds});
   githubOriginalIds=new Set(products.map(p=>Number(p.id)));
 }
-async function saveProduct(id){let image=$("#fImage").value.trim(),file=$("#fFile").files[0];try{if(file){if(file.size>5*1024*1024)throw new Error("Image must be 5MB or smaller.");const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});const up=await api({action:"uploadImage",password:adminPassword,filename:file.name,base64});image=up.path}const p={id:id||Date.now(),name:$("#fName").value.trim(),category:$("#fCat").value,price:Number($("#fPrice").value),originalPrice:Number($("#fOriginal").value)||undefined,image,newArrival:$("#fNew").checked,bestSeller:$("#fBest").checked,availability:$("#fAvail").checked};if(!p.name||!p.price||!p.image)throw new Error("Please fill product name, price and image.");if(id)products=products.map(x=>x.id===id?p:x);else products.unshift(p);await persistProducts();render();showView("products")}catch(e){alert(e.message)}}
+async function saveProduct(id){
+  const btn=$("#saveItem");
+  if(btn) btn.disabled=true;
+  try{
+    const name=$("#fName").value.trim();
+    const categoryValue=$("#fCat").value;
+    const price=Number($("#fPrice").value);
+    const originalPrice=Number($("#fOriginal").value)||undefined;
+    let image=$("#fImage").value.trim();
+    const file=$("#fFile").files[0];
+    if(!name) throw new Error("Please enter a product name.");
+    if(!price||price<0) throw new Error("Please enter a valid price.");
+    if(!image&&!file) throw new Error("Please add an image URL/path or select an image file.");
+    if(file){
+      if(file.size>5*1024*1024) throw new Error("Image must be 5MB or smaller.");
+      const base64=await new Promise((res,rej)=>{
+        const reader=new FileReader();
+        reader.onload=()=>res(reader.result);
+        reader.onerror=()=>rej(new Error("Could not read the selected image."));
+        reader.readAsDataURL(file);
+      });
+      const up=await api({action:"uploadImage",password:adminPassword,filename:file.name,base64});
+      if(!up||!up.path) throw new Error("Image upload failed.");
+      image=up.path;
+    }
+    const p={
+      id:id||Date.now(),
+      name,
+      category:categoryValue,
+      price,
+      originalPrice,
+      image,
+      newArrival:$("#fNew").checked,
+      bestSeller:$("#fBest").checked,
+      availability:$("#fAvail").checked
+    };
+    if(id) products=products.map(x=>x.id===id?p:x);
+    else products.unshift(p);
+    await persistProducts();
+    await load();
+    showView("products");
+    alert("Item saved successfully.");
+  }catch(e){
+    alert("Unable to save item: "+(e?.message||e));
+  }finally{
+    if(btn) btn.disabled=false;
+  }
+}
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
 function getSavedGithubToken(){
   return (localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"").trim();
