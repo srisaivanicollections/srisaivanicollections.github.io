@@ -2565,3 +2565,554 @@ article .badge {
   padding-top:.25rem !important;
   padding-bottom:.25rem !important;
 }
+
+
+/* =========================================================
+   SSV LUXURY EDITORIAL REFINEMENT v8
+   UI/CSS only. No catalog, auth, CRUD or storage changes.
+   ========================================================= */
+
+:root{
+  --ink:#1C1917 !important;
+  --muted:#6F6A64 !important;
+  --line:#E4D8C5 !important;
+  --paper:#FAF8F5 !important;
+  --white:#FAF8F5 !important;
+  --accent:#1C1917 !important;
+  --accent-dark:#1C1917 !important;
+  --wa:#1C1917 !important;
+  --gold:#C8B28A !important;
+  --soft:#F3EEE7 !important;
+}
+
+/* ---------- Global luxury surface ---------- */
+html,body{
+  background:#FAF8F5 !important;
+  color:#1C1917 !important;
+}
+body{
+  font-family:"Montserrat",Arial,sans-serif;
+}
+button,a,input,select{
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------- Header: compact editorial masthead ---------- */
+.header{
+  background:rgba(250,248,245,.94) !important;
+  border-bottom:1px solid #E4D8C5 !important;
+  backdrop-filter:blur(12px) !important;
+  -webkit-backdrop-filter:blur(12px) !important;
+}
+.header-inner{
+  min-height:64px !important;
+  padding:0 28px !important;
+  gap:24px !important;
+}
+.brand b{
+  color:#1C1917 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:21px !important;
+  letter-spacing:.13em !important;
+}
+.brand small{
+  color:#6F6A64 !important;
+  letter-spacing:.30em !important;
+}
+nav{
+  gap:24px !important;
+}
+nav a,.shop-link,.admin-link{
+  color:#1C1917 !important;
+  letter-spacing:.18em !important;
+}
+.shop-link{
+  border-bottom-color:#C8B28A !important;
+}
+.admin-link{
+  border-color:#E4D8C5 !important;
+  background:transparent !important;
+}
+.admin-link:hover{
+  background:#1C1917 !important;
+  border-color:#1C1917 !important;
+  color:#FAF8F5 !important;
+}
+
+/* ---------- Marquee: quieter, not a competing hero ---------- */
+.womens-world-marquee-section{
+  background:#FAF8F5 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
+.womens-world-marquee-item,
+.womens-world-marquee-separator{
+  color:#6F6A64 !important;
+}
+.womens-world-marquee-separator{
+  color:#C8B28A !important;
+}
+
+/* ---------- Hero: tighter editorial rhythm ---------- */
+#hero.hero-section{
+  background:#FAF8F5 !important;
+  border-bottom:0 !important;
+}
+#hero.hero-section .hero-container{
+  padding:2.2rem 34px 1.6rem !important;
+}
+#hero.hero-section .hero-text-grid{
+  gap:1.25rem !important;
+}
+#hero.hero-section .hero-eyebrow{
+  color:#6F6A64 !important;
+  margin:0 0 .55rem !important;
+  font-size:9px !important;
+  letter-spacing:.24em !important;
+}
+#hero.hero-section .hero-title{
+  color:#1C1917 !important;
+  margin:0 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-weight:500 !important;
+  line-height:.98 !important;
+  letter-spacing:-.025em !important;
+}
+#hero.hero-section .hero-desc{
+  color:#6F6A64 !important;
+  margin:0 !important;
+  max-width:470px !important;
+  line-height:1.65 !important;
+}
+
+/* ---------- Catalog transition ---------- */
+#shop.catalog{
+  padding:1.1rem 34px 4.5rem !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
+#shop .toolbar{
+  margin:0 0 1.15rem !important;
+  padding:.15rem 0 .55rem !important;
+  border-top:0 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
+#shop .tabs{
+  gap:2rem !important;
+}
+#shop .tabs button{
+  color:#6F6A64 !important;
+  background:transparent !important;
+  font-size:9px !important;
+  letter-spacing:.18em !important;
+}
+#shop .tabs button.active{
+  color:#1C1917 !important;
+  border-bottom-color:#C8B28A !important;
+}
+
+/* ---------- Minimal search + price controls ---------- */
+#shop .tools{
+  gap:6px !important;
+}
+#shop .search{
+  width:220px !important;
+  height:34px !important;
+  border-color:#E4D8C5 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+#shop .tools select{
+  min-width:120px !important;
+  height:34px !important;
+  border-color:#E4D8C5 !important;
+  background:transparent !important;
+  color:#1C1917 !important;
+  box-shadow:none !important;
+}
+#shop .search:focus-within,
+#shop .tools select:focus{
+  border-color:#C8B28A !important;
+  box-shadow:0 0 0 2px rgba(200,178,138,.10) !important;
+}
+
+/* ---------- Product grid ---------- */
+#shop .products{
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  column-gap:24px !important;
+  row-gap:44px !important;
+}
+#shop .product-card{
+  min-width:0 !important;
+}
+#shop .product-image{
+  aspect-ratio:3/4 !important;
+  background:#F3EEE7 !important;
+  border:1px solid #E4D8C5 !important;
+  box-shadow:none !important;
+}
+#shop .product-image img{
+  border:0 !important;
+}
+#shop .product-card:hover .product-image img{
+  transform:scale(1.025) !important;
+}
+
+/* ---------- Delicate micro badges ---------- */
+#shop #products > article.product-card > .product-image > .badges{
+  inset:auto auto 0 0 !important;
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:wrap !important;
+  align-items:flex-end !important;
+  gap:1px !important;
+  width:auto !important;
+  max-width:100% !important;
+  padding:0 !important;
+  margin:0 !important;
+  z-index:20 !important;
+}
+#shop #products > article.product-card > .product-image > .badges > .badge,
+#shop #products > article.product-card > .product-image > .badges > .badge.new,
+#shop #products > article.product-card > .product-image > .badges > .badge.best{
+  all:unset !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  box-sizing:border-box !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  padding:3px 7px !important;
+  background:rgba(250,248,245,.84) !important;
+  color:#1C1917 !important;
+  border:1px solid rgba(200,178,138,.72) !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:blur(5px) !important;
+  -webkit-backdrop-filter:blur(5px) !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:7px !important;
+  font-weight:600 !important;
+  font-style:normal !important;
+  line-height:1 !important;
+  letter-spacing:.11em !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+}
+#shop #products > article.product-card > .product-image > .badges > .badge.new{
+  background:rgba(28,25,23,.90) !important;
+  color:#FAF8F5 !important;
+  border-color:rgba(28,25,23,.90) !important;
+}
+#shop #products > article.product-card > .product-image > .badges > .badge.best{
+  background:rgba(250,248,245,.84) !important;
+  color:#1C1917 !important;
+}
+
+/* ---------- Product information hierarchy ---------- */
+#shop .product-info{
+  padding:12px 0 0 !important;
+}
+#shop .product-info h3{
+  margin:0 0 5px !important;
+  color:#1C1917 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:22px !important;
+  font-weight:500 !important;
+  line-height:1.05 !important;
+  letter-spacing:-.005em !important;
+  text-transform:capitalize !important;
+}
+#shop .meta{
+  color:#6F6A64 !important;
+  font-size:8px !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+}
+#shop .price-line{
+  margin-top:8px !important;
+}
+#shop .price{
+  color:#1C1917 !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:15px !important;
+  font-weight:600 !important;
+  font-variant-numeric:tabular-nums !important;
+  letter-spacing:.01em !important;
+}
+#shop .price del{
+  color:#9A938B !important;
+  font-size:10px !important;
+  font-weight:400 !important;
+  margin-left:7px !important;
+}
+
+/* ---------- WhatsApp actions: quiet secondary treatment ---------- */
+#shop .wa-btn,
+#shop .product-wa,
+#shop .whatsapp-btn{
+  color:#1C1917 !important;
+  background:transparent !important;
+  border:1px solid #E4D8C5 !important;
+  box-shadow:none !important;
+}
+#shop .wa-btn:hover,
+#shop .product-wa:hover,
+#shop .whatsapp-btn:hover{
+  background:#1C1917 !important;
+  border-color:#1C1917 !important;
+  color:#FAF8F5 !important;
+}
+
+/* ---------- WhatsApp band: monochrome luxury ---------- */
+.wa-band,
+.whatsapp-banner-section{
+  background:#FAF8F5 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+  border-top:0 !important;
+}
+.wa-band .eyebrow,
+.whatsapp-banner-section .eyebrow{
+  color:#6F6A64 !important;
+}
+.wa-band h2,
+.whatsapp-banner-section h2{
+  color:#1C1917 !important;
+}
+.wa-band p,
+.whatsapp-banner-section p{
+  color:#6F6A64 !important;
+}
+.wa-band .wa-btn,
+.whatsapp-banner-section .wa-btn{
+  background:transparent !important;
+  color:#1C1917 !important;
+  border:1px solid #C8B28A !important;
+}
+
+/* ---------- Client Chronicles ---------- */
+#client-chronicles-section{
+  background:#FAF8F5 !important;
+  color:#1C1917 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
+.cc-eyebrow,.cc-subtitle,.cc-trust-label{
+  color:#6F6A64 !important;
+}
+.cc-title{
+  color:#1C1917 !important;
+}
+.cc-trust-badge{
+  border-color:#E4D8C5 !important;
+  background:transparent !important;
+}
+.cc-stars{
+  color:#C8B28A !important;
+}
+.cc-card{
+  background:transparent !important;
+  border-color:#E4D8C5 !important;
+  box-shadow:none !important;
+}
+.cc-google-link{
+  color:#1C1917 !important;
+}
+
+/* ---------- Atelier / store section ---------- */
+.atelier-visit-section{
+  background:#FAF8F5 !important;
+  color:#1C1917 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
+.atelier-eyebrow,.atelier-desc,.meta-label{
+  color:#6F6A64 !important;
+}
+.atelier-title{
+  color:#1C1917 !important;
+}
+.meta-block{
+  border-color:#E4D8C5 !important;
+}
+.btn-maps-primary{
+  background:#1C1917 !important;
+  color:#FAF8F5 !important;
+  border:1px solid #1C1917 !important;
+}
+.atelier-map-frame{
+  border-color:#E4D8C5 !important;
+  box-shadow:none !important;
+}
+
+/* ---------- Footer ---------- */
+footer{
+  background:#FAF8F5 !important;
+  border-top:0 !important;
+  color:#1C1917 !important;
+}
+footer a{
+  color:#1C1917 !important;
+}
+.footer-links a:hover{
+  color:#C8B28A !important;
+}
+
+/* ---------- Admin remains functional but visually isolated ---------- */
+#admin .panel{
+  background:#FAF8F5 !important;
+  color:#1C1917 !important;
+  border:1px solid #E4D8C5 !important;
+  box-shadow:none !important;
+}
+#admin .panel-top{
+  border-bottom-color:#E4D8C5 !important;
+}
+#admin .studio-nav{
+  border-bottom-color:#E4D8C5 !important;
+}
+#admin input,#admin select,#admin textarea{
+  background:#FAF8F5 !important;
+  color:#1C1917 !important;
+  border-color:#E4D8C5 !important;
+}
+#admin button{
+  box-shadow:none !important;
+}
+
+/* ---------- Responsive editorial tuning ---------- */
+@media(max-width:900px){
+  .header-inner{
+    min-height:58px !important;
+    padding:0 20px !important;
+  }
+  .menu{
+    display:block !important;
+  }
+  nav{
+    gap:16px !important;
+  }
+  nav a,nav .admin-link{
+    font-size:8px !important;
+  }
+  #hero.hero-section .hero-container{
+    padding:1.7rem 20px 1.15rem !important;
+  }
+  #shop.catalog{
+    padding:0.8rem 20px 3.25rem !important;
+  }
+  #shop .products{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:30px 12px !important;
+  }
+  #shop .toolbar{
+    display:block !important;
+    padding:.15rem 0 .65rem !important;
+  }
+  #shop .tabs{
+    gap:1.55rem !important;
+    margin-bottom:.65rem !important;
+  }
+  #shop .tools{
+    width:100% !important;
+  }
+  #shop .search{
+    flex:1 1 auto !important;
+    width:auto !important;
+  }
+  #shop .tools select{
+    flex:0 0 34% !important;
+    min-width:0 !important;
+  }
+}
+
+@media(max-width:600px){
+  .header-inner{
+    min-height:54px !important;
+    padding:0 16px !important;
+    gap:12px !important;
+  }
+  .brand b{
+    font-size:18px !important;
+  }
+  .brand small{
+    margin-top:5px !important;
+    font-size:6px !important;
+  }
+  nav a:not(.shop-link),
+  nav .admin-link{
+    display:none !important;
+  }
+  nav{
+    margin-left:auto !important;
+  }
+  #hero.hero-section .hero-container{
+    padding:1.35rem 16px .9rem !important;
+  }
+  #hero.hero-section .hero-text-grid{
+    gap:.7rem !important;
+  }
+  #hero.hero-section .hero-eyebrow{
+    font-size:8px !important;
+    letter-spacing:.20em !important;
+    margin-bottom:.35rem !important;
+  }
+  #hero.hero-section .hero-title{
+    font-size:clamp(39px,11vw,54px) !important;
+    line-height:.98 !important;
+  }
+  #hero.hero-section .hero-desc{
+    font-size:11px !important;
+    line-height:1.55 !important;
+  }
+  #shop.catalog{
+    padding:.45rem 16px 2.7rem !important;
+  }
+  #shop .toolbar{
+    margin-bottom:.7rem !important;
+  }
+  #shop .tabs{
+    gap:1.25rem !important;
+  }
+  #shop .tabs button{
+    font-size:8px !important;
+    padding:8px 0 7px !important;
+  }
+  #shop .search,
+  #shop .tools select{
+    height:32px !important;
+    font-size:10px !important;
+  }
+  #shop .products{
+    gap:27px 12px !important;
+  }
+  #shop .product-image{
+    border-color:#E4D8C5 !important;
+  }
+  #shop #products > article.product-card > .product-image > .badges > .badge{
+    font-size:6px !important;
+    letter-spacing:.08em !important;
+    padding:2px 5px !important;
+  }
+  #shop .product-info{
+    padding-top:10px !important;
+  }
+  #shop .product-info h3{
+    font-size:19px !important;
+    line-height:1.05 !important;
+    margin-bottom:4px !important;
+  }
+  #shop .meta{
+    font-size:7px !important;
+  }
+  #shop .price-line{
+    margin-top:6px !important;
+  }
+  #shop .price{
+    font-size:14px !important;
+  }
+  #shop .price del{
+    font-size:9px !important;
+  }
+}
+
+/* Public storefront must never expose admin credentials as part of normal layout. */
+#admin{
+  /* modal remains available only through the existing Admin trigger */
+}
