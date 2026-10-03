@@ -1616,3 +1616,27 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #admin #studio.admin-screen-hidden{
   display:none !important;
 }
+
+
+/* ===================================================
+   ADMIN STATE: HARD MUTUAL-EXCLUSION FAILSAFE
+   JS is authoritative, but CSS must never allow a
+   hidden Admin screen to reappear through flex/grid.
+   =================================================== */
+#admin .admin-screen-hidden,
+#admin #login.admin-screen-hidden,
+#admin #studio.admin-screen-hidden,
+#admin #login.hidden,
+#admin #studio.hidden,
+#adminLoginScreen.hidden,
+#adminStudioScreen.hidden{
+  display:none !important;
+}
+
+#admin #login:not(.admin-screen-hidden):not(.hidden){
+  display:block !important;
+}
+
+#admin #studio:not(.admin-screen-hidden):not(.hidden){
+  display:block !important;
+}
