@@ -1522,3 +1522,12 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   border-radius:1px !important;
   width:fit-content !important;
 }
+
+/* Remove duplicate divider lines between hero and catalogue.
+   Presentation-only; product/catalogue state remains untouched. */
+.hero-section{
+  border-bottom:0 !important;
+}
+#shop .toolbar{
+  border-top:0 !important;
+}
