@@ -136,13 +136,13 @@ async function load(){
     if(IS_GITHUB_PAGES){
       const [pr,sr]=await Promise.all([publicGitHubReadJson("data/products.json"),publicGitHubReadJson("data/settings.json")]);
       if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
-      products=pr.value;settings=sr.value||{}; delete settings.githubToken; apply();render();loadReviews();return;
+      products=pr.value;githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=sr.value||{}; delete settings.githubToken; apply();render();loadReviews();return;
     }
-    const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();if(!Array.isArray(d.products)||d.products.length===0)throw new Error("Empty catalog response.");products=d.products;settings=d.settings||{};apply();render();loadReviews();
+    const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();if(!Array.isArray(d.products)||d.products.length===0)throw new Error("Empty catalog response.");products=d.products;githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=d.settings||{};apply();render();loadReviews();
   }catch(e){
     try{
       const [pr,sr]=await Promise.all([fetch("data/products.json",{cache:"no-store"}),fetch("data/settings.json",{cache:"no-store"})]);
-      products=await pr.json();if(!Array.isArray(products)||products.length===0)throw new Error("Empty static catalog.");settings=await sr.json();apply();render();loadReviews()
+      products=await pr.json();if(!Array.isArray(products)||products.length===0)throw new Error("Empty static catalog.");githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=await sr.json();apply();render();loadReviews()
     }catch(err){
       products=[];settings={name:"SRI SAI VANI",whatsapp:"",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};apply();render();loadReviews()
     }
