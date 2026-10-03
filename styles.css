@@ -65,9 +65,9 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 #shop .product-image{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--soft)}
 #shop .product-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.25,1,.5,1)}
 #shop .product-card:hover .product-image img{transform:scale(1.05)}
-#shop .badges{position:absolute;left:14px;bottom:13px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-shadow:0 1px 12px rgba(255,255,255,.9)}
-#shop .badge{padding:0;background:none;color:var(--gold);font-size:10px;line-height:1.2;letter-spacing:.2em;font-weight:500}
-#shop .badge.best{background:none;color:var(--muted)}
+#shop .badges{position:absolute;top:10px;left:10px;bottom:auto;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+#shop .badge{display:inline-flex;align-items:center;min-height:22px;padding:4px 7px;background:rgba(250,247,242,.88);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(229,223,215,.8);color:var(--gold);font-family:"Inter",Arial,sans-serif;font-size:9px;line-height:1;letter-spacing:.18em;text-transform:uppercase;font-weight:500;white-space:nowrap}
+#shop .badge.best{color:var(--ink);background:rgba(250,247,242,.88)}
 #shop .product-info{padding:13px 1px 0}
 #shop .product-info h3{margin:0 0 5px;font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;font-weight:500;line-height:1.16;letter-spacing:-.012em}
 #shop .meta{display:block;color:var(--muted);font-family:"Inter",Arial,sans-serif;font-size:8px;line-height:1.35;letter-spacing:.14em;text-transform:uppercase;font-weight:400}
@@ -166,8 +166,8 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   .search,.tools select{width:100%;min-width:0;height:40px}
   #shop .products{gap:28px 10px}
   #shop .product-image{aspect-ratio:3/4}
-  #shop .badges{top:10px;bottom:auto;left:10px;gap:4px}
-  #shop .badge{padding:0;font-size:8px}
+  #shop .badges{top:8px;left:8px;bottom:auto;gap:4px}
+  #shop .badge{min-height:20px;padding:4px 6px;font-size:7px;letter-spacing:.16em}
   #shop .product-info{padding-top:10px}
   #shop .product-info h3{font-size:17px}
   #shop .meta{font-size:7px}
