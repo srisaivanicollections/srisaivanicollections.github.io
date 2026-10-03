@@ -138,3 +138,34 @@ footer{width:min(1380px,100%);margin:auto;padding:42px 34px;display:flex;justify
   .admin-row,.upload-row{grid-template-columns:1fr}
   .studio-nav{gap:16px;overflow:auto}
 }
+
+/* Reviews */
+.reviews{width:min(1380px,100%);margin:0 auto;padding:86px 34px 78px;background:var(--paper);border-top:1px solid var(--line)}
+.reviews .section-head{align-items:flex-end;margin-bottom:42px}
+.reviews .section-head h2{font-size:clamp(48px,5.4vw,76px);max-width:760px}
+.text-btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--ink);padding:14px 18px;color:var(--ink);text-decoration:none;font-size:9px;letter-spacing:.13em;font-weight:700;white-space:nowrap;transition:background .2s,color .2s}
+.text-btn:hover{background:var(--ink);color:#fff}
+.review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.review-grid article{min-height:190px;border:1px solid var(--line);background:#fff;padding:28px 26px;display:flex;flex-direction:column;justify-content:flex-start}
+.review-grid article:first-child{background:#f4eee9}
+.review-grid article b{font-size:26px;font-weight:600;letter-spacing:-.03em}
+.review-grid article span{display:block;margin-top:13px;color:#c59b18;font-size:18px;letter-spacing:2px;line-height:1}
+.review-grid article p{margin:20px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
+
+@media (max-width:600px){
+  .wa-band{margin-top:8px;padding:38px 18px 40px}
+  .wa-band .eyebrow{font-size:8px}
+  .wa-band h2{margin:8px 0 7px;font-size:38px;line-height:1.02}
+  .wa-band p:last-child{font-size:12px;line-height:1.55;max-width:330px}
+  .wa-btn{margin-top:22px;min-height:68px;padding:15px 18px;gap:14px;font-size:9px}
+  .wa-btn svg{width:25px;height:25px}
+  .reviews{padding:58px 16px 54px}
+  .reviews .section-head{display:block;margin-bottom:28px}
+  .reviews .section-head h2{margin-top:10px;font-size:clamp(42px,13vw,58px);line-height:.98;letter-spacing:-.045em}
+  .reviews .text-btn{margin-top:22px;width:100%;min-height:48px}
+  .review-grid{grid-template-columns:1fr;gap:10px}
+  .review-grid article{min-height:0;padding:22px 20px}
+  .review-grid article b{font-size:24px}
+  .review-grid article span{font-size:17px;margin-top:10px}
+  .review-grid article p{margin-top:13px;font-size:12px}
+}
