@@ -958,3 +958,46 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
     line-height:1.7!important;
   }
 }
+
+
+/* HERO COPY WRAP: keep title and supporting copy as one editorial unit */
+@media (min-width: 992px){
+  #shop .section-head{
+    grid-template-columns:1fr!important;
+    max-width:1240px!important;
+    margin:0 auto 34px!important;
+    padding:3.25rem 2rem 2.75rem!important;
+    box-sizing:border-box!important;
+  }
+  #shop .section-head .hero-copy-wrap{
+    width:100%!important;
+    max-width:820px!important;
+    margin:0 auto!important;
+    text-align:center!important;
+  }
+  #shop .section-head .hero-copy-wrap .eyebrow{
+    margin:0 0 .8rem!important;
+  }
+  #shop .section-head .hero-copy-wrap h2{
+    max-width:820px!important;
+    margin:0!important;
+  }
+  #shop .section-head .hero-copy-wrap > p:not(.eyebrow){
+    display:block!important;
+    max-width:620px!important;
+    margin:1.35rem auto 0!important;
+    padding:0!important;
+    text-align:center!important;
+    font-family:"Cormorant Garamond",Georgia,serif!important;
+    font-size:1.05rem!important;
+    font-style:italic!important;
+    line-height:1.7!important;
+    color:#57534E!important;
+  }
+}
+
+@media (max-width: 991px){
+  #shop .section-head .hero-copy-wrap > p:not(.eyebrow){
+    margin-top:18px!important;
+  }
+}
