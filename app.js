@@ -6,6 +6,8 @@ const LOCAL_ADMIN_PASSWORD = "admin123";
 const GITHUB_REPO = "vinith1111/premium_saree_website_libas";
 const GITHUB_BRANCH = "main";
 const GITHUB_TOKEN_KEY = "ssv_github_token_v1";
+const ADMIN_TOKEN_KEY = "gh_admin_token_libas";
+const LEGACY_TOKEN_KEY = "github_token";
 let products=[],settings={},category="All",adminPassword="",reviewsArray=[],githubOriginalIds=new Set();
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
@@ -39,7 +41,7 @@ async function localLoad(){
   return state;
 }
 async function githubRequest(path,options={}){
-  const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+  const token=getSavedGithubToken();
   if(!token) throw new Error("GitHub storage is not connected. Enter a GitHub token in Admin Studio.");
   const r=await fetch("https://api.github.com"+path,{...options,headers:{
     "Accept":"application/vnd.github+json",
@@ -313,7 +315,39 @@ let adminSessionActive=false;
 let adminLogoutLock=false;
 
 function getSavedGithubToken(){
-  return (localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"").trim();
+  const keys=[GITHUB_TOKEN_KEY,ADMIN_TOKEN_KEY,LEGACY_TOKEN_KEY];
+  for(const key of keys){
+    const local=(localStorage.getItem(key)||"").trim();
+    if(local)return local;
+    const session=(sessionStorage.getItem(key)||"").trim();
+    if(session)return session;
+  }
+  return "";
+}
+
+function storeAdminToken(token){
+  const value=String(token||"").trim();
+  if(!value)return;
+  // Keep the existing app key plus the two compatibility keys requested for
+  // Admin authentication. This does not touch catalog/localStorage data.
+  localStorage.setItem(GITHUB_TOKEN_KEY,value);
+  localStorage.setItem(ADMIN_TOKEN_KEY,value);
+  localStorage.setItem(LEGACY_TOKEN_KEY,value);
+}
+
+function updateAdminView(){
+  const token=getSavedGithubToken();
+  const loginSection=$("#login")||$("#adminLoginScreen")||$(".admin-token-section");
+  const studioSection=$("#studio")||$("#adminStudioScreen")||$(".admin-studio-content");
+
+  if(token){
+    if(loginSection)loginSection.classList.add("admin-screen-hidden");
+    if(studioSection)studioSection.classList.remove("admin-screen-hidden");
+    if(studioSection)studioSection.classList.remove("hidden");
+  }else{
+    if(loginSection)loginSection.classList.remove("admin-screen-hidden");
+    if(studioSection)studioSection.classList.add("admin-screen-hidden");
+  }
 }
 
 function openAdminModal(){
@@ -337,9 +371,9 @@ function setStorageStatus(message,connected=false){
   el.classList.toggle("connected",!!connected);
   el.style.color=connected?"#10B981":"#78716C";
 }
+
 function showAdminLogin(){
-  $("#login")?.classList.remove("hidden");
-  $("#studio")?.classList.add("hidden");
+  updateAdminView();
   $("#password").value="";
   const saved=getSavedGithubToken();
   if(saved)setStorageStatus("GitHub storage is connected.",true);
@@ -347,8 +381,7 @@ function showAdminLogin(){
 }
 
 function showAdminStudio(){
-  $("#login")?.classList.add("hidden");
-  $("#studio")?.classList.remove("hidden");
+  updateAdminView();
   $("#password").value="";
   $("#loginMsg").textContent="";
   showView("products");
@@ -366,15 +399,18 @@ async function signInAdmin(token){
   try{
     await api({action:"authenticate",password:value});
     adminPassword=value;
-    localStorage.setItem(GITHUB_TOKEN_KEY,value);
+    storeAdminToken(value);
     setStorageStatus("GitHub storage is connected.",true);
     adminSessionActive=true;
     openAdminModal();
-    showAdminStudio();
+    updateAdminView();
+    $("#password").value="";
+    showView("products");
     return true;
   }catch(e){
     adminPassword="";
     adminSessionActive=false;
+    updateAdminView();
     $("#loginMsg").textContent=e?.message||"Invalid GitHub token.";
     return false;
   }finally{
@@ -389,8 +425,9 @@ function logoutAdmin(){
   closeAdminModal();
   $("#password").value="";
   $("#loginMsg").textContent="";
-  // Deliberately keep GITHUB_TOKEN_KEY. The token is remembered for the next
-  // explicit Admin click.
+  // Token is intentionally retained. The next explicit Admin click opens
+  // the Studio directly without requesting the token again.
+  updateAdminView();
   setTimeout(()=>{adminLogoutLock=false;},300);
 }
 
@@ -416,6 +453,7 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
       if(adminLogoutLock)return;
 
       openAdminModal();
+      updateAdminView();
       const saved=getSavedGithubToken();
       if(saved){
         adminPassword=saved;
@@ -458,6 +496,9 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
     },true);
   }
 }
+
+// Authoritative initial Admin view state. Catalog/CRUD state is untouched.
+updateAdminView();
 
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
