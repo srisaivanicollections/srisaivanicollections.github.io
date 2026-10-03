@@ -222,7 +222,7 @@ $("#loginBtn").onclick=()=>{
   openStudioWithToken(entered||saved);
 };
 
-$("#logoutBtn").onclick=()=>{adminPassword="";$("#studio").classList.add("hidden");$("#login").classList.remove("hidden");$("#password").value="";$("#loginMsg").textContent="";$("#adminOpen").textContent="ADMIN";$("#admin").classList.add("hidden");/* Keep the GitHub token in localStorage so the next Admin login does not require it again. */};
+$("#logoutBtn").onclick=(e)=>{e&&e.preventDefault();e&&e.stopPropagation();adminPassword="";$("#studio").classList.add("hidden");$("#login").classList.remove("hidden");$("#password").value="";$("#loginMsg").textContent="";$("#adminOpen").textContent="ADMIN";$("#admin").classList.add("hidden");};
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 (async()=>{const saved=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";if(saved){await openStudioWithToken(saved)}})();
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
