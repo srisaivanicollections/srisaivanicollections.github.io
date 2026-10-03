@@ -422,17 +422,25 @@ async function signInAdmin(token){
 }
 
 function logoutAdmin(){
-  // LOG OUT closes the Admin Studio immediately. The GitHub token remains
-  // stored locally by design, so the next explicit Admin click can reopen
-  // the Studio without asking for the token again.
   adminLogoutLock=true;
   adminSessionActive=false;
   adminPassword="";
-  closeAdminModal();
+  
+  // Clear only the active session. Keep the GitHub token stored so the user
+  // can explicitly sign in again without re-entering it.
   if($("#password"))$("#password").value="";
   if($("#loginMsg"))$("#loginMsg").textContent="";
+  
   updateAdminView();
-  window.setTimeout(()=>{adminLogoutLock=false;},500);
+  closeAdminModal();
+  
+  // Prevent any stale click handler or bubbling event from reopening Studio.
+  window.setTimeout(()=>{
+    adminSessionActive=false;
+    updateAdminView();
+    closeAdminModal();
+    adminLogoutLock=false;
+  },700);
 }
 
 if(!window.__LIBAS_ADMIN_AUTH_BOUND){
