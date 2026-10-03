@@ -2523,42 +2523,45 @@ article .badge {
 }
 
 
+
+
 /* ===================================================
-   HERO / SHOP TRANSITION - COMPACT LUXURY SPACING
-   Exact storefront DOM scope. Typography preserved.
+   FINAL HERO → COLLECTION TRANSITION
+   Exact storefront selectors, appended last so they win
+   over desktop/mobile rules above.
    =================================================== */
 
 #hero.hero-section .hero-container{
-  padding-top:1.5rem !important;
-  padding-bottom:1.25rem !important;
+  padding-top:1rem !important;
+  padding-bottom:.75rem !important;
+}
+
+#hero.hero-section .hero-text-grid{
+  gap:.75rem !important;
 }
 
 #hero.hero-section .hero-eyebrow{
-  margin-top:0 !important;
-  margin-bottom:.5rem !important;
+  margin:0 0 .35rem !important;
 }
 
 #hero.hero-section .hero-title{
-  margin-top:0 !important;
-  margin-bottom:.75rem !important;
-  line-height:1.15 !important;
+  margin:0 0 .5rem !important;
+  line-height:1.08 !important;
 }
 
 #hero.hero-section .hero-desc{
-  margin-top:0 !important;
-  margin-bottom:1rem !important;
-  line-height:1.5 !important;
+  margin:0 !important;
+  padding-bottom:0 !important;
+  line-height:1.45 !important;
 }
 
-/* Pull the collection tabs closer to the hero without changing
-   product-card spacing or catalogue content. */
 #shop.catalog{
-  padding-top:1.25rem !important;
+  padding-top:1rem !important;
 }
 
-#shop .toolbar{
+#shop.catalog .toolbar{
   margin-top:0 !important;
-  margin-bottom:1rem !important;
-  padding-top:.4rem !important;
-  padding-bottom:.4rem !important;
+  margin-bottom:.75rem !important;
+  padding-top:.25rem !important;
+  padding-bottom:.25rem !important;
 }
