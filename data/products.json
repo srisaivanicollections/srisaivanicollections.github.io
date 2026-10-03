@@ -10,18 +10,6 @@
     "availability": true
   },
   {
-    "id": 1,
-    "name": "Royal Banarasi",
-    "category": "Sarees",
-    "price": 5499,
-    "originalPrice": 5999,
-    "newArrival": true,
-    "bestSeller": true,
-    "image": "assets/saree-1.svg",
-    "description": "A rich festive Banarasi-inspired saree.",
-    "availability": true
-  },
-  {
     "id": 2,
     "name": "Rose Silk",
     "category": "Sarees",
