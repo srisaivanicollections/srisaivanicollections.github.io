@@ -456,6 +456,7 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
       updateAdminView();
       const saved=getSavedGithubToken();
       if(saved){
+        storeAdminToken(saved);
         adminPassword=saved;
         setStorageStatus("GitHub storage is connected.",true);
         adminSessionActive=true;
