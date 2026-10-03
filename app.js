@@ -237,17 +237,18 @@ $("#loginBtn").onclick=async()=>{
   const saved=getSavedGithubToken();
   await openStudioWithToken(entered||saved,true);
 };
-$("#logoutBtn").onclick=(e)=>{
-  e?.preventDefault();
-  e?.stopPropagation();
+function logoutAdmin(){
   adminPassword="";
-  $("#studio").classList.add("hidden");
-  $("#login").classList.remove("hidden");
+  const studio=$("#studio");
+  const login=$("#login");
+  const admin=$("#admin");
+  if(studio) studio.classList.add("hidden");
+  if(login) login.classList.add("hidden");
+  if(admin) admin.classList.add("hidden");
   $("#password").value="";
   $("#loginMsg").textContent="";
-  $("#admin").classList.add("hidden");
-  $("#adminOpen").textContent="ADMIN";
-};
+}
+$("#logoutBtn").onclick=logoutAdmin;
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
 $("#search").oninput=render;$("#price").onchange=render;load();
