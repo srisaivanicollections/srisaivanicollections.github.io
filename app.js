@@ -79,8 +79,16 @@ async function localApi(body){
       return {ok:true,storage:"github"};
     }
     if(!supplied) throw new Error("Enter your GitHub token.");
+    // Validate the token before remembering it.
+    const previous=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
+    localStorage.removeItem(GITHUB_TOKEN_KEY);
+    try{
+      await githubReadJson("data/products.json");
+    }catch(e){
+      if(previous)localStorage.setItem(GITHUB_TOKEN_KEY,previous);
+      throw e;
+    }
     localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
-    await githubReadJson("data/products.json");
     return {ok:true,storage:"github"};
   }
   if(body.password!==LOCAL_ADMIN_PASSWORD && body.password!==localStorage.getItem(GITHUB_TOKEN_KEY)) throw new Error("Unauthorized");
@@ -126,7 +134,15 @@ async function localApi(body){
     const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
     const merged={...existing,...incoming};
     if(String(incoming.whatsapp??"").trim()===""&&String(existing.whatsapp??"").trim()!=="") merged.whatsapp=existing.whatsapp;
-    await githubWriteJson("data/settings.json",merged,current.sha,"Update shop settings");
+    try{
+      await githubWriteJson("data/settings.json",merged,current.sha,"Update shop settings");
+    }catch(writeError){
+      const latest=await githubReadJson("data/settings.json");
+      const latestExisting=(latest.value&&typeof latest.value==="object")?latest.value:{};
+      const retryMerged={...latestExisting,...incoming};
+      if(String(incoming.whatsapp??"").trim()===""&&String(latestExisting.whatsapp??"").trim()!=="") retryMerged.whatsapp=latestExisting.whatsapp;
+      await githubWriteJson("data/settings.json",retryMerged,latest.sha,"Retry shop settings update");
+    }
     return {ok:true};
   }
   if(body.action==="uploadImage"){
