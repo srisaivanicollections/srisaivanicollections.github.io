@@ -1,6 +1,7 @@
 const API="/.netlify/functions/catalog";
 const IS_GITHUB_PAGES = location.hostname.endsWith(".github.io");
-const LOCAL_KEY = "ssv_catalog_v3";
+const LOCAL_KEY = "ssv_catalog_v4";
+const CATALOG_SCHEMA = 4;
 const LOCAL_ADMIN_PASSWORD = "admin123";
 let products=[],settings={},category="All",adminPassword="";
 const seedFallback=[];
@@ -10,13 +11,31 @@ async function localLoad(){
     fetch("data/products.json",{cache:"no-store"}),
     fetch("data/settings.json",{cache:"no-store"})
   ]);
-  const base={products:await pr.json(),settings:await sr.json()};
-  try{
-    const saved=JSON.parse(localStorage.getItem(LOCAL_KEY)||"null");
-    if(saved&&Array.isArray(saved.products)&&saved.settings) return saved;
-  }catch(_){}
-  localStorage.setItem(LOCAL_KEY,JSON.stringify(base));
-  return base;
+  if(!pr.ok||!sr.ok) throw new Error("Catalog files could not be loaded.");
+  const baseProducts=await pr.json();
+  const baseSettings=await sr.json();
+  if(!Array.isArray(baseProducts)||baseProducts.length===0) throw new Error("Invalid or empty product catalog.");
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem(LOCAL_KEY)||"null")}catch(_){saved=null}
+  if(!saved||!Array.isArray(saved.products)||!saved.settings){
+    const fresh={schema:CATALOG_SCHEMA,products:baseProducts,settings:baseSettings};
+    localStorage.setItem(LOCAL_KEY,JSON.stringify(fresh));
+    return fresh;
+  }
+  const savedById=new Map(saved.products.map(p=>[Number(p.id),p]));
+  const baseIds=new Set(baseProducts.map(p=>Number(p.id)));
+  // STRICT CATALOG RULE: every committed product must remain in the live catalog.
+  // Local admin data may update a committed product, but cannot make a committed
+  // product disappear just because an old localStorage snapshot is stale.
+  const merged=baseProducts.map(base=>savedById.get(Number(base.id))||base);
+  // Preserve products created through Admin on this device.
+  for(const local of saved.products){
+    if(!baseIds.has(Number(local.id))) merged.push(local);
+  }
+  const state={schema:CATALOG_SCHEMA,products:merged,settings:saved.settings||baseSettings};
+  if(state.products.length===0) throw new Error("Catalog safety check failed.");
+  localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
+  return state;
 }
 async function localApi(body){
   if(body.action==="authenticate"){
@@ -26,7 +45,7 @@ async function localApi(body){
   if(body.password!==LOCAL_ADMIN_PASSWORD) throw new Error("Unauthorized");
   const state=await localLoad();
   if(body.action==="saveProducts"){
-    state.products=body.products||[];
+    state.products=Array.isArray(body.products)&&body.products.length?body.products:state.products;
     localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
     return {ok:true};
   }
@@ -51,11 +70,11 @@ async function load(){
       const d=await localLoad();
       products=d.products||[];settings=d.settings||{};apply();render();return;
     }
-    const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();products=d.products||[];settings=d.settings||{};apply();render();
+    const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();if(!Array.isArray(d.products)||d.products.length===0)throw new Error("Empty catalog response.");products=d.products;settings=d.settings||{};apply();render();
   }catch(e){
     try{
       const [pr,sr]=await Promise.all([fetch("data/products.json",{cache:"no-store"}),fetch("data/settings.json",{cache:"no-store"})]);
-      products=await pr.json();settings=await sr.json();apply();render()
+      products=await pr.json();if(!Array.isArray(products)||products.length===0)throw new Error("Empty static catalog.");settings=await sr.json();apply();render()
     }catch(err){
       products=[];settings={name:"SRI SAI VANI",whatsapp:"919999999999",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};apply();render()
     }
