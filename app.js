@@ -251,7 +251,7 @@ function showView(v){
   }
 }
 function edit(id){
-  const p=products.find(x=>x.id===id);
+  const p=products.find(x=>Number(x.id)===Number(id));
   if(!p)return;
   $("#studioBody").innerHTML=form(p);
   const saveBtn=$("#saveItem");
@@ -271,7 +271,6 @@ function edit(id){
     try{
       products=oldProducts.filter(x=>Number(x.id)!==Number(id));
       await deleteProductFromGithub(id);
-      await load();
       render();
       showView("products");
       showAdminToast("Item deleted successfully.","success");
