@@ -98,3 +98,5 @@
     padding-bottom:4px!important;
   }
 }
+
+.product-image{position:relative}.wa-image{position:absolute;right:12px;bottom:12px;z-index:4;width:40px;height:40px;background:#25D366;box-shadow:0 3px 10px rgba(0,0,0,.18)}.wa-image .wa-icon{width:21px;height:21px;fill:#fff}@media(max-width:600px){.wa-image{width:38px;height:38px;right:10px;bottom:10px}.wa-image .wa-icon{width:20px;height:20px}}
