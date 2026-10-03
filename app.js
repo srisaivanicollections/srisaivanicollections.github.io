@@ -519,6 +519,21 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
   }
 }
 
+// Direct Admin logout binding. This is intentionally attached to the actual
+// button so logout does not depend on document-level delegation or bubbling.
+function bindAdminLogoutButton(){
+  const btn=$("#logoutBtn");
+  if(!btn || btn.__libasLogoutBound)return;
+  btn.__libasLogoutBound=true;
+  btn.type="button";
+  btn.onclick=(e)=>{
+    e.preventDefault();
+    e.stopPropagation();
+    logoutAdmin();
+    return false;
+  };
+}
+
 // Authoritative initial Admin view state. Catalog/CRUD state is untouched.
 if(document.readyState==="loading"){
   document.addEventListener("DOMContentLoaded",updateAdminView,{once:true});
