@@ -71,12 +71,19 @@ async function githubWriteJson(path,value,sha,message){
 }
 async function localApi(body){
   if(body.action==="authenticate"){
-    if(body.password!==LOCAL_ADMIN_PASSWORD) throw new Error("Incorrect password.");
-    const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
-    if(token) await githubReadJson("data/products.json");
+    const supplied=String(body.password||"").trim();
+    if(supplied===LOCAL_ADMIN_PASSWORD){
+      const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+      if(!token) throw new Error("Enter your GitHub token in Admin Studio.");
+      await githubReadJson("data/products.json");
+      return {ok:true,storage:"github"};
+    }
+    if(!supplied) throw new Error("Enter your GitHub token.");
+    localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
+    await githubReadJson("data/products.json");
     return {ok:true,storage:"github"};
   }
-  if(body.password!==LOCAL_ADMIN_PASSWORD) throw new Error("Unauthorized");
+  if(body.password!==LOCAL_ADMIN_PASSWORD && body.password!==localStorage.getItem(GITHUB_TOKEN_KEY)) throw new Error("Unauthorized");
   if(body.action==="saveProducts"){
     if(!Array.isArray(body.products)||body.products.length===0) throw new Error("Catalog safety check failed.");
     const current=await githubReadJson("data/products.json");
@@ -129,7 +136,7 @@ async function load(){
     if(IS_GITHUB_PAGES){
       const [pr,sr]=await Promise.all([publicGitHubReadJson("data/products.json"),publicGitHubReadJson("data/settings.json")]);
       if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
-      products=pr.value;settings=sr.value||{}; if(settings.githubToken && !localStorage.getItem(GITHUB_TOKEN_KEY)) localStorage.setItem(GITHUB_TOKEN_KEY,String(settings.githubToken)); apply();render();loadReviews();return;
+      products=pr.value;settings=sr.value||{}; delete settings.githubToken; apply();render();loadReviews();return;
     }
     const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();if(!Array.isArray(d.products)||d.products.length===0)throw new Error("Empty catalog response.");products=d.products;settings=d.settings||{};apply();render();loadReviews();
   }catch(e){
@@ -186,8 +193,26 @@ async function saveProduct(id){let image=$("#fImage").value.trim(),file=$("#fFil
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
 $("#adminOpen").onclick=()=>$("#admin").classList.remove("hidden");
 $("#adminClose").onclick=()=>$("#admin").classList.add("hidden");
-$("#loginBtn").onclick=()=>{adminPassword=$("#password").value;if(!adminPassword)return;api({action:"authenticate",password:adminPassword}).then(()=>{$("#login").classList.add("hidden");$("#studio").classList.remove("hidden");$("#password").value="";$("#loginMsg").textContent="";$("#adminOpen").textContent="ADMIN";showView("products")}).catch(e=>{$("#loginMsg").textContent=e.message||"Incorrect password or storage is not configured."})};
+async function openStudioWithToken(token){
+  const value=String(token||"").trim();
+  if(!value) return false;
+  adminPassword=value;
+  try{
+    await api({action:"authenticate",password:value});
+    $("#login").classList.add("hidden");$("#studio").classList.remove("hidden");
+    $("#password").value="";$("#loginMsg").textContent="";$("#adminOpen").textContent="ADMIN";
+    showView("products");
+    return true;
+  }catch(e){
+    adminPassword="";
+    if(!token) $("#loginMsg").textContent=e.message||"GitHub token is invalid.";
+    return false;
+  }
+}
+$("#loginBtn").onclick=()=>openStudioWithToken($("#password").value);
+
 $("#logoutBtn").onclick=()=>{adminPassword="";$("#studio").classList.add("hidden");$("#login").classList.remove("hidden");$("#password").value="";$("#loginMsg").textContent="";$("#adminOpen").textContent="ADMIN";$("#admin").classList.add("hidden")};
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
-document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); const token=$("#setGithubToken").value.trim(); if(token){localStorage.setItem(GITHUB_TOKEN_KEY,token);settings.githubToken=token}else{delete settings.githubToken;localStorage.removeItem(GITHUB_TOKEN_KEY)} api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
+(async()=>{const saved=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";if(saved){await openStudioWithToken(saved)}})();
+document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); const token=$("#setGithubToken").value.trim(); if(token){localStorage.setItem(GITHUB_TOKEN_KEY,token);adminPassword=token} delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
 $("#search").oninput=render;$("#price").onchange=render;load();
