@@ -99,39 +99,42 @@ async function localApi(body){
     }
   }
   if(body.password!==LOCAL_ADMIN_PASSWORD && body.password!==localStorage.getItem(GITHUB_TOKEN_KEY)) throw new Error("Unauthorized");
-  if(body.action==="saveProducts"){
-    if(!Array.isArray(body.products)||body.products.length===0) throw new Error("Catalog safety check failed.");
+  if(body.action==="saveProduct"){
+    const incoming=body.product;
+    if(!incoming||!incoming.id||!String(incoming.name||"").trim()) throw new Error("Invalid product.");
     const current=await githubReadJson("data/products.json");
-    const incomingById=new Map(body.products.map(p=>[Number(p.id),p]));
-    const removed=new Set((body.removedIds||[]).map(Number));
-    const merged=[];
-    for(const p of current.value||[]){
-      const id=Number(p.id);
-      if(removed.has(id)) continue;
-      merged.push(incomingById.has(id)?incomingById.get(id):p);
-    }
-    const currentIds=new Set((current.value||[]).map(p=>Number(p.id)));
-    for(const p of body.products){
-      if(!currentIds.has(Number(p.id))) merged.push(p);
-    }
+    const list=Array.isArray(current.value)?current.value:[];
+    const id=Number(incoming.id);
+    const exists=list.some(p=>Number(p.id)===id);
+    const merged=exists?list.map(p=>Number(p.id)===id?incoming:p):[incoming,...list];
     if(!merged.length) throw new Error("Catalog safety check failed.");
     try{
-      await githubWriteJson("data/products.json",merged,current.sha,"Update product catalogue");
-    }catch(writeError){
+      await githubWriteJson("data/products.json",merged,current.sha,"Update product");
+    }catch(_){
       const latest=await githubReadJson("data/products.json");
-      const latestById=new Map((latest.value||[]).map(p=>[Number(p.id),p]));
-      const retry=[];
-      for(const p of latest.value||[]){
-        const id=Number(p.id);
-        if(removed.has(id)) continue;
-        retry.push(incomingById.has(id)?incomingById.get(id):p);
-      }
-      const latestIds=new Set((latest.value||[]).map(p=>Number(p.id)));
-      for(const p of body.products){
-        if(!latestIds.has(Number(p.id))) retry.push(p);
-      }
-      if(!retry.length) throw new Error("Catalog safety check failed.");
-      await githubWriteJson("data/products.json",retry,latest.sha,"Retry product catalogue update");
+      const latestList=Array.isArray(latest.value)?latest.value:[];
+      const latestMerged=latestList.some(p=>Number(p.id)===id)
+        ?latestList.map(p=>Number(p.id)===id?incoming:p)
+        :[incoming,...latestList];
+      await githubWriteJson("data/products.json",latestMerged,latest.sha,"Retry product update");
+    }
+    return {ok:true};
+  }
+  if(body.action==="deleteProduct"){
+    const id=Number(body.id);
+    if(!id) throw new Error("Invalid product.");
+    const current=await githubReadJson("data/products.json");
+    const list=Array.isArray(current.value)?current.value:[];
+    const merged=list.filter(p=>Number(p.id)!==id);
+    if(!merged.length) throw new Error("Catalog safety check failed.");
+    try{
+      await githubWriteJson("data/products.json",merged,current.sha,"Delete product");
+    }catch(_){
+      const latest=await githubReadJson("data/products.json");
+      const latestList=Array.isArray(latest.value)?latest.value:[];
+      const latestMerged=latestList.filter(p=>Number(p.id)!==id);
+      if(!latestMerged.length) throw new Error("Catalog safety check failed.");
+      await githubWriteJson("data/products.json",latestMerged,latest.sha,"Retry product deletion");
     }
     return {ok:true};
   }
@@ -234,7 +237,7 @@ function edit(id){
     if(btn)btn.disabled=true;
     try{
       products=oldProducts.filter(x=>x.id!==id);
-      await persistProducts();
+      await deleteProductFromGithub(id);
       await load();
       render();
       showView("products");
@@ -247,11 +250,11 @@ function edit(id){
     }
   };
 }
-async function persistProducts(){
-  const currentIds=new Set(products.map(p=>Number(p.id)));
-  const removedIds=Array.from(githubOriginalIds).filter(id=>!currentIds.has(Number(id)));
-  await api({action:"saveProducts",password:adminPassword,products,removedIds});
-  githubOriginalIds=new Set(products.map(p=>Number(p.id)));
+async function persistProduct(product){
+  await api({action:"saveProduct",password:adminPassword,product});
+}
+async function deleteProductFromGithub(id){
+  await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
 }
 async function saveProduct(id){
   const btn=$("#saveItem");
@@ -297,7 +300,7 @@ async function saveProduct(id){
     if(id)products=products.map(x=>Number(x.id)===Number(id)?p:x);
     else products=[p,...products];
 
-    await persistProducts();
+    await persistProduct(p);
     await load();
     render();
     showView("products");
