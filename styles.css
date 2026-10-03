@@ -20,3 +20,9 @@
 .product-image .badge{display:inline-flex!important;align-items:center!important;width:max-content!important;min-height:26px!important;padding:7px 10px!important;background:#faf8f5!important;color:#211b19!important;border:1px solid rgba(33,27,25,.14)!important;font-size:8px!important;line-height:1!important;letter-spacing:.16em!important;font-weight:700!important;white-space:nowrap!important;box-shadow:0 2px 8px rgba(0,0,0,.06)!important}
 .product-image .badge.new{background:#faf8f5!important;color:#211b19!important}
 .product-image .badge.best{background:#211b19!important;color:#faf8f5!important;border-color:#211b19!important}
+
+/* Refined product badges: readable, restrained and premium */
+.product-image .badges{top:14px!important;left:14px!important;gap:6px!important}
+.product-image .badge{min-height:24px!important;padding:6px 10px!important;font-size:8px!important;letter-spacing:.15em!important;font-weight:700!important;line-height:1!important;box-sizing:border-box!important}
+.product-image .badge.new{background:#faf8f4!important;color:#25201e!important;border:1px solid rgba(37,32,30,.12)!important}
+.product-image .badge.best{background:rgba(37,32,30,.94)!important;color:#faf8f4!important;border:1px solid rgba(250,248,244,.18)!important}
