@@ -103,7 +103,7 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 
 /* Footer */
 footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px}
-.footer-brand p{margin:13px 0 0;color:var(--muted);font-size:11px}
+.footer-brand p{display:none!important}
 .footer-links{display:flex;align-items:flex-start;gap:25px}
 .footer-links a{color:var(--ink);text-decoration:none;font-size:9px;letter-spacing:.13em}
 .footer-links a:hover{color:var(--accent)}
