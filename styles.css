@@ -90,18 +90,6 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 .wa-btn svg{width:19px;height:19px;fill:currentColor}
 .wa-btn b{font-size:16px;font-weight:400}
 
-/* Reviews */
-.reviews{padding:88px 34px 80px;border-top:1px solid var(--line)}
-.reviews .section-head{margin-bottom:34px}
-.text-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-size:8px;line-height:1;letter-spacing:.13em;font-weight:700;white-space:nowrap;transition:background .2s ease,color .2s ease}
-.text-btn:hover{background:var(--ink);color:#fff}
-.review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.review-grid article{min-height:168px;padding:25px 24px;border:1px solid var(--line);background:var(--white);display:flex;flex-direction:column;justify-content:flex-start}
-.review-grid article:first-child{background:#f3ece6}
-.review-grid article b{font-family:"Cormorant Garamond",Georgia,serif;font-size:31px;line-height:1;font-weight:600;letter-spacing:-.03em}
-.review-grid article span{display:block;margin-top:12px;color:var(--gold);font-size:16px;line-height:1;letter-spacing:2px}
-.review-grid article p{margin:17px 0 0;color:var(--muted);font-size:11px;line-height:1.65}
-
 /* Footer */
 footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px}
 .footer-brand p{display:none!important}
@@ -419,30 +407,6 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 }
 .wa-btn svg{fill:currentColor}
 
-.reviews .text-btn{
-  border:0;
-  border-bottom:1px solid #B38E5D;
-  padding:8px 0 5px;
-  background:transparent;
-  color:#1C1917;
-  justify-content:flex-start;
-}
-.reviews .text-btn:hover{
-  background:transparent;
-  color:#8C6D3F;
-  border-bottom-color:#8C6D3F;
-}
-.review-grid article:first-child b{
-  display:none;
-}
-.review-grid article:first-child{
-  background:#F5F0EB;
-}
-.review-grid article span{
-  color:#B38E5D;
-  letter-spacing:2.5px;
-}
-
 #shop .tabs button.active::after{
   height:2px;
   background:#B38E5D;
@@ -510,4 +474,169 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 
 
 
+}
+
+
+/* Client Chronicles: fully isolated review presentation */
+#client-chronicles-section{
+  width:min(var(--container),100%);
+  margin-inline:auto;
+  box-sizing:border-box;
+  padding:4.5rem 1.5rem;
+  background:#FAF7F2;
+  border-top:1px solid #E7E0D8;
+  border-bottom:1px solid #E7E0D8;
+  text-align:center;
+}
+#client-chronicles-section .cc-header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+#client-chronicles-section .cc-eyebrow{
+  margin:0;
+  color:#8C6D3F;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-title{
+  margin:.35rem 0 0;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(1.8rem,3.5vw,2.4rem);
+  line-height:1;
+  font-weight:400;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-subtitle{
+  margin:.35rem 0 0;
+  color:#78716C;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1rem;
+  line-height:1.4;
+  font-style:italic;
+}
+#client-chronicles-section .cc-rating{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:1.15rem auto 0;
+}
+#client-chronicles-section .cc-stars{
+  color:#B38E5D;
+  font-family:Georgia,serif;
+  font-size:1.05rem;
+  line-height:1;
+  letter-spacing:4px;
+}
+#client-chronicles-section .cc-rating-score{
+  margin-top:.45rem;
+  color:#44403C;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.8rem;
+  line-height:1.3;
+  letter-spacing:.08em;
+}
+#client-chronicles-section .cc-rating-score b{
+  font-weight:500;
+}
+#client-chronicles-section .cc-reviews{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+  width:100%;
+}
+#client-chronicles-section .cc-card{
+  width:min(560px,100%);
+  margin:1.75rem auto 0;
+  box-sizing:border-box;
+  padding:2.25rem 1.75rem;
+  background:#FFFFFF;
+  border:1px solid #E7E0D8;
+  border-radius:2px;
+  box-shadow:0 4px 20px rgba(28,25,23,.03);
+  text-align:center;
+}
+#client-chronicles-section .cc-card + .cc-card{
+  margin-top:0;
+}
+#client-chronicles-section .cc-card::before{
+  content:"“";
+  display:block;
+  margin:0 auto .75rem;
+  color:#B38E5D;
+  opacity:.75;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:2.2rem;
+  line-height:1;
+}
+#client-chronicles-section .cc-card-stars{
+  display:block;
+  color:#B38E5D;
+  font-family:Georgia,serif;
+  font-size:.9rem;
+  line-height:1;
+  letter-spacing:3px;
+}
+#client-chronicles-section .cc-quote{
+  margin:1rem auto 0;
+  max-width:470px;
+  color:#292524;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.05rem;
+  line-height:1.75;
+  font-style:italic;
+}
+#client-chronicles-section .cc-score{
+  display:block;
+  margin:1rem auto 0;
+  color:#44403C;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.8rem;
+  line-height:1.3;
+  font-weight:500;
+  letter-spacing:.08em;
+}
+#client-chronicles-section .cc-google-link{
+  display:inline-block;
+  margin-top:2rem;
+  padding-bottom:3px;
+  color:#1C1917;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.72rem;
+  line-height:1.3;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border-bottom:1px solid #1C1917;
+  transition:color .3s ease,border-color .3s ease;
+}
+#client-chronicles-section .cc-google-link:hover{
+  color:#B38E5D;
+  border-color:#B38E5D;
+}
+@media(max-width:600px){
+  #client-chronicles-section{
+    padding:3.5rem 1.25rem;
+  }
+  #client-chronicles-section .cc-title{
+    font-size:clamp(1.55rem,8vw,2rem);
+    letter-spacing:.11em;
+  }
+  #client-chronicles-section .cc-card{
+    padding:2rem 1.25rem;
+  }
+  #client-chronicles-section .cc-google-link{
+    font-size:.66rem;
+    letter-spacing:.13em;
+  }
 }
