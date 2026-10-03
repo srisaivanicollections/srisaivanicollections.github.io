@@ -391,7 +391,7 @@ function showAdminStudio(){
 }
 
 async function signInAdmin(token){
-  const value=String(token||"").trim();
+  const value=String(token||getSavedGithubToken()||"").trim();
   if(!value){
     $("#loginMsg").textContent="Enter your GitHub token.";
     return false;
