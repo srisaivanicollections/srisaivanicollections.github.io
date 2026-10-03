@@ -1,7 +1,66 @@
 const API="/.netlify/functions/catalog";
+const IS_GITHUB_PAGES = location.hostname.endsWith(".github.io");
+const LOCAL_KEY = "ssv_catalog_v1";
+const LOCAL_ADMIN_PASSWORD = "admin123";
 let products=[],settings={},category="All",adminPassword="";
 const seedFallback=[];
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
+async function localLoad(){
+  const [pr,sr]=await Promise.all([
+    fetch("data/products.json",{cache:"no-store"}),
+    fetch("data/settings.json",{cache:"no-store"})
+  ]);
+  const base={products:await pr.json(),settings:await sr.json()};
+  try{
+    const saved=JSON.parse(localStorage.getItem(LOCAL_KEY)||"null");
+    if(saved&&Array.isArray(saved.products)&&saved.settings) return saved;
+  }catch(_){}
+  localStorage.setItem(LOCAL_KEY,JSON.stringify(base));
+  return base;
+}
+async function localApi(body){
+  if(body.action==="authenticate"){
+    if(body.password!==LOCAL_ADMIN_PASSWORD) throw new Error("Incorrect password.");
+    return {ok:true};
+  }
+  if(body.password!==LOCAL_ADMIN_PASSWORD) throw new Error("Unauthorized");
+  const state=await localLoad();
+  if(body.action==="saveProducts"){
+    state.products=body.products||[];
+    localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
+    return {ok:true};
+  }
+  if(body.action==="saveSettings"){
+    state.settings=body.settings||{};
+    localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
+    return {ok:true};
+  }
+  if(body.action==="uploadImage"){
+    return {ok:true,path:String(body.base64||"")};
+  }
+  throw new Error("Unknown action");
+}
+async function api(body){
+  if(IS_GITHUB_PAGES) return localApi(body);
+  const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  const d=await r.json();if(!r.ok)throw new Error(d.error||"Request failed");return d
+}
+async function load(){
+  try{
+    if(IS_GITHUB_PAGES){
+      const d=await localLoad();
+      products=d.products||[];settings=d.settings||{};apply();render();$("#empty").classList.toggle("hidden",products.length>0);return;
+    }
+    const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();products=d.products||[];settings=d.settings||{};apply();render();
+  }catch(e){
+    try{
+      const [pr,sr]=await Promise.all([fetch("data/products.json",{cache:"no-store"}),fetch("data/settings.json",{cache:"no-store"})]);
+      products=await pr.json();settings=await sr.json();apply();render();$("#empty").classList.add("hidden")
+    }catch(err){
+      products=[];settings={name:"SRI SAI VANI",whatsapp:"919999999999",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};apply();render();$("#empty").classList.remove("hidden");$("#empty").textContent="Catalogue temporarily unavailable. Please refresh in a moment."
+    }
+  }
+}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function wa(p){return "https://wa.me/"+settings.whatsapp+"?text="+encodeURIComponent("Hi Sri Sai Vani, I am interested in "+p.name+" ("+money(p.price)+"). Is it available?")}
