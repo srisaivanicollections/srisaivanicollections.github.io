@@ -94,5 +94,16 @@
     "image": "assets/dress-4.svg",
     "description": "Easy everyday printed styling.",
     "availability": true
+  },
+  {
+    "id": 1791053896069,
+    "name": "Pink saree",
+    "category": "Sarees",
+    "price": 3000,
+    "originalPrice": 5000,
+    "image": "assets/products/1791053893895-SLUS0051574_PURPLE_1_800x800.jpg",
+    "newArrival": true,
+    "bestSeller": true,
+    "availability": true
   }
 ]
