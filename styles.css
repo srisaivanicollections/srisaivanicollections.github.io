@@ -1791,3 +1791,38 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   margin-bottom: 0.6rem !important;
   gap: 0.6rem !important;
 }
+
+
+/* Admin Studio header: strict #admin scope */
+#admin .panel-top{
+  padding-bottom:10px !important;
+  margin-bottom:10px !important;
+}
+
+#admin .panel-top .eyebrow{
+  margin-bottom:2px !important;
+  line-height:1 !important;
+}
+
+#admin .panel-top h2{
+  font-size:34px !important;
+  line-height:1 !important;
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  padding:0 !important;
+}
+
+#admin .panel-top > button{
+  font-size:25px !important;
+  line-height:1 !important;
+}
+
+#admin .studio-nav{
+  margin-bottom:10px !important;
+}
+
+#admin .studio-nav button[data-view]{
+  min-height:46px !important;
+  padding-top:9px !important;
+  padding-bottom:9px !important;
+}
