@@ -1542,8 +1542,6 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    ADMIN TOKEN LOGIN LAYOUT
    Scoped to Admin Studio only.
    =================================================== */
-#admin form,
-#admin #login,
 #adminLoginForm,
 #githubTokenForm,
 #admin .token-form-container{
@@ -1551,6 +1549,16 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   flex-direction:column !important;
   gap:12px !important;
   align-items:stretch !important;
+}
+
+#admin #login{
+  flex-direction:column !important;
+  gap:12px !important;
+  align-items:stretch !important;
+}
+
+#admin #login.hidden{
+  display:none !important;
 }
 
 #admin button[type="submit"],
@@ -1590,3 +1598,8 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #admin #loginMsg{
   min-height:1.1em;
 }
+
+
+/* Keep Admin login/studio state controlled by the .hidden class.
+   Do not force display on #login because that would override .hidden. */
+#admin .hidden { display:none !important; }
