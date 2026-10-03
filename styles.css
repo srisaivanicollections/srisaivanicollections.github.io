@@ -1454,3 +1454,71 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
+
+
+/* ===================================================
+   MOBILE HERO TYPOGRAPHY + BOUTIQUE MICRO BADGES
+   Presentation-only patch. Catalogue/state untouched.
+   =================================================== */
+.hero-section h1,
+.hero-section .hero-title,
+#hero h1,
+#hero .hero-title,
+.shop-header h1{
+  font-family:'Cormorant Garamond',Georgia,serif !important;
+  font-weight:500 !important;
+  color:#1C1917 !important;
+  letter-spacing:-0.01em !important;
+  line-height:1.15 !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+.hero-section p,
+.hero-section .hero-desc,
+#hero p,
+.shop-header p{
+  font-family:'Cormorant Garamond',Georgia,serif !important;
+  font-style:italic !important;
+  font-size:1.05rem !important;
+  line-height:1.65 !important;
+  color:#44403C !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+.hero-section .hero-eyebrow,
+#hero .hero-eyebrow{
+  font-family:'Montserrat',sans-serif !important;
+  font-size:.65rem !important;
+  letter-spacing:.22em !important;
+  text-transform:uppercase !important;
+  color:#8C6D3F !important;
+  font-weight:600 !important;
+}
+#shop article .badge-container,
+.collection-grid article .badge-container{
+  position:absolute !important;
+  top:8px !important;
+  left:8px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:4px !important;
+  z-index:3 !important;
+}
+#shop article .badge,
+.collection-grid article .badge{
+  position:static !important;
+  background:rgba(250,247,242,.92) !important;
+  backdrop-filter:blur(6px) !important;
+  border:1px solid #C8A97E !important;
+  color:#8C6D3F !important;
+  font-family:'Montserrat',sans-serif !important;
+  font-size:.58rem !important;
+  font-weight:500 !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase !important;
+  padding:3px 6px !important;
+  border-radius:1px !important;
+  width:fit-content !important;
+}
