@@ -1826,3 +1826,59 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   padding-top:9px !important;
   padding-bottom:9px !important;
 }
+
+
+/* Admin CRUD premium interaction layer, strictly scoped */
+#admin .admin-item{
+  transition:background .2s ease,transform .2s ease;
+}
+#admin .admin-item:hover{
+  background:rgba(0,0,0,.018);
+}
+#admin #saveItem,
+#admin #deleteItem{
+  min-height:36px;
+  padding:8px 14px !important;
+  font-size:9px !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase;
+}
+#admin #saveItem{
+  border:1px solid var(--ink);
+  transition:opacity .2s ease,transform .2s ease;
+}
+#admin #saveItem:hover:not(:disabled){
+  transform:translateY(-1px);
+}
+#admin #saveItem.is-busy{
+  opacity:.6;
+  cursor:wait;
+}
+#admin #deleteItem{
+  border:1px solid var(--line);
+  background:transparent;
+}
+#admin .admin-toast{
+  position:absolute;
+  left:50%;
+  bottom:20px;
+  transform:translate(-50%,10px);
+  opacity:0;
+  pointer-events:none;
+  padding:10px 16px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:10px;
+  letter-spacing:.08em;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  transition:opacity .2s ease,transform .2s ease;
+  z-index:20;
+}
+#admin .admin-toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+#admin .admin-toast.error{
+  border-color:#b45309;
+}
