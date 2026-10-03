@@ -3,6 +3,9 @@ const IS_GITHUB_PAGES = location.hostname.endsWith(".github.io");
 const LOCAL_KEY = "ssv_catalog_v4";
 const CATALOG_SCHEMA = 4;
 const LOCAL_ADMIN_PASSWORD = "admin123";
+const GITHUB_REPO = "vinith1111/premium_saree_website_libas";
+const GITHUB_BRANCH = "main";
+const GITHUB_TOKEN_KEY = "ssv_github_token_v1";
 let products=[],settings={},category="All",adminPassword="",reviewsArray=[];
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
@@ -35,25 +38,73 @@ async function localLoad(){
   localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
   return state;
 }
+async function githubRequest(path,options={}){
+  const token=sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+  if(!token) throw new Error("GitHub storage is not connected. Enter a GitHub token in Admin Studio.");
+  const r=await fetch("https://api.github.com"+path,{...options,headers:{
+    "Accept":"application/vnd.github+json",
+    "Authorization":"Bearer "+token,
+    "X-GitHub-Api-Version":"2022-11-28",
+    ...(options.headers||{})
+  }});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(d.message||"GitHub request failed");
+  return d;
+}
+async function githubReadJson(path){
+  const d=await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path+"?ref="+encodeURIComponent(GITHUB_BRANCH));
+  const content=atob(String(d.content||"").replace(/\n/g,""));
+  return {value:JSON.parse(content),sha:d.sha};
+}
+async function githubWriteJson(path,value,sha,message){
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(value,null,2))));
+  return githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path,{
+    method:"PUT",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({message,content,sha,branch:GITHUB_BRANCH})
+  });
+}
 async function localApi(body){
   if(body.action==="authenticate"){
     if(body.password!==LOCAL_ADMIN_PASSWORD) throw new Error("Incorrect password.");
-    return {ok:true};
+    const token=String(body.githubToken||"").trim();
+    if(!token) throw new Error("Enter your GitHub token to enable Git-backed Admin Studio.");
+    sessionStorage.setItem(GITHUB_TOKEN_KEY,token);
+    await githubReadJson("data/products.json");
+    return {ok:true,storage:"github"};
   }
   if(body.password!==LOCAL_ADMIN_PASSWORD) throw new Error("Unauthorized");
-  const state=await localLoad();
   if(body.action==="saveProducts"){
-    state.products=Array.isArray(body.products)&&body.products.length?body.products:state.products;
-    localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
+    if(!Array.isArray(body.products)||body.products.length===0) throw new Error("Catalog safety check failed.");
+    const current=await githubReadJson("data/products.json");
+    const currentById=new Map((Array.isArray(current.value)?current.value:[]).map(p=>[Number(p.id),p]));
+    const incomingById=new Map(body.products.map(p=>[Number(p.id),p]));
+    const merged=[];
+    for(const p of current.value||[]){
+      merged.push(incomingById.has(Number(p.id))?incomingById.get(Number(p.id)):p);
+    }
+    for(const p of body.products){
+      if(!currentById.has(Number(p.id))) merged.push(p);
+    }
+    await githubWriteJson("data/products.json",merged,current.sha,"Update product catalogue");
     return {ok:true};
   }
   if(body.action==="saveSettings"){
-    state.settings=body.settings||{};
-    localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
+    const current=await githubReadJson("data/settings.json");
+    await githubWriteJson("data/settings.json",body.settings||{},current.sha,"Update shop settings");
     return {ok:true};
   }
   if(body.action==="uploadImage"){
-    return {ok:true,path:String(body.base64||"")};
+    const safe=String(body.filename||"product.jpg").replace(/[^a-zA-Z0-9._-]/g,"-");
+    const path="assets/products/"+Date.now()+"-"+safe;
+    const content=String(body.base64||"").replace(/^data:[^;]+;base64,/,"");
+    if(!content) throw new Error("Image data missing");
+    const d=await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path,{
+      method:"PUT",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:"Add product image",content,branch:GITHUB_BRANCH})
+    });
+    return {ok:true,path:path,sha:d.content?.sha||""};
   }
   throw new Error("Unknown action");
 }
@@ -65,6 +116,12 @@ async function api(body){
 async function load(){
   try{
     if(IS_GITHUB_PAGES){
+      const token=sessionStorage.getItem(GITHUB_TOKEN_KEY);
+      if(token){
+        const [pr,sr]=await Promise.all([githubReadJson("data/products.json"),githubReadJson("data/settings.json")]);
+        if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
+        products=pr.value;settings=sr.value||{};apply();render();loadReviews();return;
+      }
       const d=await localLoad();
       products=d.products||[];settings=d.settings||{};apply();render();loadReviews();return;
     }
