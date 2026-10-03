@@ -1043,3 +1043,352 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
     color:#57534E!important;
   }
 }
+
+
+
+/* =========================================================
+   SRI SAI VANI / ANTIQUE ZARI GOLD + WARM SILK LINEN
+   Scoped storefront presentation layer only.
+   No catalogue, state, storage, auth, or CRUD rules are changed.
+   ========================================================= */
+
+.hero-section{
+  width:100%;
+  box-sizing:border-box;
+  background:#FAF7F2;
+  border-bottom:1px solid #E7E0D8;
+  overflow:hidden;
+}
+.hero-section .hero-container{
+  width:min(1240px,100%);
+  margin:0 auto;
+  padding:3rem 1.25rem 2rem;
+  box-sizing:border-box;
+}
+.hero-section .hero-text-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+  align-items:end;
+}
+.hero-section .hero-eyebrow{
+  display:block;
+  margin:0 0 .75rem;
+  color:#8C6D3F;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+.hero-section .hero-title{
+  margin:0;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2.35rem,8vw,3.4rem);
+  line-height:1.08;
+  font-weight:400;
+  letter-spacing:-.025em;
+}
+.hero-section .hero-desc{
+  max-width:620px;
+  margin:0;
+  color:#57534E;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.05rem;
+  line-height:1.7;
+  font-style:italic;
+}
+@media(min-width:992px){
+  .hero-section .hero-container{
+    padding:4.5rem 2rem 3.25rem;
+  }
+  .hero-section .hero-text-grid{
+    grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
+    gap:3.5rem;
+  }
+  .hero-section .hero-desc{
+    padding-bottom:.3rem;
+  }
+}
+
+#client-chronicles-section{
+  width:min(var(--container),100%);
+  margin-inline:auto;
+  box-sizing:border-box;
+  padding:3.5rem 1.25rem;
+  background:#FAF7F2;
+  border-top:1px solid #E7E0D8;
+  border-bottom:1px solid #E7E0D8;
+  text-align:center;
+}
+#client-chronicles-section .cc-header{
+  margin:0 auto 2rem;
+}
+#client-chronicles-section .cc-eyebrow{
+  display:block;
+  margin:0 0 .5rem;
+  color:#8C6D3F;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-title{
+  margin:0;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2rem,4vw,2.75rem);
+  line-height:1;
+  font-weight:400;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-subtitle{
+  margin:.35rem 0 1.25rem;
+  color:#78716C;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.05rem;
+  line-height:1.4;
+  font-style:italic;
+}
+#client-chronicles-section .cc-trust-badge{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+#client-chronicles-section .cc-stars,
+#client-chronicles-section .cc-card-stars{
+  color:#B38E5D;
+  font-family:Georgia,serif;
+  line-height:1;
+  letter-spacing:4px;
+}
+#client-chronicles-section .cc-stars{font-size:1.05rem}
+#client-chronicles-section .cc-card-stars{
+  margin:0 0 1rem;
+  font-size:.9rem;
+  letter-spacing:3px;
+}
+#client-chronicles-section .cc-trust-label{
+  color:#44403C;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.78rem;
+  line-height:1.3;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-cards-container{
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  width:100%;
+  max-width:580px;
+  margin:0 auto 2.5rem;
+}
+#client-chronicles-section .cc-card{
+  position:relative;
+  width:100%;
+  box-sizing:border-box;
+  padding:2rem 1.5rem;
+  background:#FFFFFF;
+  border:1px solid #E7E0D8;
+  border-radius:2px;
+  box-shadow:0 4px 20px rgba(28,25,23,.03);
+  text-align:center;
+}
+#client-chronicles-section .cc-quote-mark{
+  display:block;
+  margin:0 0 .5rem;
+  color:#B38E5D;
+  opacity:.85;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:3rem;
+  line-height:1;
+}
+#client-chronicles-section .cc-quote-text{
+  margin:0 0 1.25rem;
+  color:#292524;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.05rem;
+  line-height:1.7;
+  font-style:italic;
+}
+#client-chronicles-section .cc-author{
+  margin:0;
+  color:#78716C;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.75rem;
+  line-height:1.3;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+#client-chronicles-section .cc-footer-cta{
+  display:flex;
+  justify-content:center;
+  width:100%;
+}
+#client-chronicles-section .cc-google-link{
+  display:inline-block;
+  padding-bottom:3px;
+  color:#1C1917;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.74rem;
+  line-height:1.3;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border-bottom:1px solid #1C1917;
+  transition:color .3s ease,border-color .3s ease;
+}
+#client-chronicles-section .cc-google-link:hover{
+  color:#B38E5D;
+  border-color:#B38E5D;
+}
+@media(min-width:992px){
+  #client-chronicles-section{padding:4.5rem 1.5rem}
+  #client-chronicles-section .cc-cards-container{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    max-width:1040px;
+    gap:2rem;
+  }
+  #client-chronicles-section .cc-card{padding:2.5rem 2rem}
+}
+
+.atelier-visit-section{
+  width:100%;
+  box-sizing:border-box;
+  padding:3.5rem 1.25rem;
+  background:#FAF7F2;
+  border-top:1px solid #E7E0D8;
+  overflow:hidden;
+}
+.atelier-visit-section .atelier-container{
+  width:min(1240px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2.5rem;
+  align-items:center;
+}
+.atelier-visit-section .atelier-details{
+  min-width:0;
+}
+.atelier-visit-section .atelier-eyebrow{
+  display:block;
+  margin:0 0 .75rem;
+  color:#8C6D3F;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+.atelier-visit-section .atelier-title{
+  margin:0 0 1.25rem;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2rem,3.5vw,2.75rem);
+  line-height:1.2;
+  font-weight:400;
+}
+.atelier-visit-section .atelier-title em{font-style:italic}
+.atelier-visit-section .atelier-desc{
+  max-width:440px;
+  margin:0 0 2rem;
+  color:#57534E;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.95rem;
+  line-height:1.7;
+}
+.atelier-visit-section .atelier-meta{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+  margin:0 0 2.25rem;
+  padding-top:1.5rem;
+  border-top:1px solid #E7E0D8;
+}
+.atelier-visit-section .meta-block{
+  min-width:0;
+}
+.atelier-visit-section .meta-label{
+  display:block;
+  margin:0 0 4px;
+  color:#B38E5D;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.65rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.atelier-visit-section .meta-text{
+  margin:0;
+  color:#1C1917;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.9rem;
+  line-height:1.5;
+}
+.atelier-visit-section .atelier-actions{
+  display:flex;
+  width:100%;
+}
+.atelier-visit-section .btn-maps-primary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:13px 24px;
+  background:#1C1917;
+  color:#FAF7F2;
+  border:1px solid #1C1917;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.72rem;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-decoration:none;
+  transition:background .3s ease,color .3s ease,border-color .3s ease;
+}
+.atelier-visit-section .btn-maps-primary:hover{
+  background:#B38E5D;
+  color:#181513;
+  border-color:#B38E5D;
+}
+.atelier-visit-section .atelier-map-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/10;
+  overflow:hidden;
+  background:#F4EFEA;
+  border:1px solid #E7E0D8;
+  box-shadow:0 10px 30px rgba(28,25,23,.04);
+}
+.atelier-visit-section .atelier-map-frame iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  filter:grayscale(20%) contrast(95%);
+}
+@media(min-width:992px){
+  .atelier-visit-section{padding:5rem 1.5rem}
+  .atelier-visit-section .atelier-container{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:4rem;
+  }
+  .atelier-visit-section .atelier-map-frame{aspect-ratio:4/3}
+  .atelier-visit-section .atelier-actions{width:auto}
+}
+@media(max-width:600px){
+  .atelier-visit-section .btn-maps-primary{width:100%}
+  #client-chronicles-section .cc-card{padding:2rem 1.2rem}
+}
