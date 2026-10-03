@@ -100,3 +100,5 @@
 }
 
 .product-image{position:relative}.wa-image{position:absolute;right:12px;bottom:12px;z-index:4;width:40px;height:40px;background:#25D366;box-shadow:0 3px 10px rgba(0,0,0,.18)}.wa-image .wa-icon{width:21px;height:21px;fill:#fff}@media(max-width:600px){.wa-image{width:38px;height:38px;right:10px;bottom:10px}.wa-image .wa-icon{width:20px;height:20px}}
+
+.wa-band{margin-top:70px}.wa-btn{align-items:center;gap:12px;background:#25D366;border-color:#25D366;border-radius:2px;padding:15px 20px}.wa-btn svg{width:22px;height:22px;fill:#fff}.wa-btn span{font-size:9px;letter-spacing:.15em}@media(max-width:600px){.wa-band{margin-top:45px;padding:34px 24px;display:block}.wa-band h2{font-size:38px}.wa-band .wa-btn{margin-top:24px;width:max-content;max-width:100%;}.wa-band .wa-copy p:last-child{font-size:13px;line-height:1.6}}
