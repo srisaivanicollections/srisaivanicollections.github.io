@@ -274,12 +274,12 @@ function edit(id){
       await load();
       render();
       showView("products");
-      alert("Item deleted successfully.");
+      showAdminToast("Item deleted successfully.","success");
     }catch(e){
       products=oldProducts;
       render();
       if(btn)btn.disabled=false;
-      alert("Unable to delete item: "+(e?.message||e));
+      showAdminToast("Unable to delete item: "+(e?.message||e),"error");
     }
   };
 }
@@ -289,11 +289,28 @@ async function persistProduct(product){
 async function deleteProductFromGithub(id){
   await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
 }
+function showAdminToast(message,type="success"){
+  let el=$("#adminToast");
+  if(!el){
+    el=document.createElement("div");
+    el.id="adminToast";
+    el.setAttribute("role","status");
+    const admin=$("#admin");
+    if(admin)admin.appendChild(el);
+  }
+  el.textContent=message;
+  el.className="admin-toast "+type;
+  clearTimeout(window.__adminToastTimer);
+  window.__adminToastTimer=setTimeout(()=>el.classList.remove("show"),2600);
+  requestAnimationFrame(()=>el.classList.add("show"));
+}
+
 async function saveProduct(id){
   const btn=$("#saveItem");
   const originalText=btn?.textContent||"SAVE ITEM";
   if(btn){
     btn.disabled=true;
+    btn.classList.add("is-busy");
     btn.textContent="SAVING...";
   }
   const oldProducts=products.slice();
@@ -341,14 +358,15 @@ async function saveProduct(id){
     await load();
     render();
     showView("products");
-    alert(id?"Item updated successfully.":"Item added successfully.");
+    showAdminToast(id?"Item updated successfully.":"Item added successfully.","success");
   }catch(e){
     products=oldProducts;
     render();
-    alert("Unable to save item: "+(e?.message||e));
+    showAdminToast("Unable to save item: "+(e?.message||e),"error");
   }finally{
     if(btn){
       btn.disabled=false;
+      btn.classList.remove("is-busy");
       btn.textContent=originalText;
     }
   }
