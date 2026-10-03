@@ -237,7 +237,15 @@ function showView(v){
     b.innerHTML=products.map(p=>'<div class="admin-item"><div><strong>'+p.name+'</strong><br><small>'+p.category+" · "+money(p.price)+(p.newArrival?" · NEW":"")+(p.bestSeller?" · BEST":"")+'</small></div><button class="danger edit" data-id="'+p.id+'">EDIT</button></div>').join("");
   }else if(v==="add"){
     b.innerHTML=form();
-    $("#saveItem").onclick=()=>saveProduct(0);
+    const saveBtn=$("#saveItem");
+    if(saveBtn){
+      saveBtn.type="button";
+      saveBtn.onclick=async(e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        await saveProduct(0);
+      };
+    }
   }else{
     b.innerHTML='<p>Shop name</p><input id="setName" value="'+(settings.name||"")+'"><p>WhatsApp number</p><input id="setWa" value="'+(settings.whatsapp||"")+'"><p>Instagram URL</p><input id="setIg" value="'+(settings.instagram||"")+'"><button class="btn dark" id="saveSettings">SAVE SETTINGS</button>';
   }
@@ -246,7 +254,15 @@ function edit(id){
   const p=products.find(x=>x.id===id);
   if(!p)return;
   $("#studioBody").innerHTML=form(p);
-  $("#saveItem").onclick=()=>saveProduct(id);
+  const saveBtn=$("#saveItem");
+  if(saveBtn){
+    saveBtn.type="button";
+    saveBtn.onclick=async(e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      await saveProduct(id);
+    };
+  }
   $("#deleteItem").onclick=async()=>{
     if(!confirm("Delete this item?"))return;
     const oldProducts=products.slice();
@@ -275,7 +291,11 @@ async function deleteProductFromGithub(id){
 }
 async function saveProduct(id){
   const btn=$("#saveItem");
-  if(btn)btn.disabled=true;
+  const originalText=btn?.textContent||"SAVE ITEM";
+  if(btn){
+    btn.disabled=true;
+    btn.textContent="SAVING...";
+  }
   const oldProducts=products.slice();
   try{
     const name=$("#fName").value.trim();
@@ -327,7 +347,10 @@ async function saveProduct(id){
     render();
     alert("Unable to save item: "+(e?.message||e));
   }finally{
-    if(btn)btn.disabled=false;
+    if(btn){
+      btn.disabled=false;
+      btn.textContent=originalText;
+    }
   }
 }
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
