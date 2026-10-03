@@ -379,41 +379,64 @@ function showAdminLogin(){
   adminPassword="";
   updateAdminView();
   if($("#password"))$("#password").value="";
-  setStorageStatus("Enter your GitHub token to sign in.",false);
+  const hasGithubToken=!!getSavedGithubToken();
+  const input=$("#password");
+  if(input){
+    input.placeholder=hasGithubToken?"Admin password":"GitHub token";
+    input.setAttribute("autocomplete",hasGithubToken?"current-password":"new-password");
+  }
+  setStorageStatus(
+    hasGithubToken
+      ?"Enter your Admin password to sign in."
+      :"First-time setup: enter your GitHub token.",
+    false
+  );
 }
 
 function showAdminStudio(){
+  adminSessionActive=true;
   updateAdminView();
-  $("#password").value="";
-  $("#loginMsg").textContent="";
+  if($("#password"))$("#password").value="";
+  if($("#loginMsg"))$("#loginMsg").textContent="";
   showView("products");
 }
 
-async function signInAdmin(token){
-  const value=String(token||"").trim();
-  if(!value){
-    $("#loginMsg").textContent="Enter your GitHub token.";
+async function signInAdmin(value){
+  const inputValue=String(value||"").trim();
+  const hasGithubToken=!!getSavedGithubToken();
+  if(!inputValue){
+    if($("#loginMsg"))$("#loginMsg").textContent=hasGithubToken?"Enter your Admin password.":"Enter your GitHub token.";
     return false;
   }
   const btn=$("#loginBtn");
   const oldText=btn?.textContent;
   if(btn){btn.disabled=true;btn.textContent="SIGNING IN...";}
   try{
-    await api({action:"authenticate",password:value});
-    adminPassword=value;
-    storeAdminToken(value);
-    setStorageStatus("GitHub storage is connected.",true);
+    if(!hasGithubToken){
+      // First-time setup: supplied value is the GitHub token.
+      await api({action:"authenticate",password:inputValue});
+      storeAdminToken(inputValue);
+      adminPassword=LOCAL_ADMIN_PASSWORD;
+      setStorageStatus("GitHub storage connected. Admin password is now required for future logins.",true);
+    }else{
+      // Returning login: supplied value is the separate Admin password.
+      if(inputValue!==LOCAL_ADMIN_PASSWORD) throw new Error("Invalid Admin password.");
+      // Validate the stored GitHub credential without exposing it.
+      await api({action:"authenticate",password:LOCAL_ADMIN_PASSWORD});
+      adminPassword=LOCAL_ADMIN_PASSWORD;
+      setStorageStatus("Signed in.",true);
+    }
     adminSessionActive=true;
     openAdminModal();
     updateAdminView();
-    $("#password").value="";
+    if($("#password"))$("#password").value="";
     showView("products");
     return true;
   }catch(e){
     adminPassword="";
     adminSessionActive=false;
     updateAdminView();
-    $("#loginMsg").textContent=e?.message||"Invalid GitHub token.";
+    if($("#loginMsg"))$("#loginMsg").textContent=e?.message||"Sign in failed.";
     return false;
   }finally{
     if(btn){btn.disabled=false;btn.textContent=oldText||"SIGN IN";}
@@ -424,16 +447,11 @@ function logoutAdmin(){
   adminLogoutLock=true;
   adminSessionActive=false;
   adminPassword="";
-  
-  // Logout must require the GitHub token again on the next login.
-  clearSavedGithubTokens();
-  
+  // Keep the GitHub token. It is never shown and is only used for GitHub storage.
   if($("#password"))$("#password").value="";
   if($("#loginMsg"))$("#loginMsg").textContent="";
-  
-  updateAdminView();
   closeAdminModal();
-  
+  updateAdminView();
   window.setTimeout(()=>{
     adminSessionActive=false;
     adminPassword="";
