@@ -897,3 +897,21 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
     padding:4px 6px!important;
   }
 }
+
+
+/* FINAL BADGE TEXT VISIBILITY PATCH */
+#shop .product-image .badges{
+  width:auto!important;
+  max-width:none!important;
+  overflow:visible!important;
+}
+#shop .product-image .badges .badge,
+#shop .product-image .badges .badge.new,
+#shop .product-image .badges .badge.best{
+  flex:0 0 auto!important;
+  width:auto!important;
+  max-width:none!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+  white-space:nowrap!important;
+}
