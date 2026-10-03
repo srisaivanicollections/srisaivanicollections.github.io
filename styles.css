@@ -377,3 +377,11 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
  .womens-world-marquee-separator{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){.womens-world-marquee-track{animation:none}}
+
+/* Marquee layout correction: keep each duplicated rail on one uninterrupted line. */
+.womens-world-marquee-section{display:block!important;max-width:100%;height:auto!important;min-height:0!important;white-space:nowrap!important}
+.womens-world-marquee-viewport{display:block!important;max-width:100%;height:auto!important;min-height:0!important;white-space:nowrap!important}
+.womens-world-marquee-track{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;width:max-content!important;max-width:none!important;min-width:max-content!important;white-space:nowrap!important}
+.womens-world-marquee-group{display:flex!important;flex:0 0 max-content!important;width:max-content!important;max-width:none!important;min-width:max-content!important;align-items:center!important;flex-wrap:nowrap!important;white-space:nowrap!important}
+.womens-world-marquee-item{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:none!important;white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important}
+.womens-world-marquee-separator{display:inline-flex!important;flex:0 0 auto!important;white-space:nowrap!important}
