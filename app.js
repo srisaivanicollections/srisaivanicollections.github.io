@@ -325,11 +325,20 @@ function closeAdminModal(){
   modal.style.display="none";
 }
 
+function setStorageStatus(message,connected=false){
+  const el=$("#loginMsg");
+  if(!el)return;
+  el.textContent=message;
+  el.classList.toggle("connected",!!connected);
+  el.style.color=connected?"#10B981":"#78716C";
+}
 function showAdminLogin(){
   $("#login")?.classList.remove("hidden");
   $("#studio")?.classList.add("hidden");
   $("#password").value="";
-  $("#loginMsg").textContent="";
+  const saved=getSavedGithubToken();
+  if(saved)setStorageStatus("GitHub storage is connected.",true);
+  else setStorageStatus("GitHub storage is not connected. Enter a GitHub token.",false);
 }
 
 function showAdminStudio(){
@@ -353,6 +362,7 @@ async function signInAdmin(token){
     await api({action:"authenticate",password:value});
     adminPassword=value;
     localStorage.setItem(GITHUB_TOKEN_KEY,value);
+    setStorageStatus("GitHub storage is connected.",true);
     adminSessionActive=true;
     openAdminModal();
     showAdminStudio();
@@ -404,6 +414,7 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
       const saved=getSavedGithubToken();
       if(saved){
         adminPassword=saved;
+        setStorageStatus("GitHub storage is connected.",true);
         adminSessionActive=true;
         showAdminStudio();
       }else{
