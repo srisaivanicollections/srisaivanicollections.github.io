@@ -98,7 +98,11 @@ async function localApi(body){
   }
   if(body.action==="saveSettings"){
     const current=await githubReadJson("data/settings.json");
-    await githubWriteJson("data/settings.json",body.settings||{},current.sha,"Update shop settings");
+    const existing=(current.value&&typeof current.value==="object")?current.value:{};
+    const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
+    const merged={...existing,...incoming};
+    if(String(incoming.whatsapp??"").trim()===""&&String(existing.whatsapp??"").trim()!=="") merged.whatsapp=existing.whatsapp;
+    await githubWriteJson("data/settings.json",merged,current.sha,"Update shop settings");
     return {ok:true};
   }
   if(body.action==="uploadImage"){
