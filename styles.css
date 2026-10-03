@@ -498,141 +498,16 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
     letter-spacing:.15em!important;
   }
 }
-
-/* Boutique visit, fully isolated under atelier-visit-* */
-.atelier-visit-section{
-  width:100%;
-  background:#F5F0EB;
-  border-top:1px solid #E7E0D8;
-  border-bottom:1px solid #E7E0D8;
-}
-.atelier-visit-inner{
-  width:min(1380px,100%);
-  margin:0 auto;
-  padding:88px 34px;
-  display:grid;
-  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
-  gap:70px;
-  align-items:center;
-}
-.atelier-visit-copy{
-  max-width:570px;
-}
-.atelier-visit-eyebrow{
-  margin:0;
-  color:#8C6D3F;
-  font:600 9px/1.2 "Inter",Arial,sans-serif;
-  letter-spacing:.23em;
-}
-.atelier-visit-copy h2{
-  margin:12px 0 18px;
-  color:#1C1917;
-  font:400 clamp(48px,5vw,72px)/.9 "Cormorant Garamond",Georgia,serif;
-  letter-spacing:-.035em;
-}
-.atelier-visit-copy h2 em{
-  font-style:italic;
-}
-.atelier-visit-intro{
-  max-width:500px;
-  margin:0;
-  color:#78716C;
-  font:400 12px/1.75 "Inter",Arial,sans-serif;
-}
-.atelier-visit-details{
-  margin-top:35px;
-  padding-top:22px;
-  border-top:1px solid #DED4C9;
-  display:grid;
-  grid-template-columns:1.35fr 1fr;
-  gap:30px;
-}
-.atelier-visit-detail span{
-  display:block;
-  color:#8C6D3F;
-  font:600 8px/1.2 "Inter",Arial,sans-serif;
-  letter-spacing:.2em;
-}
-.atelier-visit-detail p{
-  margin:9px 0 0;
-  color:#1C1917;
-  font:400 11px/1.7 "Inter",Arial,sans-serif;
-}
-.atelier-visit-map-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:44px;
-  margin-top:32px;
-  padding:12px 17px;
-  border:1px solid #1C1917;
-  color:#1C1917;
-  background:transparent;
-  text-decoration:none;
-  font:600 8px/1 "Inter",Arial,sans-serif;
-  letter-spacing:.18em;
-  transition:background .25s ease,color .25s ease,border-color .25s ease;
-}
-.atelier-visit-map-link:hover{
-  background:#1C1917;
-  color:#FAF7F2;
-  border-color:#1C1917;
-}
-.atelier-visit-map{
-  position:relative;
-  width:100%;
-  aspect-ratio:4/3;
-  min-height:300px;
-  overflow:hidden;
-  background:#E9E2D9;
-  border:1px solid #DED4C9;
-}
-.atelier-visit-map::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  border:1px solid rgba(179,142,93,.18);
-}
-.atelier-visit-map iframe{
-  display:block;
-  width:100%;
-  height:100%;
-  border:0;
-  filter:grayscale(20%) contrast(95%);
-}
 @media(max-width:900px){
-  .atelier-visit-inner{
-    padding:62px 26px;
-    grid-template-columns:1fr;
-    gap:38px;
-  }
-  .atelier-visit-copy{max-width:none}
-  .atelier-visit-map{min-height:0}
+
+
+
 }
 @media(max-width:600px){
-  .atelier-visit-inner{
-    padding:54px 16px;
-    gap:30px;
-  }
-  .atelier-visit-copy h2{
-    margin-top:10px;
-    font-size:clamp(43px,12vw,58px);
-  }
-  .atelier-visit-intro{
-    font-size:11px;
-    line-height:1.65;
-  }
-  .atelier-visit-details{
-    margin-top:28px;
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-  .atelier-visit-map-link{
-    width:100%;
-    margin-top:26px;
-  }
-  .atelier-visit-map{
-    aspect-ratio:4/3;
-  }
+
+
+
+
+
+
 }
