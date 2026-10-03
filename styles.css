@@ -335,3 +335,25 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
  #shop .badges{top:10px;left:10px;gap:4px}
  #shop .badge{font-size:.58rem;letter-spacing:.16em;padding:4px 6px}
 }
+
+/* Isolated luxury variety ticker */
+.variety-marquee-section{position:relative;width:100%;box-sizing:border-box;background:#FAF7F2;border-top:1px solid #E7E0D8;border-bottom:1px solid #E7E0D8;overflow:hidden}
+.variety-marquee-viewport{position:relative;width:100%;overflow:hidden}
+.variety-marquee-viewport::before,.variety-marquee-viewport::after{content:"";position:absolute;top:0;bottom:0;width:72px;z-index:2;pointer-events:none}
+.variety-marquee-viewport::before{left:0;background:linear-gradient(90deg,#FAF7F2 0%,rgba(250,247,242,.8) 38%,rgba(250,247,242,0) 100%)}
+.variety-marquee-viewport::after{right:0;background:linear-gradient(270deg,#FAF7F2 0%,rgba(250,247,242,.8) 38%,rgba(250,247,242,0) 100%)}
+.variety-marquee-track{display:flex;width:max-content;animation:variety-marquee-scroll 42s linear infinite;will-change:transform}
+.variety-marquee-group{display:flex;align-items:center;flex-shrink:0;white-space:nowrap}
+.variety-marquee-item{display:inline-flex;align-items:center;padding:18px 20px 17px;font-family:"Cormorant Garamond",Georgia,serif;font-size:15px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:.12em;color:#1C1917}
+.variety-marquee-separator{display:inline-flex;align-items:center;color:#B38E5D;font-family:"Cormorant Garamond",Georgia,serif;font-size:11px;line-height:1}
+.variety-marquee-section:hover .variety-marquee-track{animation-play-state:paused}
+@keyframes variety-marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:600px){
+ .variety-marquee-viewport::before,.variety-marquee-viewport::after{width:42px}
+ .variety-marquee-track{animation-duration:32s}
+ .variety-marquee-item{padding:14px 14px 13px;font-size:12px;letter-spacing:.1em}
+ .variety-marquee-separator{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .variety-marquee-track{animation:none}
+}
