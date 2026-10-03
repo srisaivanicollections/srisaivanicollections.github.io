@@ -1536,3 +1536,57 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #shop .toolbar{
   border-top:0 !important;
 }
+
+
+/* ===================================================
+   ADMIN TOKEN LOGIN LAYOUT
+   Scoped to Admin Studio only.
+   =================================================== */
+#admin form,
+#admin #login,
+#adminLoginForm,
+#githubTokenForm,
+#admin .token-form-container{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:12px !important;
+  align-items:stretch !important;
+}
+
+#admin button[type="submit"],
+#adminLoginForm button[type="submit"],
+#githubTokenForm button[type="submit"]{
+  display:inline-block !important;
+  width:fit-content !important;
+  min-width:110px !important;
+  margin-top:4px !important;
+  margin-bottom:6px !important;
+  background:#B38E5D !important;
+  color:#181513 !important;
+  border:none !important;
+  padding:10px 20px !important;
+  font-weight:600 !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+  cursor:pointer !important;
+}
+
+#admin .storage-status-msg,
+#admin #login small,
+#admin form span,
+#admin form p:not(.token-instructions){
+  display:block !important;
+  clear:both !important;
+  font-size:.75rem !important;
+  line-height:1.4 !important;
+  color:#78716C !important;
+  margin:4px 0 0 !important;
+}
+
+#admin .storage-status-msg.connected{
+  color:#10B981 !important;
+}
+
+#admin #loginMsg{
+  min-height:1.1em;
+}
