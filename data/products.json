@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Royal Banarasi",
+    "category": "Sarees",
+    "price": 5499,
+    "originalPrice": 5999,
+    "newArrival": true,
+    "bestSeller": true,
+    "image": "assets/saree-1.svg",
+    "description": "A rich festive Banarasi-inspired saree.",
+    "availability": true
+  },
+  {
+    "id": 2,
+    "name": "Rose Silk",
+    "category": "Sarees",
+    "price": 4299,
+    "originalPrice": 4799,
+    "newArrival": true,
+    "bestSeller": false,
+    "image": "assets/saree-2.svg",
+    "description": "Soft silk styling for elegant occasions.",
+    "availability": true
+  },
+  {
+    "id": 3,
+    "name": "Classic Kanchi",
+    "category": "Sarees",
+    "price": 6999,
+    "originalPrice": 7499,
+    "newArrival": false,
+    "bestSeller": true,
+    "image": "assets/saree-3.svg",
+    "description": "Classic Kanchi-inspired festive drape.",
+    "availability": true
+  },
+  {
+    "id": 4,
+    "name": "Festive Draped Dress",
+    "category": "Dresses",
+    "price": 2899,
+    "originalPrice": 3299,
+    "newArrival": true,
+    "bestSeller": true,
+    "image": "assets/dress-1.svg",
+    "description": "An occasion-ready statement dress.",
+    "availability": true
+  },
+  {
+    "id": 5,
+    "name": "Ivory Occasion Dress",
+    "category": "Dresses",
+    "price": 3499,
+    "originalPrice": 3999,
+    "newArrival": true,
+    "bestSeller": false,
+    "image": "assets/dress-2.svg",
+    "description": "Clean ivory styling for celebrations.",
+    "availability": true
+  },
+  {
+    "id": 6,
+    "name": "Maroon Anarkali",
+    "category": "Dresses",
+    "price": 4599,
+    "originalPrice": 4999,
+    "newArrival": false,
+    "bestSeller": true,
+    "image": "assets/dress-3.svg",
+    "description": "A classic maroon occasion silhouette.",
+    "availability": true
+  },
+  {
+    "id": 7,
+    "name": "Temple Border Saree",
+    "category": "Sarees",
+    "price": 3799,
+    "originalPrice": 4299,
+    "newArrival": false,
+    "bestSeller": false,
+    "image": "assets/saree-4.svg",
+    "description": "Traditional border detailing with a modern finish.",
+    "availability": true
+  },
+  {
+    "id": 8,
+    "name": "Everyday Printed Dress",
+    "category": "Dresses",
+    "price": 1899,
+    "originalPrice": 2199,
+    "newArrival": true,
+    "bestSeller": false,
+    "image": "assets/dress-4.svg",
+    "description": "Easy everyday printed styling.",
+    "availability": true
+  }
+]
