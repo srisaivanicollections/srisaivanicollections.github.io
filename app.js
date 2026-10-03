@@ -191,7 +191,14 @@ async function persistProducts(){
 }
 async function saveProduct(id){let image=$("#fImage").value.trim(),file=$("#fFile").files[0];try{if(file){if(file.size>5*1024*1024)throw new Error("Image must be 5MB or smaller.");const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});const up=await api({action:"uploadImage",password:adminPassword,filename:file.name,base64});image=up.path}const p={id:id||Date.now(),name:$("#fName").value.trim(),category:$("#fCat").value,price:Number($("#fPrice").value),originalPrice:Number($("#fOriginal").value)||undefined,image,newArrival:$("#fNew").checked,bestSeller:$("#fBest").checked,availability:$("#fAvail").checked};if(!p.name||!p.price||!p.image)throw new Error("Please fill product name, price and image.");if(id)products=products.map(x=>x.id===id?p:x);else products.unshift(p);await persistProducts();render();showView("products")}catch(e){alert(e.message)}}
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
-$("#adminOpen").onclick=()=>$("#admin").classList.remove("hidden");
+$("#adminOpen").onclick=async()=>{
+  $("#admin").classList.remove("hidden");
+  const saved=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+  if(saved){
+    const ok=await openStudioWithToken(saved);
+    if(ok){ $("#login").classList.add("hidden"); $("#studio").classList.remove("hidden"); }
+  }
+};
 $("#adminClose").onclick=()=>$("#admin").classList.add("hidden");
 async function openStudioWithToken(token){
   const value=String(token||"").trim();
@@ -218,5 +225,5 @@ $("#loginBtn").onclick=()=>{
 $("#logoutBtn").onclick=()=>{adminPassword="";$("#studio").classList.add("hidden");$("#login").classList.remove("hidden");$("#password").value="";$("#loginMsg").textContent="";$("#adminOpen").textContent="ADMIN";$("#admin").classList.add("hidden");/* Keep the GitHub token in localStorage so the next Admin login does not require it again. */};
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 (async()=>{const saved=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";if(saved){await openStudioWithToken(saved)}})();
-document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); const token=$("#setGithubToken").value.trim(); if(token){localStorage.setItem(GITHUB_TOKEN_KEY,token);adminPassword=token} delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
+document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
 $("#search").oninput=render;$("#price").onchange=render;load();
