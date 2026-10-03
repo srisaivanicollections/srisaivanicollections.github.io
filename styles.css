@@ -1640,3 +1640,24 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #admin #studio:not(.admin-screen-hidden):not(.hidden){
   display:block !important;
 }
+
+
+/* Admin Studio: clearly show which section is currently open */
+.studio-nav button[data-view]{
+  position:relative;
+  color:var(--muted);
+  transition:color .2s ease;
+}
+.studio-nav button[data-view].active{
+  color:var(--ink);
+  font-weight:600;
+}
+.studio-nav button[data-view].active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:2px;
+  background:var(--ink);
+}
