@@ -288,6 +288,7 @@ async function saveProduct(id){
   }
 }
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
+let adminJustLoggedOut=false;
 function getSavedGithubToken(){
   return (localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"").trim();
 }
@@ -297,11 +298,11 @@ function clearSavedGithubToken(){
 }
 async function openStudioWithToken(token, remember=true){
   const value=String(token||"").trim();
-  if(!value) return false;
+  if(!value)return false;
   try{
-    const result=await api({action:"authenticate",password:value});
+    await api({action:"authenticate",password:value});
     adminPassword=value;
-    if(remember) localStorage.setItem(GITHUB_TOKEN_KEY,value);
+    if(remember)localStorage.setItem(GITHUB_TOKEN_KEY,value);
     $("#login").classList.add("hidden");
     $("#studio").classList.remove("hidden");
     $("#password").value="";
@@ -310,58 +311,63 @@ async function openStudioWithToken(token, remember=true){
     return true;
   }catch(e){
     adminPassword="";
-    if(getSavedGithubToken()===value) clearSavedGithubToken();
     $("#login").classList.remove("hidden");
     $("#studio").classList.add("hidden");
     $("#loginMsg").textContent=e.message||"GitHub token is invalid.";
     return false;
   }
 }
-$("#adminOpen").onclick=async()=>{
+$("#adminOpen").onclick=async(e)=>{
+  e.preventDefault();
+  e.stopPropagation();
+  if(adminJustLoggedOut){
+    adminJustLoggedOut=false;
+    return;
+  }
   $("#admin").classList.remove("hidden");
   const saved=getSavedGithubToken();
   if(saved){
-    // A previously authenticated browser does not need to enter the token again.
-    // Use the saved token directly and validate it only when a GitHub operation runs.
     adminPassword=saved;
     $("#login").classList.add("hidden");
     $("#studio").classList.remove("hidden");
     $("#password").value="";
     $("#loginMsg").textContent="";
     showView("products");
-    return;
+  }else{
+    adminPassword="";
+    $("#login").classList.remove("hidden");
+    $("#studio").classList.add("hidden");
+    $("#password").focus();
   }
-  adminPassword="";
-  $("#login").classList.remove("hidden");
-  $("#studio").classList.add("hidden");
-  $("#password").focus();
 };
-$("#adminClose").onclick=()=>$("#admin").classList.add("hidden");
-$("#loginBtn").onclick=async()=>{
+$("#adminClose").onclick=(e)=>{
+  e.preventDefault();
+  e.stopPropagation();
+  $("#admin").classList.add("hidden");
+};
+$("#loginBtn").onclick=async(e)=>{
+  e.preventDefault();
+  e.stopPropagation();
   const entered=$("#password").value.trim();
   const saved=getSavedGithubToken();
   await openStudioWithToken(entered||saved,true);
 };
-function logoutAdmin(){
-  // Log out of the current Admin Studio session, but keep the GitHub token
-  // saved for this browser so the token is only entered once.
+function logoutAdmin(e){
+  if(e){
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+  }
+  adminJustLoggedOut=true;
   adminPassword="";
-  const studio=$("#studio");
-  const login=$("#login");
-  const admin=$("#admin");
-  if(studio) studio.classList.add("hidden");
-  if(login) login.classList.add("hidden");
-  if(admin) admin.classList.add("hidden");
+  $("#studio").classList.add("hidden");
+  $("#login").classList.add("hidden");
+  $("#admin").classList.add("hidden");
   $("#password").value="";
   $("#loginMsg").textContent="";
+  setTimeout(()=>{adminJustLoggedOut=false},500);
 }
-$("#logoutBtn").onclick=(e)=>{
-  e.preventDefault();
-  e.stopPropagation();
-  e.stopImmediatePropagation();
-  logoutAdmin();
-  return false;
-};
+$("#logoutBtn").onclick=logoutAdmin;
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
 $("#search").oninput=render;$("#price").onchange=render;load();
