@@ -264,21 +264,22 @@ function edit(id){
     };
   }
   $("#deleteItem").onclick=async()=>{
-    if(!confirm("Delete this item?"))return;
+    if(!confirm("Delete this product?\n\nThis action cannot be undone."))return;
     const oldProducts=products.slice();
     const btn=$("#deleteItem");
-    if(btn)btn.disabled=true;
+    const originalDeleteText=btn?.textContent||"DELETE ITEM";
+    if(btn){btn.disabled=true;btn.classList.add("is-busy");btn.textContent="DELETING...";}
     try{
       products=oldProducts.filter(x=>Number(x.id)!==Number(id));
       await deleteProductFromGithub(id);
       render();
       showView("products");
-      showAdminToast("Item deleted successfully.","success");
+      showAdminToast("Product deleted successfully.","success");
     }catch(e){
       products=oldProducts;
       render();
-      if(btn)btn.disabled=false;
-      showAdminToast("Unable to delete item: "+(e?.message||e),"error");
+      if(btn){btn.disabled=false;btn.classList.remove("is-busy");btn.textContent=originalDeleteText;}
+      showAdminToast("Could not delete product. "+(e?.message||"Please try again."),"error");
     }
   };
 }
@@ -356,11 +357,11 @@ async function saveProduct(id){
     await persistProduct(p);
     render();
     showView("products");
-    showAdminToast(id?"Item updated successfully.":"Item added successfully.","success");
+    showAdminToast(id?"Product updated successfully.":"Product added successfully.","success");
   }catch(e){
     products=oldProducts;
     render();
-    showAdminToast("Unable to save item: "+(e?.message||e),"error");
+    showAdminToast("Could not save product. "+(e?.message||"Please try again."),"error");
   }finally{
     if(btn){
       btn.disabled=false;
