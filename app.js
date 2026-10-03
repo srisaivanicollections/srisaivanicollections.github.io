@@ -105,7 +105,7 @@ function renderReviews(){
   container.innerHTML=validReviews.map(item=>{
     const text=esc(item.text||item.comment||"");
     const author=esc(item.author||item.name||"Verified Patron");
-    return '<article class="cc-card"><span class="cc-quote-mark" aria-hidden="true">“</span><div class="cc-card-stars" aria-hidden="true">★★★★★</div><p class="cc-quote-text">'+text+'</p><p class="cc-author">— '+author+'</p></article>';
+    return '<article class="cc-card"><span class="cc-quote-mark" aria-hidden="true">“</span><div class="cc-card-stars" aria-hidden="true">★★★★☆</div><p class="cc-quote-text">'+text+'</p><p class="cc-author">— '+author+'</p></article>';
   }).join("");
 }
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
