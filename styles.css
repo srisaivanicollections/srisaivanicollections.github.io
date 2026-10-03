@@ -202,3 +202,58 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* SHOP BADGE OVERRIDE: final authoritative presentation */
+#shop .product-image .badges{
+  position:absolute!important;
+  top:10px!important;
+  left:10px!important;
+  right:auto!important;
+  bottom:auto!important;
+  z-index:20!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  gap:4px!important;
+  pointer-events:none!important;
+}
+#shop .product-image .badges .badge,
+#shop .product-image .badges .badge.new,
+#shop .product-image .badges .badge.best{
+  display:block!important;
+  position:static!important;
+  box-sizing:border-box!important;
+  width:max-content!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:5px 7px!important;
+  background:rgba(250,247,242,.92)!important;
+  color:#1C1917!important;
+  border:1px solid rgba(229,223,215,.9)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(4px)!important;
+  -webkit-backdrop-filter:blur(4px)!important;
+  font-family:"Inter",Arial,sans-serif!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:500!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+  text-shadow:none!important;
+}
+#shop .product-image .badges .badge.new{color:#B38E5D!important}
+#shop .product-image .badges .badge.best{color:#1C1917!important}
+@media(max-width:600px){
+  #shop .product-image .badges{top:7px!important;left:7px!important;gap:3px!important}
+  #shop .product-image .badges .badge,
+  #shop .product-image .badges .badge.new,
+  #shop .product-image .badges .badge.best{
+    padding:4px 5px!important;
+    font-size:7px!important;
+    letter-spacing:.15em!important;
+  }
+}
