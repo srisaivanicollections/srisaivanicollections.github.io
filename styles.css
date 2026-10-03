@@ -2521,3 +2521,44 @@ article .badge {
     padding:2px 6px !important;
   }
 }
+
+
+/* ===================================================
+   HERO / SHOP TRANSITION - COMPACT LUXURY SPACING
+   Exact storefront DOM scope. Typography preserved.
+   =================================================== */
+
+#hero.hero-section .hero-container{
+  padding-top:1.5rem !important;
+  padding-bottom:1.25rem !important;
+}
+
+#hero.hero-section .hero-eyebrow{
+  margin-top:0 !important;
+  margin-bottom:.5rem !important;
+}
+
+#hero.hero-section .hero-title{
+  margin-top:0 !important;
+  margin-bottom:.75rem !important;
+  line-height:1.15 !important;
+}
+
+#hero.hero-section .hero-desc{
+  margin-top:0 !important;
+  margin-bottom:1rem !important;
+  line-height:1.5 !important;
+}
+
+/* Pull the collection tabs closer to the hero without changing
+   product-card spacing or catalogue content. */
+#shop.catalog{
+  padding-top:1.25rem !important;
+}
+
+#shop .toolbar{
+  margin-top:0 !important;
+  margin-bottom:1rem !important;
+  padding-top:.4rem !important;
+  padding-bottom:.4rem !important;
+}
