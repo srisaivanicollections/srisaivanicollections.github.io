@@ -336,17 +336,22 @@ function storeAdminToken(token){
 }
 
 function updateAdminView(){
-  const token=getSavedGithubToken();
+  // This is the single source of truth for the two Admin Studio views.
+  // A token means the browser is authenticated. Login and Studio are never
+  // allowed to be visible at the same time, regardless of existing CSS.
+  const token=!!getSavedGithubToken();
   const loginSection=$("#login")||$("#adminLoginScreen")||$(".admin-token-section");
   const studioSection=$("#studio")||$("#adminStudioScreen")||$(".admin-studio-content");
 
-  if(token){
-    if(loginSection)loginSection.classList.add("admin-screen-hidden");
-    if(studioSection)studioSection.classList.remove("admin-screen-hidden");
-    if(studioSection)studioSection.classList.remove("hidden");
-  }else{
-    if(loginSection)loginSection.classList.remove("admin-screen-hidden");
-    if(studioSection)studioSection.classList.add("admin-screen-hidden");
+  if(loginSection){
+    loginSection.classList.toggle("admin-screen-hidden",token);
+    loginSection.classList.toggle("hidden",token);
+    loginSection.style.setProperty("display",token?"none":"block","important");
+  }
+  if(studioSection){
+    studioSection.classList.toggle("admin-screen-hidden",!token);
+    studioSection.classList.toggle("hidden",!token);
+    studioSection.style.setProperty("display",token?"block":"none","important");
   }
 }
 
@@ -354,14 +359,15 @@ function openAdminModal(){
   const modal=$("#admin");
   if(!modal)return;
   modal.classList.remove("hidden");
-  modal.style.display="";
+  modal.style.setProperty("display","flex","important");
+  updateAdminView();
 }
 
 function closeAdminModal(){
   const modal=$("#admin");
   if(!modal)return;
   modal.classList.add("hidden");
-  modal.style.display="none";
+  modal.style.setProperty("display","none","important");
 }
 
 function setStorageStatus(message,connected=false){
@@ -419,16 +425,17 @@ async function signInAdmin(token){
 }
 
 function logoutAdmin(){
+  // LOG OUT closes the Admin Studio immediately. The GitHub token remains
+  // stored locally by design, so the next explicit Admin click can reopen
+  // the Studio without asking for the token again.
   adminLogoutLock=true;
   adminSessionActive=false;
   adminPassword="";
   closeAdminModal();
-  $("#password").value="";
-  $("#loginMsg").textContent="";
-  // Token is intentionally retained. The next explicit Admin click opens
-  // the Studio directly without requesting the token again.
+  if($("#password"))$("#password").value="";
+  if($("#loginMsg"))$("#loginMsg").textContent="";
   updateAdminView();
-  setTimeout(()=>{adminLogoutLock=false;},300);
+  window.setTimeout(()=>{adminLogoutLock=false;},500);
 }
 
 if(!window.__LIBAS_ADMIN_AUTH_BOUND){
@@ -493,13 +500,17 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
     form.addEventListener("submit",async(e)=>{
       e.preventDefault();
       e.stopPropagation();
-      await signInAdmin($("#password")?.value);
+      if(e.defaultPrevented) await signInAdmin($("#password")?.value);
     },true);
   }
 }
 
 // Authoritative initial Admin view state. Catalog/CRUD state is untouched.
-updateAdminView();
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",updateAdminView,{once:true});
+}else{
+  updateAdminView();
+}
 
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
