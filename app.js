@@ -379,8 +379,7 @@ function showAdminLogin(){
   adminPassword="";
   updateAdminView();
   if($("#password"))$("#password").value="";
-  const saved=getSavedGithubToken();
-  setStorageStatus(saved?"Saved GitHub access is available. Click SIGN IN to continue.":"GitHub storage is not connected. Enter a GitHub token.",!!saved);
+  setStorageStatus("Enter your GitHub token to sign in.",false);
 }
 
 function showAdminStudio(){
@@ -391,7 +390,7 @@ function showAdminStudio(){
 }
 
 async function signInAdmin(token){
-  const value=String(token||getSavedGithubToken()||"").trim();
+  const value=String(token||"").trim();
   if(!value){
     $("#loginMsg").textContent="Enter your GitHub token.";
     return false;
@@ -426,17 +425,18 @@ function logoutAdmin(){
   adminSessionActive=false;
   adminPassword="";
   
-  // Clear only the active session. Keep the GitHub token stored so the user
-  // can explicitly sign in again without re-entering it.
+  // Logout must require the GitHub token again on the next login.
+  clearSavedGithubTokens();
+  
   if($("#password"))$("#password").value="";
   if($("#loginMsg"))$("#loginMsg").textContent="";
   
   updateAdminView();
   closeAdminModal();
   
-  // Prevent any stale click handler or bubbling event from reopening Studio.
   window.setTimeout(()=>{
     adminSessionActive=false;
+    adminPassword="";
     updateAdminView();
     closeAdminModal();
     adminLogoutLock=false;
