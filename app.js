@@ -1,4 +1,3 @@
-const API="/.netlify/functions/catalog";
 const IS_GITHUB_PAGES = location.hostname.endsWith(".github.io");
 const LOCAL_KEY = "ssv_catalog_v4";
 const CATALOG_SCHEMA = 4;
@@ -170,18 +169,16 @@ async function localApi(body){
   throw new Error("Unknown action");
 }
 async function api(body){
-  if(IS_GITHUB_PAGES) return localApi(body);
-  const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
-  const d=await r.json();if(!r.ok)throw new Error(d.error||"Request failed");return d
+  return localApi(body);
 }
 async function load(){
   try{
     if(IS_GITHUB_PAGES){
       const [pr,sr]=await Promise.all([publicGitHubReadJson("data/products.json"),publicGitHubReadJson("data/settings.json")]);
       if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
-      products=pr.value;githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=sr.value||{}; delete settings.githubToken; apply();render();loadReviews();return;
+      products=pr.value;githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=sr.value||{};delete settings.githubToken;apply();render();loadReviews();return;
     }
-    const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();if(!Array.isArray(d.products)||d.products.length===0)throw new Error("Empty catalog response.");products=d.products;githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=d.settings||{};apply();render();loadReviews();
+    throw new Error("GitHub Pages mode");
   }catch(e){
     try{
       const [pr,sr]=await Promise.all([fetch("data/products.json",{cache:"no-store"}),fetch("data/settings.json",{cache:"no-store"})]);
@@ -339,22 +336,18 @@ function storeAdminToken(token){
 }
 
 function updateAdminView(){
-  // This is the single source of truth for the two Admin Studio views.
-  // A token means the browser is authenticated. Login and Studio are never
-  // allowed to be visible at the same time, regardless of existing CSS.
-  const token=!!getSavedGithubToken();
   const loginSection=$("#login")||$("#adminLoginScreen")||$(".admin-token-section");
   const studioSection=$("#studio")||$("#adminStudioScreen")||$(".admin-studio-content");
-
+  const active=adminSessionActive===true;
   if(loginSection){
-    loginSection.classList.toggle("admin-screen-hidden",token);
-    loginSection.classList.toggle("hidden",token);
-    loginSection.style.setProperty("display",token?"none":"block","important");
+    loginSection.classList.toggle("admin-screen-hidden",active);
+    loginSection.classList.toggle("hidden",active);
+    loginSection.style.setProperty("display",active?"none":"block","important");
   }
   if(studioSection){
-    studioSection.classList.toggle("admin-screen-hidden",!token);
-    studioSection.classList.toggle("hidden",!token);
-    studioSection.style.setProperty("display",token?"block":"none","important");
+    studioSection.classList.toggle("admin-screen-hidden",!active);
+    studioSection.classList.toggle("hidden",!active);
+    studioSection.style.setProperty("display",active?"block":"none","important");
   }
 }
 
@@ -382,11 +375,12 @@ function setStorageStatus(message,connected=false){
 }
 
 function showAdminLogin(){
+  adminSessionActive=false;
+  adminPassword="";
   updateAdminView();
-  $("#password").value="";
+  if($("#password"))$("#password").value="";
   const saved=getSavedGithubToken();
-  if(saved)setStorageStatus("GitHub storage is connected.",true);
-  else setStorageStatus("GitHub storage is not connected. Enter a GitHub token.",false);
+  setStorageStatus(saved?"Saved GitHub access is available. Click SIGN IN to continue.":"GitHub storage is not connected. Enter a GitHub token.",!!saved);
 }
 
 function showAdminStudio(){
@@ -464,18 +458,9 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
 
       openAdminModal();
       updateAdminView();
-      const saved=getSavedGithubToken();
-      if(saved){
-        storeAdminToken(saved);
-        adminPassword=saved;
-        setStorageStatus("GitHub storage is connected.",true);
-        adminSessionActive=true;
-        showAdminStudio();
-      }else{
-        adminPassword="";
-        adminSessionActive=false;
-        showAdminLogin();
-      }
+      adminSessionActive=false;
+      adminPassword="";
+      showAdminLogin();
       return;
     }
 
