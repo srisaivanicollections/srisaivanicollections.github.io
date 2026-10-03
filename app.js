@@ -79,17 +79,22 @@ async function localApi(body){
       return {ok:true,storage:"github"};
     }
     if(!supplied) throw new Error("Enter your GitHub token.");
-    // Validate the token before remembering it.
-    const previous=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
-    localStorage.removeItem(GITHUB_TOKEN_KEY);
+    // Temporarily use the newly entered token for GitHub validation.
+    // githubRequest reads the token from storage, so it must be available
+    // before githubReadJson() can validate access to the repository.
+    const previousLocal=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
+    const previousSession=sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+    localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
     try{
       await githubReadJson("data/products.json");
+      return {ok:true,storage:"github"};
     }catch(e){
-      if(previous)localStorage.setItem(GITHUB_TOKEN_KEY,previous);
+      if(previousLocal)localStorage.setItem(GITHUB_TOKEN_KEY,previousLocal);
+      else localStorage.removeItem(GITHUB_TOKEN_KEY);
+      if(previousSession)sessionStorage.setItem(GITHUB_TOKEN_KEY,previousSession);
+      else sessionStorage.removeItem(GITHUB_TOKEN_KEY);
       throw e;
     }
-    localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
-    return {ok:true,storage:"github"};
   }
   if(body.password!==LOCAL_ADMIN_PASSWORD && body.password!==localStorage.getItem(GITHUB_TOKEN_KEY)) throw new Error("Unauthorized");
   if(body.action==="saveProducts"){
