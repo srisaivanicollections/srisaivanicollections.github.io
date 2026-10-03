@@ -239,7 +239,7 @@ function showView(v){
     b.innerHTML=form();
     $("#saveItem").onclick=()=>saveProduct(0);
   }else{
-    b.innerHTML='<p>Shop name</p><input id="setName" value="'+(settings.name||"")+'"><p>WhatsApp number</p><input id="setWa" value="'+(settings.whatsapp||"")+'"><p>Instagram URL</p><input id="setIg" value="'+(settings.instagram||"")+'"><small>GitHub access is already connected on this browser. The token is stored locally and is not saved to your shop settings.</small><button class="btn dark" id="saveSettings">SAVE SETTINGS</button>';
+    b.innerHTML='<p>Shop name</p><input id="setName" value="'+(settings.name||"")+'"><p>WhatsApp number</p><input id="setWa" value="'+(settings.whatsapp||"")+'"><p>Instagram URL</p><input id="setIg" value="'+(settings.instagram||"")+'"><button class="btn dark" id="saveSettings">SAVE SETTINGS</button>';
   }
 }
 function edit(id){
