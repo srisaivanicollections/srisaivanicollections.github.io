@@ -1910,3 +1910,85 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #admin .admin-logout{
   padding:7px 12px !important;
 }
+
+
+/* --- ADMIN STUDIO COMPACT HEADER (FAIL-SAFE UNIVERSAL SCOPE) --- */
+
+/* 1. Reduce main modal wrapper padding */
+#admin,
+#admin > div,
+#admin .modal-content,
+#admin .studio-container {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+/* 2. Compact eyebrow label */
+#admin p:first-of-type,
+#admin span:first-of-type,
+#admin .eyebrow,
+#admin small {
+  margin-top: 0 !important;
+  margin-bottom: 0.2rem !important;
+  padding-bottom: 0 !important;
+  font-size: 0.62rem !important;
+}
+
+/* 3. Compact Admin Studio title */
+#admin h2,
+#admin h1,
+#admin .title {
+  margin-top: 0 !important;
+  margin-bottom: 0.6rem !important;
+  padding: 0 !important;
+  font-size: 1.75rem !important;
+  line-height: 1.15 !important;
+}
+
+/* 4. Remove excessive line/divider spacing */
+#admin hr,
+#admin .divider,
+#admin [class*="border"] {
+  margin: 0.4rem 0 0.6rem 0 !important;
+}
+
+/* 5. Compact tabs and navigation bar */
+#admin nav,
+#admin .tabs,
+#admin .nav,
+#admin div:has(> [data-view]) {
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.6rem !important;
+  padding-top: 0 !important;
+  padding-bottom: 0.3rem !important;
+  gap: 0.5rem !important;
+}
+
+/* 6. Compact tab buttons */
+#admin [data-view],
+#admin button[data-tab],
+#admin .tab-btn {
+  padding: 5px 8px !important;
+  font-size: 0.72rem !important;
+}
+
+/* 7. Compact LOG OUT button */
+#admin #logoutBtn,
+#admin .logout-btn {
+  padding: 4px 10px !important;
+  font-size: 0.68rem !important;
+}
+
+/* 8. Move form inputs directly beneath the active tab */
+#admin #studioBody,
+#admin #studio,
+#admin form {
+  margin-top: 0.5rem !important;
+  padding-top: 0 !important;
+}
+
+#admin .admin-row,
+#admin .form-group {
+  margin-bottom: 0.5rem !important;
+  gap: 0.5rem !important;
+}
