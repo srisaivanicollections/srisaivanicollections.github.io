@@ -1603,3 +1603,16 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 /* Keep Admin login/studio state controlled by the .hidden class.
    Do not force display on #login because that would override .hidden. */
 #admin .hidden { display:none !important; }
+
+
+/* Admin view state failsafe: authentication JS is authoritative. */
+.admin-screen-hidden,
+#adminLoginScreen.hidden,
+#adminStudioScreen.hidden{
+  display:none !important;
+}
+
+#admin #login.admin-screen-hidden,
+#admin #studio.admin-screen-hidden{
+  display:none !important;
+}
