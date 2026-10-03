@@ -792,3 +792,55 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
     width:100%;
   }
 }
+
+
+/* DESKTOP HERO REFINEMENT: scoped to #shop and intentionally inactive below 992px */
+@media (min-width: 992px){
+  #shop .section-head{
+    width:100%;
+    max-width:1240px!important;
+    margin:0 auto 34px!important;
+    padding:4rem 2rem 2.5rem!important;
+    display:grid!important;
+    grid-template-columns:1.2fr 0.8fr!important;
+    gap:3rem!important;
+    align-items:end!important;
+    box-sizing:border-box!important;
+  }
+
+  #shop .section-head > div{
+    min-width:0;
+  }
+
+  #shop .section-head .eyebrow{
+    display:block!important;
+    margin:0 0 .75rem!important;
+    color:#8C6D3F!important;
+    font-size:.68rem!important;
+    line-height:1.2!important;
+    letter-spacing:.22em!important;
+    text-transform:uppercase!important;
+  }
+
+  #shop .section-head h2{
+    max-width:none!important;
+    margin:0!important;
+    color:#1C1917!important;
+    font-family:"Cormorant Garamond",Georgia,serif!important;
+    font-size:clamp(2.4rem,3.8vw,3.4rem)!important;
+    font-weight:400!important;
+    line-height:1.15!important;
+    letter-spacing:-.02em!important;
+  }
+
+  #shop .section-head > p{
+    max-width:none!important;
+    margin:0!important;
+    padding-bottom:6px!important;
+    color:#57534E!important;
+    font-family:"Cormorant Garamond",Georgia,serif!important;
+    font-size:1.05rem!important;
+    font-style:italic!important;
+    line-height:1.7!important;
+  }
+}
