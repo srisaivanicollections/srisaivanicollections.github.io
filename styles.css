@@ -357,3 +357,23 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 @media(prefers-reduced-motion:reduce){
  .variety-marquee-track{animation:none}
 }
+
+/* Women's World luxury marquee: fully isolated namespace */
+.womens-world-marquee-section{position:relative;width:100%;box-sizing:border-box;background:#FAF7F2;border-top:1px solid #E7E0D8;border-bottom:1px solid #E7E0D8;overflow:hidden}
+.womens-world-marquee-viewport{position:relative;width:100%;overflow:hidden}
+.womens-world-marquee-viewport::before,.womens-world-marquee-viewport::after{content:"";position:absolute;top:0;bottom:0;width:76px;z-index:2;pointer-events:none}
+.womens-world-marquee-viewport::before{left:0;background:linear-gradient(90deg,#FAF7F2 0%,rgba(250,247,242,.86) 38%,rgba(250,247,242,0) 100%)}
+.womens-world-marquee-viewport::after{right:0;background:linear-gradient(270deg,#FAF7F2 0%,rgba(250,247,242,.86) 38%,rgba(250,247,242,0) 100%)}
+.womens-world-marquee-track{display:flex;width:max-content;will-change:transform;animation:womens-world-marquee-scroll 44s linear infinite}
+.womens-world-marquee-group{display:flex;align-items:center;flex-shrink:0;white-space:nowrap}
+.womens-world-marquee-item{display:inline-flex;align-items:center;padding:17px 20px 16px;color:#1C1917;font-family:"Cormorant Garamond",Georgia,serif;font-size:15px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:.12em}
+.womens-world-marquee-separator{display:inline-flex;align-items:center;color:#B38E5D;font-family:"Cormorant Garamond",Georgia,serif;font-size:10px;line-height:1}
+.womens-world-marquee-section:hover .womens-world-marquee-track{animation-play-state:paused}
+@keyframes womens-world-marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:600px){
+ .womens-world-marquee-viewport::before,.womens-world-marquee-viewport::after{width:42px}
+ .womens-world-marquee-track{animation-duration:34s}
+ .womens-world-marquee-item{padding:14px 13px 13px;font-size:12px;letter-spacing:.1em}
+ .womens-world-marquee-separator{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.womens-world-marquee-track{animation:none}}
