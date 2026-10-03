@@ -9,7 +9,7 @@ const seed=[
 {id:7,name:"Temple Border Saree",category:"Sarees",price:3799,newArrival:false,bestSeller:false,image:"assets/saree-4.svg"},
 {id:8,name:"Everyday Printed Dress",category:"Dresses",price:1899,newArrival:true,bestSeller:false,image:"assets/dress-4.svg"}];
 var products=JSON.parse(localStorage.getItem(KEY)||"null")||seed;
-var settings=JSON.parse(localStorage.getItem(SET)||"null")||{name:"SRI SAI VANI",whatsapp:"919999999999",instagram:"https://www.instagram.com/"};
+var settings=JSON.parse(localStorage.getItem(SET)||"null")||{name:"SRI SAI VANI",whatsapp:"919999999999",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};
 var category="All",onlyNew=false;
 function $(s){return document.querySelector(s)}function all(s){return document.querySelectorAll(s)}
 function save(){localStorage.setItem(KEY,JSON.stringify(products));localStorage.setItem(SET,JSON.stringify(settings))}
