@@ -26,3 +26,31 @@
 .product-image .badge{min-height:24px!important;padding:6px 10px!important;font-size:8px!important;letter-spacing:.15em!important;font-weight:700!important;line-height:1!important;box-sizing:border-box!important}
 .product-image .badge.new{background:#faf8f4!important;color:#25201e!important;border:1px solid rgba(37,32,30,.12)!important}
 .product-image .badge.best{background:rgba(37,32,30,.94)!important;color:#faf8f4!important;border:1px solid rgba(250,248,244,.18)!important}
+
+/* MOBILE-FIRST POLISH */
+@media(max-width:600px){
+  body{overflow-x:hidden}
+  .header-inner{gap:10px}
+  .brand b{font-size:12px}.brand small{font-size:6px}
+  .catalog{padding:34px 14px 42px}
+  .section-head{margin-bottom:20px}
+  .section-head h2{font-size:40px;line-height:.98}
+  .section-head>p{font-size:11px;line-height:1.55;margin:16px 0 0}
+  .toolbar{padding:10px 0;margin-bottom:22px}
+  .tabs{gap:18px;margin-bottom:10px}
+  .tabs button{font-size:8px;padding:8px 0}
+  .tools{grid-template-columns:minmax(0,1fr) 108px;gap:7px}
+  .search{height:42px}.tools select{height:42px;min-width:0}
+  .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 8px}
+  .product-image{aspect-ratio:3/4}
+  .product-image .badges{top:8px!important;left:8px!important;gap:5px!important}
+  .product-image .badge{min-height:21px!important;padding:5px 7px!important;font-size:7px!important;letter-spacing:.1em!important}
+  .product-info{padding-top:9px}.product-info h3{font-size:14px;line-height:1.2;margin-bottom:4px}
+  .meta{font-size:7px;letter-spacing:.08em}.price-line{margin-top:7px}.price{font-size:11px}.price del{font-size:7px}.wa-mini{width:30px;height:30px}
+  .promises{margin-top:0}.promises>div{padding:18px 14px}.promises b{font-size:23px}
+  .wa-band{padding:34px 16px}.wa-band h2{font-size:40px}.wa-band p:last-child{font-size:11px;line-height:1.5}
+  footer{padding:26px 16px}
+  .modal{padding:8px!important}.panel{padding:22px 15px!important;width:100%!important;max-height:calc(100vh - 16px)!important}
+  .panel h2{font-size:30px}.studio-nav{gap:12px;overflow-x:auto;white-space:nowrap}.studio-nav button{font-size:8px;flex:none}.admin-item{padding:13px 11px}.admin-item strong{font-size:14px}
+}
+@media(min-width:601px) and (max-width:900px){.products{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px}.catalog{padding:48px 22px}.header-inner{padding:9px 22px}}
