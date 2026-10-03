@@ -18,7 +18,7 @@ $("#menu").onclick=()=>$("#nav").classList.toggle("open");
 $("#adminOpen").onclick=()=>$("#admin").classList.remove("hidden");
 $("#adminMobile").onclick=e=>{e.preventDefault();$("#nav").classList.remove("open");$("#admin").classList.remove("hidden")};
 $("#adminClose").onclick=()=>$("#admin").classList.add("hidden");
-$("#loginBtn").onclick=()=>{adminPassword=$("#password").value;if(!adminPassword)return;api({action:"saveSettings",password:adminPassword,settings}).then(()=>{$("#login").classList.add("hidden");$("#studio").classList.remove("hidden");showView("products")}).catch(()=>$("#loginMsg").textContent="Incorrect password or storage is not configured.")};
+$("#loginBtn").onclick=()=>{adminPassword=$("#password").value;if(!adminPassword)return;api({action:"authenticate",password:adminPassword}).then(()=>{$("#login").classList.add("hidden");$("#studio").classList.remove("hidden");showView("products")}).catch(e=>{$("#loginMsg").textContent=e.message||"Incorrect password or storage is not configured."})};
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim();api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();showView("products")}).catch(e=>alert(e.message))}});
 $("#search").oninput=render;$("#price").onchange=render;load();
