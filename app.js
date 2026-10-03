@@ -100,7 +100,24 @@ async function localApi(body){
       if(!currentIds.has(Number(p.id))) merged.push(p);
     }
     if(!merged.length) throw new Error("Catalog safety check failed.");
-    await githubWriteJson("data/products.json",merged,current.sha,"Update product catalogue");
+    try{
+      await githubWriteJson("data/products.json",merged,current.sha,"Update product catalogue");
+    }catch(writeError){
+      const latest=await githubReadJson("data/products.json");
+      const latestById=new Map((latest.value||[]).map(p=>[Number(p.id),p]));
+      const retry=[];
+      for(const p of latest.value||[]){
+        const id=Number(p.id);
+        if(removed.has(id)) continue;
+        retry.push(incomingById.has(id)?incomingById.get(id):p);
+      }
+      const latestIds=new Set((latest.value||[]).map(p=>Number(p.id)));
+      for(const p of body.products){
+        if(!latestIds.has(Number(p.id))) retry.push(p);
+      }
+      if(!retry.length) throw new Error("Catalog safety check failed.");
+      await githubWriteJson("data/products.json",retry,latest.sha,"Retry product catalogue update");
+    }
     return {ok:true};
   }
   if(body.action==="saveSettings"){
