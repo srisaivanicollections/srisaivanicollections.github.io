@@ -133,7 +133,7 @@ async function load(){
       const [pr,sr]=await Promise.all([fetch("data/products.json",{cache:"no-store"}),fetch("data/settings.json",{cache:"no-store"})]);
       products=await pr.json();if(!Array.isArray(products)||products.length===0)throw new Error("Empty static catalog.");settings=await sr.json();apply();render();loadReviews()
     }catch(err){
-      products=[];settings={name:"SRI SAI VANI",whatsapp:"919999999999",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};apply();render();loadReviews()
+      products=[];settings={name:"SRI SAI VANI",whatsapp:"",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};apply();render();loadReviews()
     }
   }
 }
