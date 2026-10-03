@@ -354,7 +354,6 @@ async function saveProduct(id){
     else products=[p,...products];
 
     await persistProduct(p);
-    await load();
     render();
     showView("products");
     showAdminToast(id?"Item updated successfully.":"Item added successfully.","success");
