@@ -336,11 +336,12 @@ $("#loginBtn").onclick=async()=>{
 };
 function logoutAdmin(){
   adminPassword="";
+  clearSavedGithubToken();
   const studio=$("#studio");
   const login=$("#login");
   const admin=$("#admin");
   if(studio) studio.classList.add("hidden");
-  if(login) login.classList.add("hidden");
+  if(login) login.classList.remove("hidden");
   if(admin) admin.classList.add("hidden");
   $("#password").value="";
   $("#loginMsg").textContent="";
