@@ -1,6 +1,6 @@
 const API="/.netlify/functions/catalog";
 const IS_GITHUB_PAGES = location.hostname.endsWith(".github.io");
-const LOCAL_KEY = "ssv_catalog_v2";
+const LOCAL_KEY = "ssv_catalog_v3";
 const LOCAL_ADMIN_PASSWORD = "admin123";
 let products=[],settings={},category="All",adminPassword="";
 const seedFallback=[];
