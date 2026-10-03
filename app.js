@@ -6,7 +6,7 @@ const LOCAL_ADMIN_PASSWORD = "admin123";
 const GITHUB_REPO = "vinith1111/premium_saree_website_libas";
 const GITHUB_BRANCH = "main";
 const GITHUB_TOKEN_KEY = "ssv_github_token_v1";
-let products=[],settings={},category="All",adminPassword="",reviewsArray=[];
+let products=[],settings={},category="All",adminPassword="",reviewsArray=[],githubOriginalIds=new Set();
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
   const pr=await fetch("data/products.json",{cache:"no-store"});
@@ -51,6 +51,11 @@ async function githubRequest(path,options={}){
   if(!r.ok) throw new Error(d.message||"GitHub request failed");
   return d;
 }
+async function publicGitHubReadJson(path){
+  const r=await fetch("https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path+"?v="+Date.now(),{cache:"no-store"});
+  if(!r.ok) throw new Error("Git-backed catalog could not be loaded.");
+  return {value:await r.json()};
+}
 async function githubReadJson(path){
   const d=await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path+"?ref="+encodeURIComponent(GITHUB_BRANCH));
   const content=atob(String(d.content||"").replace(/\n/g,""));
@@ -77,15 +82,19 @@ async function localApi(body){
   if(body.action==="saveProducts"){
     if(!Array.isArray(body.products)||body.products.length===0) throw new Error("Catalog safety check failed.");
     const current=await githubReadJson("data/products.json");
-    const currentById=new Map((Array.isArray(current.value)?current.value:[]).map(p=>[Number(p.id),p]));
     const incomingById=new Map(body.products.map(p=>[Number(p.id),p]));
+    const removed=new Set((body.removedIds||[]).map(Number));
     const merged=[];
     for(const p of current.value||[]){
-      merged.push(incomingById.has(Number(p.id))?incomingById.get(Number(p.id)):p);
+      const id=Number(p.id);
+      if(removed.has(id)) continue;
+      merged.push(incomingById.has(id)?incomingById.get(id):p);
     }
+    const currentIds=new Set((current.value||[]).map(p=>Number(p.id)));
     for(const p of body.products){
-      if(!currentById.has(Number(p.id))) merged.push(p);
+      if(!currentIds.has(Number(p.id))) merged.push(p);
     }
+    if(!merged.length) throw new Error("Catalog safety check failed.");
     await githubWriteJson("data/products.json",merged,current.sha,"Update product catalogue");
     return {ok:true};
   }
@@ -116,14 +125,9 @@ async function api(body){
 async function load(){
   try{
     if(IS_GITHUB_PAGES){
-      const token=sessionStorage.getItem(GITHUB_TOKEN_KEY);
-      if(token){
-        const [pr,sr]=await Promise.all([githubReadJson("data/products.json"),githubReadJson("data/settings.json")]);
-        if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
-        products=pr.value;settings=sr.value||{};apply();render();loadReviews();return;
-      }
-      const d=await localLoad();
-      products=d.products||[];settings=d.settings||{};apply();render();loadReviews();return;
+      const [pr,sr]=await Promise.all([publicGitHubReadJson("data/products.json"),publicGitHubReadJson("data/settings.json")]);
+      if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
+      products=pr.value;settings=sr.value||{};apply();render();loadReviews();return;
     }
     const r=await fetch(API,{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();if(!Array.isArray(d.products)||d.products.length===0)throw new Error("Empty catalog response.");products=d.products;settings=d.settings||{};apply();render();loadReviews();
   }catch(e){
@@ -170,7 +174,12 @@ function render(){renderTabs();if(!Array.isArray(products)||products.length===0)
 function form(p={}){return '<div class="admin-row"><input id="fName" placeholder="Product name" value="'+(p.name||"")+'"><select id="fCat"><option '+(p.category==="Sarees"?"selected":"")+'>Sarees</option><option '+(p.category==="Dresses"?"selected":"")+'>Dresses</option></select></div><div class="admin-row"><input id="fPrice" type="number" placeholder="Price" value="'+(p.price||"")+'"><input id="fOriginal" type="number" placeholder="Original price" value="'+(p.originalPrice||"")+'"></div><div class="upload-row"><input id="fImage" placeholder="Image path or URL" value="'+(p.image||"")+'"><input id="fFile" type="file" accept="image/*"></div><label><input id="fNew" type="checkbox" '+(p.newArrival?"checked":"")+'> New arrival</label> <label><input id="fBest" type="checkbox" '+(p.bestSeller?"checked":"")+'> Best seller</label> <label><input id="fAvail" type="checkbox" '+(p.availability!==false?"checked":"")+'> Available</label><br><br><button class="btn dark" id="saveItem">SAVE ITEM</button>'+(p.id?' <button class="danger" id="deleteItem">DELETE</button>':"")}
 function showView(v){const b=$("#studioBody");if(v==="products"){b.innerHTML=products.map(p=>'<div class="admin-item"><div><strong>'+p.name+'</strong><br><small>'+p.category+" · "+money(p.price)+(p.newArrival?" · NEW":"")+(p.bestSeller?" · BEST":"")+'</small></div><button class="danger edit" data-id="'+p.id+'">EDIT</button></div>').join("")}else if(v==="add"){b.innerHTML=form();$("#saveItem").onclick=()=>saveProduct(0)}else{b.innerHTML='<p>Shop name</p><input id="setName" value="'+(settings.name||"")+'"><p>WhatsApp number</p><input id="setWa" value="'+(settings.whatsapp||"")+'"><p>Instagram URL</p><input id="setIg" value="'+(settings.instagram||"")+'"><button class="btn dark" id="saveSettings">SAVE SETTINGS</button>'}}
 function edit(id){const p=products.find(x=>x.id===id);$("#studioBody").innerHTML=form(p);$("#saveItem").onclick=()=>saveProduct(id);$("#deleteItem").onclick=async()=>{if(!confirm("Delete this item?"))return;products=products.filter(x=>x.id!==id);await persistProducts();render();showView("products")}}
-async function persistProducts(){await api({action:"saveProducts",password:adminPassword,products})}
+async function persistProducts(){
+  const currentIds=new Set(products.map(p=>Number(p.id)));
+  const removedIds=Array.from(githubOriginalIds).filter(id=>!currentIds.has(Number(id)));
+  await api({action:"saveProducts",password:adminPassword,products,removedIds});
+  githubOriginalIds=new Set(products.map(p=>Number(p.id)));
+}
 async function saveProduct(id){let image=$("#fImage").value.trim(),file=$("#fFile").files[0];try{if(file){if(file.size>5*1024*1024)throw new Error("Image must be 5MB or smaller.");const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});const up=await api({action:"uploadImage",password:adminPassword,filename:file.name,base64});image=up.path}const p={id:id||Date.now(),name:$("#fName").value.trim(),category:$("#fCat").value,price:Number($("#fPrice").value),originalPrice:Number($("#fOriginal").value)||undefined,image,newArrival:$("#fNew").checked,bestSeller:$("#fBest").checked,availability:$("#fAvail").checked};if(!p.name||!p.price||!p.image)throw new Error("Please fill product name, price and image.");if(id)products=products.map(x=>x.id===id?p:x);else products.unshift(p);await persistProducts();render();showView("products")}catch(e){alert(e.message)}}
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
 $("#adminOpen").onclick=()=>$("#admin").classList.remove("hidden");
