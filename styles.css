@@ -2046,3 +2046,72 @@ article .badge {
   color: #44403C !important;
   border-color: rgba(68, 64, 60, 0.3) !important;
 }
+
+
+/* ===================================================
+   FINAL SHOP BADGE AUTHORITY - CHAMPAGNE FROSTED GLASS
+   =================================================== */
+#shop .product-image .badges{
+  position:absolute !important;
+  top:10px !important;
+  left:10px !important;
+  right:auto !important;
+  bottom:auto !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:flex-start !important;
+  gap:5px !important;
+  width:auto !important;
+  height:auto !important;
+  z-index:20 !important;
+}
+
+#shop .product-image .badges .badge,
+#shop .product-image .badges .badge.new,
+#shop .product-image .badges .badge.best{
+  display:inline-block !important;
+  position:static !important;
+  box-sizing:border-box !important;
+  width:max-content !important;
+  min-width:0 !important;
+  max-width:none !important;
+  min-height:0 !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:4px 8px !important;
+  background:rgba(250,247,242,.72) !important;
+  color:#8C6D3F !important;
+  border:1px solid rgba(184,149,93,.60) !important;
+  border-radius:2px !important;
+  box-shadow:0 2px 7px rgba(0,0,0,.08) !important;
+  backdrop-filter:blur(8px) !important;
+  -webkit-backdrop-filter:blur(8px) !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:9px !important;
+  line-height:1 !important;
+  font-weight:600 !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+}
+
+#shop .product-image .badges .badge.best{
+  color:#44403C !important;
+  border-color:rgba(68,64,60,.35) !important;
+}
+
+@media(max-width:600px){
+  #shop .product-image .badges{
+    top:8px !important;
+    left:8px !important;
+    gap:4px !important;
+  }
+  #shop .product-image .badges .badge,
+  #shop .product-image .badges .badge.new,
+  #shop .product-image .badges .badge.best{
+    padding:3px 6px !important;
+    font-size:7px !important;
+    letter-spacing:.14em !important;
+  }
+}
