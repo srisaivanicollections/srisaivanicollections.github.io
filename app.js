@@ -321,9 +321,17 @@ $("#adminOpen").onclick=async()=>{
   $("#admin").classList.remove("hidden");
   const saved=getSavedGithubToken();
   if(saved){
-    const ok=await openStudioWithToken(saved,false);
-    if(ok) return;
+    // A previously authenticated browser does not need to enter the token again.
+    // Use the saved token directly and validate it only when a GitHub operation runs.
+    adminPassword=saved;
+    $("#login").classList.add("hidden");
+    $("#studio").classList.remove("hidden");
+    $("#password").value="";
+    $("#loginMsg").textContent="";
+    showView("products");
+    return;
   }
+  adminPassword="";
   $("#login").classList.remove("hidden");
   $("#studio").classList.add("hidden");
   $("#password").focus();
