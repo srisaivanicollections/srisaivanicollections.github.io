@@ -209,7 +209,11 @@ async function openStudioWithToken(token){
     return false;
   }
 }
-$("#loginBtn").onclick=()=>openStudioWithToken($("#password").value);
+$("#loginBtn").onclick=()=>{
+  const entered=$("#password").value.trim();
+  const saved=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+  openStudioWithToken(entered||saved);
+};
 
 $("#logoutBtn").onclick=()=>{adminPassword="";$("#studio").classList.add("hidden");$("#login").classList.remove("hidden");$("#password").value="";$("#loginMsg").textContent="";$("#adminOpen").textContent="ADMIN";$("#admin").classList.add("hidden");/* Keep the GitHub token in localStorage so the next Admin login does not require it again. */};
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
