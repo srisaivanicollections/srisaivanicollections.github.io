@@ -335,13 +335,14 @@ $("#loginBtn").onclick=async()=>{
   await openStudioWithToken(entered||saved,true);
 };
 function logoutAdmin(){
+  // Log out of the current Admin Studio session, but keep the GitHub token
+  // saved for this browser so the token is only entered once.
   adminPassword="";
-  clearSavedGithubToken();
   const studio=$("#studio");
   const login=$("#login");
   const admin=$("#admin");
   if(studio) studio.classList.add("hidden");
-  if(login) login.classList.remove("hidden");
+  if(login) login.classList.add("hidden");
   if(admin) admin.classList.add("hidden");
   $("#password").value="";
   $("#loginMsg").textContent="";
