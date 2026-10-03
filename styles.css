@@ -844,3 +844,56 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
     line-height:1.7!important;
   }
 }
+
+
+/* FINAL PRODUCT BADGE ALIGNMENT FIX */
+#shop .product-image .badges{
+  position:absolute!important;
+  top:10px!important;
+  left:10px!important;
+  right:auto!important;
+  bottom:auto!important;
+  z-index:5!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  gap:5px!important;
+  width:max-content!important;
+  max-width:calc(100% - 20px)!important;
+}
+#shop .product-image .badges .badge{
+  position:static!important;
+  display:block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:4px 8px!important;
+  min-height:0!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  background:rgba(250,247,242,.94)!important;
+  backdrop-filter:blur(6px)!important;
+  -webkit-backdrop-filter:blur(6px)!important;
+  border:1px solid #C8A97E!important;
+  border-radius:1px!important;
+  font-family:"Inter",Arial,sans-serif!important;
+  font-size:.62rem!important;
+  font-weight:500!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+}
+@media (max-width:991px){
+  #shop .product-image .badges{
+    top:8px!important;
+    left:8px!important;
+    gap:4px!important;
+    max-width:calc(100% - 16px)!important;
+  }
+  #shop .product-image .badges .badge{
+    font-size:.56rem!important;
+    letter-spacing:.14em!important;
+    padding:4px 6px!important;
+  }
+}
