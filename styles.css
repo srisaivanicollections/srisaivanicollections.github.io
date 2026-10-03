@@ -1531,3 +1531,15 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #shop .toolbar{
   border-top:0 !important;
 }
+
+/* Final hero-to-catalog divider cleanup.
+   Remove all top/bottom boundary rules at this transition. */
+.hero-section{
+  border-bottom:0 !important;
+}
+#shop{
+  border-top:0 !important;
+}
+#shop .toolbar{
+  border-top:0 !important;
+}
