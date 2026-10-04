@@ -164,7 +164,12 @@ async function localApi(body){
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({message:"Add product image",content,branch:GITHUB_BRANCH})
     });
-    return {ok:true,path:path,sha:d.content?.sha||""};
+    return {
+      ok:true,
+      path:path,
+      url:"https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path,
+      sha:d.content?.sha||""
+    };
   }
   throw new Error("Unknown action");
 }
@@ -192,6 +197,12 @@ function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function waNumber(){return String(settings.whatsapp||"").replace(/\D/g,"")}
 function wa(p){const n=waNumber();return "https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I am interested in "+p.name+" ("+money(p.price)+"). Is it available?")}
+function productImageSrc(value){
+  const src=String(value||"").trim();
+  if(!src)return "";
+  if(/^(https?:|data:|blob:)/i.test(src))return src;
+  return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
+}
 function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();$("#waMain").href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";$("#instagram").href=settings.instagram}
 async function loadReviews(){
   try{
@@ -336,7 +347,7 @@ async function saveProduct(id){
       });
       const up=await api({action:"uploadImage",password:adminPassword,filename:file.name,base64});
       if(!up?.path)throw new Error("Image upload failed.");
-      image=up.path;
+      image=up.url||("https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+up.path);
     }
 
     const p={
