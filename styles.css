@@ -5416,3 +5416,15 @@ nav a,
     background:transparent !important;
   }
 }
+
+
+/* Mobile menu: show Admin only. Keep desktop navigation unchanged. */
+@media (max-width:600px){
+  .header nav.open .shop-link,
+  .header nav.open a[href*="instagram.com"]{
+    display:none !important;
+  }
+  .header nav.open .admin-link{
+    display:block !important;
+  }
+}
