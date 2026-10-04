@@ -686,7 +686,7 @@ function showAdminLogin(){
     input.setAttribute("autocomplete",hasGithubToken?"current-password":"new-password");
   }
   if($("#loginBtn"))$("#loginBtn").textContent=hasGithubToken?"SIGN IN":"CONNECT & CREATE PASSWORD";
-  if(forgot)forgot.textContent="Forgot password?";
+  if(forgot)forgot.textContent="SET / RESET PASSWORD";
   setStorageStatus(
     hasGithubToken
       ?"Enter your Admin password to sign in."
@@ -810,7 +810,7 @@ function startPasswordReset(){
     $("#password").focus();
   }
   if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
-  setStorageStatus("Set a new Admin password. Your GitHub access verifies the reset.",false);
+  setStorageStatus("Create or replace your Admin password. GitHub access verifies the change.",false);
 }
 
 function logoutAdmin(){
