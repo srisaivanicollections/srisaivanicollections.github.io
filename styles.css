@@ -4852,3 +4852,107 @@ nav a,
     width:min(100%,270px);
   }
 }
+
+
+/* ==========================================================================
+   INSTAGRAM REEL: FINAL EDITORIAL LAYOUT
+   ========================================================================== */
+.drape-instagram-shell{
+  width:min(760px,100%);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.drape-instagram-heading{
+  width:min(560px,100%);
+  margin:0 auto 30px;
+  text-align:center;
+}
+.drape-instagram-heading .drape-editorial-eyebrow{
+  display:block;
+  margin:0 0 10px;
+  color:#B89758;
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-size:9px!important;
+  font-weight:600!important;
+  letter-spacing:.22em!important;
+  line-height:1.2!important;
+}
+.drape-instagram-heading .drape-editorial-title{
+  margin:0 0 12px;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(42px,5vw,58px)!important;
+  line-height:.98!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+.drape-instagram-heading .drape-editorial-text{
+  max-width:430px;
+  margin:0 auto;
+  color:#6F6A64;
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-size:11px!important;
+  line-height:1.7!important;
+}
+.drape-instagram-frame{
+  width:min(540px,100%);
+  min-height:620px;
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+  background:#FAF8F5;
+  border:1px solid #E4D8C5;
+  box-shadow:0 12px 34px rgba(28,25,23,.06);
+}
+.drape-instagram-frame .instagram-media{
+  width:100%!important;
+  min-width:0!important;
+  max-width:540px!important;
+  margin:0 auto!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.drape-instagram-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:42px;
+  margin-top:22px;
+  padding:0 20px;
+  background:#1C1917;
+  border:1px solid #1C1917;
+  color:#FAF8F5;
+  text-decoration:none;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:.16em;
+  transition:all .25s ease;
+}
+.drape-instagram-cta:hover{
+  background:#B89758;
+  border-color:#B89758;
+  color:#1C1917;
+}
+@media(max-width:768px){
+  .drape-editorial-section{
+    padding:54px 16px 60px!important;
+  }
+  .drape-instagram-heading{
+    margin-bottom:24px;
+  }
+  .drape-instagram-heading .drape-editorial-title{
+    font-size:clamp(38px,11vw,48px)!important;
+  }
+  .drape-instagram-frame{
+    width:min(100%,430px);
+    min-height:580px;
+    box-shadow:0 8px 24px rgba(28,25,23,.05);
+  }
+  .drape-instagram-cta{
+    width:min(100%,230px);
+  }
+}
