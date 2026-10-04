@@ -114,7 +114,7 @@ async function localApi(body){
     if(!token){
       if(!supplied) throw new Error("Enter your GitHub token.");
       const previousLocal=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
-      const previousSession=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
+      const previousSession=sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
       localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
       try{
         await githubReadJson("data/products.json");
@@ -673,26 +673,47 @@ function setStorageStatus(message,connected=false){
 function showAdminLogin(){
   adminSessionActive=false;
   adminPassword="";
-  updateAdminView();
-  if($("#password"))$("#password").value="";
-  const hasGithubToken=!!getSavedGithubToken();
-  const input=$("#password");
-  const forgot=$("#forgotPassword");
   adminSetupMode=false;
   adminResetMode=false;
   adminRecoveryTokenMode=false;
+  updateAdminView();
+  const input=$("#password");
+  const label=$("#passwordLabel");
+  const toggle=$("#passwordToggle");
+  const forgot=$("#forgotPassword");
+  const heading=$("#adminAuthHeading");
+  const description=$("#adminAuthDescription");
   if(input){
-    input.placeholder=hasGithubToken?"Admin password":"GitHub token";
-    input.setAttribute("autocomplete",hasGithubToken?"current-password":"new-password");
+    input.value="";
+    input.type="password";
+    input.setAttribute("autocomplete","current-password");
+    input.placeholder="Enter your Admin password";
   }
-  if($("#loginBtn"))$("#loginBtn").textContent=hasGithubToken?"SIGN IN":"CONNECT & CREATE PASSWORD";
-  if(forgot)forgot.textContent="SET / RESET PASSWORD";
-  setStorageStatus(
-    hasGithubToken
-      ?"Enter your Admin password to sign in."
-      :"First-time setup: connect GitHub and create your Admin password.",
-    false
-  );
+  if(toggle){
+    toggle.textContent="SHOW";
+    toggle.setAttribute("aria-label","Show password");
+    toggle.setAttribute("aria-pressed","false");
+  }
+  const hasGithubToken=!!getSavedGithubToken();
+  if(hasGithubToken){
+    if(heading)heading.textContent="Sign in to Admin Studio";
+    if(description)description.textContent="Use your private Admin password to manage products and shop settings.";
+    if(label)label.textContent="Admin password";
+    if($("#loginBtn"))$("#loginBtn").textContent="SIGN IN";
+    if(forgot)forgot.textContent="RESET PASSWORD";
+    setStorageStatus("Your GitHub connection is ready.",true);
+  }else{
+    if(heading)heading.textContent="Connect Admin storage";
+    if(description)description.textContent="Connect your GitHub storage once. Then you will create your private Admin password.";
+    if(label)label.textContent="GitHub access token";
+    if(input){
+      input.placeholder="Paste your GitHub access token";
+      input.setAttribute("autocomplete","off");
+    }
+    if($("#loginBtn"))$("#loginBtn").textContent="CONNECT GITHUB";
+    if(forgot)forgot.textContent="RESET PASSWORD";
+    setStorageStatus("GitHub access is required for Admin storage and password recovery.",false);
+  }
 }
 
 function showAdminStudio(){
@@ -719,11 +740,15 @@ async function signInAdmin(value){
       adminResetMode=true;
       if($("#password")){
         $("#password").value="";
-        $("#password").placeholder="New Admin password (8+ characters)";
+        $("#password").placeholder="Enter new Admin password (8+ characters)";
         $("#password").setAttribute("autocomplete","new-password");
       }
+      if($("#passwordLabel"))$("#passwordLabel").textContent="New Admin password";
+      if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Set a new Admin password";
+      if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a new password of at least 8 characters.";
       if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
-      setStorageStatus("GitHub access verified. Set your new Admin password.",true);
+      if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
+      setStorageStatus("GitHub access verified. Choose your new Admin password.",true);
       return false;
     }
     if(adminResetMode){
@@ -731,7 +756,7 @@ async function signInAdmin(value){
       adminResetMode=false;
       adminSetupMode=false;
       if($("#password"))$("#password").value="";
-      if($("#loginBtn"))$("#loginBtn").textContent="SIGN IN";
+      showAdminLogin();
       setStorageStatus("Password reset successfully. Sign in with your new password.",true);
       return false;
     }
@@ -745,8 +770,12 @@ async function signInAdmin(value){
         $("#password").placeholder="Create Admin password (8+ characters)";
         $("#password").setAttribute("autocomplete","new-password");
       }
+      if($("#passwordLabel"))$("#passwordLabel").textContent="Create Admin password";
+      if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Create your Admin password";
+      if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a password of at least 8 characters. GitHub will be used only for storage and recovery.";
       if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
-      setStorageStatus("GitHub connected. Now create your Admin password.",true);
+      if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
+      setStorageStatus("GitHub connected. Choose your Admin password.",true);
       return false;
     }
 
@@ -793,11 +822,22 @@ async function signInAdmin(value){
 }
 
 function startPasswordReset(){
+  if(adminSetupMode || adminResetMode || adminRecoveryTokenMode){
+    showAdminLogin();
+    return;
+  }
   if(!getSavedGithubToken()){
     adminResetMode=false;
     adminRecoveryTokenMode=true;
-    if($("#password"))$("#password").placeholder="GitHub token";
+    if($("#password")){
+      $("#password").placeholder="Paste your GitHub access token";
+      $("#password").setAttribute("autocomplete","off");
+    }
+    if($("#passwordLabel"))$("#passwordLabel").textContent="GitHub access token";
+    if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Recover Admin access";
+    if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Enter your GitHub access token to verify ownership, then choose a new Admin password.";
     if($("#loginBtn"))$("#loginBtn").textContent="CONNECT & RESET PASSWORD";
+    if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
     setStorageStatus("Enter your GitHub token to recover Admin access.",false);
     return;
   }
@@ -805,12 +845,16 @@ function startPasswordReset(){
   adminSetupMode=false;
   if($("#password")){
     $("#password").value="";
-    $("#password").placeholder="New Admin password (8+ characters)";
+    $("#password").placeholder="Enter new Admin password (8+ characters)";
     $("#password").setAttribute("autocomplete","new-password");
     $("#password").focus();
   }
+  if($("#passwordLabel"))$("#passwordLabel").textContent="New Admin password";
+  if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Set a new Admin password";
+  if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a new password of at least 8 characters. Your GitHub access verifies the change.";
   if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
-  setStorageStatus("Create or replace your Admin password. GitHub access verifies the change.",false);
+  if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
+  setStorageStatus("Ready for your new Admin password.",false);
 }
 
 function logoutAdmin(){
@@ -829,6 +873,21 @@ function logoutAdmin(){
     closeAdminModal();
     adminLogoutLock=false;
   },700);
+}
+
+if(!window.__LIBAS_ADMIN_PASSWORD_TOGGLE_BOUND){
+  window.__LIBAS_ADMIN_PASSWORD_TOGGLE_BOUND=true;
+  document.addEventListener("click",(e)=>{
+    const toggle=e.target.closest("#passwordToggle");
+    if(!toggle)return;
+    const input=$("#password");
+    if(!input)return;
+    const show=input.type==="password";
+    input.type=show?"text":"password";
+    toggle.textContent=show?"HIDE":"SHOW";
+    toggle.setAttribute("aria-label",show?"Hide password":"Show password");
+    toggle.setAttribute("aria-pressed",String(show));
+  });
 }
 
 if(!window.__LIBAS_ADMIN_KEYBOARD_BOUND){
