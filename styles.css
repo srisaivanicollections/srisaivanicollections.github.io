@@ -4316,3 +4316,289 @@ nav a,
   #shop .lux-price-original{font-size:.62rem}
   #shop .lux-wa-action{width:30px;height:30px;flex-basis:30px}
 }
+
+
+/* ============================================================
+   FINAL CATALOG LAYER
+   Scoped to the current .lux-* product renderer in app.js.
+   This intentionally supersedes legacy .product-card/.badge rules.
+   ============================================================ */
+
+#shop .lux-product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:28px;
+  row-gap:42px;
+  width:100%;
+}
+
+#shop .lux-item-card{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  background:transparent;
+}
+
+#shop .lux-item-media{
+  position:relative;
+  width:100%;
+  aspect-ratio:3 / 4;
+  overflow:hidden;
+  background:#F2EFE9;
+  border:0;
+}
+
+#shop .lux-item-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+#shop .lux-badge-cluster{
+  position:absolute;
+  left:8px;
+  bottom:8px;
+  right:auto;
+  top:auto;
+
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:4px;
+
+  width:max-content;
+  max-width:calc(100% - 16px);
+  margin:0;
+  padding:0;
+
+  background:transparent;
+  border:0;
+  z-index:5;
+  pointer-events:none;
+}
+
+#shop .lux-badge-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:auto;
+  min-width:0;
+  max-width:max-content;
+  min-height:17px;
+  box-sizing:border-box;
+
+  margin:0;
+  padding:3px 6px;
+
+  border:1px solid #E4D8C5;
+  border-radius:2px;
+
+  font-family:"Inter","Montserrat",Arial,sans-serif;
+  font-size:.46rem;
+  font-weight:600;
+  line-height:1;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  white-space:nowrap;
+
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  box-shadow:none;
+}
+
+#shop .lux-badge-new{
+  background:rgba(28,25,23,.82);
+  color:#FAF8F5;
+  border-color:rgba(228,216,197,.78);
+}
+
+#shop .lux-badge-best{
+  background:rgba(250,248,245,.90);
+  color:#1C1917;
+  border-color:#E4D8C5;
+}
+
+#shop .lux-item-body{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  padding:12px 1px 0;
+}
+
+#shop .lux-item-title{
+  margin:0 0 5px;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:21px;
+  font-weight:500;
+  line-height:1.12;
+  letter-spacing:-.012em;
+  overflow-wrap:anywhere;
+}
+
+#shop .lux-item-cat{
+  margin:0;
+  color:#78716C;
+  font-family:"Inter","Montserrat",Arial,sans-serif;
+  font-size:8px;
+  font-weight:400;
+  line-height:1.35;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+#shop .lux-item-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  width:100%;
+  min-width:0;
+  margin-top:10px;
+}
+
+#shop .lux-pricing-block{
+  display:flex;
+  align-items:baseline;
+  min-width:0;
+  gap:8px;
+}
+
+/* Preserve the boutique's original serif price treatment. */
+#shop .lux-price-current{
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:18px;
+  font-weight:500;
+  line-height:1;
+  white-space:nowrap;
+  font-variant-numeric:oldstyle-nums;
+}
+
+#shop .lux-price-original{
+  color:#78716C;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:12px;
+  font-weight:300;
+  line-height:1;
+  white-space:nowrap;
+  text-decoration:line-through;
+  text-decoration-thickness:1px;
+  text-decoration-color:#78716C;
+  font-variant-numeric:oldstyle-nums;
+}
+
+/* 28px WhatsApp action, vertically centered with the price row. */
+#shop .lux-wa-action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:28px;
+  height:28px;
+  min-width:28px;
+  flex:0 0 28px;
+
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+
+  border:1px solid #DCCFBC;
+  border-radius:2px;
+  background:transparent;
+  color:#1C1917;
+
+  line-height:0;
+  text-decoration:none;
+
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+#shop .lux-wa-action svg{
+  display:block;
+  width:14px;
+  height:14px;
+  margin:0;
+  padding:0;
+  fill:currentColor;
+}
+
+#shop .lux-wa-action:hover,
+#shop .lux-wa-action:focus-visible{
+  background:#1C1917;
+  border-color:#1C1917;
+  color:#FAF8F5;
+}
+
+@media(max-width:1100px){
+  #shop .lux-product-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    column-gap:24px;
+    row-gap:38px;
+  }
+}
+
+@media(max-width:900px){
+  #shop .lux-product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:14px;
+    row-gap:30px;
+  }
+}
+
+@media(max-width:600px){
+  #shop .lux-product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:12px;
+    row-gap:28px;
+  }
+
+  #shop .lux-item-media{
+    aspect-ratio:3 / 4;
+  }
+
+  #shop .lux-badge-cluster{
+    left:8px;
+    bottom:8px;
+    max-width:calc(100% - 16px);
+    gap:3px;
+  }
+
+  #shop .lux-badge-pill{
+    min-height:16px;
+    padding:3px 5px;
+    font-size:.40rem;
+    letter-spacing:.10em;
+  }
+
+  #shop .lux-item-body{
+    padding-top:10px;
+  }
+
+  #shop .lux-item-title{
+    font-size:17px;
+  }
+
+  #shop .lux-item-cat{
+    font-size:7px;
+  }
+
+  #shop .lux-price-current{
+    font-size:17px;
+  }
+
+  #shop .lux-price-original{
+    font-size:10px;
+  }
+
+  #shop .lux-wa-action{
+    width:28px;
+    height:28px;
+    flex-basis:28px;
+  }
+}
