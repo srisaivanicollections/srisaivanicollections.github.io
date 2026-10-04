@@ -5368,3 +5368,32 @@ nav a,
     padding-bottom:34px !important;
   }
 }
+
+
+/* Search icon alignment fix: icon and placeholder must never overlap. */
+#shop .lux-search{position:relative;}
+#shop .lux-search-icon{
+  position:absolute !important;
+  left:14px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:20px !important;
+  height:20px !important;
+  margin:0 !important;
+  flex:none !important;
+  z-index:1;
+}
+#shop .lux-search-icon svg{width:20px !important;height:20px !important;}
+#shop .lux-search-input{
+  display:block !important;
+  width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  padding-left:42px !important;
+  padding-right:10px !important;
+}
+@media(max-width:767px){
+  #shop .lux-search-icon{left:14px !important;width:19px !important;height:19px !important;}
+  #shop .lux-search-icon svg{width:19px !important;height:19px !important;}
+  #shop .lux-search-input{padding-left:40px !important;}
+}
