@@ -215,10 +215,9 @@ function productImageSrc(value){
   const src=String(value||"").trim();
   if(!src)return "";
   if(/^(https?:|data:|blob:)/i.test(src))return src;
-  // Keep Git-backed product images as repository paths. Resolve them against
-  // the current GitHub Pages base URL so the catalog and its assets stay in
-  // the same deployment.
-  return new URL(src.replace(/^\.\//,""),document.baseURI).href;
+  // GitHub raw is used for repository assets so newly uploaded images become
+  // available independently of GitHub Pages deployment propagation.
+  return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
 }
 function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();$("#waMain").href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";$("#instagram").href=settings.instagram}
 async function loadReviews(){
