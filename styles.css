@@ -5498,3 +5498,17 @@ footer .brand b{
     row-gap:26px !important;
   }
 }
+
+/* FINAL MOBILE GRID SPACING - LIBAS-INSPIRED COMPACT RHYTHM */
+@media (max-width: 767px){
+  #shop .lux-product-grid{
+    column-gap:8px !important;
+    row-gap:18px !important;
+  }
+  #shop .lux-item-body{
+    padding-top:7px !important;
+  }
+  #shop .lux-item-footer{
+    margin-top:6px !important;
+  }
+}
