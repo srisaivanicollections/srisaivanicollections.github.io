@@ -3927,3 +3927,110 @@ nav a,
     line-height:1 !important;
   }
 }
+
+/* ---------- PRINCIPAL ADMIN AUTH SURFACE ---------- */
+#admin .admin-auth-screen{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:16px !important;
+  max-width:460px !important;
+  margin:0 auto !important;
+}
+#admin .admin-auth-copy{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:6px !important;
+}
+#admin .admin-auth-copy h3{
+  margin:0 !important;
+  font:500 30px/1.05 "Cormorant Garamond",Georgia,serif !important;
+  color:#1C1917 !important;
+}
+#admin .admin-auth-copy p{
+  margin:0 !important;
+  max-width:430px !important;
+  color:#78716C !important;
+  font:400 12px/1.55 "Inter",Arial,sans-serif !important;
+}
+#admin .admin-auth-field{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:7px !important;
+}
+#admin .admin-auth-field label{
+  color:#57514B !important;
+  font:600 9px/1 "Inter",Arial,sans-serif !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+}
+#admin .admin-password-wrap{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+}
+#admin .admin-password-wrap input{
+  margin:0 !important;
+  padding-right:64px !important;
+  height:48px !important;
+}
+#admin .admin-password-toggle{
+  position:absolute !important;
+  right:8px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:auto !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:6px 5px !important;
+  border:0 !important;
+  background:transparent !important;
+  color:#78716C !important;
+  font:600 8px/1 "Inter",Arial,sans-serif !important;
+  letter-spacing:.08em !important;
+  cursor:pointer !important;
+}
+#admin .admin-password-toggle:hover,
+#admin .admin-password-toggle:focus-visible{
+  color:#1C1917 !important;
+}
+#admin #loginBtn{
+  width:100% !important;
+  min-height:46px !important;
+  margin:0 !important;
+}
+#admin #forgotPassword{
+  align-self:center !important;
+  margin:0 !important;
+  padding:3px 6px !important;
+  text-decoration:none !important;
+  color:#78716C !important;
+  font-size:8px !important;
+  letter-spacing:.12em !important;
+}
+#admin #forgotPassword:hover,
+#admin #forgotPassword:focus-visible{
+  color:#1C1917 !important;
+  text-decoration:underline !important;
+}
+#admin #loginMsg{
+  min-height:18px !important;
+  text-align:center !important;
+  margin:0 !important;
+}
+@media(max-width:600px){
+  #admin .panel{
+    width:calc(100% - 24px) !important;
+    max-height:calc(100vh - 24px) !important;
+    padding:22px 18px !important;
+  }
+  #admin .admin-auth-copy h3{
+    font-size:27px !important;
+  }
+  #admin .admin-auth-copy p{
+    font-size:11px !important;
+    line-height:1.5 !important;
+  }
+  #admin .admin-auth-screen{
+    gap:14px !important;
+  }
+}
