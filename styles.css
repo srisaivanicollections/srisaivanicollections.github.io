@@ -3691,12 +3691,12 @@ footer a{
 
 /* Catalog empty state */
 .catalog-empty{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;min-height:260px;padding:40px 20px;text-align:center}
-.catalog-empty strong{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:500;color:var(--ink)}
+.catalog-empty strong{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:500;color:var(--ink)}
 .catalog-empty span{font-family:Inter,Arial,sans-serif;font-size:.82rem;color:var(--muted)}
 .catalog-empty .btn{margin-top:8px}
 .admin-image-preview-wrap{display:flex;align-items:center;justify-content:center;min-height:170px;margin:12px 0 18px;padding:12px;background:var(--soft);border:1px solid var(--line)}
 .admin-image-preview{display:block;width:120px;height:160px;object-fit:cover;background:#fff}
-.admin-image-preview-wrap span{font:500 .62rem/1 Inter,Arial,sans-serif;letter-spacing:.14em;color:var(--muted)}
+.admin-image-preview-wrap span{font:500 .62rem/1 "Inter",Arial,sans-serif;letter-spacing:.14em;color:var(--muted)}
 
 /* Admin login recovery link */
 #admin #forgotPassword{
