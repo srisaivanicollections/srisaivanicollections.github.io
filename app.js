@@ -53,9 +53,23 @@ async function githubRequest(path,options={}){
   return d;
 }
 async function publicGitHubReadJson(path){
-  const r=await fetch("https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path+"?v="+Date.now(),{cache:"no-store"});
+  // Read the authoritative GitHub file through the Contents API instead of
+  // raw.githubusercontent.com. This avoids CDN propagation/cache returning
+  // an older catalog immediately after an Admin write.
+  const url="https://api.github.com/repos/"+GITHUB_REPO+"/contents/"+path+
+    "?ref="+encodeURIComponent(GITHUB_BRANCH)+"&v="+Date.now();
+  const r=await fetch(url,{cache:"no-store",headers:{
+    "Accept":"application/vnd.github+json",
+    "X-GitHub-Api-Version":"2022-11-28"
+  }});
   if(!r.ok) throw new Error("Git-backed catalog could not be loaded.");
-  return {value:await r.json()};
+  const d=await r.json();
+  const encoded=String(d.content||"").replace(/\n/g,"");
+  if(!encoded) throw new Error("Git-backed catalog file is empty.");
+  const binary=atob(encoded);
+  const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+  const value=JSON.parse(new TextDecoder().decode(bytes));
+  return {value,sha:d.sha};
 }
 async function githubReadJson(path){
   const d=await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path+"?ref="+encodeURIComponent(GITHUB_BRANCH));
@@ -201,7 +215,10 @@ function productImageSrc(value){
   const src=String(value||"").trim();
   if(!src)return "";
   if(/^(https?:|data:|blob:)/i.test(src))return src;
-  return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
+  // Keep Git-backed product images as repository paths. Resolve them against
+  // the current GitHub Pages base URL so the catalog and its assets stay in
+  // the same deployment.
+  return new URL(src.replace(/^\.\//,""),document.baseURI).href;
 }
 function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();$("#waMain").href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";$("#instagram").href=settings.instagram}
 async function loadReviews(){
@@ -347,7 +364,7 @@ async function saveProduct(id){
       });
       const up=await api({action:"uploadImage",password:adminPassword,filename:file.name,base64});
       if(!up?.path)throw new Error("Image upload failed.");
-      image=up.url||("https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+up.path);
+      image=up.path;
     }
 
     const p={
