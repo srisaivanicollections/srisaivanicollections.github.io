@@ -666,31 +666,6 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   letter-spacing:.16em;
   text-transform:uppercase;
 }
-#client-chronicles-section .cc-footer-cta{
-  display:flex;
-  justify-content:center;
-  width:100%;
-}
-#client-chronicles-section .cc-google-link{
-  display:inline-block;
-  margin-top:2rem;
-  padding-bottom:3px;
-  color:#1C1917!important;
-  font-family:"Inter",Arial,sans-serif;
-  font-size:.72rem;
-  line-height:1.3;
-  font-weight:500;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  text-decoration:none!important;
-  border-bottom:1px solid #1C1917!important;
-  transition:color .3s ease,border-color .3s ease;
-}
-#client-chronicles-section .cc-google-link:hover{
-  color:#B38E5D!important;
-  border-color:#B38E5D!important;
-}
-
 /* STORE DETAILS + MAP */
 .atelier-visit-section {
   background-color: #FAF7F2 !important;
@@ -1273,28 +1248,6 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   font-weight:600;
   letter-spacing:.16em;
   text-transform:uppercase;
-}
-#client-chronicles-section .cc-footer-cta{
-  display:flex;
-  justify-content:center;
-  width:100%;
-}
-#client-chronicles-section .cc-google-link{
-  display:inline-block;
-  padding-bottom:3px;
-  color:#1C1917;
-  font-family:"Inter",Arial,sans-serif;
-  font-size:.74rem;
-  line-height:1.3;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  text-decoration:none;
-  border-bottom:1px solid #1C1917;
-  transition:color .3s ease,border-color .3s ease;
-}
-#client-chronicles-section .cc-google-link:hover{
-  color:#B38E5D;
-  border-color:#B38E5D;
 }
 @media(min-width:992px){
   #client-chronicles-section{padding:4.5rem 1.5rem}
