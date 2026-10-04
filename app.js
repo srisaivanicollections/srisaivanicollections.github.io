@@ -192,19 +192,33 @@ async function api(body){
 }
 async function load(){
   try{
-    if(IS_GITHUB_PAGES){
-      const [pr,sr]=await Promise.all([publicGitHubReadJson("data/products.json"),publicGitHubReadJson("data/settings.json")]);
-      if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
-      products=pr.value;githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=sr.value||{};delete settings.githubToken;apply();render();loadReviews();return;
-    }
-    throw new Error("GitHub Pages mode");
+    // GitHub is the single source of truth for the storefront. Never fall back
+    // to the deployed static JSON because that can temporarily be older than
+    // the latest Admin commit and make a newly saved item appear to disappear.
+    const [pr,sr]=await Promise.all([
+      publicGitHubReadJson("data/products.json"),
+      publicGitHubReadJson("data/settings.json")
+    ]);
+    if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
+    products=pr.value;
+    githubOriginalIds=new Set(products.map(p=>Number(p.id)));
+    settings=sr.value||{};
+    delete settings.githubToken;
+    apply();
+    render();
+    loadReviews();
+    return true;
   }catch(e){
-    try{
-      const [pr,sr]=await Promise.all([fetch("data/products.json",{cache:"no-store"}),fetch("data/settings.json",{cache:"no-store"})]);
-      products=await pr.json();if(!Array.isArray(products)||products.length===0)throw new Error("Empty static catalog.");githubOriginalIds=new Set(products.map(p=>Number(p.id)));settings=await sr.json();apply();render();loadReviews()
-    }catch(err){
-      products=[];settings={name:"SRI SAI VANI",whatsapp:"",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};apply();render();loadReviews()
+    // Fail closed. Keep the last successfully rendered in-memory catalog and
+    // show the real storage error instead of replacing it with stale data.
+    console.error("Git-backed catalog load failed:",e);
+    if(!Array.isArray(products)||products.length===0){
+      products=[];
+      settings={name:"SRI SAI VANI",whatsapp:"",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};
+      apply();
+      render();
     }
+    return false;
   }
 }
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
@@ -332,6 +346,24 @@ function showAdminToast(message,type="success"){
   requestAnimationFrame(()=>el.classList.add("show"));
 }
 
+let catalogWriteQueue=Promise.resolve();
+
+function nextProductId(){
+  let id=Date.now();
+  while(products.some(p=>Number(p.id)===id)) id++;
+  return id;
+}
+
+async function verifyProductPersistence(product){
+  const latest=await githubReadJson("data/products.json");
+  const list=Array.isArray(latest.value)?latest.value:[];
+  const saved=list.find(p=>Number(p.id)===Number(product.id));
+  if(!saved) throw new Error("GitHub saved the change, but the product could not be verified.");
+  if(String(saved.name||"").trim()!==String(product.name||"").trim()) throw new Error("Product verification failed.");
+  if(String(saved.image||"").trim()!==String(product.image||"").trim()) throw new Error("Product image verification failed.");
+  return latest.value;
+}
+
 async function saveProduct(id){
   const btn=$("#saveItem");
   const originalText=btn?.textContent||"SAVE ITEM";
@@ -353,6 +385,10 @@ async function saveProduct(id){
     if(!Number.isFinite(price)||price<=0)throw new Error("Please enter a valid price.");
     if(!image&&!file)throw new Error("Please add an image URL/path or select an image file.");
 
+    // Build from the existing Git-backed product when editing so unrelated
+    // fields are never accidentally erased by an Admin form update.
+    const existing=id?products.find(x=>Number(x.id)===Number(id)):null;
+
     if(file){
       if(file.size>5*1024*1024)throw new Error("Image must be 5MB or smaller.");
       const base64=await new Promise((resolve,reject)=>{
@@ -367,21 +403,32 @@ async function saveProduct(id){
     }
 
     const p={
-      id:id||Date.now(),
+      ...(existing||{}),
+      id:id?Number(id):nextProductId(),
       name,
       category:categoryValue,
       price,
-      originalPrice,
+      ...(originalPrice===undefined?{originalPrice:undefined}:{originalPrice}),
       image,
       newArrival:$("#fNew").checked,
       bestSeller:$("#fBest").checked,
       availability:$("#fAvail").checked
     };
 
-    if(id)products=products.map(x=>Number(x.id)===Number(id)?p:x);
-    else products=[p,...products];
+    // Serialize catalog writes. Two rapid Admin operations must never race
+    // against each other with stale GitHub file SHAs.
+    const write=async()=>{
+      await persistProduct(p);
+      const verified=await verifyProductPersistence(p);
+      products=verified;
+      githubOriginalIds=new Set(products.map(x=>Number(x.id)));
+      render();
+    };
+    catalogWriteQueue=catalogWriteQueue.then(write,write);
+    await catalogWriteQueue;
 
-    await persistProduct(p);
+    // Re-read the authoritative catalog after the write. No localStorage merge
+    // and no static-file fallback can resurrect or remove products.
     await load();
     showView("products");
     showAdminToast(id?"Product updated successfully.":"Product added successfully.","success");
