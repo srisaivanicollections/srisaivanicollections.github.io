@@ -1,7 +1,6 @@
 const IS_GITHUB_PAGES = location.hostname.endsWith(".github.io");
 const LOCAL_KEY = "ssv_catalog_v4";
 const CATALOG_SCHEMA = 4;
-const LOCAL_ADMIN_PASSWORD = "admin123";
 const GITHUB_REPO = "vinith1111/premium_saree_website_libas";
 const GITHUB_BRANCH = "main";
 const GITHUB_TOKEN_KEY = "ssv_github_token_v1";
@@ -67,34 +66,75 @@ async function githubWriteJson(path,value,sha,message){
     body:JSON.stringify({message,content,sha,branch:GITHUB_BRANCH})
   });
 }
+async function hashAdminPassword(password,salt){
+  const enc=new TextEncoder();
+  const key=await crypto.subtle.importKey("raw",enc.encode(String(password)),{name:"PBKDF2"},false,["deriveBits"]);
+  const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(String(salt)),iterations:120000,hash:"SHA-256"},key,256);
+  return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function createPasswordSalt(){
+  const bytes=crypto.getRandomValues(new Uint8Array(16));
+  return Array.from(bytes).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+async function verifyAdminPassword(password,settingsValue){
+  const salt=String(settingsValue?.adminPasswordSalt||"");
+  const hash=String(settingsValue?.adminPasswordHash||"");
+  if(!salt||!hash)return false;
+  return (await hashAdminPassword(password,salt))===hash;
+}
+
 async function localApi(body){
   if(body.action==="authenticate"){
     const supplied=String(body.password||"").trim();
-    if(supplied===LOCAL_ADMIN_PASSWORD){
-      const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
-      if(!token) throw new Error("Enter your GitHub token in Admin Studio.");
-      await githubReadJson("data/products.json");
-      return {ok:true,storage:"github"};
+    const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+    if(!token){
+      if(!supplied) throw new Error("Enter your GitHub token.");
+      const previousLocal=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
+      const previousSession=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
+      localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
+      try{
+        await githubReadJson("data/products.json");
+        return {ok:true,storage:"github",setupRequired:true};
+      }catch(e){
+        if(previousLocal)localStorage.setItem(GITHUB_TOKEN_KEY,previousLocal);
+        else localStorage.removeItem(GITHUB_TOKEN_KEY);
+        if(previousSession)sessionStorage.setItem(GITHUB_TOKEN_KEY,previousSession);
+        else sessionStorage.removeItem(GITHUB_TOKEN_KEY);
+        throw e;
+      }
     }
-    if(!supplied) throw new Error("Enter your GitHub token.");
-    // Temporarily use the newly entered token for GitHub validation.
-    // githubRequest reads the token from storage, so it must be available
-    // before githubReadJson() can validate access to the repository.
-    const previousLocal=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
-    const previousSession=sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
-    localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
-    try{
-      await githubReadJson("data/products.json");
-      return {ok:true,storage:"github"};
-    }catch(e){
-      if(previousLocal)localStorage.setItem(GITHUB_TOKEN_KEY,previousLocal);
-      else localStorage.removeItem(GITHUB_TOKEN_KEY);
-      if(previousSession)sessionStorage.setItem(GITHUB_TOKEN_KEY,previousSession);
-      else sessionStorage.removeItem(GITHUB_TOKEN_KEY);
-      throw e;
-    }
+    const site=await githubReadJson("data/settings.json");
+    const configured=site.value&&typeof site.value==="object"?site.value:{};
+    if(!configured.adminPasswordHash) return {ok:true,storage:"github",setupRequired:true};
+    if(!await verifyAdminPassword(supplied,configured)) throw new Error("Invalid Admin password.");
+    await githubReadJson("data/products.json");
+    return {ok:true,storage:"github"};
   }
-  if(body.password!==LOCAL_ADMIN_PASSWORD && body.password!==localStorage.getItem(GITHUB_TOKEN_KEY)) throw new Error("Unauthorized");
+
+  if(body.action==="setupAdminPassword"||body.action==="resetAdminPassword"){
+    const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+    if(!token) throw new Error("GitHub access is required to reset the Admin password.");
+    const next=String(body.newPassword||"");
+    if(next.length<8) throw new Error("Admin password must be at least 8 characters.");
+    await githubReadJson("data/products.json");
+    const current=await githubReadJson("data/settings.json");
+    const existing=current.value&&typeof current.value==="object"?current.value:{};
+    if(body.action==="resetAdminPassword" && !existing.adminPasswordHash) throw new Error("Admin password is not configured yet.");
+    const salt=createPasswordSalt();
+    const hash=await hashAdminPassword(next,salt);
+    const updated={...existing,adminPasswordHash:hash,adminPasswordSalt:salt};
+    delete updated.githubToken;
+    await githubWriteJson("data/settings.json",updated,current.sha,body.action==="resetAdminPassword"?"Reset Admin password":"Create Admin password");
+    const verified=await githubReadJson("data/settings.json");
+    if(String(verified.value?.adminPasswordHash||"")!==hash) throw new Error("Password reset could not be verified.");
+    return {ok:true,storage:"github"};
+  }
+
+  const storedToken=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+  if(!storedToken) throw new Error("GitHub storage is not connected.");
+  const configured=await githubReadJson("data/settings.json");
+  const configuredSettings=configured.value&&typeof configured.value==="object"?configured.value:{};
+  if(!await verifyAdminPassword(String(body.password||""),configuredSettings)) throw new Error("Unauthorized");
   if(body.action==="saveProduct"){
     const incoming=body.product;
     if(!incoming||!incoming.id||!String(incoming.name||"").trim()) throw new Error("Invalid product.");
@@ -441,6 +481,8 @@ async function saveProduct(id){
 }
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
 let adminSessionActive=false;
+let adminSetupMode=false;
+let adminResetMode=false;
 let adminLogoutLock=false;
 
 function getSavedGithubToken(){
@@ -510,14 +552,19 @@ function showAdminLogin(){
   if($("#password"))$("#password").value="";
   const hasGithubToken=!!getSavedGithubToken();
   const input=$("#password");
+  const forgot=$("#forgotPassword");
+  adminSetupMode=false;
+  adminResetMode=false;
   if(input){
     input.placeholder=hasGithubToken?"Admin password":"GitHub token";
     input.setAttribute("autocomplete",hasGithubToken?"current-password":"new-password");
   }
+  if($("#loginBtn"))$("#loginBtn").textContent=hasGithubToken?"SIGN IN":"CONNECT & CREATE PASSWORD";
+  if(forgot)forgot.textContent="Forgot password?";
   setStorageStatus(
     hasGithubToken
       ?"Enter your Admin password to sign in."
-      :"First-time setup: enter your GitHub token.",
+      :"First-time setup: connect GitHub and create your Admin password.",
     false
   );
 }
@@ -531,30 +578,51 @@ function showAdminStudio(){
 }
 
 async function signInAdmin(value){
-  const inputValue=String(value||"").trim();
-  const hasGithubToken=!!getSavedGithubToken();
-  if(!inputValue){
-    if($("#loginMsg"))$("#loginMsg").textContent=hasGithubToken?"Enter your Admin password.":"Enter your GitHub token.";
+  const inputValue=String(value||"");
+  if(!inputValue.trim()){
+    if($("#loginMsg"))$("#loginMsg").textContent=adminResetMode||adminSetupMode?"Enter a new Admin password.":"Enter your Admin password.";
     return false;
   }
   const btn=$("#loginBtn");
   const oldText=btn?.textContent;
-  if(btn){btn.disabled=true;btn.textContent="SIGNING IN...";}
+  if(btn){btn.disabled=true;btn.textContent=adminResetMode?"RESETTING...":adminSetupMode?"CREATING...":"SIGNING IN...";}
   try{
+    if(adminResetMode){
+      await api({action:"resetAdminPassword",newPassword:inputValue});
+      adminResetMode=false;
+      adminSetupMode=false;
+      if($("#password"))$("#password").value="";
+      if($("#loginBtn"))$("#loginBtn").textContent="SIGN IN";
+      setStorageStatus("Password reset successfully. Sign in with your new password.",true);
+      return false;
+    }
+
+    const hasGithubToken=!!getSavedGithubToken();
     if(!hasGithubToken){
-      // First-time setup: supplied value is the GitHub token.
       await api({action:"authenticate",password:inputValue});
-      storeAdminToken(inputValue);
-      adminPassword=LOCAL_ADMIN_PASSWORD;
-      setStorageStatus("GitHub storage connected. Admin password is now required for future logins.",true);
+      if($("#password"))$("#password").value="";
+      adminSetupMode=true;
+      if($("#password")){
+        $("#password").placeholder="Create Admin password (8+ characters)";
+        $("#password").setAttribute("autocomplete","new-password");
+      }
+      if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
+      setStorageStatus("GitHub connected. Now create your Admin password.",true);
+      return false;
+    }
+
+    if(adminSetupMode){
+      if(inputValue.length<8) throw new Error("Admin password must be at least 8 characters.");
+      await api({action:"setupAdminPassword",newPassword:inputValue});
+      adminSetupMode=false;
+      adminPassword=inputValue;
+      setStorageStatus("Admin password created.",true);
     }else{
-      // Returning login: supplied value is the separate Admin password.
-      if(inputValue!==LOCAL_ADMIN_PASSWORD) throw new Error("Invalid Admin password.");
-      // Validate the stored GitHub credential without exposing it.
-      await api({action:"authenticate",password:LOCAL_ADMIN_PASSWORD});
-      adminPassword=LOCAL_ADMIN_PASSWORD;
+      await api({action:"authenticate",password:inputValue});
+      adminPassword=inputValue;
       setStorageStatus("Signed in.",true);
     }
+
     adminSessionActive=true;
     openAdminModal();
     updateAdminView();
@@ -563,8 +631,6 @@ async function signInAdmin(value){
     return true;
   }catch(e){
     adminPassword="";
-    adminSessionActive=false;
-    updateAdminView();
     if($("#loginMsg"))$("#loginMsg").textContent=e?.message||"Sign in failed.";
     return false;
   }finally{
@@ -572,15 +638,31 @@ async function signInAdmin(value){
   }
 }
 
+function startPasswordReset(){
+  if(!getSavedGithubToken()){
+    if($("#password"))$("#password").placeholder="GitHub token";
+    if($("#loginBtn"))$("#loginBtn").textContent="CONNECT & RESET PASSWORD";
+    adminResetMode=true;
+    setStorageStatus("Enter your GitHub token to recover Admin access.",false);
+    return;
+  }
+  adminResetMode=true;
+  adminSetupMode=false;
+  if($("#password")){
+    $("#password").value="";
+    $("#password").placeholder="New Admin password (8+ characters)";
+    $("#password").setAttribute("autocomplete","new-password");
+    $("#password").focus();
+  }
+  if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
+  setStorageStatus("Set a new Admin password. Your GitHub access verifies the reset.",false);
+}
+
 function logoutAdmin(){
   adminLogoutLock=true;
   adminSessionActive=false;
   adminPassword="";
-  // End the Admin session completely. GitHub credentials are cleared from browser storage.
-  [GITHUB_TOKEN_KEY,ADMIN_TOKEN_KEY,LEGACY_TOKEN_KEY].forEach(key=>{
-    localStorage.removeItem(key);
-    sessionStorage.removeItem(key);
-  });
+  // Keep the hidden GitHub connection so future Admin login and password recovery do not require the token again.
   if($("#password"))$("#password").value="";
   if($("#loginMsg"))$("#loginMsg").textContent="";
   closeAdminModal();
@@ -629,6 +711,15 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
       e.stopPropagation();
       e.stopImmediatePropagation();
       closeAdminModal();
+      return;
+    }
+
+    const forgot=e.target.closest("#forgotPassword");
+    if(forgot){
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      startPasswordReset();
       return;
     }
 
