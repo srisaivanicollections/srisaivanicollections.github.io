@@ -328,7 +328,19 @@ async function persistProduct(product){
   await api({action:"saveProduct",password:adminPassword,product});
 }
 async function deleteProductFromGithub(id){
-  await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
+  const deleteOperation=async()=>{
+    await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
+    const latest=await githubReadJson("data/products.json");
+    const list=Array.isArray(latest.value)?latest.value:[];
+    if(list.some(p=>Number(p.id)===Number(id))){
+      throw new Error("Product deletion could not be verified.");
+    }
+    return list;
+  };
+  catalogWriteQueue=catalogWriteQueue.then(deleteOperation,deleteOperation);
+  const verified=await catalogWriteQueue;
+  products=verified;
+  githubOriginalIds=new Set(products.map(p=>Number(p.id)));
 }
 function showAdminToast(message,type="success"){
   let el=$("#adminToast");
