@@ -4854,188 +4854,110 @@ nav a,
 }
 
 
+
 /* ==========================================================================
-   INSTAGRAM REEL: FINAL EDITORIAL LAYOUT
+   INSTAGRAM EDITORIAL FEATURE
+   One source of truth. No native Instagram card chrome is recreated.
    ========================================================================== */
+.drape-instagram-section{
+  scroll-margin-top:96px;
+  padding:88px 24px 96px;
+  background:#FAF8F5;
+  overflow:hidden;
+}
 .drape-instagram-shell{
-  width:min(760px,100%);
+  width:min(560px,100%);
   margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
 }
 .drape-instagram-heading{
-  width:min(560px,100%);
-  margin:0 auto 30px;
+  max-width:500px;
+  margin:0 auto 34px;
   text-align:center;
 }
 .drape-instagram-heading .drape-editorial-eyebrow{
   display:block;
-  margin:0 0 10px;
-  color:#B89758;
-  font-family:"Montserrat",Arial,sans-serif!important;
-  font-size:9px!important;
-  font-weight:600!important;
-  letter-spacing:.22em!important;
-  line-height:1.2!important;
+  margin:0 0 12px;
+  color:#A88B57;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.22em;
+  line-height:1.2;
 }
 .drape-instagram-heading .drape-editorial-title{
   margin:0 0 12px;
   color:#1C1917;
-  font-family:"Cormorant Garamond",Georgia,serif!important;
-  font-size:clamp(42px,5vw,58px)!important;
-  line-height:.98!important;
-  font-weight:400!important;
-  letter-spacing:-.025em!important;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(42px,7vw,58px);
+  font-weight:400;
+  line-height:.96;
+  letter-spacing:-.025em;
 }
 .drape-instagram-heading .drape-editorial-text{
-  max-width:430px;
+  max-width:390px;
   margin:0 auto;
-  color:#6F6A64;
-  font-family:"Montserrat",Arial,sans-serif!important;
-  font-size:11px!important;
-  line-height:1.7!important;
-}
-.drape-instagram-frame{
-  width:min(540px,100%);
-  min-height:620px;
-  display:flex;
-  justify-content:center;
-  overflow:hidden;
-  background:#FAF8F5;
-  border:1px solid #E4D8C5;
-  box-shadow:0 12px 34px rgba(28,25,23,.06);
-}
-.drape-instagram-frame .instagram-media{
-  width:100%!important;
-  min-width:0!important;
-  max-width:540px!important;
-  margin:0 auto!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-.drape-instagram-cta{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  min-height:42px;
-  margin-top:22px;
-  padding:0 20px;
-  background:#1C1917;
-  border:1px solid #1C1917;
-  color:#FAF8F5;
-  text-decoration:none;
+  color:#77716C;
   font-family:"Montserrat",Arial,sans-serif;
-  font-size:8px;
-  font-weight:600;
-  letter-spacing:.16em;
-  transition:all .25s ease;
+  font-size:11px;
+  line-height:1.75;
 }
-.drape-instagram-cta:hover{
-  background:#B89758;
-  border-color:#B89758;
-  color:#1C1917;
-}
-@media(max-width:768px){
-  .drape-editorial-section{
-    padding:54px 16px 60px!important;
-  }
-  .drape-instagram-heading{
-    margin-bottom:24px;
-  }
-  .drape-instagram-heading .drape-editorial-title{
-    font-size:clamp(38px,11vw,48px)!important;
-  }
-  .drape-instagram-frame{
-    width:min(100%,430px);
-    min-height:580px;
-    box-shadow:0 8px 24px rgba(28,25,23,.05);
-  }
-  .drape-instagram-cta{
-    width:min(100%,230px);
-  }
-}
-
-
-/* ==========================================================================
-   INSTAGRAM EDITORIAL SHOWCASE - CLEAN MOBILE/PORTRAIT TREATMENT
-   ========================================================================== */
-.drape-instagram-section{
-  scroll-margin-top:90px;
-  overflow:hidden;
-}
-.drape-instagram-shell{
-  width:min(620px,100%);
+.drape-reel-wrap{
+  width:min(390px,100%);
   margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
 }
-.drape-instagram-heading{
-  width:min(520px,100%);
-  margin:0 auto 26px;
-  text-align:center;
-}
-.drape-instagram-heading .drape-editorial-eyebrow{
-  display:block;
-  margin:0 0 10px;
-  color:#A88B57;
-  font-family:"Montserrat",Arial,sans-serif!important;
-  font-size:9px!important;
-  font-weight:600!important;
-  letter-spacing:.22em!important;
-  line-height:1.2!important;
-}
-.drape-instagram-heading .drape-editorial-title{
-  margin:0 0 10px;
-  color:#1C1917;
-  font-family:"Cormorant Garamond",Georgia,serif!important;
-  font-size:clamp(40px,6vw,56px)!important;
-  line-height:1!important;
-  font-weight:400!important;
-  letter-spacing:-.02em!important;
-}
-.drape-instagram-heading .drape-editorial-text{
-  max-width:420px;
-  margin:0 auto;
-  color:#77716B;
-  font-family:"Montserrat",Arial,sans-serif!important;
-  font-size:11px!important;
-  line-height:1.7!important;
-}
-.drape-instagram-frame{
-  width:min(400px,100%);
-  height:650px;
+.drape-reel-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:9 / 16;
   overflow:hidden;
-  background:#FAF8F5;
+  background:#EDE8E0;
   border:1px solid #E4D8C5;
-  box-shadow:0 10px 28px rgba(28,25,23,.045);
+  box-shadow:0 16px 40px rgba(28,25,23,.07);
 }
-.drape-instagram-frame .instagram-media{
-  width:100%!important;
-  min-width:0!important;
-  max-width:400px!important;
-  margin:0!important;
-  border:0!important;
-  box-shadow:none!important;
-  background:#FAF8F5!important;
+.drape-reel-iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#000;
+}
+.drape-reel-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:46px;
+  margin-top:12px;
+  padding:0 2px;
+  color:#1C1917;
+  text-decoration:none;
+  border-bottom:1px solid #DCCFBC;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.17em;
+}
+.drape-reel-link span:last-child{
+  font-size:15px;
+  letter-spacing:0;
+  transition:transform .2s ease;
+}
+.drape-reel-link:hover span:last-child{
+  transform:translate(2px,-2px);
 }
 @media(max-width:768px){
   .drape-instagram-section{
-    padding:56px 16px 64px!important;
+    padding:64px 16px 72px;
   }
   .drape-instagram-heading{
-    margin-bottom:22px;
+    margin-bottom:26px;
   }
   .drape-instagram-heading .drape-editorial-title{
-    font-size:44px!important;
+    font-size:44px;
   }
   .drape-instagram-heading .drape-editorial-text{
-    font-size:10.5px!important;
+    font-size:10.5px;
   }
-  .drape-instagram-frame{
-    width:min(100%,380px);
-    height:640px;
+  .drape-reel-wrap{
+    width:min(360px,100%);
   }
 }
