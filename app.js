@@ -10,34 +10,17 @@ const LEGACY_TOKEN_KEY = "github_token";
 let products=[],settings={},category="All",adminPassword="",reviewsArray=[],githubOriginalIds=new Set();
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
-  const pr=await fetch("data/products.json",{cache:"no-store"});
-  if(!pr.ok) throw new Error("Catalog files could not be loaded.");
-  const sr=await fetch("data/settings.json",{cache:"no-store"}).catch(()=>null);
-  if(!pr.ok||!sr.ok) throw new Error("Catalog files could not be loaded.");
-  const baseProducts=await pr.json();
-  const baseSettings=sr&&sr.ok?await sr.json():{name:"SRI SAI VANI",whatsapp:"",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};
-  if(!Array.isArray(baseProducts)||baseProducts.length===0) throw new Error("Invalid or empty product catalog.");
-  let saved=null;
-  try{saved=JSON.parse(localStorage.getItem(LOCAL_KEY)||"null")}catch(_){saved=null}
-  if(!saved||!Array.isArray(saved.products)||!saved.settings){
-    const fresh={schema:CATALOG_SCHEMA,products:baseProducts,settings:baseSettings};
-    localStorage.setItem(LOCAL_KEY,JSON.stringify(fresh));
-    return fresh;
-  }
-  const savedById=new Map(saved.products.map(p=>[Number(p.id),p]));
-  const baseIds=new Set(baseProducts.map(p=>Number(p.id)));
-  // STRICT CATALOG RULE: every committed product must remain in the live catalog.
-  // Local admin data may update a committed product, but cannot make a committed
-  // product disappear just because an old localStorage snapshot is stale.
-  const merged=baseProducts.map(base=>savedById.get(Number(base.id))||base);
-  // Preserve products created through Admin on this device.
-  for(const local of saved.products){
-    if(!baseIds.has(Number(local.id))) merged.push(local);
-  }
-  const state={schema:CATALOG_SCHEMA,products:merged,settings:saved.settings||baseSettings};
-  if(state.products.length===0) throw new Error("Catalog safety check failed.");
-  localStorage.setItem(LOCAL_KEY,JSON.stringify(state));
-  return state;
+  // GitHub is the single source of truth for catalog/settings.
+  return await loadAuthoritativeCatalog();
+}
+async function loadAuthoritativeCatalog(){
+  const [catalog,siteSettings]=await Promise.all([
+    githubReadJson("data/products.json"),
+    githubReadJson("data/settings.json")
+  ]);
+  if(!Array.isArray(catalog.value)||catalog.value.length===0) throw new Error("Invalid or empty product catalog.");
+  const safeSettings=(siteSettings.value&&typeof siteSettings.value==="object")?siteSettings.value:{};
+  return {schema:CATALOG_SCHEMA,products:catalog.value,settings:safeSettings};
 }
 async function githubRequest(path,options={}){
   const token=getSavedGithubToken();
@@ -593,7 +576,11 @@ function logoutAdmin(){
   adminLogoutLock=true;
   adminSessionActive=false;
   adminPassword="";
-  // Keep the GitHub token. It is never shown and is only used for GitHub storage.
+  // End the Admin session completely. GitHub credentials are cleared from browser storage.
+  [GITHUB_TOKEN_KEY,ADMIN_TOKEN_KEY,LEGACY_TOKEN_KEY].forEach(key=>{
+    localStorage.removeItem(key);
+    sessionStorage.removeItem(key);
+  });
   if($("#password"))$("#password").value="";
   if($("#loginMsg"))$("#loginMsg").textContent="";
   closeAdminModal();
@@ -665,21 +652,6 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
   }
 }
 
-// Direct Admin logout binding. This is intentionally attached to the actual
-// button so logout does not depend on document-level delegation or bubbling.
-function bindAdminLogoutButton(){
-  const btn=$("#logoutBtn");
-  if(!btn || btn.__libasLogoutBound)return;
-  btn.__libasLogoutBound=true;
-  btn.type="button";
-  btn.onclick=(e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-    logoutAdmin();
-    return false;
-  };
-}
-
 // Authoritative initial Admin view state. Catalog/CRUD state is untouched.
 if(document.readyState==="loading"){
   document.addEventListener("DOMContentLoaded",updateAdminView,{once:true});
@@ -688,5 +660,34 @@ if(document.readyState==="loading"){
 }
 
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
-document.addEventListener("click",e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){settings.name=$("#setName").value.trim()||"SRI SAI VANI";settings.whatsapp=$("#setWa").value.replace(/\D/g,"");settings.instagram=$("#setIg").value.trim(); delete settings.githubToken; api({action:"saveSettings",password:adminPassword,settings}).then(()=>{apply();render();showView("products")}).catch(e=>alert(e.message))}});
+document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){
+  e.preventDefault();
+  const nextSettings={
+    name:$("#setName").value.trim()||"SRI SAI VANI",
+    whatsapp:$("#setWa").value.replace(/\D/g,""),
+    instagram:$("#setIg").value.trim()
+  };
+  delete nextSettings.githubToken;
+  const btn=e.target;
+  const oldText=btn.textContent;
+  btn.disabled=true;
+  btn.textContent="SAVING...";
+  try{
+    await api({action:"saveSettings",password:adminPassword,settings:nextSettings});
+    const verified=await githubReadJson("data/settings.json");
+    if(!verified.value||String(verified.value.name||"")!==String(nextSettings.name||"")||String(verified.value.whatsapp||"")!==String(nextSettings.whatsapp||"")||String(verified.value.instagram||"")!==String(nextSettings.instagram||"")){
+      throw new Error("Settings could not be verified after saving.");
+    }
+    settings=verified.value;
+    apply();
+    render();
+    showView("products");
+    alert("Settings saved successfully.");
+  }catch(err){
+    alert(err?.message||"Settings could not be saved.");
+  }finally{
+    btn.disabled=false;
+    btn.textContent=oldText;
+  }
+}});
 $("#search").oninput=render;$("#price").onchange=render;load();
