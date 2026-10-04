@@ -696,12 +696,12 @@ function showAdminLogin(){
   }
   const hasGithubToken=!!getSavedGithubToken();
   if(hasGithubToken){
-    if(heading)heading.textContent="Sign in to Admin Studio";
-    if(description)description.textContent="Use your private Admin password to manage products and shop settings.";
+    if(heading)heading.textContent="Sign in to manage your store.";
+    if(description)description.textContent="Manage products and shop settings from your private Admin area.";
     if(label)label.textContent="Admin password";
     if($("#loginBtn"))$("#loginBtn").textContent="SIGN IN";
-    if(forgot)forgot.textContent="RESET PASSWORD";
-    setStorageStatus("Your GitHub connection is ready.",true);
+    if(forgot)forgot.textContent="Forgot password?";
+    setStorageStatus("● Storage connected",true);
   }else{
     if(heading)heading.textContent="Connect Admin storage";
     if(description)description.textContent="Connect your GitHub storage once. Then you will create your private Admin password.";
@@ -711,8 +711,8 @@ function showAdminLogin(){
       input.setAttribute("autocomplete","off");
     }
     if($("#loginBtn"))$("#loginBtn").textContent="CONNECT GITHUB";
-    if(forgot)forgot.textContent="RESET PASSWORD";
-    setStorageStatus("GitHub access is required for Admin storage and password recovery.",false);
+    if(forgot)forgot.textContent="Forgot password?";
+    setStorageStatus("GitHub storage connection required.",false);
   }
 }
 
