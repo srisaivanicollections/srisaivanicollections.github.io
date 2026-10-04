@@ -34,7 +34,7 @@ There is intentionally no localStorage catalogue fallback. This prevents stale b
 
 Open **ADMIN** on the website.
 
-On first setup, the Admin screen accepts the GitHub token and validates repository access. Subsequent sessions use the configured Admin password. The GitHub token is not displayed in the storefront UI.
+On first setup, the Admin screen connects GitHub and asks you to create an Admin password. The password is stored only as a salted PBKDF2 hash, never as plaintext and never hardcoded in JavaScript. Subsequent sessions use the Admin password. **Forgot password?** uses the hidden GitHub connection to verify repository access and create a new password. The GitHub token is not displayed in the storefront UI.
 
 > Note: this is a lightweight browser-based Admin Studio. A production-grade authentication system should use a server-side authentication boundary rather than a frontend password.
 
@@ -42,7 +42,7 @@ On first setup, the Admin screen accepts the GitHub token and validates reposito
 
 The site can be deployed as a static GitHub Pages/Netlify-style site. The current storefront does not depend on a Netlify serverless catalogue function.
 
-Keep repository write credentials out of committed source code. The Admin Studio stores its GitHub credential in browser storage because the current lightweight architecture writes directly to GitHub.
+Keep repository write credentials out of committed source code. The Admin Studio stores its GitHub credential in browser storage because the current lightweight architecture writes directly to GitHub. The Admin password hash and salt are stored in `data/settings.json`; the plaintext password is never committed.
 
 ## Maintenance
 
