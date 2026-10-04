@@ -4034,3 +4034,76 @@ nav a,
     gap:14px !important;
   }
 }
+
+/* ---------- ADMIN AUTH MOBILE-FIRST SIMPLIFICATION ---------- */
+#admin .panel{
+  width:min(680px,calc(100vw - 32px)) !important;
+  max-width:680px !important;
+  padding:24px 28px 26px !important;
+}
+#admin .panel-top{
+  padding:0 0 10px !important;
+  margin:0 0 22px !important;
+}
+#admin .panel-top h2{
+  font-size:30px !important;
+  line-height:1 !important;
+}
+#admin .admin-auth-screen{
+  width:100% !important;
+  max-width:560px !important;
+  margin:0 auto !important;
+  gap:14px !important;
+}
+#admin .admin-auth-copy{
+  gap:5px !important;
+}
+#admin .admin-auth-copy h3{
+  font-size:28px !important;
+  line-height:1.08 !important;
+}
+#admin .admin-auth-copy p{
+  max-width:100% !important;
+  font-size:11px !important;
+  line-height:1.45 !important;
+}
+#admin .admin-auth-field{
+  gap:6px !important;
+}
+#admin .admin-auth-field label{
+  font-size:8px !important;
+}
+#admin .admin-password-wrap input{
+  height:46px !important;
+  font-size:12px !important;
+}
+#admin #loginBtn{
+  min-height:44px !important;
+}
+#admin #forgotPassword{
+  font-size:8px !important;
+  padding:4px 8px !important;
+}
+#admin #loginMsg{
+  font-size:9px !important;
+}
+@media(max-width:600px){
+  #admin .panel{
+    width:calc(100vw - 20px) !important;
+    max-width:none !important;
+    padding:20px 18px 22px !important;
+  }
+  #admin .panel-top{
+    margin-bottom:18px !important;
+  }
+  #admin .panel-top h2{
+    font-size:27px !important;
+  }
+  #admin .admin-auth-screen{
+    max-width:none !important;
+    gap:13px !important;
+  }
+  #admin .admin-auth-copy h3{
+    font-size:25px !important;
+  }
+}
