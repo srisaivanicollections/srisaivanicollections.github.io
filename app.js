@@ -665,7 +665,7 @@ function closeAdminModal(){
 function setStorageStatus(message,connected=false){
   const el=$("#loginMsg");
   if(!el)return;
-  el.textContent=message;
+  el.textContent=connected?"":message;
   el.classList.toggle("connected",!!connected);
   el.style.color=connected?"#10B981":"#78716C";
 }
@@ -678,7 +678,7 @@ function showAdminSetupScreen(){
   if(input){
     input.value="";
     input.type="password";
-    input.placeholder="Create Admin password (8+ characters)";
+    input.placeholder="Create a password";
     input.setAttribute("autocomplete","new-password");
   }
   if($("#passwordLabel"))$("#passwordLabel").textContent="Password";
