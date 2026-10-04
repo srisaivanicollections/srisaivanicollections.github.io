@@ -3903,3 +3903,27 @@ nav a,
     padding:2px 5px !important;
   }
 }
+
+/* ---------- MOBILE PRODUCT RHYTHM REFINEMENT ---------- */
+@media (pointer:coarse) and (hover:none){
+  #shop .products{
+    row-gap:18px !important;
+  }
+  #shop .product-info{
+    padding-top:7px !important;
+  }
+  #shop .product-info h3{
+    min-height:0 !important;
+    margin-bottom:2px !important;
+    line-height:1.06 !important;
+  }
+  #shop .meta{
+    line-height:1.2 !important;
+  }
+  #shop .price-line{
+    margin-top:5px !important;
+  }
+  #shop .price{
+    line-height:1 !important;
+  }
+}
