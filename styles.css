@@ -3315,3 +3315,126 @@ footer a{
   color: #B89758;
   background-color: #FFFFFF;
 }
+
+
+/* =========================================================
+   EDITORIAL INSTAGRAM REEL SHOWCASE
+   ========================================================= */
+.reel-editorial-showcase {
+  background-color: #FAF8F5;
+  border-top: 1px solid rgba(28, 25, 23, 0.08);
+  border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+  padding: 64px 20px;
+}
+.reel-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+.reel-video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 9 / 16;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid #E4D8C5;
+  box-shadow: 0 10px 28px rgba(28, 25, 23, 0.04);
+  background-color: #000;
+  flex-shrink: 0;
+}
+.reel-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.reel-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: rgba(250, 248, 245, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 8px;
+  border: 1px solid rgba(200, 178, 138, 0.4);
+  color: #1C1917;
+}
+.reel-details {
+  max-width: 440px;
+  text-align: left;
+}
+.reel-eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #B89758;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.reel-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 3.5vw, 2.7rem);
+  line-height: 1.15;
+  font-weight: 400;
+  color: #1C1917;
+  margin: 0 0 14px;
+}
+.reel-title em { font-style: italic; }
+.reel-text {
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: #6E6862;
+  margin: 0 0 24px;
+  font-weight: 300;
+}
+.reel-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.reel-primary-btn {
+  background-color: #1C1917;
+  color: #FAF8F5;
+  padding: 10px 20px;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid #1C1917;
+  transition: all 0.25s ease;
+}
+.reel-primary-btn:hover {
+  background-color: #B89758;
+  border-color: #B89758;
+  color: #FFFFFF;
+}
+.reel-link {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #78716C;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.reel-link:hover { color: #1C1917; }
+@media (max-width: 768px) {
+  .reel-editorial-showcase { padding: 48px 16px; }
+  .reel-container { flex-direction: column; gap: 24px; }
+  .reel-video-wrapper { max-width: 250px; }
+  .reel-details { text-align: center; }
+  .reel-actions {
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
