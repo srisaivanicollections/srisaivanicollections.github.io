@@ -1,5 +1,16 @@
 [
   {
+    "id": 1791112871954,
+    "name": "Colour Saree",
+    "category": "Sarees",
+    "price": 5000,
+    "originalPrice": 6500,
+    "image": "assets/products/1791112867208-IMG_0063.png",
+    "newArrival": true,
+    "bestSeller": true,
+    "availability": true
+  },
+  {
     "id": 1791101221779,
     "name": "Green paitani sari",
     "category": "Sarees",
