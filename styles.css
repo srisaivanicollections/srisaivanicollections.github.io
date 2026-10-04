@@ -3053,18 +3053,23 @@ footer a{
     padding-top:10px !important;
   }
   #shop .product-info h3{
-    font-size:19px !important;
-    line-height:1.05 !important;
-    margin-bottom:4px !important;
+    font-size:17px !important;
+    line-height:1.08 !important;
+    min-height:36.7px !important;
+    margin:0 0 4px !important;
+    letter-spacing:0 !important;
   }
   #shop .meta{
-    font-size:7px !important;
+    font-size:7.5px !important;
+    line-height:1.3 !important;
+    letter-spacing:.14em !important;
   }
   #shop .price-line{
-    margin-top:6px !important;
+    margin-top:7px !important;
   }
   #shop .price{
-    font-size:14px !important;
+    font-size:13px !important;
+    line-height:1.1 !important;
   }
   #shop .price del{
     font-size:9px !important;
