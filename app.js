@@ -111,22 +111,7 @@ async function localApi(body){
   if(body.action==="authenticate"){
     const supplied=String(body.password||"").trim();
     const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
-    if(!token){
-      if(!supplied) throw new Error("Enter your GitHub token.");
-      const previousLocal=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
-      const previousSession=sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
-      localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
-      try{
-        await githubReadJson("data/products.json");
-        return {ok:true,storage:"github",setupRequired:true};
-      }catch(e){
-        if(previousLocal)localStorage.setItem(GITHUB_TOKEN_KEY,previousLocal);
-        else localStorage.removeItem(GITHUB_TOKEN_KEY);
-        if(previousSession)sessionStorage.setItem(GITHUB_TOKEN_KEY,previousSession);
-        else sessionStorage.removeItem(GITHUB_TOKEN_KEY);
-        throw e;
-      }
-    }
+    if(!token) throw new Error("GitHub storage is not connected.");
     const site=await githubReadJson("data/settings.json");
     const configured=site.value&&typeof site.value==="object"?site.value:{};
     if(!configured.adminPasswordHash) return {ok:true,storage:"github",setupRequired:true};
@@ -685,8 +670,8 @@ function showAdminSetupScreen(){
   if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Create password";
   if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="";
   if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
-  if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
-  setStorageStatus("● Storage connected",true);
+  if($("#forgotPassword")){ $("#forgotPassword").textContent=""; $("#forgotPassword").style.display="none"; }
+  setStorageStatus("",true);
 }
 
 function showAdminLogin(){
@@ -722,12 +707,12 @@ function showAdminLogin(){
   }
 
   if(hasGithubToken){
-    if(heading)heading.textContent="Sign in to manage your store.";
-    if(description)description.textContent="Manage products and shop settings from your private Admin area.";
+    if(heading)heading.textContent="Sign in";
+    if(description)description.textContent="";
     if(label)label.textContent="Password";
     if($("#loginBtn"))$("#loginBtn").textContent="SIGN IN";
-    if(forgot)forgot.textContent="Forgot password?";
-    setStorageStatus("● Storage connected",true);
+    if(forgot){forgot.textContent="Forgot password?";forgot.style.display="";}
+    setStorageStatus("",true);
   }else{
     if(heading)heading.textContent="Connect Admin storage";
     if(description)description.textContent="Connect your GitHub storage once. Then you will create your private Admin password.";
@@ -773,7 +758,7 @@ async function signInAdmin(value){
       if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Set a new Admin password";
       if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a new password of at least 8 characters.";
       if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
-      if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
+      if($("#forgotPassword"))$("#forgotPassword").textContent="";
       setStorageStatus("GitHub access verified. Choose your new Admin password.",true);
       return false;
     }
@@ -860,8 +845,8 @@ function startPasswordReset(){
     if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Recover Admin access";
     if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Enter your GitHub access token to verify ownership, then choose a new Admin password.";
     if($("#loginBtn"))$("#loginBtn").textContent="CONNECT & RESET PASSWORD";
-    if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
-    setStorageStatus("Enter your GitHub token to recover Admin access.",false);
+    if($("#forgotPassword"))$("#forgotPassword").textContent="";
+    setStorageStatus("",false);
     return;
   }
   adminResetMode=true;
@@ -876,8 +861,8 @@ function startPasswordReset(){
   if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Set a new Admin password";
   if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a new password of at least 8 characters. Your GitHub access verifies the change.";
   if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
-  if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
-  setStorageStatus("Ready for your new Admin password.",false);
+  if($("#forgotPassword"))$("#forgotPassword").textContent="Cancel";
+  setStorageStatus("",false);
 }
 
 function logoutAdmin(){
