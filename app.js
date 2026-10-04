@@ -84,6 +84,26 @@ async function verifyAdminPassword(password,settingsValue){
 }
 
 async function localApi(body){
+  if(body.action==="recoverWithGithubToken"){
+    const supplied=String(body.githubToken||"").trim();
+    if(!supplied) throw new Error("Enter your GitHub token.");
+    const previousLocal=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
+    const previousSession=sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+    localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
+    try{
+      await githubReadJson("data/products.json");
+      const site=await githubReadJson("data/settings.json");
+      const configured=site.value&&typeof site.value==="object"?site.value:{};
+      if(!configured.adminPasswordHash) throw new Error("Admin password is not configured yet.");
+      return {ok:true,storage:"github",recoveryVerified:true};
+    }catch(e){
+      if(previousLocal)localStorage.setItem(GITHUB_TOKEN_KEY,previousLocal);
+      else localStorage.removeItem(GITHUB_TOKEN_KEY);
+      if(previousSession)sessionStorage.setItem(GITHUB_TOKEN_KEY,previousSession);
+      else sessionStorage.removeItem(GITHUB_TOKEN_KEY);
+      throw e;
+    }
+  }
   if(body.action==="authenticate"){
     const supplied=String(body.password||"").trim();
     const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
@@ -590,7 +610,7 @@ async function signInAdmin(value){
   if(btn){btn.disabled=true;btn.textContent=adminResetMode?"RESETTING...":adminSetupMode?"CREATING...":"SIGNING IN...";}
   try{
     if(adminRecoveryTokenMode){
-      await api({action:"authenticate",password:inputValue});
+      await api({action:"recoverWithGithubToken",githubToken:inputValue});
       adminRecoveryTokenMode=false;
       adminResetMode=true;
       if($("#password")){
