@@ -483,6 +483,7 @@ $("#menu").onclick=()=>$("#nav").classList.toggle("open");
 let adminSessionActive=false;
 let adminSetupMode=false;
 let adminResetMode=false;
+let adminRecoveryTokenMode=false;
 let adminLogoutLock=false;
 
 function getSavedGithubToken(){
@@ -555,6 +556,7 @@ function showAdminLogin(){
   const forgot=$("#forgotPassword");
   adminSetupMode=false;
   adminResetMode=false;
+  adminRecoveryTokenMode=false;
   if(input){
     input.placeholder=hasGithubToken?"Admin password":"GitHub token";
     input.setAttribute("autocomplete",hasGithubToken?"current-password":"new-password");
@@ -587,6 +589,19 @@ async function signInAdmin(value){
   const oldText=btn?.textContent;
   if(btn){btn.disabled=true;btn.textContent=adminResetMode?"RESETTING...":adminSetupMode?"CREATING...":"SIGNING IN...";}
   try{
+    if(adminRecoveryTokenMode){
+      await api({action:"authenticate",password:inputValue});
+      adminRecoveryTokenMode=false;
+      adminResetMode=true;
+      if($("#password")){
+        $("#password").value="";
+        $("#password").placeholder="New Admin password (8+ characters)";
+        $("#password").setAttribute("autocomplete","new-password");
+      }
+      if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
+      setStorageStatus("GitHub access verified. Set your new Admin password.",true);
+      return false;
+    }
     if(adminResetMode){
       await api({action:"resetAdminPassword",newPassword:inputValue});
       adminResetMode=false;
@@ -618,7 +633,18 @@ async function signInAdmin(value){
       adminPassword=inputValue;
       setStorageStatus("Admin password created.",true);
     }else{
-      await api({action:"authenticate",password:inputValue});
+      const auth=await api({action:"authenticate",password:inputValue});
+      if(auth?.setupRequired){
+        adminSetupMode=true;
+        if($("#password")){
+          $("#password").value="";
+          $("#password").placeholder="Create Admin password (8+ characters)";
+          $("#password").setAttribute("autocomplete","new-password");
+        }
+        if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
+        setStorageStatus("GitHub is connected. Create your Admin password to finish setup.",true);
+        return false;
+      }
       adminPassword=inputValue;
       setStorageStatus("Signed in.",true);
     }
@@ -640,9 +666,10 @@ async function signInAdmin(value){
 
 function startPasswordReset(){
   if(!getSavedGithubToken()){
+    adminResetMode=false;
+    adminRecoveryTokenMode=true;
     if($("#password"))$("#password").placeholder="GitHub token";
     if($("#loginBtn"))$("#loginBtn").textContent="CONNECT & RESET PASSWORD";
-    adminResetMode=true;
     setStorageStatus("Enter your GitHub token to recover Admin access.",false);
     return;
   }
