@@ -681,9 +681,9 @@ function showAdminSetupScreen(){
     input.placeholder="Create Admin password (8+ characters)";
     input.setAttribute("autocomplete","new-password");
   }
-  if($("#passwordLabel"))$("#passwordLabel").textContent="Create Admin password";
-  if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Create your Admin password";
-  if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a password of at least 8 characters. GitHub will be used only for storage and recovery.";
+  if($("#passwordLabel"))$("#passwordLabel").textContent="Password";
+  if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Create password";
+  if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="";
   if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
   if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
   setStorageStatus("● Storage connected",true);
@@ -706,7 +706,7 @@ function showAdminLogin(){
     input.value="";
     input.type="password";
     input.setAttribute("autocomplete","current-password");
-    input.placeholder="Enter your Admin password";
+    input.placeholder="Enter password";
   }
   if(toggle){
     toggle.textContent="SHOW";
@@ -724,7 +724,7 @@ function showAdminLogin(){
   if(hasGithubToken){
     if(heading)heading.textContent="Sign in to manage your store.";
     if(description)description.textContent="Manage products and shop settings from your private Admin area.";
-    if(label)label.textContent="Admin password";
+    if(label)label.textContent="Password";
     if($("#loginBtn"))$("#loginBtn").textContent="SIGN IN";
     if(forgot)forgot.textContent="Forgot password?";
     setStorageStatus("● Storage connected",true);
