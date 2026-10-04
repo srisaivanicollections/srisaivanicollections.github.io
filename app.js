@@ -157,7 +157,7 @@ async function localApi(body){
   if(!await verifyAdminPassword(String(body.password||""),configuredSettings)) throw new Error("Unauthorized");
   if(body.action==="saveProduct"){
     const incoming=body.product;
-    if(!incoming||!incoming.id||!String(incoming.name||"").trim()) throw new Error("Invalid product.");
+    validateProductInput(incoming);
     const current=await githubReadJson("data/products.json");
     const list=Array.isArray(current.value)?current.value:[];
     const id=Number(incoming.id);
@@ -198,6 +198,7 @@ async function localApi(body){
     const current=await githubReadJson("data/settings.json");
     const existing=(current.value&&typeof current.value==="object")?current.value:{};
     const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
+    validateSettingsInput({...existing,...incoming});
     const merged={...existing,...incoming};
     if(String(incoming.whatsapp??"").trim()===""&&String(existing.whatsapp??"").trim()!=="") merged.whatsapp=existing.whatsapp;
     try{
@@ -212,7 +213,10 @@ async function localApi(body){
     return {ok:true};
   }
   if(body.action==="uploadImage"){
-    const safe=String(body.filename||"product.jpg").replace(/[^a-zA-Z0-9._-]/g,"-");
+    const filename=String(body.filename||"product.jpg");
+    const extension=filename.toLowerCase().match(/\.(jpe?g|png|webp|gif)$/);
+    if(!extension) throw new Error("Only JPG, PNG, WEBP or GIF images are allowed.");
+    const safe=filename.replace(/[^a-zA-Z0-9._-]/g,"-");
     const path="assets/products/"+Date.now()+"-"+safe;
     const content=String(body.base64||"").replace(/^data:[^;]+;base64,/,"");
     if(!content) throw new Error("Image data missing");
@@ -227,6 +231,17 @@ async function localApi(body){
       url:"https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path,
       sha:d.content?.sha||""
     };
+  }
+  if(body.action==="deleteImage"){
+    const path=String(body.path||"");
+    if(!/^assets\/products\/[a-zA-Z0-9._-]+$/.test(path)) throw new Error("Invalid image path.");
+    const file=await githubReadJson(path);
+    await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path,{
+      method:"DELETE",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:"Remove unused product image",sha:file.sha,branch:GITHUB_BRANCH})
+    });
+    return {ok:true};
   }
   throw new Error("Unknown action");
 }
@@ -265,6 +280,37 @@ async function load(){
   }
 }
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function validateProductInput(product){
+  if(!product||!Number.isSafeInteger(Number(product.id))||Number(product.id)<=0) throw new Error("Invalid product ID.");
+  const name=String(product.name||"").trim();
+  if(!name||name.length>120) throw new Error("Product name must be 1-120 characters.");
+  if(!["Sarees","Dresses"].includes(String(product.category||""))) throw new Error("Invalid product category.");
+  const price=Number(product.price);
+  if(!Number.isFinite(price)||price<=0||price>10000000) throw new Error("Invalid product price.");
+  if(product.originalPrice!==undefined){
+    const original=Number(product.originalPrice);
+    if(!Number.isFinite(original)||original<=0||original>10000000) throw new Error("Invalid original price.");
+  }
+  const image=String(product.image||"").trim();
+  if(!image||image.length>1000) throw new Error("A valid product image is required.");
+  return true;
+}
+function validateSettingsInput(settingsValue){
+  const s=settingsValue&&typeof settingsValue==="object"?settingsValue:{};
+  const name=String(s.name||"").trim();
+  if(!name||name.length>100) throw new Error("Shop name must be 1-100 characters.");
+  const whatsapp=String(s.whatsapp||"").replace(/\D/g,"");
+  if(whatsapp && (whatsapp.length<10||whatsapp.length>15)) throw new Error("WhatsApp number must contain 10-15 digits.");
+  const instagram=String(s.instagram||"").trim();
+  if(instagram){
+    let url;
+    try{url=new URL(instagram)}catch(_){throw new Error("Enter a valid Instagram URL.");}
+    if(!["https:","http:"].includes(url.protocol)||!/instagram\.com$/i.test(url.hostname.replace(/^www\./i,""))) throw new Error("Instagram URL must point to Instagram.");
+  }
+  return true;
+}
+let settingsWriteQueue=Promise.resolve();
+
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function waNumber(){return String(settings.whatsapp||"").replace(/\D/g,"")}
 function wa(p){const n=waNumber();return "https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I am interested in "+p.name+" ("+money(p.price)+"). Is it available?")}
@@ -304,7 +350,14 @@ function renderReviews(){
 }
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){renderTabs();if(!Array.isArray(products)||products.length===0){return}const q=$("#search").value.trim().toLowerCase(),pf=$("#price").value;let list=products.filter(p=>(category==="All"||p.category===category)&&(!q||p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q))).sort((a,b)=>{const rank=p=>p.newArrival&&p.bestSeller?0:(p.newArrival||p.bestSeller?1:2);return rank(a)-rank(b)}).filter(p=>!pf||(pf==="0-2000"?p.price<2000:pf==="2000-4000"?p.price>=2000&&p.price<4000:pf==="4000-7000"?p.price>=4000&&p.price<7000:p.price>=7000));$("#products").innerHTML=list.map(p=>'<article class="product-card"><div class="product-image"><img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.closest(\'.product-image\').classList.add(\'image-missing\')"><div class="badges">'+(p.newArrival?'<span class="badge new">NEW ARRIVAL</span>':"")+(p.bestSeller?'<span class="badge best">BEST SELLER</span>':"")+'</div></div><div class="product-info"><h3>'+esc(p.name)+'</h3><span class="meta">'+esc(p.category)+(p.availability===false?" · Unavailable":"")+'</span><div class="price-line"><span class="price">'+money(p.price)+(p.originalPrice&&p.originalPrice>p.price?'<del>'+money(p.originalPrice)+'</del>':"")+'</span><a class="wa-mini" href="'+wa(p)+'" target="_blank" rel="noopener" aria-label="WhatsApp about '+esc(p.name)+'" title="Ask on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.51 0 .18 5.33.18 11.88c0 2.09.55 4.13 1.59 5.93L.08 24l6.33-1.66a11.9 11.9 0 0 0 5.65 1.44h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.18-1.24-6.17-3.43-8.42ZM12.07 21.8h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.76.99 1-3.67-.23-.38a9.89 9.89 0 0 1-1.52-5.27C2.14 6.42 6.59 1.97 12.07 1.97c2.65 0 5.14 1.03 7.01 2.9a9.85 9.85 0 0 1 2.9 7.02c0 5.48-4.45 9.91-9.91 9.91Zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.35Z"/></svg></a></div></div></article>').join("")}
-function form(p={}){return '<div class="admin-row"><input id="fName" placeholder="Product name" value="'+(p.name||"")+'"><select id="fCat"><option '+(p.category==="Sarees"?"selected":"")+'>Sarees</option><option '+(p.category==="Dresses"?"selected":"")+'>Dresses</option></select></div><div class="admin-row"><input id="fPrice" type="number" placeholder="Price" value="'+(p.price||"")+'"><input id="fOriginal" type="number" placeholder="Original price" value="'+(p.originalPrice||"")+'"></div><div class="upload-row"><input id="fImage" placeholder="Image path or URL" value="'+(p.image||"")+'"><input id="fFile" type="file" accept="image/*"></div><label><input id="fNew" type="checkbox" '+(p.newArrival?"checked":"")+'> New arrival</label> <label><input id="fBest" type="checkbox" '+(p.bestSeller?"checked":"")+'> Best seller</label> <label><input id="fAvail" type="checkbox" '+(p.availability!==false?"checked":"")+'> Available</label><br><br><button class="btn dark" id="saveItem">'+(p.id?"SAVE CHANGES":"SAVE ITEM")+'</button>'+(p.id?' <button type="button" class="danger" id="deleteItem">DELETE ITEM</button>':"")}
+function form(p={}){
+  const name=esc(p.name||"");
+  const category=esc(p.category||"");
+  const price=esc(p.price??"");
+  const original=esc(p.originalPrice??"");
+  const image=esc(p.image||"");
+  return '<div class="admin-row"><input id="fName" maxlength="120" placeholder="Product name" value="'+name+'"><select id="fCat"><option value="Sarees" '+(p.category==="Sarees"?"selected":"")+'>Sarees</option><option value="Dresses" '+(p.category==="Dresses"?"selected":"")+'>Dresses</option></select></div><div class="admin-row"><input id="fPrice" type="number" min="1" step="1" placeholder="Price" value="'+price+'"><input id="fOriginal" type="number" min="1" step="1" placeholder="Original price" value="'+original+'"></div><div class="upload-row"><input id="fImage" maxlength="1000" placeholder="Image path or URL" value="'+image+'"><input id="fFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif"></div><label><input id="fNew" type="checkbox" '+(p.newArrival?"checked":"")+'> New arrival</label> <label><input id="fBest" type="checkbox" '+(p.bestSeller?"checked":"")+'> Best seller</label> <label><input id="fAvail" type="checkbox" '+(p.availability!==false?"checked":"")+'> Available</label><br><br><button type="button" class="btn dark" id="saveItem">'+(p.id?"SAVE CHANGES":"SAVE ITEM")+'</button>'+(p.id?' <button type="button" class="danger" id="deleteItem">DELETE ITEM</button>':"");
+}
 function updateStudioNav(activeView){
   all("[data-view]").forEach(btn=>{
     const active=btn.dataset.view===activeView;
@@ -318,7 +371,7 @@ function showView(v){
   updateStudioNav(v);
   const b=$("#studioBody");
   if(v==="products"){
-    b.innerHTML=products.map(p=>'<div class="admin-item"><div><strong>'+p.name+'</strong><br><small>'+p.category+" · "+money(p.price)+(p.newArrival?" · NEW":"")+(p.bestSeller?" · BEST":"")+'</small></div><button class="danger edit" data-id="'+p.id+'">EDIT</button></div>').join("");
+    b.innerHTML=products.map(p=>'<div class="admin-item"><div><strong>'+esc(p.name)+'</strong><br><small>'+esc(p.category)+" · "+money(p.price)+(p.newArrival?" · NEW":"")+(p.bestSeller?" · BEST":"")+'</small></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
   }else if(v==="add"){
     b.innerHTML=form();
     const saveBtn=$("#saveItem");
@@ -331,7 +384,7 @@ function showView(v){
       };
     }
   }else{
-    b.innerHTML='<p>Shop name</p><input id="setName" value="'+(settings.name||"")+'"><p>WhatsApp number</p><input id="setWa" value="'+(settings.whatsapp||"")+'"><p>Instagram URL</p><input id="setIg" value="'+(settings.instagram||"")+'"><button class="btn dark" id="saveSettings">SAVE SETTINGS</button>';
+    b.innerHTML='<p>Shop name</p><input id="setName" maxlength="100" value="'+esc(settings.name||"")+'"><p>WhatsApp number</p><input id="setWa" inputmode="tel" maxlength="15" value="'+esc(settings.whatsapp||"")+'"><p>Instagram URL</p><input id="setIg" type="url" value="'+esc(settings.instagram||"")+'"><button type="button" class="btn dark" id="saveSettings">SAVE SETTINGS</button>';
   }
 }
 function edit(id){
@@ -435,9 +488,12 @@ async function saveProduct(id){
     const originalPrice=Number($("#fOriginal").value)||undefined;
     let image=$("#fImage").value.trim();
     const file=$("#fFile").files[0];
+    let uploadedImagePath="";
 
     if(!name)throw new Error("Please enter a product name.");
     if(!Number.isFinite(price)||price<=0)throw new Error("Please enter a valid price.");
+    if(originalPrice!==undefined && originalPrice<=0)throw new Error("Original price must be greater than zero.");
+    if(originalPrice!==undefined && originalPrice<price)throw new Error("Original price cannot be lower than sale price.");
     if(!image&&!file)throw new Error("Please add an image URL/path or select an image file.");
 
     // Build from the existing Git-backed product when editing so unrelated
@@ -446,6 +502,8 @@ async function saveProduct(id){
 
     if(file){
       if(file.size>5*1024*1024)throw new Error("Image must be 5MB or smaller.");
+      const allowedTypes=["image/jpeg","image/png","image/webp","image/gif"];
+      if(!allowedTypes.includes(file.type))throw new Error("Only JPG, PNG, WEBP or GIF images are allowed.");
       const base64=await new Promise((resolve,reject)=>{
         const reader=new FileReader();
         reader.onload=()=>resolve(reader.result);
@@ -454,6 +512,7 @@ async function saveProduct(id){
       });
       const up=await api({action:"uploadImage",password:adminPassword,filename:file.name,base64});
       if(!up?.path)throw new Error("Image upload failed.");
+      uploadedImagePath=up.path;
       image=up.path;
     }
 
@@ -490,6 +549,9 @@ async function saveProduct(id){
   }catch(e){
     products=oldProducts;
     render();
+    if(uploadedImagePath){
+      try{await api({action:"deleteImage",password:adminPassword,path:uploadedImagePath});}catch(cleanupError){console.warn("Uploaded image cleanup failed:",cleanupError);}
+    }
     showAdminToast("Could not save product. "+(e?.message||"Please try again."),"error");
   }finally{
     if(btn){
@@ -811,7 +873,9 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
   btn.disabled=true;
   btn.textContent="SAVING...";
   try{
-    await api({action:"saveSettings",password:adminPassword,settings:nextSettings});
+    const saveSettingsOperation=async()=>api({action:"saveSettings",password:adminPassword,settings:nextSettings});
+    settingsWriteQueue=settingsWriteQueue.then(saveSettingsOperation,saveSettingsOperation);
+    await settingsWriteQueue;
     const verified=await githubReadJson("data/settings.json");
     if(!verified.value||String(verified.value.name||"")!==String(nextSettings.name||"")||String(verified.value.whatsapp||"")!==String(nextSettings.whatsapp||"")||String(verified.value.instagram||"")!==String(nextSettings.instagram||"")){
       throw new Error("Settings could not be verified after saving.");
