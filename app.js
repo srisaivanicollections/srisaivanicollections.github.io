@@ -31,7 +31,11 @@ async function githubRequest(path,options={}){
     ...(options.headers||{})
   }});
   const d=await r.json().catch(()=>({}));
-  if(!r.ok) throw new Error(d.message||"GitHub request failed");
+  if(!r.ok){
+    const error=new Error(d.message||"GitHub request failed");
+    error.status=r.status;
+    throw error;
+  }
   return d;
 }
 async function publicGitHubReadJson(path){
@@ -142,9 +146,21 @@ async function localApi(body){
     if(body.action==="resetAdminPassword" && !existing.adminPasswordHash) throw new Error("Admin password is not configured yet.");
     const salt=createPasswordSalt();
     const hash=await hashAdminPassword(next,salt);
-    const updated={...existing,adminPasswordHash:hash,adminPasswordSalt:salt};
+    const message=body.action==="resetAdminPassword"?"Reset Admin password":"Create Admin password";
+    let updated={...existing,adminPasswordHash:hash,adminPasswordSalt:salt};
     delete updated.githubToken;
-    await githubWriteJson("data/settings.json",updated,current.sha,body.action==="resetAdminPassword"?"Reset Admin password":"Create Admin password");
+    try{
+      await githubWriteJson("data/settings.json",updated,current.sha,message);
+    }catch(writeError){
+      if(writeError?.status!==409) throw writeError;
+      // Another Admin/settings write won the race. Re-read the latest file and
+      // merge only the password fields so unrelated settings are preserved.
+      const latest=await githubReadJson("data/settings.json");
+      const latestValue=latest.value&&typeof latest.value==="object"?latest.value:{};
+      updated={...latestValue,adminPasswordHash:hash,adminPasswordSalt:salt};
+      delete updated.githubToken;
+      await githubWriteJson("data/settings.json",updated,latest.sha,message);
+    }
     const verified=await githubReadJson("data/settings.json");
     if(String(verified.value?.adminPasswordHash||"")!==hash) throw new Error("Password reset could not be verified.");
     return {ok:true,storage:"github"};
@@ -765,7 +781,11 @@ async function signInAdmin(value){
     return true;
   }catch(e){
     adminPassword="";
-    if($("#loginMsg"))$("#loginMsg").textContent=e?.message||"Sign in failed.";
+    let message=e?.message||"Sign in failed.";
+    if(e?.status===409 || /does not match [0-9a-f]{7,40}/i.test(message)){
+      message="GitHub settings changed while saving. Please try the password reset again.";
+    }
+    if($("#loginMsg"))$("#loginMsg").textContent=message;
     return false;
   }finally{
     if(btn){btn.disabled=false;btn.textContent=oldText||"SIGN IN";}
