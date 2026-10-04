@@ -252,21 +252,40 @@ async function api(body){
   return localApi(body);
 }
 async function loadPublicJson(path){
+  // Prefer the same-origin GitHub Pages file. This is the deployed site's
+  // authoritative public catalog and avoids raw.githubusercontent.com
+  // propagation/rate-limit/cache differences.
   const sources=[
-    "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path,
-    path
+    path,
+    "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path
   ];
   let lastError=null;
+
   for(const base of sources){
     try{
-      const url=base+"?cb="+Date.now();
-      const r=await fetch(url,{cache:"no-store",headers:{"Accept":"application/json"}});
+      const separator=base.includes("?")?"&":"?";
+      const url=base+separator+"cb="+Date.now();
+      const r=await fetch(url,{
+        cache:"no-store",
+        headers:{"Accept":"application/json"}
+      });
+
       if(!r.ok) throw new Error("HTTP "+r.status);
-      return {value:await r.json()};
+
+      const value=await r.json();
+      if(path.endsWith("products.json") && !Array.isArray(value)){
+        throw new Error("Product catalog format is invalid.");
+      }
+      if(path.endsWith("products.json") && Array.isArray(value) && value.length===0){
+        throw new Error("Product catalog is empty.");
+      }
+
+      return {value};
     }catch(e){
       lastError=e;
     }
   }
+
   throw lastError||new Error("Public catalog could not be loaded.");
 }
 
