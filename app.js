@@ -251,34 +251,54 @@ async function localApi(body){
 async function api(body){
   return localApi(body);
 }
+async function loadPublicJson(path){
+  const sources=[
+    "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path,
+    path
+  ];
+  let lastError=null;
+  for(const base of sources){
+    try{
+      const url=base+"?cb="+Date.now();
+      const r=await fetch(url,{cache:"no-store",headers:{"Accept":"application/json"}});
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      return {value:await r.json()};
+    }catch(e){
+      lastError=e;
+    }
+  }
+  throw lastError||new Error("Public catalog could not be loaded.");
+}
+
 async function load(){
   try{
-    // GitHub is the single source of truth for the storefront. Never fall back
-    // to the deployed static JSON because that can temporarily be older than
-    // the latest Admin commit and make a newly saved item appear to disappear.
+    // Storefront reads are PUBLIC. They must never depend on an Admin GitHub
+    // token or GitHub API rate-limit. Admin credentials are only required for
+    // CRUD/settings writes.
     const [pr,sr]=await Promise.all([
-      publicGitHubReadJson("data/products.json"),
-      publicGitHubReadJson("data/settings.json")
+      loadPublicJson("data/products.json"),
+      loadPublicJson("data/settings.json")
     ]);
     if(!Array.isArray(pr.value)||pr.value.length===0) throw new Error("Empty Git-backed catalog.");
     products=pr.value;
     githubOriginalIds=new Set(products.map(p=>Number(p.id)));
-    settings=sr.value||{};
+    settings=(sr.value&&typeof sr.value==="object")?{...sr.value}:{};
     delete settings.githubToken;
     apply();
     render();
     loadReviews();
     return true;
   }catch(e){
-    // Fail closed. Keep the last successfully rendered in-memory catalog and
-    // show the real storage error instead of replacing it with stale data.
-    console.error("Git-backed catalog load failed:",e);
-    if(!Array.isArray(products)||products.length===0){
-      products=[];
-      settings={name:"SRI SAI VANI",whatsapp:"",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};
-      apply();
+    console.error("Public catalog load failed:",e);
+    if(Array.isArray(products)&&products.length){
       render();
+      return false;
     }
+    products=[];
+    settings={name:"SRI SAI VANI",whatsapp:"",instagram:"https://www.instagram.com/sri_sai_vani_collections/"};
+    apply();
+    const grid=$("#products");
+    if(grid)grid.innerHTML='<div class="lux-empty"><strong>Collection temporarily unavailable</strong><br><span>Please refresh in a moment.</span></div>';
     return false;
   }
 }
