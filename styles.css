@@ -4227,3 +4227,90 @@ nav a,
   text-overflow:ellipsis !important;
   white-space:nowrap !important;
 }
+
+/* CATALOG CARD FINAL OVERRIDES: 2026-10-04 */
+#shop .lux-item-card{min-width:0;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+#shop .lux-item-media{position:relative!important;aspect-ratio:3/4!important;overflow:hidden!important;background:#F1ECE5!important;border:1px solid #E4D8C5!important;border-radius:0!important}
+#shop .product-image .badges,
+#shop .product-image .badges.lux-badge-cluster{
+  position:absolute!important;
+  top:auto!important;
+  left:8px!important;
+  right:8px!important;
+  bottom:8px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:4px!important;
+  flex-wrap:wrap!important;
+  margin:0!important;
+  padding:0!important;
+  z-index:5!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#shop .product-image .badges .badge,
+#shop .product-image .badges .badge.new,
+#shop .product-image .badges .badge.best{
+  display:inline-flex!important;
+  position:static!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:18px!important;
+  height:auto!important;
+  margin:0!important;
+  padding:3px 7px!important;
+  box-sizing:border-box!important;
+  border:1px solid #E4D8C5!important;
+  border-radius:2px!important;
+  font-family:"Inter",Arial,sans-serif!important;
+  font-size:7px!important;
+  line-height:1!important;
+  letter-spacing:.12em!important;
+  font-weight:600!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(7px)!important;
+  -webkit-backdrop-filter:blur(7px)!important;
+}
+#shop .product-image .badges .badge.new{background:rgba(28,25,23,.84)!important;color:#FAF8F5!important;border-color:rgba(228,216,197,.65)!important}
+#shop .product-image .badges .badge.best{background:rgba(250,248,245,.90)!important;color:#302b27!important;border-color:#E4D8C5!important}
+#shop .product-info.lux-item-body{padding:11px 2px 0!important}
+#shop .product-info.lux-item-body h3.lux-item-title{margin:0 0 5px!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:1.18rem!important;line-height:1.05!important;font-weight:500!important;letter-spacing:-.01em!important}
+#shop .product-info.lux-item-body .meta.lux-item-cat{margin:0 0 10px!important;font-size:.57rem!important;line-height:1!important;letter-spacing:.15em!important}
+#shop .price-line.lux-item-footer{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin-top:0!important}
+#shop .price-line .price.lux-pricing-block{display:flex!important;align-items:baseline!important;gap:6px!important;margin:0!important}
+#shop .price-line .lux-price-current{font-family:"Inter",Arial,sans-serif!important;font-size:.9rem!important;font-weight:600!important;line-height:1!important}
+#shop .price-line .lux-price-original{font-family:"Inter",Arial,sans-serif!important;font-size:.66rem!important;color:#aaa39c!important;text-decoration:line-through!important}
+#shop .price-line .wa-mini.lux-wa-action{
+  width:30px!important;
+  height:30px!important;
+  min-height:30px!important;
+  padding:0!important;
+  flex:0 0 30px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:1px solid #DCCFBC!important;
+  border-radius:0!important;
+  background:#FAF8F5!important;
+  color:#292521!important;
+  font-size:0!important;
+  letter-spacing:0!important;
+}
+#shop .price-line .wa-mini.lux-wa-action svg{width:14px!important;height:14px!important;fill:currentColor!important}
+#shop .price-line .wa-mini.lux-wa-action:hover{background:#292521!important;color:#FAF8F5!important;border-color:#292521!important}
+@media(max-width:560px){
+  #shop .lux-catalog-section{padding-left:14px!important;padding-right:14px!important}
+  #shop .lux-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:14px!important;row-gap:30px!important}
+  #shop .product-image .badges,#shop .product-image .badges.lux-badge-cluster{left:7px!important;right:7px!important;bottom:7px!important;gap:3px!important}
+  #shop .product-image .badges .badge,#shop .product-image .badges .badge.new,#shop .product-image .badges .badge.best{padding:3px 5px!important;font-size:6px!important;letter-spacing:.12em!important;min-height:17px!important}
+  #shop .product-info.lux-item-body{padding-top:10px!important}
+  #shop .product-info.lux-item-body h3.lux-item-title{font-size:1.08rem!important}
+  #shop .product-info.lux-item-body .meta.lux-item-cat{font-size:.54rem!important;margin-bottom:9px!important}
+  #shop .price-line .lux-price-current{font-size:.84rem!important}
+  #shop .price-line .lux-price-original{font-size:.62rem!important}
+  #shop .price-line .wa-mini.lux-wa-action{width:28px!important;height:28px!important;min-height:28px!important;flex-basis:28px!important}
+}
