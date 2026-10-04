@@ -607,12 +607,32 @@ function updateAdminView(){
   }
 }
 
+let lastAdminTrigger=null;
+function focusAdminDialog(){
+  const modal=$("#admin");
+  if(!modal)return;
+  modal.setAttribute("role","dialog");
+  modal.setAttribute("aria-modal","true");
+  modal.setAttribute("aria-labelledby","adminTitle");
+  $("#adminTitle")?.focus();
+}
+function trapAdminFocus(e){
+  const modal=$("#admin");
+  if(!modal||modal.classList.contains("hidden")||e.key!=="Tab")return;
+  const focusable=[...modal.querySelectorAll('button,input,select,textarea,a[href],[tabindex]:not([tabindex="-1"])')].filter(el=>!el.disabled&&el.offsetParent!==null);
+  if(!focusable.length)return;
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+}
+
 function openAdminModal(){
   const modal=$("#admin");
   if(!modal)return;
   modal.classList.remove("hidden");
   modal.style.setProperty("display","flex","important");
   updateAdminView();
+  focusAdminDialog();
 }
 
 function closeAdminModal(){
@@ -787,6 +807,19 @@ function logoutAdmin(){
   },700);
 }
 
+if(!window.__LIBAS_ADMIN_KEYBOARD_BOUND){
+  window.__LIBAS_ADMIN_KEYBOARD_BOUND=true;
+  document.addEventListener("keydown",(e)=>{
+    if(e.key==="Escape"&&$("#admin")&&!$("#admin").classList.contains("hidden")){
+      e.preventDefault();
+      closeAdminModal();
+      lastAdminTrigger?.focus?.();
+      return;
+    }
+    trapAdminFocus(e);
+  });
+}
+
 if(!window.__LIBAS_ADMIN_AUTH_BOUND){
   window.__LIBAS_ADMIN_AUTH_BOUND=true;
 
@@ -807,7 +840,7 @@ if(!window.__LIBAS_ADMIN_AUTH_BOUND){
       e.stopImmediatePropagation();
 
       if(adminLogoutLock)return;
-
+      lastAdminTrigger=admin;
       openAdminModal();
       updateAdminView();
       adminSessionActive=false;
