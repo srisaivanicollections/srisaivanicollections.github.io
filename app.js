@@ -373,7 +373,7 @@ function showView(v){
   updateStudioNav(v);
   const b=$("#studioBody");
   if(v==="products"){
-    b.innerHTML=products.map(p=>'<div class="admin-item"><div><strong>'+esc(p.name)+'</strong><br><small>'+esc(p.category)+" · "+money(p.price)+(p.newArrival?" · NEW":"")+(p.bestSeller?" · BEST":"")+'</small></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
+    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(p.name)+'</strong><br><small>'+esc(p.category)+" · "+money(p.price)+(p.newArrival?" · NEW":"")+(p.bestSeller?" · BEST":"")+(p.availability===false?" · UNAVAILABLE":"")+'</small></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
   }else if(v==="add"){
     b.innerHTML=form();
     const saveBtn=$("#saveItem");
