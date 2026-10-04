@@ -4664,3 +4664,191 @@ nav a,
   #shop .lux-price-select{font-size:10px}
   #shop .lux-product-grid{gap-inline:10px}
 }
+
+
+/* ==========================================================================
+   FINAL DRAPE / INSTAGRAM REEL PRESENTATION
+   Custom portrait card, no raw Instagram iframe chrome.
+   ========================================================================== */
+.drape-editorial-section{
+  width:100%;
+  padding:72px 24px 78px;
+  background:#FAF8F5;
+  border-top:1px solid rgba(28,25,23,.08);
+  border-bottom:1px solid rgba(28,25,23,.08);
+  overflow:hidden;
+}
+.drape-editorial-inner{
+  width:min(1080px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;
+  align-items:center;
+  justify-content:center;
+  gap:72px;
+}
+.drape-editorial-copy{
+  min-width:0;
+  max-width:500px;
+}
+.drape-editorial-eyebrow{
+  display:block;
+  margin:0 0 12px;
+  color:#B38E5D;
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-size:9px!important;
+  line-height:1.2!important;
+  font-weight:600!important;
+  letter-spacing:.22em!important;
+  text-transform:uppercase;
+}
+.drape-editorial-title{
+  margin:0 0 16px;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(42px,5vw,64px)!important;
+  line-height:.98!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+.drape-editorial-text{
+  max-width:440px;
+  margin:0;
+  color:#6F6A64;
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-size:12px!important;
+  line-height:1.75!important;
+  font-weight:400!important;
+}
+.drape-reel-card{
+  width:300px;
+  max-width:100%;
+  display:block;
+  color:inherit;
+  text-decoration:none;
+  background:#FFF;
+  border:1px solid #E4D8C5;
+  box-shadow:0 12px 36px rgba(28,25,23,.08);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.drape-reel-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 42px rgba(28,25,23,.12);
+}
+.drape-reel-media{
+  position:relative;
+  display:block;
+  width:100%;
+  aspect-ratio:9/16;
+  overflow:hidden;
+  background:#EDE6DC;
+}
+.drape-reel-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1.01);
+  transition:transform .5s ease;
+}
+.drape-reel-card:hover .drape-reel-media img{
+  transform:scale(1.035);
+}
+.drape-reel-shade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(28,25,23,.38),rgba(28,25,23,.03) 55%,rgba(28,25,23,.12));
+}
+.drape-reel-play{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:58px;
+  height:58px;
+  transform:translate(-50%,-50%);
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(250,248,245,.78);
+  border-radius:50%;
+  background:rgba(250,248,245,.16);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.drape-reel-play svg{
+  width:20px;
+  height:20px;
+  margin-left:3px;
+  fill:#FAF8F5;
+}
+.drape-reel-label{
+  position:absolute;
+  left:14px;
+  top:14px;
+  padding:5px 7px;
+  border:1px solid rgba(228,216,197,.8);
+  background:rgba(28,25,23,.62);
+  color:#FAF8F5;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:8px;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:.16em;
+}
+.drape-reel-meta{
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+  padding:16px 16px 17px;
+}
+.drape-reel-title{
+  color:#302C29;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:24px;
+  line-height:1;
+}
+.drape-reel-action{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:38px;
+  padding:0 13px;
+  background:#1C1917;
+  border:1px solid #1C1917;
+  color:#FAF8F5;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:8px;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:.15em;
+}
+.drape-reel-card:hover .drape-reel-action{
+  background:#B89758;
+  border-color:#B89758;
+  color:#1C1917;
+}
+@media(max-width:768px){
+  .drape-editorial-section{padding:54px 18px 60px}
+  .drape-editorial-inner{
+    grid-template-columns:1fr;
+    gap:28px;
+    justify-items:center;
+  }
+  .drape-editorial-copy{
+    width:min(100%,390px);
+    text-align:center;
+  }
+  .drape-editorial-eyebrow{font-size:8px!important;margin-bottom:10px}
+  .drape-editorial-title{
+    font-size:clamp(38px,11vw,50px)!important;
+    margin-bottom:13px;
+  }
+  .drape-editorial-text{
+    max-width:340px;
+    margin:0 auto;
+    font-size:11px!important;
+  }
+  .drape-reel-card{
+    width:min(100%,270px);
+  }
+}
