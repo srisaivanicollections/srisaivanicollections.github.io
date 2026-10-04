@@ -817,7 +817,15 @@ async function signInAdmin(value){
     if($("#loginMsg"))$("#loginMsg").textContent=message;
     return false;
   }finally{
-    if(btn){btn.disabled=false;btn.textContent=oldText||"SIGN IN";}
+    if(btn){
+      btn.disabled=false;
+      if(adminRecoveryTokenMode) btn.textContent="CONNECT & RESET PASSWORD";
+      else if(adminResetMode) btn.textContent="RESET PASSWORD";
+      else if(adminSetupMode) btn.textContent="CREATE PASSWORD";
+      else if(adminSessionActive) btn.textContent="SIGN IN";
+      else if(!getSavedGithubToken()) btn.textContent="CONNECT GITHUB";
+      else btn.textContent="SIGN IN";
+    }
   }
 }
 
