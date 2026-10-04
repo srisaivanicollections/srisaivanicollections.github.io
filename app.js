@@ -292,7 +292,7 @@ async function loadPublicJson(path){
 async function removeLegacyInstagramEmbed(){
   document.querySelectorAll('iframe[src*="instagram.com"], iframe[src*="instagramcdn.com"], .instagram-media, .instagram-embed').forEach(function(el){ el.remove(); });
 }
-function load(){
+async function load(){
   removeLegacyInstagramEmbed();
   try{
     // Storefront reads are PUBLIC. They must never depend on an Admin GitHub
