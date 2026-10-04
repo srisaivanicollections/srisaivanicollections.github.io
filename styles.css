@@ -5512,3 +5512,26 @@ footer .brand b{
     margin-top:6px !important;
   }
 }
+
+/* PRINCIPAL UI/UX FINAL MOBILE CATALOG RHYTHM
+   Apply to both grid selectors because the rendered #products element
+   carries both classes. UI-only. */
+@media (max-width:767px){
+  #shop #products.products.lux-product-grid{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    column-gap:6px !important;
+    row-gap:18px !important;
+    width:100% !important;
+  }
+  #shop #products.products.lux-product-grid .lux-item-card{
+    min-width:0 !important;
+    width:100% !important;
+  }
+  #shop #products.products.lux-product-grid .lux-item-body{
+    padding-top:7px !important;
+  }
+  #shop #products.products.lux-product-grid .lux-item-footer{
+    margin-top:6px !important;
+  }
+}
