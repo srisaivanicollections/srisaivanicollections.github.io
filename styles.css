@@ -5397,3 +5397,22 @@ nav a,
   #shop .lux-search-icon svg{width:19px !important;height:19px !important;}
   #shop .lux-search-input{padding-left:40px !important;}
 }
+
+/* Mobile menu: keep only Admin. Desktop navigation is unchanged. */
+@media (max-width: 767px){
+  .header nav.open a.shop-link,
+  .header nav.open a[href*="instagram.com"]{
+    display:none !important;
+  }
+  .header nav.open .admin-link{
+    display:block !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    margin:0 !important;
+    padding:14px 12px !important;
+    text-align:left !important;
+    border:0 !important;
+    color:#1C1917 !important;
+    background:transparent !important;
+  }
+}
