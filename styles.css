@@ -5428,3 +5428,15 @@ nav a,
     display:block !important;
   }
 }
+
+/* Shop name only: normal word spacing, no letter-by-letter treatment. */
+.brand b{
+  letter-spacing:0 !important;
+  word-spacing:.18em !important;
+}
+@media(max-width:600px){
+  .brand b{
+    letter-spacing:0 !important;
+    word-spacing:.14em !important;
+  }
+}
