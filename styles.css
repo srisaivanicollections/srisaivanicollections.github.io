@@ -4961,3 +4961,13 @@ nav a,
     width:min(360px,100%);
   }
 }
+
+
+/* FINAL INSTAGRAM CTA GUARD: no embedded reel/player */
+.drape-editorial-section iframe,
+.drape-editorial-section .instagram-media,
+.drape-editorial-section .instagram-embed,
+.drape-editorial-section video,
+.drape-editorial-section embed,
+.drape-editorial-section object { display:none !important; }
+.drape-editorial-section .drape-editorial-content { position:relative; z-index:2; }
