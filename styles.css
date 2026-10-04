@@ -5460,3 +5460,9 @@ footer .brand b{
 @media (max-width:767px){
   #shop.lux-catalog-section{padding-top:0 !important;}
 }
+
+
+/* TEST: refined smaller product title scale */
+/* Typography only. No layout, data, links, or functionality changes. */
+#shop .lux-item-title{font-size:16px!important;line-height:1.3!important;letter-spacing:0!important}
+@media(max-width:760px){#shop .lux-item-title{font-size:14px!important;line-height:1.3!important}}
