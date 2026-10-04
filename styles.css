@@ -5440,3 +5440,12 @@ nav a,
     word-spacing:.14em !important;
   }
 }
+
+
+/* Brand name: keep the shop name readable in both header and footer. */
+.header .brand b,
+footer .brand b{
+  letter-spacing:.04em !important;
+  word-spacing:.12em !important;
+  white-space:nowrap !important;
+}
