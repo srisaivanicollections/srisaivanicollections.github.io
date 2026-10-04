@@ -217,7 +217,8 @@ async function localApi(body){
     const extension=filename.toLowerCase().match(/\.(jpe?g|png|webp|gif)$/);
     if(!extension) throw new Error("Only JPG, PNG, WEBP or GIF images are allowed.");
     const safe=filename.replace(/[^a-zA-Z0-9._-]/g,"-");
-    const path="assets/products/"+Date.now()+"-"+safe;
+    const randomSuffix=Array.from(crypto.getRandomValues(new Uint8Array(6))).map(b=>b.toString(16).padStart(2,"0")).join("");
+    const path="assets/products/"+Date.now()+"-"+randomSuffix+"-"+safe;
     const content=String(body.base64||"").replace(/^data:[^;]+;base64,/,"");
     if(!content) throw new Error("Image data missing");
     const d=await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path,{
@@ -235,7 +236,8 @@ async function localApi(body){
   if(body.action==="deleteImage"){
     const path=String(body.path||"");
     if(!/^assets\/products\/[a-zA-Z0-9._-]+$/.test(path)) throw new Error("Invalid image path.");
-    const file=await githubReadJson(path);
+    const file=await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path);
+    if(!file?.sha) throw new Error("Image was not found in GitHub.");
     await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path,{
       method:"DELETE",
       headers:{"Content-Type":"application/json"},
