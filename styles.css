@@ -5449,3 +5449,14 @@ footer .brand b{
   word-spacing:.12em !important;
   white-space:nowrap !important;
 }
+
+
+/* Final catalog presentation refinements. UI-only, no catalog behavior changes. */
+#shop .lux-price-current{font-weight:700 !important;}
+#shop.lux-catalog-section{margin-top:0 !important;}
+@media (min-width:768px){
+  #shop.lux-catalog-section{padding-top:24px !important;}
+}
+@media (max-width:767px){
+  #shop.lux-catalog-section{padding-top:0 !important;}
+}
