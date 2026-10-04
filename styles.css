@@ -4212,3 +4212,18 @@ nav a,
     margin-bottom:14px !important;
   }
 }
+
+/* ---------- ADMIN AUTH CLEAN SETUP ---------- */
+#admin #loginMsg.connected{
+  display:none !important;
+}
+#admin .admin-auth-screen{
+  gap:10px !important;
+}
+#admin #adminAuthHeading{
+  margin-bottom:12px !important;
+}
+#admin #password{
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
