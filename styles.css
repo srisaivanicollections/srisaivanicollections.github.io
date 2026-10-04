@@ -4228,89 +4228,91 @@ nav a,
   white-space:nowrap !important;
 }
 
-/* CATALOG CARD FINAL OVERRIDES: 2026-10-04 */
-#shop .lux-item-card{min-width:0;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
-#shop .lux-item-media{position:relative!important;aspect-ratio:3/4!important;overflow:hidden!important;background:#F1ECE5!important;border:1px solid #E4D8C5!important;border-radius:0!important}
-#shop .product-image .badges,
-#shop .product-image .badges.lux-badge-cluster{
-  position:absolute!important;
-  top:auto!important;
-  left:8px!important;
-  right:8px!important;
-  bottom:8px!important;
-  display:flex!important;
-  flex-direction:row!important;
-  align-items:center!important;
-  gap:4px!important;
-  flex-wrap:wrap!important;
-  margin:0!important;
-  padding:0!important;
-  z-index:5!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
+
+/* ==========================================================================
+   CATALOG COMPONENT
+   Single source of truth. No legacy .badge/.badges/.wa-mini selectors.
+   ========================================================================== */
+#shop{
+  background:#FAF8F5;
+  padding:48px 14px 64px;
+  width:100%;
+  box-sizing:border-box;
 }
-#shop .product-image .badges .badge,
-#shop .product-image .badges .badge.new,
-#shop .product-image .badges .badge.best{
-  display:inline-flex!important;
-  position:static!important;
-  width:auto!important;
-  min-width:0!important;
-  min-height:18px!important;
-  height:auto!important;
-  margin:0!important;
-  padding:3px 7px!important;
-  box-sizing:border-box!important;
-  border:1px solid #E4D8C5!important;
-  border-radius:2px!important;
-  font-family:"Inter",Arial,sans-serif!important;
-  font-size:7px!important;
-  line-height:1!important;
-  letter-spacing:.12em!important;
-  font-weight:600!important;
-  text-transform:uppercase!important;
-  white-space:nowrap!important;
-  box-shadow:none!important;
-  backdrop-filter:blur(7px)!important;
-  -webkit-backdrop-filter:blur(7px)!important;
+#shop .lux-catalog-container{width:100%;max-width:1200px;margin:0 auto}
+#shop .lux-catalog-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px}
+#shop .lux-tabs{display:flex;align-items:center;gap:30px;min-width:0}
+#shop .lux-tabs button{appearance:none;border:0;background:transparent;padding:0 0 10px;color:#78716C;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.62rem;font-weight:500;line-height:1;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;position:relative}
+#shop .lux-tabs button.active{color:#1C1917}
+#shop .lux-tabs button.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#B89758}
+#shop .lux-tools{display:flex;align-items:center;gap:8px}
+#shop .lux-search{position:relative;width:220px}
+#shop .lux-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#78716C;font-size:15px;pointer-events:none}
+#shop .lux-search-input,#shop .lux-price-select{height:34px;box-sizing:border-box;border:1px solid #E4D8C5;border-radius:0;background:#FFF;color:#1C1917;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.68rem;outline:none}
+#shop .lux-search-input{width:100%;padding:0 12px 0 32px}
+#shop .lux-price-select{width:112px;padding:0 8px}
+#shop .lux-search-input:focus,#shop .lux-price-select:focus{border-color:#B89758}
+#shop .lux-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px;row-gap:34px;width:100%}
+#shop .lux-item-card{min-width:0;display:flex;flex-direction:column;background:transparent}
+#shop .lux-item-media{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#F1ECE5;border:1px solid #E4D8C5;box-sizing:border-box}
+#shop .lux-item-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+#shop .lux-item-card:hover .lux-item-media img{transform:scale(1.025)}
+#shop .lux-item-media.image-missing{background:#EEE8DF}
+#shop .lux-item-media .image-failed{opacity:0}
+#shop .lux-badge-cluster{position:absolute;left:8px;right:8px;bottom:8px;display:flex;align-items:center;flex-wrap:wrap;gap:4px;width:auto;margin:0;padding:0;background:transparent;border:0;z-index:3;pointer-events:none}
+#shop .lux-badge-pill{display:inline-flex;align-items:center;width:auto;max-width:max-content;min-height:18px;box-sizing:border-box;padding:3px 7px;border:1px solid #E4D8C5;border-radius:3px;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.48rem;font-weight:600;line-height:1;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#shop .lux-badge-new{background:rgba(28,25,23,.84);color:#FAF8F5;border-color:rgba(228,216,197,.7)}
+#shop .lux-badge-best{background:rgba(250,248,245,.9);color:#1C1917;border-color:#E4D8C5}
+#shop .lux-item-body{min-width:0;display:flex;flex-direction:column;padding:11px 2px 0}
+#shop .lux-item-cat{order:1;margin:0 0 7px;color:#78716C;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.57rem;font-weight:500;line-height:1;letter-spacing:.15em;text-transform:uppercase}
+#shop .lux-item-title{order:2;margin:0 0 9px;color:#1C1917;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.25rem;font-weight:500;line-height:1.08;letter-spacing:-.01em;overflow-wrap:anywhere}
+#shop .lux-item-footer{order:3;display:flex;align-items:center;justify-content:space-between;width:100%;min-width:0;margin:0;padding:0;gap:10px}
+#shop .lux-pricing-block{display:flex;align-items:baseline;min-width:0;gap:6px}
+#shop .lux-price-current{color:#1C1917;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.9rem;font-weight:600;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+#shop .lux-price-original{color:#A8A29E;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.66rem;line-height:1;white-space:nowrap;text-decoration:line-through;font-variant-numeric:tabular-nums}
+#shop .lux-wa-action{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;flex:0 0 32px;box-sizing:border-box;margin:0;padding:0;border:1px solid #DCCFBC;border-radius:3px;background:#FAF8F5;color:#1C1917;text-decoration:none;line-height:0;transition:background-color .2s,border-color .2s,color .2s}
+#shop .lux-wa-action svg{display:block;width:15px;height:15px;margin:0;padding:0;fill:currentColor}
+#shop .lux-wa-action:hover,#shop .lux-wa-action:focus-visible{background:#1C1917;border-color:#1C1917;color:#FAF8F5;outline:none}
+#shop .lux-empty{grid-column:1/-1;padding:48px 16px;text-align:center;color:#78716C;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.8rem;line-height:1.6}
+
+.drape-editorial-section{width:100%;padding:72px 24px;box-sizing:border-box;background:#FAF8F5}
+.drape-editorial-inner{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.85fr) minmax(280px,360px);align-items:center;justify-content:center;gap:72px}
+.drape-editorial-copy{max-width:420px}
+.drape-editorial-eyebrow{display:block;margin-bottom:14px;color:#8A8177;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.drape-editorial-title{margin:0 0 16px;color:#1C1917;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.3rem,5vw,4rem);font-weight:500;line-height:.95}
+.drape-editorial-text{max-width:360px;margin:0 0 22px;color:#6F6861;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.82rem;line-height:1.7}
+.drape-editorial-note{display:inline-block;color:#8A8177;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.6rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.drape-video-frame{width:min(100%,360px);aspect-ratio:9/16;overflow:hidden;background:#EEE8DF;border:1px solid #E4D8C5;border-radius:3px;box-shadow:0 16px 40px rgba(28,25,23,.08)}
+.drape-video-frame iframe{display:block;width:100%;height:100%;border:0}
+
+@media(min-width:769px){
+  #shop{padding-left:24px;padding-right:24px}
+  #shop .lux-product-grid{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;row-gap:38px}
+  #shop .lux-item-title{font-size:1.35rem}
 }
-#shop .product-image .badges .badge.new{background:rgba(28,25,23,.84)!important;color:#FAF8F5!important;border-color:rgba(228,216,197,.65)!important}
-#shop .product-image .badges .badge.best{background:rgba(250,248,245,.90)!important;color:#302b27!important;border-color:#E4D8C5!important}
-#shop .product-info.lux-item-body{padding:11px 2px 0!important}
-#shop .product-info.lux-item-body h3.lux-item-title{margin:0 0 5px!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:1.18rem!important;line-height:1.05!important;font-weight:500!important;letter-spacing:-.01em!important}
-#shop .product-info.lux-item-body .meta.lux-item-cat{margin:0 0 10px!important;font-size:.57rem!important;line-height:1!important;letter-spacing:.15em!important}
-#shop .price-line.lux-item-footer{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin-top:0!important}
-#shop .price-line .price.lux-pricing-block{display:flex!important;align-items:baseline!important;gap:6px!important;margin:0!important}
-#shop .price-line .lux-price-current{font-family:"Inter",Arial,sans-serif!important;font-size:.9rem!important;font-weight:600!important;line-height:1!important}
-#shop .price-line .lux-price-original{font-family:"Inter",Arial,sans-serif!important;font-size:.66rem!important;color:#aaa39c!important;text-decoration:line-through!important}
-#shop .price-line .wa-mini.lux-wa-action{
-  width:30px!important;
-  height:30px!important;
-  min-height:30px!important;
-  padding:0!important;
-  flex:0 0 30px!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  border:1px solid #DCCFBC!important;
-  border-radius:0!important;
-  background:#FAF8F5!important;
-  color:#292521!important;
-  font-size:0!important;
-  letter-spacing:0!important;
+@media(min-width:1024px){
+  #shop .lux-product-grid{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:28px;row-gap:42px}
 }
-#shop .price-line .wa-mini.lux-wa-action svg{width:14px!important;height:14px!important;fill:currentColor!important}
-#shop .price-line .wa-mini.lux-wa-action:hover{background:#292521!important;color:#FAF8F5!important;border-color:#292521!important}
+@media(max-width:700px){
+  .drape-editorial-section{padding:56px 14px}
+  .drape-editorial-inner{grid-template-columns:1fr;gap:32px}
+  .drape-editorial-copy{max-width:100%;text-align:center}
+  .drape-editorial-text{margin-left:auto;margin-right:auto}
+  .drape-video-frame{width:min(100%,330px);margin:0 auto}
+}
 @media(max-width:560px){
-  #shop .lux-catalog-section{padding-left:14px!important;padding-right:14px!important}
-  #shop .lux-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:14px!important;row-gap:30px!important}
-  #shop .product-image .badges,#shop .product-image .badges.lux-badge-cluster{left:7px!important;right:7px!important;bottom:7px!important;gap:3px!important}
-  #shop .product-image .badges .badge,#shop .product-image .badges .badge.new,#shop .product-image .badges .badge.best{padding:3px 5px!important;font-size:6px!important;letter-spacing:.12em!important;min-height:17px!important}
-  #shop .product-info.lux-item-body{padding-top:10px!important}
-  #shop .product-info.lux-item-body h3.lux-item-title{font-size:1.08rem!important}
-  #shop .product-info.lux-item-body .meta.lux-item-cat{font-size:.54rem!important;margin-bottom:9px!important}
-  #shop .price-line .lux-price-current{font-size:.84rem!important}
-  #shop .price-line .lux-price-original{font-size:.62rem!important}
-  #shop .price-line .wa-mini.lux-wa-action{width:28px!important;height:28px!important;min-height:28px!important;flex-basis:28px!important}
+  #shop .lux-catalog-toolbar{display:block;margin-bottom:24px}
+  #shop .lux-tabs{gap:28px;margin-bottom:16px}
+  #shop .lux-tools{width:100%}
+  #shop .lux-search{flex:1;width:auto}
+  #shop .lux-price-select{width:106px}
+  #shop .lux-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px;row-gap:30px}
+  #shop .lux-badge-cluster{left:7px;right:7px;bottom:7px;gap:3px}
+  #shop .lux-badge-pill{min-height:17px;padding:3px 5px;font-size:.42rem}
+  #shop .lux-item-body{padding-top:10px}
+  #shop .lux-item-title{font-size:1.08rem}
+  #shop .lux-item-cat{font-size:.54rem;margin-bottom:8px}
+  #shop .lux-price-current{font-size:.84rem}
+  #shop .lux-price-original{font-size:.62rem}
+  #shop .lux-wa-action{width:30px;height:30px;flex-basis:30px}
 }
