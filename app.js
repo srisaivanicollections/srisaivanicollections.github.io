@@ -670,6 +670,25 @@ function setStorageStatus(message,connected=false){
   el.style.color=connected?"#10B981":"#78716C";
 }
 
+function showAdminSetupScreen(){
+  adminSetupMode=true;
+  adminResetMode=false;
+  adminRecoveryTokenMode=false;
+  const input=$("#password");
+  if(input){
+    input.value="";
+    input.type="password";
+    input.placeholder="Create Admin password (8+ characters)";
+    input.setAttribute("autocomplete","new-password");
+  }
+  if($("#passwordLabel"))$("#passwordLabel").textContent="Create Admin password";
+  if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Create your Admin password";
+  if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a password of at least 8 characters. GitHub will be used only for storage and recovery.";
+  if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
+  if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
+  setStorageStatus("● Storage connected",true);
+}
+
 function showAdminLogin(){
   adminSessionActive=false;
   adminPassword="";
@@ -695,6 +714,13 @@ function showAdminLogin(){
     toggle.setAttribute("aria-pressed","false");
   }
   const hasGithubToken=!!getSavedGithubToken();
+  const passwordConfigured=!!String(settings?.adminPasswordHash||"").trim();
+
+  if(hasGithubToken && !passwordConfigured){
+    showAdminSetupScreen();
+    return;
+  }
+
   if(hasGithubToken){
     if(heading)heading.textContent="Sign in to manage your store.";
     if(description)description.textContent="Manage products and shop settings from your private Admin area.";
@@ -755,6 +781,8 @@ async function signInAdmin(value){
       await api({action:"resetAdminPassword",newPassword:inputValue});
       adminResetMode=false;
       adminSetupMode=false;
+      settings.adminPasswordHash="configured";
+      settings.adminPasswordSalt="configured";
       if($("#password"))$("#password").value="";
       showAdminLogin();
       setStorageStatus("Password reset successfully. Sign in with your new password.",true);
@@ -765,17 +793,8 @@ async function signInAdmin(value){
     if(!hasGithubToken){
       await api({action:"authenticate",password:inputValue});
       if($("#password"))$("#password").value="";
-      adminSetupMode=true;
-      if($("#password")){
-        $("#password").placeholder="Create Admin password (8+ characters)";
-        $("#password").setAttribute("autocomplete","new-password");
-      }
-      if($("#passwordLabel"))$("#passwordLabel").textContent="Create Admin password";
-      if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Create your Admin password";
-      if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a password of at least 8 characters. GitHub will be used only for storage and recovery.";
-      if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
-      if($("#forgotPassword"))$("#forgotPassword").textContent="CANCEL";
-      setStorageStatus("GitHub connected. Choose your Admin password.",true);
+      showAdminSetupScreen();
+      setStorageStatus("● Storage connected",true);
       return false;
     }
 
@@ -783,19 +802,15 @@ async function signInAdmin(value){
       if(inputValue.length<8) throw new Error("Admin password must be at least 8 characters.");
       await api({action:"setupAdminPassword",newPassword:inputValue});
       adminSetupMode=false;
+      settings.adminPasswordHash="configured";
+      settings.adminPasswordSalt="configured";
       adminPassword=inputValue;
       setStorageStatus("Admin password created.",true);
     }else{
       const auth=await api({action:"authenticate",password:inputValue});
       if(auth?.setupRequired){
-        adminSetupMode=true;
-        if($("#password")){
-          $("#password").value="";
-          $("#password").placeholder="Create Admin password (8+ characters)";
-          $("#password").setAttribute("autocomplete","new-password");
-        }
-        if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
-        setStorageStatus("GitHub is connected. Create your Admin password to finish setup.",true);
+        showAdminSetupScreen();
+        setStorageStatus("● Storage connected",true);
         return false;
       }
       adminPassword=inputValue;
