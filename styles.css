@@ -4971,3 +4971,215 @@ nav a,
 .drape-editorial-section embed,
 .drape-editorial-section object { display:none !important; }
 .drape-editorial-section .drape-editorial-content { position:relative; z-index:2; }
+
+
+/* ==========================================================================
+   PRINCIPAL EDITORIAL RHYTHM
+   Single source of truth for spacing between the major storefront sections.
+   ========================================================================== */
+:root{
+  --linen:#FAF8F5;
+  --champagne:#E4D8C5;
+  --charcoal:#1C1917;
+  --editorial-gold:#B89758;
+}
+
+/* Catalog: compact luxury cadence */
+#shop.lux-catalog-section{
+  padding:56px 28px !important;
+  border-top:0 !important;
+  border-bottom:1px solid var(--champagne) !important;
+  background:var(--linen) !important;
+}
+#shop .lux-catalog-container{
+  width:min(100%,var(--container));
+  margin:0 auto;
+}
+#shop .lux-product-grid{
+  row-gap:32px !important;
+}
+
+/* Keep only one hairline at each major transition. */
+.hero-section{
+  border-bottom:1px solid var(--champagne) !important;
+}
+#shop{
+  border-top:0 !important;
+}
+#shop + .wa-band,
+#shop + .whatsapp-banner-section{
+  border-top:0 !important;
+}
+#shop + .wa-band{
+  border-bottom:0 !important;
+}
+#client-chronicles-section{
+  border-top:0 !important;
+  border-bottom:0 !important;
+}
+#client-chronicles-section + .drape-editorial-section{
+  border-top:1px solid var(--champagne) !important;
+}
+.drape-editorial-section + .atelier-visit-section{
+  border-top:1px solid var(--champagne) !important;
+}
+.atelier-visit-section{
+  border-bottom:0 !important;
+}
+
+/* Product rows */
+#shop .products{
+  row-gap:32px !important;
+}
+
+/* ==========================================================================
+   ATELIER REEL EDIT
+   Editorial invitation only. No iframe, Reel, video or social-card chrome.
+   ========================================================================== */
+.drape-editorial-section{
+  width:100%;
+  padding:44px 20px !important;
+  background:var(--linen) !important;
+  border-top:1px solid var(--champagne) !important;
+  border-bottom:0 !important;
+  overflow:hidden;
+  text-align:center;
+}
+.drape-editorial-content{
+  width:min(680px,100%);
+  margin:0 auto;
+}
+.drape-editorial-eyebrow{
+  margin:0 0 12px !important;
+  color:var(--editorial-gold) !important;
+  font-family:"Montserrat","Inter",Arial,sans-serif !important;
+  font-size:9px !important;
+  line-height:1.2 !important;
+  font-weight:600 !important;
+  letter-spacing:.24em !important;
+  text-transform:uppercase !important;
+}
+.drape-editorial-title{
+  margin:0 0 10px !important;
+  color:var(--charcoal) !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:clamp(42px,5vw,60px) !important;
+  line-height:.98 !important;
+  font-weight:400 !important;
+  letter-spacing:-.02em !important;
+}
+.drape-editorial-title em{
+  font-style:italic !important;
+  font-weight:400 !important;
+}
+.drape-editorial-text{
+  max-width:510px;
+  margin:0 auto 22px !important;
+  color:#716B65 !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-size:11px !important;
+  line-height:1.65 !important;
+  font-weight:400 !important;
+}
+.drape-editorial-cta{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:16px !important;
+  min-height:40px !important;
+  padding:0 17px !important;
+  border:1px solid var(--champagne) !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:var(--charcoal) !important;
+  text-decoration:none !important;
+  font-family:"Montserrat","Inter",Arial,sans-serif !important;
+  font-size:8px !important;
+  line-height:1 !important;
+  font-weight:600 !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  transition:background .25s ease,color .25s ease,border-color .25s ease !important;
+}
+.drape-editorial-cta span:last-child{
+  font-size:14px !important;
+  line-height:1 !important;
+  letter-spacing:0 !important;
+  transition:transform .25s ease !important;
+}
+.drape-editorial-cta:hover,
+.drape-editorial-cta:focus-visible{
+  background:var(--charcoal) !important;
+  border-color:var(--charcoal) !important;
+  color:var(--linen) !important;
+}
+.drape-editorial-cta:hover span:last-child,
+.drape-editorial-cta:focus-visible span:last-child{
+  transform:translate(2px,-2px);
+}
+
+/* Absolute guard: this section is a link invitation, never a media player. */
+.drape-editorial-section iframe,
+.drape-editorial-section video,
+.drape-editorial-section embed,
+.drape-editorial-section object,
+.drape-editorial-section .instagram-media,
+.drape-editorial-section .instagram-embed,
+.drape-editorial-section .drape-reel-card,
+.drape-editorial-section .drape-reel-frame,
+.drape-editorial-section .drape-reel-wrap{
+  display:none !important;
+}
+
+@media(max-width:767px){
+  #shop.lux-catalog-section{
+    padding:40px 16px !important;
+  }
+  #shop .lux-product-grid,
+  #shop .products{
+    row-gap:22px !important;
+  }
+  #shop .lux-catalog-toolbar{
+    margin-bottom:22px !important;
+  }
+  .drape-editorial-section{
+    padding:44px 20px !important;
+  }
+  .drape-editorial-eyebrow{
+    font-size:8px !important;
+    letter-spacing:.24em !important;
+    margin-bottom:11px !important;
+  }
+  .drape-editorial-title{
+    font-size:43px !important;
+    line-height:.98 !important;
+    margin-bottom:10px !important;
+  }
+  .drape-editorial-text{
+    max-width:330px;
+    font-size:10.5px !important;
+    line-height:1.6 !important;
+    margin-bottom:20px !important;
+  }
+  .drape-editorial-cta{
+    min-height:39px !important;
+    padding-inline:15px !important;
+    font-size:7.5px !important;
+  }
+}
+
+/* Search control: preserve breathing room around the icon on narrow screens. */
+@media(max-width:767px){
+  #shop .lux-search{
+    min-width:0;
+  }
+  #shop .lux-search-icon{
+    flex:0 0 20px !important;
+    width:20px !important;
+    margin-right:9px !important;
+  }
+  #shop .lux-search-input{
+    min-width:0 !important;
+    padding-left:0 !important;
+  }
+}
