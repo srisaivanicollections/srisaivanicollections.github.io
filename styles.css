@@ -3603,3 +3603,46 @@ footer a{
     min-height:44px !important;
   }
 }
+
+
+/* ---------- Mobile menu: keep Admin accessible ---------- */
+@media (max-width: 600px){
+  .header nav.open{
+    display:flex !important;
+    position:absolute !important;
+    top:100% !important;
+    left:12px !important;
+    right:12px !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    padding:7px !important;
+    background:#FAF8F5 !important;
+    border:1px solid #E4D8C5 !important;
+    box-shadow:0 14px 35px rgba(28,25,23,.08) !important;
+    z-index:60 !important;
+  }
+  .header nav.open a,
+  .header nav.open .admin-link{
+    display:block !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    padding:14px 12px !important;
+    text-align:left !important;
+    border-bottom:1px solid #E4D8C5 !important;
+  }
+  .header nav.open .admin-link{
+    border-left:0 !important;
+    border-right:0 !important;
+    border-top:0 !important;
+    color:#1C1917 !important;
+    background:transparent !important;
+  }
+  .header nav.open .admin-link:hover{
+    background:#1C1917 !important;
+    color:#FAF8F5 !important;
+  }
+  .header nav.open a:last-of-type{
+    border-bottom:1px solid #E4D8C5 !important;
+  }
+}
