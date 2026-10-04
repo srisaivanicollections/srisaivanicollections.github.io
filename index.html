@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Sri Sai Vani Collections - Sarees and Dresses"><title>Sri Sai Vani Collections</title><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=10.0"></head><body data-build="20261004-drape-editorial-clean">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=11.0"></head><body data-build="20261004-drape-editorial-clean">
 <header class="header"><div class="header-inner"><button class="menu" id="menu" aria-label="Menu"><i></i><i></i><i></i></button><a class="brand" href="#home"><span><b>SRI SAI VANI</b><small>COLLECTIONS</small></span></a><nav id="nav"><a href="#shop" class="shop-link">SHOP NOW</a><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener">INSTAGRAM</a><button id="adminOpen" type="button" class="admin-link" aria-label="Open Admin Studio">ADMIN</button></nav></div></header>
 <section class="womens-world-marquee-section" aria-label="Saree and dress varieties">
   <div class="womens-world-marquee-viewport">
@@ -43,68 +43,7 @@
   </div>
 </section>
 <section id="shop" class="lux-catalog-section" aria-label="Curated Catalog">
-  <style>
-    .lux-catalog-section{background:#FAF8F5;padding:42px 14px 56px;width:100%;box-sizing:border-box}
-    .lux-catalog-container{max-width:1200px;margin:0 auto}
-    .lux-catalog-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}
-    .lux-tabs{display:flex;gap:30px;align-items:flex-end;min-width:0}
-    .lux-tabs button{appearance:none;border:0;background:transparent;padding:0 0 10px;color:#77716b;font:500 .62rem/1 "Inter",sans-serif;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;position:relative}
-    .lux-tabs button.active{color:#1c1917}
-    .lux-tabs button.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#B89758}
-    .lux-tools{display:flex;gap:8px;align-items:center}
-    .lux-search{position:relative;width:220px}
-    .lux-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font:400 15px/1 "Inter",sans-serif;color:#8b847d;pointer-events:none}
-    .lux-search-input,.lux-price-select{height:34px;border:1px solid #E4D8C5;border-radius:0;background:#fff;color:#3a3530;font:400 .68rem/1 "Inter",sans-serif;outline:0;box-sizing:border-box}
-    .lux-search-input{width:100%;padding:0 12px 0 32px}
-    .lux-price-select{width:112px;padding:0 8px}
-    .lux-search-input:focus,.lux-price-select:focus{border-color:#B89758}
-    .lux-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px;row-gap:34px}
-    .lux-item-card{min-width:0;background:transparent;display:flex;flex-direction:column}
-    .lux-item-media{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#F1ECE5;border:1px solid #E4D8C5;box-sizing:border-box}
-    .lux-item-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
-    .lux-item-card:hover .lux-item-media img{transform:scale(1.025)}
-    .lux-item-media.image-missing{background:#EEE8DF}
-    .lux-item-media .image-failed{opacity:0}
-    .lux-badge-cluster{position:absolute;left:8px;bottom:8px;right:8px;display:flex;gap:4px;flex-wrap:wrap;z-index:2;pointer-events:none}
-    .lux-badge-pill{display:inline-flex;align-items:center;min-height:18px;padding:3px 7px;border:1px solid #E4D8C5;border-radius:2px;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);font:600 .48rem/1 "Inter",sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
-    .lux-badge-pill.badge-dark{background:rgba(28,25,23,.84);color:#FAF8F5;border-color:rgba(228,216,197,.65)}
-    .lux-badge-pill.badge-light{background:rgba(250,248,245,.9);color:#302b27}
-    .lux-item-body{padding:11px 2px 0;display:flex;flex-direction:column;min-width:0}
-    .lux-item-title{margin:0 0 5px;color:#292521;font:500 1.18rem/1.05 "Cormorant Garamond",Georgia,serif;letter-spacing:-.01em;overflow-wrap:anywhere}
-    .lux-item-cat{margin:0 0 10px;color:#817a73;font:500 .57rem/1 "Inter",sans-serif;letter-spacing:.15em;text-transform:uppercase}
-    .lux-item-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
-    .lux-pricing-block{display:flex;align-items:baseline;gap:6px;min-width:0}
-    .lux-price-current{color:#2b2723;font:600 .9rem/1 "Inter",sans-serif;white-space:nowrap;font-variant-numeric:tabular-nums}
-    .lux-price-original{color:#aaa39c;font:400 .66rem/1 "Inter",sans-serif;white-space:nowrap;text-decoration:line-through;font-variant-numeric:tabular-nums}
-    .lux-wa-action{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 30px;border:1px solid #DCCFBC;border-radius:0;background:transparent;color:#292521;text-decoration:none;transition:background .2s,border-color .2s,color .2s}
-    .lux-wa-action:hover,.lux-wa-action:focus-visible{background:#292521;border-color:#292521;color:#FAF8F5;outline:none}
-    .lux-wa-action svg{width:14px;height:14px;fill:currentColor}
-    .lux-empty{grid-column:1/-1;padding:44px 12px;text-align:center;color:#746d66;font:400 .8rem/1.5 "Inter",sans-serif}
-    @media(min-width:769px){
-      .lux-catalog-section{padding:54px 24px 72px}
-      .lux-product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 24px}
-      .lux-item-title{font-size:1.38rem}
-    }
-    @media(min-width:1024px){
-      .lux-product-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:42px 28px}
-    }
-    @media(max-width:560px){
-      .lux-catalog-toolbar{display:block;margin-bottom:24px}
-      .lux-tabs{gap:28px;margin-bottom:16px}
-      .lux-tools{width:100%}
-      .lux-search{flex:1}
-      .lux-price-select{width:106px}
-      .lux-search-input{font-size:.64rem}
-      .lux-item-body{padding-top:10px}
-      .lux-item-title{font-size:1.08rem;line-height:1.06}
-      .lux-item-cat{font-size:.54rem;margin-bottom:9px}
-      .lux-price-current{font-size:.84rem}
-      .lux-price-original{font-size:.62rem}
-      .lux-wa-action{width:28px;height:28px;flex-basis:28px}
-      .lux-badge-cluster{left:7px;bottom:7px}
-    }
-  </style>
-  <div class="lux-catalog-container">
+<div class="lux-catalog-container">
     <div class="lux-catalog-toolbar">
       <div id="tabs" class="tabs lux-tabs" role="tablist" aria-label="Collection category"></div>
       <div class="tools lux-tools">
@@ -143,16 +82,27 @@
 <!-- ==========================================================================
      CURATED DRAPE EDITORIAL
      ========================================================================== -->
-<section class="drape-editorial-section" aria-label="See Our Collection">
-  <div class="drape-editorial-content">
-    <span class="drape-editorial-eyebrow">A CLOSER LOOK</span>
-    <h2 class="drape-editorial-title">See the details. <em>Imagine it on you.</em></h2>
-    <p class="drape-editorial-text">
-      Take a closer look at the colours, fabric and fine details of our collection through real styling.
-    </p>
-    <a href="https://www.instagram.com/reel/Dd4Bjobz7Bv/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==" class="drape-editorial-cta" target="_blank" rel="noopener">
-      WATCH ON INSTAGRAM ↗
-    </a>
+<section class="drape-editorial-section" aria-labelledby="drape-showcase-title">
+  <div class="drape-editorial-inner">
+    <div class="drape-editorial-copy">
+      <span class="drape-editorial-eyebrow">SEE IT IN MOTION</span>
+      <h2 id="drape-showcase-title" class="drape-editorial-title">
+        Drape Your Story
+      </h2>
+      <p class="drape-editorial-text">
+        See the movement, fall and finish of our collection before you choose your piece.
+      </p>
+      <span class="drape-editorial-note">Watch the collection in motion</span>
+    </div>
+    <div class="drape-video-frame">
+      <iframe
+        src="https://www.instagram.com/reel/Dd4Bjobz7Bv/embed/"
+        title="Sri Sai Vani Collections drape showcase"
+        loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 </section>
 <section class="atelier-visit-section" id="visit" aria-label="Visit Our Store">
@@ -198,4 +148,4 @@
   <button type="button" id="loginBtn" class="btn dark">SIGN IN</button>
   <button type="button" id="forgotPassword" class="text-link">Forgot password?</button>
   <small id="loginMsg" class="storage-status-msg" aria-live="polite"></small>
-</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SHOP SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="studioBody"></div></div></div></div><script src="app.js?v=20261004-CATALOG16"></script></body></html>
+</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SHOP SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="studioBody"></div></div></div></div><script src="app.js?v=20261004-CATALOG17"></script></body></html>
