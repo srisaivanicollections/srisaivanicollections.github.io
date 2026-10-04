@@ -290,16 +290,7 @@ async function loadPublicJson(path){
 }
 
 async function removeLegacyInstagramEmbed(){
-  document.querySelectorAll('iframe[src*="instagram.com"], iframe[src*="instagramcdn.com"]').forEach(frame=>{
-    const section=frame.closest('section');
-    if(section && /drape|instagram/i.test(section.className||'')) section.remove();
-    else frame.remove();
-  });
-  document.querySelectorAll('.instagram-media, .instagram-embed').forEach(el=>{
-    const section=el.closest('section');
-    if(section && /drape|instagram/i.test(section.className||'')) section.remove();
-    else el.remove();
-  });
+  document.querySelectorAll('iframe[src*="instagram.com"], iframe[src*="instagramcdn.com"], .instagram-media, .instagram-embed').forEach(function(el){ el.remove(); });
 }
 function load(){
   removeLegacyInstagramEmbed();
