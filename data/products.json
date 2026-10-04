@@ -7,7 +7,7 @@
     "originalPrice": 5000,
     "image": "assets/products/1791101219183-4910S901_1.jpg",
     "newArrival": true,
-    "bestSeller": true,
+    "bestSeller": false,
     "availability": false
   },
   {
