@@ -5183,3 +5183,120 @@ nav a,
     padding-left:0 !important;
   }
 }
+
+
+/* ==========================================================================
+   FINAL MOBILE EDITORIAL POLISH
+   One authoritative layer for the current storefront.
+   ========================================================================== */
+#client-chronicles-section{
+  padding-top:48px !important;
+  padding-bottom:36px !important;
+  border-bottom:0 !important;
+}
+#client-chronicles-section .cc-footer-cta{
+  margin-top:26px !important;
+  padding-bottom:0 !important;
+}
+#client-chronicles-section .cc-google-link{
+  min-height:42px !important;
+}
+
+.drape-editorial-section{
+  padding:38px 20px !important;
+  background:#FAF8F5 !important;
+  border-top:1px solid #E4D8C5 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
+.drape-editorial-content{
+  max-width:520px !important;
+  margin:0 auto !important;
+  text-align:center !important;
+}
+.drape-editorial-eyebrow{
+  margin:0 0 9px !important;
+  color:#B89758 !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-size:8px !important;
+  line-height:1.2 !important;
+  font-weight:600 !important;
+  letter-spacing:.22em !important;
+  text-transform:uppercase !important;
+}
+.drape-editorial-title{
+  margin:0 0 18px !important;
+  color:#1C1917 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:clamp(34px,8vw,48px) !important;
+  line-height:1 !important;
+  font-weight:400 !important;
+  letter-spacing:-.025em !important;
+}
+.drape-editorial-cta{
+  display:inline-flex !important;
+  width:auto !important;
+  min-width:205px !important;
+  min-height:40px !important;
+  padding:0 18px !important;
+  gap:14px !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border:1px solid #E4D8C5 !important;
+  background:transparent !important;
+  color:#1C1917 !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-size:8px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  letter-spacing:.17em !important;
+  text-transform:uppercase !important;
+  text-decoration:none !important;
+}
+.drape-editorial-cta:hover,
+.drape-editorial-cta:focus-visible{
+  background:#1C1917 !important;
+  border-color:#1C1917 !important;
+  color:#FAF8F5 !important;
+}
+
+.atelier-visit-section{
+  padding:42px 20px !important;
+  border-top:0 !important;
+}
+.atelier-visit-section .atelier-title{
+  margin:0 0 12px !important;
+  font-size:2.25rem !important;
+  line-height:1 !important;
+  font-weight:400 !important;
+}
+.atelier-visit-section .atelier-desc{
+  margin:0 0 24px !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-style:normal !important;
+  font-size:11px !important;
+  line-height:1.55 !important;
+  color:#6F6A64 !important;
+}
+@media(max-width:767px){
+  #client-chronicles-section{
+    padding-top:40px !important;
+    padding-bottom:30px !important;
+  }
+  #client-chronicles-section .cc-footer-cta{
+    margin-top:20px !important;
+  }
+  .drape-editorial-section{
+    padding:34px 18px !important;
+  }
+  .drape-editorial-title{
+    font-size:38px !important;
+    margin-bottom:16px !important;
+  }
+  .drape-editorial-cta{
+    min-width:198px !important;
+    min-height:40px !important;
+  }
+  .atelier-visit-section{
+    padding:38px 20px !important;
+  }
+}
