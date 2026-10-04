@@ -289,7 +289,20 @@ async function loadPublicJson(path){
   throw lastError||new Error("Public catalog could not be loaded.");
 }
 
-async function load(){
+async function removeLegacyInstagramEmbed(){
+  document.querySelectorAll('iframe[src*="instagram.com"], iframe[src*="instagramcdn.com"]').forEach(frame=>{
+    const section=frame.closest('section');
+    if(section && /drape|instagram/i.test(section.className||'')) section.remove();
+    else frame.remove();
+  });
+  document.querySelectorAll('.instagram-media, .instagram-embed').forEach(el=>{
+    const section=el.closest('section');
+    if(section && /drape|instagram/i.test(section.className||'')) section.remove();
+    else el.remove();
+  });
+}
+function load(){
+  removeLegacyInstagramEmbed();
   try{
     // Storefront reads are PUBLIC. They must never depend on an Admin GitHub
     // token or GitHub API rate-limit. Admin credentials are only required for
