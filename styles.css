@@ -4241,11 +4241,11 @@ nav a,
 #shop .lux-tabs button.active{color:#1C1917}
 #shop .lux-tabs button.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#B89758}
 #shop .lux-tools{display:flex;align-items:center;gap:10px;flex:0 0 auto}
-#shop .lux-search{position:relative;width:230px;height:40px}
-#shop .lux-search-icon{position:absolute;left:12px;top:50%;width:15px;height:15px;transform:translateY(-50%);color:#8A8177;pointer-events:none}
-#shop .lux-search-icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
-#shop .lux-search-input,#shop .lux-price-select{height:40px;box-sizing:border-box;border:1px solid #E4D8C5;border-radius:0;background:rgba(255,255,255,.58);color:#1C1917;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.68rem;outline:none}
-#shop .lux-search-input{width:100%;padding:0 12px 0 34px}
+#shop .lux-search{position:relative;width:230px;height:40px;min-width:0;display:block;overflow:hidden}
+#shop .lux-search-icon{position:absolute;left:13px;top:50%;z-index:2;width:16px!important;height:16px!important;min-width:16px;min-height:16px;transform:translateY(-50%);display:grid;place-items:center;color:#8A8177;pointer-events:none}
+#shop .lux-search-icon svg{display:block!important;width:16px!important;height:16px!important;max-width:16px!important;max-height:16px!important;min-width:16px;min-height:16px;box-sizing:border-box;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+#shop .lux-search-input,#shop .lux-price-select{height:40px;box-sizing:border-box;border:1px solid #E4D8C5;border-radius:0;background:rgba(255,255,255,.58);color:#1C1917;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.68rem;line-height:1;outline:none}
+#shop .lux-search-input{display:block;width:100%;min-width:0;padding:0 12px 0 46px!important;margin:0;line-height:40px}
 #shop .lux-price-select{width:124px;padding:0 10px}
 #shop .lux-search-input::placeholder{color:#918980}
 #shop .lux-search-input:focus,#shop .lux-price-select:focus{border-color:#B89758;box-shadow:0 0 0 2px rgba(184,151,88,.08)}
@@ -4275,7 +4275,9 @@ nav a,
 #shop .lux-catalog-toolbar{display:block;margin:0 0 24px}
 #shop .lux-tabs{gap:28px;margin:0 0 18px}
 #shop .lux-tools{width:100%;gap:10px}
-#shop .lux-search{flex:1 1 auto;width:auto;min-width:0}
+#shop .lux-search{flex:1 1 auto;width:auto;min-width:0;max-width:none}
+#shop .lux-search-icon{left:13px;width:16px!important;height:16px!important}
+#shop .lux-search-input{padding-left:46px!important}
 #shop .lux-price-select{flex:0 0 108px;width:108px}
 #shop .lux-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px;row-gap:30px}
 #shop .lux-item-title{font-size:1.08rem}
