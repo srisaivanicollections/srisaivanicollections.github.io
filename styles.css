@@ -5300,3 +5300,71 @@ nav a,
     padding:38px 20px !important;
   }
 }
+
+
+/* ==========================================================================
+   SPACING-ONLY POLISH
+   Reduces empty vertical space without changing layout, content, controls,
+   product rendering, links, filters, admin behaviour, or JavaScript.
+   ========================================================================== */
+
+@media (min-width: 768px){
+  #shop.lux-catalog-section{
+    padding-top:48px !important;
+    padding-bottom:48px !important;
+  }
+
+  #client-chronicles-section{
+    padding-top:40px !important;
+    padding-bottom:28px !important;
+  }
+
+  .drape-editorial-section{
+    padding-top:32px !important;
+    padding-bottom:32px !important;
+  }
+
+  .atelier-visit-section{
+    padding-top:36px !important;
+    padding-bottom:44px !important;
+  }
+}
+
+@media (max-width: 767px){
+  #shop.lux-catalog-section{
+    padding-top:28px !important;
+    padding-bottom:34px !important;
+  }
+
+  #shop .lux-catalog-toolbar{
+    margin-bottom:18px !important;
+  }
+
+  #shop .lux-product-grid,
+  #shop .products{
+    row-gap:22px !important;
+  }
+
+  #client-chronicles-section{
+    padding-top:28px !important;
+    padding-bottom:22px !important;
+  }
+
+  #client-chronicles-section .cc-footer-cta{
+    margin-top:16px !important;
+  }
+
+  .drape-editorial-section{
+    padding-top:28px !important;
+    padding-bottom:30px !important;
+  }
+
+  .drape-editorial-title{
+    margin-bottom:13px !important;
+  }
+
+  .atelier-visit-section{
+    padding-top:30px !important;
+    padding-bottom:34px !important;
+  }
+}
