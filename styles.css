@@ -4956,3 +4956,86 @@ nav a,
     width:min(100%,230px);
   }
 }
+
+
+/* ==========================================================================
+   INSTAGRAM EDITORIAL SHOWCASE - CLEAN MOBILE/PORTRAIT TREATMENT
+   ========================================================================== */
+.drape-instagram-section{
+  scroll-margin-top:90px;
+  overflow:hidden;
+}
+.drape-instagram-shell{
+  width:min(620px,100%);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.drape-instagram-heading{
+  width:min(520px,100%);
+  margin:0 auto 26px;
+  text-align:center;
+}
+.drape-instagram-heading .drape-editorial-eyebrow{
+  display:block;
+  margin:0 0 10px;
+  color:#A88B57;
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-size:9px!important;
+  font-weight:600!important;
+  letter-spacing:.22em!important;
+  line-height:1.2!important;
+}
+.drape-instagram-heading .drape-editorial-title{
+  margin:0 0 10px;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(40px,6vw,56px)!important;
+  line-height:1!important;
+  font-weight:400!important;
+  letter-spacing:-.02em!important;
+}
+.drape-instagram-heading .drape-editorial-text{
+  max-width:420px;
+  margin:0 auto;
+  color:#77716B;
+  font-family:"Montserrat",Arial,sans-serif!important;
+  font-size:11px!important;
+  line-height:1.7!important;
+}
+.drape-instagram-frame{
+  width:min(400px,100%);
+  height:650px;
+  overflow:hidden;
+  background:#FAF8F5;
+  border:1px solid #E4D8C5;
+  box-shadow:0 10px 28px rgba(28,25,23,.045);
+}
+.drape-instagram-frame .instagram-media{
+  width:100%!important;
+  min-width:0!important;
+  max-width:400px!important;
+  margin:0!important;
+  border:0!important;
+  box-shadow:none!important;
+  background:#FAF8F5!important;
+}
+@media(max-width:768px){
+  .drape-instagram-section{
+    padding:56px 16px 64px!important;
+  }
+  .drape-instagram-heading{
+    margin-bottom:22px;
+  }
+  .drape-instagram-heading .drape-editorial-title{
+    font-size:44px!important;
+  }
+  .drape-instagram-heading .drape-editorial-text{
+    font-size:10.5px!important;
+  }
+  .drape-instagram-frame{
+    width:min(100%,380px);
+    height:640px;
+  }
+}
