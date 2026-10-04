@@ -1,34 +1,56 @@
 # Sri Sai Vani Collections
 
-Standalone storefront built from an empty repository.
-
-This project was created from scratch. It does not copy the previous Sri Sai Vani repository files.
+Premium editorial storefront for Sri Sai Vani Collections.
 
 ## Included
-- Premium editorial fashion layout
-- Sarees and Dresses categories
+
+- Premium responsive fashion storefront
+- Sarees and Dresses catalogue
 - Search and price filtering
 - New Arrivals and Best Seller labels
 - WhatsApp product enquiries
-- Responsive mobile/desktop design
-- Local admin studio for add/edit/delete
+- Instagram and Google Maps CTAs
+- Client reviews section
+- Responsive desktop, tablet and mobile layouts
+- Lightweight Admin Studio for add/edit/delete
 - Shop name, WhatsApp and Instagram settings
-- Original local SVG demo artwork
+
+## Catalogue architecture
+
+GitHub is the **single source of truth** for catalogue and storefront settings.
+
+- Product metadata: `data/products.json`
+- Store settings: `data/settings.json`
+- Product images: `assets/products/`
+- Storefront reads the committed JSON through GitHub's public API and raw asset URLs.
+- Admin writes catalogue JSON and uploaded images back to the repository.
+- Product writes are serialized and verified after the GitHub commit.
+- Product deletion is re-read and verified so a deleted item cannot silently return from a stale browser snapshot.
+- Admin logout clears browser-stored GitHub credentials.
+
+There is intentionally no localStorage catalogue fallback. This prevents stale browser data from reappearing after refresh.
 
 ## Admin
-Open ADMIN on the website.
+
+Open **ADMIN** on the website.
+
+On first setup, the Admin screen accepts the GitHub token and validates repository access. Subsequent sessions use the configured Admin password. The GitHub token is not displayed in the storefront UI.
+
+> Note: this is a lightweight browser-based Admin Studio. A production-grade authentication system should use a server-side authentication boundary rather than a frontend password.
 
 ## Deployment
-The repository is static and can be deployed directly to Netlify with the publish directory set to the repository root.
 
+The site can be deployed as a static GitHub Pages/Netlify-style site. The current storefront does not depend on a Netlify serverless catalogue function.
 
-## Secure catalogue storage
+Keep repository write credentials out of committed source code. The Admin Studio stores its GitHub credential in browser storage because the current lightweight architecture writes directly to GitHub.
 
-The Admin catalogue is persisted in GitHub through the Netlify serverless function. Configure these Netlify environment variables (never put them in frontend code):
+## Maintenance
 
-- `GITHUB_TOKEN`: fine-grained GitHub token with Contents read/write permission for this repository
-- `GITHUB_REPO`: `vinith1111/premium_saree_website_libas`
-- `GITHUB_BRANCH`: `main` (or the branch actually used for deployment)
-- `ADMIN_PASSWORD`: private Admin password
+After any catalogue change, test this sequence:
 
-Product metadata is stored in `data/products.json`, settings in `data/settings.json`, and uploaded product images in `public/products/`.
+1. Add/edit/delete from Admin.
+2. Confirm the GitHub JSON/image commit succeeds.
+3. Refresh the storefront.
+4. Confirm the change remains.
+5. Test the same flow on mobile.
+
