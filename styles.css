@@ -3722,3 +3722,127 @@ footer a{
 #admin #forgotPassword:focus-visible{
   color:#1C1917;
 }
+
+/* ---------- PRINCIPAL UI/UX TYPOGRAPHY SYSTEM ---------- */
+/* One editorial type system: Cormorant for titles, Inter for interface/body. */
+body,
+button,
+input,
+select,
+textarea{
+  font-family:"Inter",Arial,sans-serif;
+}
+
+.brand b,
+.hero-title,
+.section-head h2,
+.shop-header h1,
+#shop .product-info h3,
+.wa-band h2,
+.cc-title,
+.drape-editorial-title,
+.atelier-title,
+#admin #adminTitle,
+.admin-item strong{
+  font-family:"Cormorant Garamond",Georgia,serif;
+}
+
+/* Shared small-label language */
+.eyebrow,
+.cc-eyebrow,
+.atelier-eyebrow,
+.admin-login-title,
+.meta-text,
+#shop .meta,
+#shop .tabs button,
+nav a,
+.shop-link,
+.admin-link,
+.badge,
+.wa-btn,
+.cc-google-link,
+.footer-links a{
+  font-family:"Inter",Arial,sans-serif;
+}
+
+/* Product cards: controlled editorial hierarchy */
+#shop .product-info{
+  padding-top:12px;
+}
+#shop .product-info h3{
+  margin:0 0 6px;
+  max-width:100%;
+  min-height:2.18em;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  font-size:20px;
+  line-height:1.09;
+  letter-spacing:-.012em;
+  font-weight:500;
+}
+#shop .meta{
+  min-height:1.35em;
+  font-size:9px;
+  line-height:1.35;
+  letter-spacing:.13em;
+}
+#shop .price-line{
+  margin-top:9px;
+}
+#shop .price{
+  font-size:17px;
+  line-height:1;
+}
+#shop .price del{
+  font-size:11px;
+}
+#shop .wa-mini{
+  min-width:34px;
+  min-height:34px;
+  padding:8px;
+  font-size:0;
+}
+#shop .wa-mini .wa-icon{
+  width:15px;
+  height:15px;
+}
+
+/* Consistent section support copy */
+.hero-description,
+.section-head>p,
+.wa-band p:last-child,
+.cc-subtitle,
+.drape-editorial-text,
+.atelier-desc,
+.meta-text{
+  font-family:"Inter",Arial,sans-serif;
+}
+
+/* Consistent button geometry */
+.hero-actions a,
+.wa-btn,
+.cc-google-link,
+#shop .btn,
+#admin button,
+#admin .btn{
+  font-family:"Inter",Arial,sans-serif;
+}
+
+/* Mobile type scale */
+@media(max-width:600px){
+  .brand b{font-size:19px}
+  .brand small{font-size:6px;letter-spacing:.27em}
+  nav a,.shop-link,.admin-link{font-size:8px}
+  .hero-title{font-size:clamp(42px,11.5vw,54px)}
+  #shop .product-info h3{
+    font-size:17px;
+    line-height:1.08;
+    min-height:2.16em;
+  }
+  #shop .meta{font-size:8px}
+  #shop .price{font-size:16px}
+  #shop .price del{font-size:10px}
+  #shop .product-info{padding-top:10px}
+}
