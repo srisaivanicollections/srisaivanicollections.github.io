@@ -155,7 +155,7 @@ async function localApi(body){
   if(!storedToken) throw new Error("GitHub storage is not connected.");
   const configured=await githubReadJson("data/settings.json");
   const configuredSettings=configured.value&&typeof configured.value==="object"?configured.value:{};
-  if(!await verifyAdminPassword(String(body.password||""),configuredSettings)) throw new Error("Unauthorized");
+  if(!otpAdminSession && !await verifyAdminPassword(String(body.password||""),configuredSettings)) throw new Error("Unauthorized");
   if(body.action==="saveProduct"){
     const incoming=body.product;
     validateProductInput(incoming);
@@ -680,43 +680,31 @@ async function saveProduct(id){
 }
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
 let adminSessionActive=false;
-let adminSetupMode=false;
-let adminResetMode=false;
-let adminRecoveryTokenMode=false;
+let otpAdminSession=false;
+let otpAdminEmail="";
+let otpRequestInProgress=false;
 let adminLogoutLock=false;
 
-function getSavedGithubToken(){
-  const keys=[GITHUB_TOKEN_KEY,ADMIN_TOKEN_KEY,LEGACY_TOKEN_KEY];
-  for(const key of keys){
-    const local=(localStorage.getItem(key)||"").trim();
-    if(local)return local;
-    const session=(sessionStorage.getItem(key)||"").trim();
-    if(session)return session;
-  }
-  return "";
+const OTP_WORKER_URL="https://ssv-admin-otp.vinith-paithari.workers.dev";
+const TRUSTED_ADMIN_EMAILS=new Set(["vinith.paithari@gmail.com"]);
+
+function isTrustedAdminEmail(email){
+  return TRUSTED_ADMIN_EMAILS.has(String(email||"").trim().toLowerCase());
 }
 
-function storeAdminToken(token){
-  const value=String(token||"").trim();
-  if(!value)return;
-  // Keep the existing app key plus the two compatibility keys requested for
-  // Admin authentication. This does not touch catalog/localStorage data.
-  localStorage.setItem(GITHUB_TOKEN_KEY,value);
-  localStorage.setItem(ADMIN_TOKEN_KEY,value);
-  localStorage.setItem(LEGACY_TOKEN_KEY,value);
+function normalizeAdminEmail(email){
+  return String(email||"").trim().toLowerCase();
 }
 
 function updateAdminView(){
-  const loginSection=$("#login")||$("#adminLoginScreen")||$(".admin-token-section");
-  const studioSection=$("#studio")||$("#adminStudioScreen")||$(".admin-studio-content");
+  const loginSection=$("#login");
+  const studioSection=$("#studio");
   const active=adminSessionActive===true;
   if(loginSection){
-    loginSection.classList.toggle("admin-screen-hidden",active);
     loginSection.classList.toggle("hidden",active);
     loginSection.style.setProperty("display",active?"none":"block","important");
   }
   if(studioSection){
-    studioSection.classList.toggle("admin-screen-hidden",!active);
     studioSection.classList.toggle("hidden",!active);
     studioSection.style.setProperty("display",active?"block":"none","important");
   }
@@ -740,7 +728,6 @@ function trapAdminFocus(e){
   if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
 }
-
 function openAdminModal(){
   const modal=$("#admin");
   if(!modal)return;
@@ -749,346 +736,164 @@ function openAdminModal(){
   updateAdminView();
   focusAdminDialog();
 }
-
 function closeAdminModal(){
   const modal=$("#admin");
   if(!modal)return;
   modal.classList.add("hidden");
   modal.style.setProperty("display","none","important");
 }
-
 function setStorageStatus(message,connected=false){
   const el=$("#loginMsg");
   if(!el)return;
-  el.textContent=connected?"":message;
+  el.textContent=message||"";
   el.classList.toggle("connected",!!connected);
   el.style.color=connected?"#10B981":"#78716C";
 }
-
-function showAdminSetupScreen(){
-  adminSetupMode=true;
-  adminResetMode=false;
-  adminRecoveryTokenMode=false;
-  const input=$("#password");
-  if(input){
-    input.value="";
-    input.type="password";
-    input.placeholder="Create a password";
-    input.setAttribute("autocomplete","new-password");
-  }
-  if($("#passwordLabel"))$("#passwordLabel").textContent="Password";
-  if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Create password";
-  if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="";
-  if($("#loginBtn"))$("#loginBtn").textContent="CREATE PASSWORD";
-  if($("#forgotPassword")){ $("#forgotPassword").textContent=""; $("#forgotPassword").style.display="none"; }
-  setStorageStatus("",true);
+function resetOtpScreen(){
+  const email=$("#adminEmail");
+  const otp=$("#adminOtp");
+  const send=$("#sendOtpBtn");
+  const verify=$("#verifyOtpBtn");
+  if(email){email.value="";email.disabled=false;}
+  if(otp){otp.value="";otp.disabled=true;otp.style.display="none";}
+  if(send){send.disabled=false;send.style.display="";}
+  if(verify){verify.disabled=true;verify.style.display="none";}
+  setStorageStatus("");
 }
-
 function showAdminLogin(){
   adminSessionActive=false;
-  adminPassword="";
-  adminSetupMode=false;
-  adminResetMode=false;
-  adminRecoveryTokenMode=false;
+  otpAdminSession=false;
+  otpAdminEmail="";
+  otpRequestInProgress=false;
   updateAdminView();
-  const input=$("#password");
-  const label=$("#passwordLabel");
-  const toggle=$("#passwordToggle");
-  const forgot=$("#forgotPassword");
-  const heading=$("#adminAuthHeading");
-  const description=$("#adminAuthDescription");
-  if(input){
-    input.value="";
-    input.type="password";
-    input.setAttribute("autocomplete","current-password");
-    input.placeholder="Enter password";
-  }
-  if(toggle){
-    toggle.textContent="SHOW";
-    toggle.setAttribute("aria-label","Show password");
-    toggle.setAttribute("aria-pressed","false");
-  }
-  const hasGithubToken=!!getSavedGithubToken();
-  const passwordConfigured=!!String(settings?.adminPasswordHash||"").trim();
-
-  if(hasGithubToken && !passwordConfigured){
-    showAdminSetupScreen();
+  const email=$("#adminEmail");
+  const otp=$("#adminOtp");
+  const send=$("#sendOtpBtn");
+  const verify=$("#verifyOtpBtn");
+  if(email){email.value="";email.disabled=false;email.focus();}
+  if(otp){otp.value="";otp.disabled=true;otp.style.display="none";}
+  if(send){send.disabled=false;send.style.display="";}
+  if(verify){verify.disabled=true;verify.style.display="none";}
+  if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Admin sign in";
+  if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Enter your trusted email address to receive a one-time verification code.";
+  if($("#forgotPassword"))$("#forgotPassword").style.display="none";
+  setStorageStatus("");
+}
+async function callOtpWorker(action,email,otp=""){
+  const response=await fetch(OTP_WORKER_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({action,email,otp})
+  });
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok||data.success!==true) throw new Error(data.message||"OTP request failed.");
+  return data;
+}
+async function requestAdminOtp(){
+  if(otpRequestInProgress)return;
+  const email=normalizeAdminEmail($("#adminEmail")?.value);
+  if(!email){
+    setStorageStatus("Enter your email address.");
     return;
   }
-
-  if(hasGithubToken){
-    if(heading)heading.textContent="Sign in";
-    if(description)description.textContent="";
-    if(label)label.textContent="Password";
-    if($("#loginBtn"))$("#loginBtn").textContent="SIGN IN";
-    if(forgot){forgot.textContent="Forgot password?";forgot.style.display="";}
-    setStorageStatus("",true);
-  }else{
-    if(heading)heading.textContent="Connect Admin storage";
-    if(description)description.textContent="Connect your GitHub storage once. Then you will create your private Admin password.";
-    if(label)label.textContent="GitHub access token";
-    if(input){
-      input.placeholder="Paste your GitHub access token";
-      input.setAttribute("autocomplete","off");
-    }
-    if($("#loginBtn"))$("#loginBtn").textContent="CONNECT GITHUB";
-    if(forgot)forgot.textContent="Forgot password?";
-    setStorageStatus("GitHub storage connection required.",false);
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    setStorageStatus("Enter a valid email address.");
+    return;
   }
-}
-
-function showAdminStudio(){
-  adminSessionActive=true;
-  updateAdminView();
-  if($("#password"))$("#password").value="";
-  if($("#loginMsg"))$("#loginMsg").textContent="";
-  showView("products");
-}
-
-async function signInAdmin(value){
-  const inputValue=String(value||"");
-  if(!inputValue.trim()){
-    if($("#loginMsg"))$("#loginMsg").textContent=adminResetMode||adminSetupMode?"Enter a new Admin password.":"Enter your Admin password.";
-    return false;
+  if(!isTrustedAdminEmail(email)){
+    setStorageStatus("This email is not authorized for Admin access.");
+    return;
   }
-  const btn=$("#loginBtn");
-  const oldText=btn?.textContent;
-  if(btn){btn.disabled=true;btn.textContent=adminResetMode?"RESETTING...":adminSetupMode?"CREATING...":"SIGNING IN...";}
+  otpRequestInProgress=true;
+  const btn=$("#sendOtpBtn");
+  if(btn){btn.disabled=true;btn.textContent="SENDING...";}
   try{
-    if(adminRecoveryTokenMode){
-      await api({action:"recoverWithGithubToken",githubToken:inputValue});
-      adminRecoveryTokenMode=false;
-      adminResetMode=true;
-      if($("#password")){
-        $("#password").value="";
-        $("#password").placeholder="Enter new Admin password (8+ characters)";
-        $("#password").setAttribute("autocomplete","new-password");
-      }
-      if($("#passwordLabel"))$("#passwordLabel").textContent="New Admin password";
-      if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Set a new Admin password";
-      if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a new password of at least 8 characters.";
-      if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
-      if($("#forgotPassword"))$("#forgotPassword").textContent="";
-      setStorageStatus("GitHub access verified. Choose your new Admin password.",true);
-      return false;
+    await callOtpWorker("send",email);
+    otpAdminEmail=email;
+    const otp=$("#adminOtp");
+    const verify=$("#verifyOtpBtn");
+    if($("#adminEmail"))$("#adminEmail").disabled=true;
+    if(otp){otp.value="";otp.disabled=false;otp.style.display="";otp.maxLength=6;otp.inputMode="numeric";otp.autocomplete="one-time-code";otp.focus();}
+    if(btn)btn.style.display="none";
+    if(verify){verify.disabled=false;verify.style.display="";verify.textContent="VERIFY OTP";}
+    setStorageStatus("OTP sent. Check your email.",true);
+  }catch(e){
+    setStorageStatus(e?.message||"Could not send OTP.");
+    if(btn){btn.disabled=false;btn.textContent="SEND OTP";}
+  }finally{
+    otpRequestInProgress=false;
+  }
+}
+async function verifyAdminOtp(){
+  const email=normalizeAdminEmail(otpAdminEmail||$("#adminEmail")?.value);
+  const otp=String($("#adminOtp")?.value||"").replace(/\D/g,"");
+  if(!isTrustedAdminEmail(email)){setStorageStatus("This email is not authorized for Admin access.");return false;}
+  if(!/^\d{6}$/.test(otp)){setStorageStatus("Enter the 6-digit OTP.");return false;}
+  const btn=$("#verifyOtpBtn");
+  if(btn){btn.disabled=true;btn.textContent="VERIFYING...";}
+  try{
+    await callOtpWorker("verify",email,otp);
+    const token=getSavedGithubToken();
+    if(!token){
+      throw new Error("OTP verified, but Admin storage is not connected on this device. Connect the GitHub Admin storage once, then use Email OTP.");
     }
-    if(adminResetMode){
-      await api({action:"resetAdminPassword",newPassword:inputValue});
-      adminResetMode=false;
-      adminSetupMode=false;
-      settings.adminPasswordHash="configured";
-      settings.adminPasswordSalt="configured";
-      if($("#password"))$("#password").value="";
-      showAdminLogin();
-      setStorageStatus("Password reset successfully. Sign in with your new password.",true);
-      return false;
-    }
-
-    const hasGithubToken=!!getSavedGithubToken();
-    if(!hasGithubToken){
-      await api({action:"authenticate",password:inputValue});
-      if($("#password"))$("#password").value="";
-      showAdminSetupScreen();
-      setStorageStatus("● Storage connected",true);
-      return false;
-    }
-
-    if(adminSetupMode){
-      if(inputValue.length<8) throw new Error("Admin password must be at least 8 characters.");
-      await api({action:"setupAdminPassword",newPassword:inputValue});
-      adminSetupMode=false;
-      settings.adminPasswordHash="configured";
-      settings.adminPasswordSalt="configured";
-      adminPassword=inputValue;
-      setStorageStatus("Admin password created.",true);
-    }else{
-      const auth=await api({action:"authenticate",password:inputValue});
-      if(auth?.setupRequired){
-        showAdminSetupScreen();
-        setStorageStatus("● Storage connected",true);
-        return false;
-      }
-      adminPassword=inputValue;
-      setStorageStatus("Signed in.",true);
-    }
-
+    otpAdminSession=true;
+    otpAdminEmail=email;
     adminSessionActive=true;
-    openAdminModal();
+    adminPassword="";
+    setStorageStatus("Signed in successfully.",true);
+    if($("#adminOtp"))$("#adminOtp").value="";
     updateAdminView();
-    if($("#password"))$("#password").value="";
     showView("products");
     return true;
   }catch(e){
-    adminPassword="";
-    let message=e?.message||"Sign in failed.";
-    if(e?.status===409 || /does not match [0-9a-f]{7,40}/i.test(message)){
-      message="GitHub settings changed while saving. Please try the password reset again.";
-    }
-    if($("#loginMsg"))$("#loginMsg").textContent=message;
+    otpAdminSession=false;
+    adminSessionActive=false;
+    setStorageStatus(e?.message||"OTP verification failed.");
     return false;
   }finally{
-    if(btn){
-      btn.disabled=false;
-      if(adminRecoveryTokenMode) btn.textContent="CONNECT & RESET PASSWORD";
-      else if(adminResetMode) btn.textContent="RESET PASSWORD";
-      else if(adminSetupMode) btn.textContent="CREATE PASSWORD";
-      else if(adminSessionActive) btn.textContent="SIGN IN";
-      else if(!getSavedGithubToken()) btn.textContent="CONNECT GITHUB";
-      else btn.textContent="SIGN IN";
-    }
+    if(btn){btn.disabled=false;btn.textContent="VERIFY OTP";}
   }
 }
-
-function startPasswordReset(){
-  if(adminSetupMode || adminResetMode || adminRecoveryTokenMode){
-    showAdminLogin();
-    return;
-  }
-  if(!getSavedGithubToken()){
-    adminResetMode=false;
-    adminRecoveryTokenMode=true;
-    if($("#password")){
-      $("#password").placeholder="Paste your GitHub access token";
-      $("#password").setAttribute("autocomplete","off");
-    }
-    if($("#passwordLabel"))$("#passwordLabel").textContent="GitHub access token";
-    if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Recover Admin access";
-    if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Enter your GitHub access token to verify ownership, then choose a new Admin password.";
-    if($("#loginBtn"))$("#loginBtn").textContent="CONNECT & RESET PASSWORD";
-    if($("#forgotPassword"))$("#forgotPassword").textContent="";
-    setStorageStatus("",false);
-    return;
-  }
-  adminResetMode=true;
-  adminSetupMode=false;
-  if($("#password")){
-    $("#password").value="";
-    $("#password").placeholder="Enter new Admin password (8+ characters)";
-    $("#password").setAttribute("autocomplete","new-password");
-    $("#password").focus();
-  }
-  if($("#passwordLabel"))$("#passwordLabel").textContent="New Admin password";
-  if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Set a new Admin password";
-  if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Choose a new password of at least 8 characters. Your GitHub access verifies the change.";
-  if($("#loginBtn"))$("#loginBtn").textContent="RESET PASSWORD";
-  if($("#forgotPassword"))$("#forgotPassword").textContent="Cancel";
-  setStorageStatus("",false);
-}
-
 function logoutAdmin(){
   adminLogoutLock=true;
   adminSessionActive=false;
-  adminPassword="";
-  // Keep the hidden GitHub connection so future Admin login and password recovery do not require the token again.
-  if($("#password"))$("#password").value="";
-  if($("#loginMsg"))$("#loginMsg").textContent="";
+  otpAdminSession=false;
+  otpAdminEmail="";
   closeAdminModal();
+  resetOtpScreen();
   updateAdminView();
-  window.setTimeout(()=>{
-    adminSessionActive=false;
-    adminPassword="";
-    updateAdminView();
-    closeAdminModal();
-    adminLogoutLock=false;
-  },700);
+  window.setTimeout(()=>{adminLogoutLock=false;},300);
 }
 
-if(!window.__LIBAS_ADMIN_PASSWORD_TOGGLE_BOUND){
-  window.__LIBAS_ADMIN_PASSWORD_TOGGLE_BOUND=true;
-  document.addEventListener("click",(e)=>{
-    const toggle=e.target.closest("#passwordToggle");
-    if(!toggle)return;
-    const input=$("#password");
-    if(!input)return;
-    const show=input.type==="password";
-    input.type=show?"text":"password";
-    toggle.textContent=show?"HIDE":"SHOW";
-    toggle.setAttribute("aria-label",show?"Hide password":"Show password");
-    toggle.setAttribute("aria-pressed",String(show));
-  });
-}
-
-if(!window.__LIBAS_ADMIN_KEYBOARD_BOUND){
-  window.__LIBAS_ADMIN_KEYBOARD_BOUND=true;
+if(!window.__LIBAS_ADMIN_OTP_BOUND){
+  window.__LIBAS_ADMIN_OTP_BOUND=true;
+  document.addEventListener("click",async(e)=>{
+    const admin=e.target.closest("#adminOpen");
+    if(admin){
+      e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+      if(adminLogoutLock)return;
+      lastAdminTrigger=admin;
+      openAdminModal();
+      showAdminLogin();
+      return;
+    }
+    const close=e.target.closest("#adminClose");
+    if(close){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();closeAdminModal();return;}
+    const logout=e.target.closest("#logoutBtn");
+    if(logout){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();logoutAdmin();return;}
+    const send=e.target.closest("#sendOtpBtn");
+    if(send){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await requestAdminOtp();return;}
+    const verify=e.target.closest("#verifyOtpBtn");
+    if(verify){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await verifyAdminOtp();return;}
+  },true);
   document.addEventListener("keydown",(e)=>{
     if(e.key==="Escape"&&$("#admin")&&!$("#admin").classList.contains("hidden")){
-      e.preventDefault();
-      closeAdminModal();
-      lastAdminTrigger?.focus?.();
-      return;
+      e.preventDefault();closeAdminModal();lastAdminTrigger?.focus?.();return;
     }
     trapAdminFocus(e);
   });
 }
-
-if(!window.__LIBAS_ADMIN_AUTH_BOUND){
-  window.__LIBAS_ADMIN_AUTH_BOUND=true;
-
-  document.addEventListener("click",async(e)=>{
-    const logout=e.target.closest("#logoutBtn");
-    if(logout){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      logoutAdmin();
-      return;
-    }
-
-    const admin=e.target.closest("#adminOpen");
-    if(admin){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      if(adminLogoutLock)return;
-      lastAdminTrigger=admin;
-      openAdminModal();
-      updateAdminView();
-      adminSessionActive=false;
-      adminPassword="";
-      showAdminLogin();
-      return;
-    }
-
-    const close=e.target.closest("#adminClose");
-    if(close){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      closeAdminModal();
-      return;
-    }
-
-    const forgot=e.target.closest("#forgotPassword");
-    if(forgot){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      startPasswordReset();
-      return;
-    }
-
-    const login=e.target.closest("#loginBtn");
-    if(login){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      await signInAdmin($("#password")?.value);
-      return;
-    }
-  },true);
-
-  const form=$("#login");
-  if(form){
-    form.addEventListener("submit",async(e)=>{
-      e.preventDefault();
-      e.stopPropagation();
-      if(e.defaultPrevented) await signInAdmin($("#password")?.value);
-    },true);
-  }
-}
-
-// Authoritative initial Admin view state. Catalog/CRUD state is untouched.
 if(document.readyState==="loading"){
   document.addEventListener("DOMContentLoaded",updateAdminView,{once:true});
 }else{
