@@ -6897,67 +6897,6 @@ footer .brand b{
   }
 }
 
-/* Customer Voices Horizontal Snap Strip */
-#client-chronicles-section.chronicles-section{width:100%;max-width:none;margin:0;border:0;box-sizing:border-box;}
-#client-chronicles-section .ssv-voices-track{display:flex!important;flex-direction:row!important;gap:12px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding:4px 16px 14px!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important;box-sizing:border-box!important;}
-#client-chronicles-section .ssv-voices-track::-webkit-scrollbar{display:none!important;}
-#client-chronicles-section .ssv-voice-card{flex:0 0 78vw!important;width:78vw;max-width:300px!important;scroll-snap-align:center!important;background:#FFF!important;border:1px solid rgba(231,222,200,.7)!important;border-radius:3px!important;padding:16px 14px!important;box-shadow:0 4px 14px rgba(28,25,23,.03)!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;box-sizing:border-box!important;}
-#client-chronicles-section .ssv-voice-quote{font-family:'Cormorant Garamond',Georgia,serif!important;font-size:22px!important;line-height:1!important;color:#B89758!important;margin-bottom:4px!important;opacity:.85!important;}
-#client-chronicles-section .ssv-voice-text{font-family:'Cormorant Garamond',Georgia,serif!important;font-size:14.5px!important;font-style:italic!important;line-height:1.4!important;color:#2C2825!important;margin:0 0 8px!important;}
-#client-chronicles-section .ssv-voice-by{font-size:8px!important;font-weight:600!important;letter-spacing:.16em!important;text-transform:uppercase!important;color:#8C827A!important;}
-#client-chronicles-section .ssv-voice-link{display:inline-block!important;font-size:8.5px!important;letter-spacing:.16em!important;text-transform:uppercase!important;font-weight:600!important;color:#78716C!important;text-decoration:underline!important;text-underline-offset:4px!important;padding:6px 12px!important;border:none!important;background:transparent!important;}
-
-/* FINAL CUSTOMER VOICES UX POLISH - scoped to this section only */
-#client-chronicles-section.chronicles-section{
-  padding:22px 0 17px!important;
-}
-#client-chronicles-section .ssv-voices-track{
-  gap:10px!important;
-  padding:4px 14px 12px!important;
-  scroll-padding-inline:14px!important;
-}
-#client-chronicles-section .ssv-voice-card{
-  flex-basis:74vw!important;
-  width:74vw!important;
-  max-width:280px!important;
-  min-height:142px!important;
-  padding:14px 13px!important;
-}
-#client-chronicles-section .ssv-voice-text{
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:3!important;
-  overflow:hidden!important;
-  min-height:61px!important;
-  margin-bottom:7px!important;
-}
-#client-chronicles-section .ssv-voice-by{
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  max-width:100%!important;
-}
-#client-chronicles-section .ssv-voice-link{
-  padding:5px 10px!important;
-}
-@media(min-width:601px){
-  #client-chronicles-section .ssv-voices-track{
-    justify-content:center!important;
-    overflow-x:auto!important;
-  }
-  #client-chronicles-section .ssv-voice-card{
-    flex:0 0 270px!important;
-    width:270px!important;
-    max-width:270px!important;
-  }
-}
-@media(max-width:600px){
-  #client-chronicles-section .ssv-voices-track::after{
-    content:""!important;
-    flex:0 0 1px!important;
-  }
-}
-
 /* Store Details Section Polish - scoped exclusively to #visit */
 #visit.ssv-store-section{padding:32px 16px 28px;background:#FAF8F5;text-align:center;box-sizing:border-box;}
 #visit .ssv-store-header{margin-bottom:20px;}
@@ -7020,29 +6959,6 @@ footer .brand b{
   }
 }
 
-/* Customer Voices swipe affordance - scoped only to Client Chronicles */
-#client-chronicles-section .ssv-voices-hint{
-  display:block!important;
-  margin:-3px 0 3px!important;
-  font-size:7px!important;
-  line-height:1.2!important;
-  letter-spacing:.18em!important;
-  text-transform:uppercase!important;
-  font-weight:600!important;
-  color:#A88B57!important;
-  pointer-events:none!important;
-}
-#client-chronicles-section .ssv-voices-hint span{
-  display:inline-block!important;
-  margin-left:3px!important;
-  font-size:10px!important;
-  line-height:0!important;
-  vertical-align:-1px!important;
-}
-@media(min-width:601px){
-  #client-chronicles-section .ssv-voices-hint{display:none!important;}
-}
-
 /* Final testimonial / concierge micro-finish - scoped only to affected sections */
 #client-chronicles-section .ssv-voice-card{
   padding:16px 14px!important;
@@ -7059,71 +6975,18 @@ footer .brand b{
 /* Review byline hard-stop: customer voices must not expose reviewer names */
 #client-chronicles-section .ssv-voice-by{display:none!important;}
 
-/* FINAL CLIENT CHRONICLES UI AUTHORITY */
-#client-chronicles-section .ssv-voices-track{display:flex!important;align-items:stretch!important;gap:10px!important;padding:4px 16px 12px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;scroll-padding-inline:16px!important;}
-#client-chronicles-section .ssv-voice-card{flex:0 0 74vw!important;width:74vw!important;max-width:280px!important;min-height:0!important;height:auto!important;padding:16px 14px!important;justify-content:center!important;}
-#client-chronicles-section .ssv-voice-by{display:none!important;}
-#client-chronicles-section .ssv-voices-hint{display:block!important;margin:0 0 2px!important;}
-@media(min-width:601px){#client-chronicles-section .ssv-voice-card{flex:0 0 270px!important;width:270px!important;max-width:270px!important;}}
-
-/* QUOTES-ONLY CUSTOMER VOICES */
-#client-chronicles-section .ssv-voice-by,
-#client-chronicles-section .chronicle-author,
-#client-chronicles-section .testimonial-card .author,
-#client-chronicles-section .testimonial-author,
-#client-chronicles-section .ssv-voice-card span {
-  display: none !important;
-}
-
-#client-chronicles-section .ssv-voice-card,
-#client-chronicles-section .testimonial-card {
-  padding: 14px 16px !important;
-  min-height: auto !important;
-}
-
-/* QUOTES ONLY CUSTOMER VOICES */
-.ssv-voice-by,
-.chronicle-author,
-.testimonial-card .author,
-.testimonial-author,
-.ssv-voice-card span {
-  display: none !important;
-}
-
-.ssv-voice-card,
-.testimonial-card {
-  padding: 14px 16px !important;
-  min-height: auto !important;
-}
-
-/* Structural defense: eliminate all elements inside review cards except the quote mark and quote text */
-#client-chronicles-section .ssv-voice-card > *:not(.ssv-voice-quote):not(.ssv-voice-text) {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-#client-chronicles-section .ssv-voice-by,
-.ssv-voice-by,
-.chronicle-author,
-.testimonial-author {
-  display: none !important;
-}
 /* Customer Voices structural defense: quote and review text only */
 #client-chronicles-section .ssv-voice-card > *:not(.ssv-voice-quote):not(.ssv-voice-text),
 #client-chronicles-section .ssv-voice-by,
 .ssv-voice-by,
 .chronicle-author,
 .cc-author {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
 }
-
 /* Clean static Customer Voices presentation */
 #client-chronicles-section{
   width:100%;
