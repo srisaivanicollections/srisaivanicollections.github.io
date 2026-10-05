@@ -6039,3 +6039,38 @@ footer .brand b{
     white-space:nowrap !important;
   }
 }
+
+@media (max-width:600px){
+  #shop .lux-item-media{position:relative !important;}
+  #shop .ssv-badge-dock{
+    position:absolute !important;
+    top:6px !important;
+    left:6px !important;
+    z-index:5 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:3px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+  #shop .ssv-badge-pill{
+    display:inline-flex !important;
+    align-items:center !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:2px 4px !important;
+    border:0 !important;
+    border-radius:1px !important;
+    background:rgba(255,255,255,.92) !important;
+    color:#702040 !important;
+    font-size:7px !important;
+    line-height:1 !important;
+    font-weight:600 !important;
+    letter-spacing:.08em !important;
+    text-transform:uppercase !important;
+    white-space:nowrap !important;
+  }
+  #shop .lux-badge-new,
+  #shop .lux-badge-best{display:none !important;}
+}
