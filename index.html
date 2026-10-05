@@ -6580,6 +6580,36 @@ const GITHUB_BRANCH = "main";
 const GITHUB_TOKEN_KEY = "ssv_github_token_v1";
 const ADMIN_TOKEN_KEY = "gh_admin_token_libas";
 const LEGACY_TOKEN_KEY = "github_token";
+
+/* ===================================================
+   GITHUB TOKEN ACCESS
+   Single source for all Admin GitHub API calls.
+   Supports the current key plus legacy keys so an
+   existing Admin session is not broken by migrations.
+   =================================================== */
+function getSavedGithubToken(){
+  const keys=[GITHUB_TOKEN_KEY,ADMIN_TOKEN_KEY,LEGACY_TOKEN_KEY];
+
+  for(const key of keys){
+    try{
+      const local=String(localStorage.getItem(key)||"").trim();
+      const session=String(sessionStorage.getItem(key)||"").trim();
+      const token=local||session;
+
+      if(token){
+        // Migrate an older key to the current key without exposing it in UI.
+        if(key!==GITHUB_TOKEN_KEY){
+          try{
+            localStorage.setItem(GITHUB_TOKEN_KEY,token);
+          }catch(_){}
+        }
+        return token;
+      }
+    }catch(_){}
+  }
+
+  return "";
+}
 let products=[],settings={},category="All",adminPassword="",reviewsArray=[],githubOriginalIds=new Set();
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
@@ -7419,7 +7449,7 @@ async function verifyAdminOtp(){
     await callOtpWorker("verify",email,otp);
     const token=getSavedGithubToken();
     if(!token){
-      throw new Error("OTP verified, but Admin storage is not connected on this device. Connect the GitHub Admin storage once, then use Email OTP.");
+      throw new Error("OTP verified successfully, but GitHub Admin storage is not connected on this device. Add your existing GitHub token once in Admin storage, then sign in with OTP again.");
     }
     otpAdminSession=true;
     otpAdminEmail=email;
