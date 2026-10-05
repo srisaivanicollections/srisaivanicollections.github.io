@@ -6986,6 +6986,29 @@ footer .brand b{
     column-gap: 3px !important;
   }
 }
+
+/* Customer Voices swipe affordance - scoped only to Client Chronicles */
+#client-chronicles-section .ssv-voices-hint{
+  display:block!important;
+  margin:-3px 0 3px!important;
+  font-size:7px!important;
+  line-height:1.2!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  font-weight:600!important;
+  color:#A88B57!important;
+  pointer-events:none!important;
+}
+#client-chronicles-section .ssv-voices-hint span{
+  display:inline-block!important;
+  margin-left:3px!important;
+  font-size:10px!important;
+  line-height:0!important;
+  vertical-align:-1px!important;
+}
+@media(min-width:601px){
+  #client-chronicles-section .ssv-voices-hint{display:none!important;}
+}
 </style>
 </head>
 <script>
@@ -7066,6 +7089,7 @@ footer .brand b{
   <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin:0 0 2px;color:#1C1917;">Client Chronicles</h2>
   <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:13px;font-style:italic;color:#78716C;margin:0 0 16px;">From those who wear us</p>
   <div id="reviews-container" class="ssv-voices-track" aria-live="polite"></div>
+  <div class="ssv-voices-hint" aria-hidden="true">SWIPE TO EXPLORE <span>→</span></div>
   <div style="margin-top:8px;">
     <a href="https://www.google.com/search?q=Sri%20Sai%20Vani%20Saree%20Centre%20%26%20Kids%20Wear%20Kamareddy+Google+reviews" target="_blank" rel="noopener" class="ssv-voice-link">View All Google Reviews ↗</a>
   </div>
