@@ -6593,6 +6593,165 @@ footer .brand b{
     font-size: 11px !important;
   }
 }
+
+/* =========================================================
+   FINAL ADMIN STUDIO MOBILE UX
+   CSS/layout only. No JS, IDs, handlers, auth or CRUD changed.
+   ========================================================= */
+
+/* Keep the modal shell stable while the product area becomes the
+   only independently scrolling region. */
+#admin .panel{
+  display:flex !important;
+  flex-direction:column !important;
+  overflow:hidden !important;
+}
+
+#admin #studio{
+  min-height:0 !important;
+}
+
+#admin #studioBody{
+  min-width:0 !important;
+  min-height:0 !important;
+  max-height:calc(100vh - 190px) !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior:contain !important;
+  -webkit-overflow-scrolling:touch !important;
+  scrollbar-width:thin !important;
+  padding-right:2px !important;
+}
+
+/* Keep the navigation visible while products/settings scroll underneath. */
+#admin .studio-nav{
+  position:relative !important;
+  z-index:5 !important;
+  flex:0 0 auto !important;
+  width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  overflow:visible !important;
+  background:#FAF8F5 !important;
+}
+
+/* Prevent the four controls from forcing the mobile panel wider. */
+#admin .studio-nav button[data-view],
+#admin .studio-nav #logoutBtn{
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:clip !important;
+}
+
+/* Desktop/tablet: comfortable editorial proportions. */
+#admin .studio-nav{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.35fr) auto !important;
+  align-items:center !important;
+  gap:0 !important;
+}
+
+#admin .studio-nav button[data-view]{
+  width:100% !important;
+  padding-left:8px !important;
+  padding-right:8px !important;
+}
+
+#admin .studio-nav #logoutBtn{
+  width:auto !important;
+  margin:0 0 0 8px !important;
+  justify-self:end !important;
+  flex:none !important;
+}
+
+/* Mobile: all navigation remains visible in one clean row. */
+@media(max-width:600px){
+  #admin .panel{
+    width:calc(100vw - 20px) !important;
+    max-width:none !important;
+    max-height:calc(100dvh - 20px) !important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+
+  #admin .panel-top{
+    flex:0 0 auto !important;
+  }
+
+  #admin .studio-nav{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.35fr) auto !important;
+    width:100% !important;
+    min-width:0 !important;
+    margin:0 0 8px !important;
+    padding:0 !important;
+    gap:0 !important;
+    overflow:visible !important;
+  }
+
+  #admin .studio-nav button[data-view]{
+    min-width:0 !important;
+    width:100% !important;
+    height:42px !important;
+    min-height:42px !important;
+    padding:6px 3px !important;
+    font-size:8px !important;
+    line-height:1 !important;
+    letter-spacing:.10em !important;
+  }
+
+  #admin .studio-nav #logoutBtn{
+    width:auto !important;
+    min-width:0 !important;
+    height:34px !important;
+    min-height:34px !important;
+    margin:0 0 0 5px !important;
+    padding:0 9px !important;
+    font-size:8px !important;
+    letter-spacing:.10em !important;
+    white-space:nowrap !important;
+  }
+
+  #admin #studioBody{
+    max-height:calc(100dvh - 150px) !important;
+    padding-right:1px !important;
+    padding-bottom:8px !important;
+  }
+
+  #admin .admin-item{
+    width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  #admin .admin-product-copy{
+    min-width:0 !important;
+  }
+
+  #admin .admin-product-copy strong{
+    max-width:none !important;
+  }
+}
+
+/* Very narrow phones: preserve all four actions without horizontal overflow. */
+@media(max-width:360px){
+  #admin .studio-nav button[data-view]{
+    font-size:7px !important;
+    letter-spacing:.07em !important;
+    padding-left:2px !important;
+    padding-right:2px !important;
+  }
+
+  #admin .studio-nav #logoutBtn{
+    margin-left:3px !important;
+    padding-left:7px !important;
+    padding-right:7px !important;
+    font-size:7px !important;
+  }
+}
+
 </style>
 </head>
 <script>
