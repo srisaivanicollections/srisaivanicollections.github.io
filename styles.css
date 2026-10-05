@@ -5977,3 +5977,57 @@ footer .brand b{
   #shop .lux-badge-new,
   #shop .lux-badge-best{display:none !important;}
 }
+/* =========================================================
+   MOBILE FINAL POLISH: BADGES + PRICE / WHATSAPP ROW
+   Presentation only. Do not alter catalog functionality.
+   ========================================================= */
+@media (max-width: 600px) {
+  #shop .ssv-badge-dock {
+    width: fit-content !important;
+    max-width: 80px !important;
+    gap: 3px !important;
+  }
+
+  #shop .ssv-badge-pill {
+    width: fit-content !important;
+    max-width: 80px !important;
+    padding: 2px 4px !important;
+    font-size: 6.5px !important;
+    line-height: 1 !important;
+    letter-spacing: 0.08em !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 1px !important;
+  }
+
+  #shop .lux-pricing-block {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 3px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    white-space: nowrap !important;
+  }
+
+  #shop .lux-price-discount {
+    font-size: 9.5px !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+  }
+
+  #shop .lux-wa-action {
+    width: 20px !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    flex: 0 0 20px !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  #shop .lux-wa-action svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
