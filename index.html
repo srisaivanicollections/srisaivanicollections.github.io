@@ -7826,8 +7826,7 @@ function renderReviews(){
   if(!validReviews.length)return;
   container.innerHTML=validReviews.map(item=>{
     const text=esc(item.text||item.comment||"");
-    const author=esc(item.author||item.name||"Verified Patron");
-    return '<div class="ssv-voice-card"><div class="ssv-voice-quote">“</div><p class="ssv-voice-text">'+text+'</p><span class="ssv-voice-by">— '+author+'</span></div>';
+    return '<div class="ssv-voice-card"><div class="ssv-voice-quote">“</div><p class="ssv-voice-text">'+text+'</p></div>';
   }).join("");
 }
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
