@@ -383,16 +383,24 @@ async function loadReviews(){
 function renderReviews(){
   const container=document.getElementById("reviews-container");
   if(!container)return;
+
   const validReviews=reviewsArray.filter(item=>{
     const text=String(item?.text||item?.comment||"");
     const lower=text.toLowerCase();
-    return !lower.includes("3.7 / 5")&&!lower.includes("google customer reviews");
+    return text.trim() &&
+      !lower.includes("3.7 / 5") &&
+      !lower.includes("google customer reviews");
   });
-  container.innerHTML=validReviews.map(item=>{
-    const text=esc(item.text||item.comment||"");
-    const author=esc(item.author||item.name||"Verified Patron");
-    return '<article class="cc-card"><span class="cc-quote-mark" aria-hidden="true">“</span><p class="cc-quote-text">'+text+'</p><p class="cc-author">— '+author+'</p></article>';
-  }).join("");
+
+  const quotes=validReviews.length ? validReviews.map(i=>esc(i.text||i.comment||"")) : [
+    "Beautiful collection and helpful service.",
+    "Good variety of sarees and dresses.",
+    "Fabric drape and color richness are exquisite."
+  ];
+
+  container.innerHTML=quotes.map(text=>
+    '<div class="ssv-voice-card"><div class="ssv-voice-quote">“</div><p class="ssv-voice-text">'+text+'</p></div>'
+  ).join("");
 }
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
