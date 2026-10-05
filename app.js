@@ -421,7 +421,7 @@ function render(){
     return '<article class="lux-item-card">'+
       '<div class="lux-item-media">'+
         '<img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.closest(".lux-item-media").classList.add("image-missing");this.classList.add("image-failed");">'+
-        (p.newArrival?'<span class="lux-badge-new" aria-label="New">NEW</span>':"")+
+        (p.newArrival?'<span class="lux-badge-new" aria-label="New">NEW</span>':"")+(p.bestSeller?'<span class="lux-badge-best" aria-label="Best Seller">BEST SELLER</span>':"")+
       '</div>'+
       '<div class="lux-item-body">'+
         (categoryTag?'<div class="lux-item-cat">'+esc(categoryTag)+'</div>':"")+
