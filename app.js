@@ -394,7 +394,7 @@ function renderReviews(){
     return '<article class="cc-card"><span class="cc-quote-mark" aria-hidden="true">“</span><p class="cc-quote-text">'+text+'</p><p class="cc-author">— '+author+'</p></article>';
   }).join("");
 }
-function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
+function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
   renderTabs();
   if(!Array.isArray(products)||products.length===0){
@@ -403,7 +403,7 @@ function render(){
   }
   const q=$("#search").value.trim().toLowerCase(),pf=$("#price").value;
   let list=products
-    .filter(p=>(category==="All"||p.category===category)&&(!q||String(p.name||"").toLowerCase().includes(q)||String(p.category||"").toLowerCase().includes(q)))
+    .filter(p=>(category==="All"||p.category===category||(category==="Best Seller"&&p.bestSeller===true))&&(!q||String(p.name||"").toLowerCase().includes(q)||String(p.category||"").toLowerCase().includes(q)))
     .sort((a,b)=>{const rank=p=>p.newArrival&&p.bestSeller?0:(p.newArrival||p.bestSeller?1:2);return rank(a)-rank(b)})
     .filter(p=>!pf||(pf==="0-2000"?p.price<2000:pf==="2000-4000"?p.price>=2000&&p.price<4000:pf==="4000-7000"?p.price>=4000&&p.price<7000:p.price>=7000));
   const grid=$("#products");
