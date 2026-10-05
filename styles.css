@@ -6015,3 +6015,27 @@ footer .brand b{
     margin:0 !important;
   }
 }
+
+@media (max-width:600px){
+  #shop .lux-item-media{position:relative !important;}
+  #shop .lux-badge-best{
+    position:absolute !important;
+    top:6px !important;
+    left:6px !important;
+    z-index:4 !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:2px 4px !important;
+    border:0 !important;
+    border-radius:1px !important;
+    background:rgba(255,255,255,.9) !important;
+    color:#702040 !important;
+    font-size:7px !important;
+    line-height:1 !important;
+    font-weight:600 !important;
+    letter-spacing:.08em !important;
+    text-transform:uppercase !important;
+    white-space:nowrap !important;
+  }
+}
