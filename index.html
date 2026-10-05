@@ -7019,10 +7019,11 @@ function render(){
     let badgeDock="";
     if(outOfStock){
       badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-out">OUT OF STOCK</span></div>';
-    }else if(p.bestSeller===true){
-      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-best">BEST SELLER</span></div>';
-    }else if(p.newArrival===true){
-      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-new">NEW</span></div>';
+    }else{
+      const badges=[];
+      if(p.bestSeller===true) badges.push('<span class="ssv-badge-pill pill-best">BEST SELLER</span>');
+      if(p.newArrival===true) badges.push('<span class="ssv-badge-pill pill-new">NEW</span>');
+      if(badges.length) badgeDock='<div class="ssv-badge-dock">'+badges.join("")+'</div>';
     }
     return '<article class="lux-item-card">'+
       '<div class="lux-item-media'+(outOfStock?' is-out-of-stock':'')+'">'+
