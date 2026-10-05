@@ -6880,19 +6880,83 @@ const LEGACY_TOKEN_KEY = "github_token";
    existing Admin session is not broken by migrations.
    =================================================== */
 function getSavedGithubToken(){
-  const keys=[GITHUB_TOKEN_KEY,ADMIN_TOKEN_KEY,LEGACY_TOKEN_KEY];
+  // Recover the existing GitHub token without changing the Admin flow.
+  // Current and legacy keys are checked first, then only explicitly
+  // GitHub/token-related storage keys are considered.
+  const keys=[
+    GITHUB_TOKEN_KEY,
+    ADMIN_TOKEN_KEY,
+    LEGACY_TOKEN_KEY,
+    "githubToken",
+    "github_token",
+    "githubAccessToken",
+    "github_access_token",
+    "ghToken",
+    "gh_token",
+    "GITHUB_TOKEN",
+    "GH_TOKEN"
+  ];
 
-  for(const key of keys){
+  const isGithubToken=(value)=>{
+    return /^(ghp_|github_pat_|gho_|ghu_|ghs_|ghr_)[A-Za-z0-9_]+$/.test(String(value||"").trim());
+  };
+
+  const extractToken=(raw)=>{
+    const value=String(raw||"").trim();
+    if(isGithubToken(value))return value;
+
+    // Support older builds that stored the token inside a JSON object.
     try{
-      const local=String(localStorage.getItem(key)||"").trim();
-      const session=String(sessionStorage.getItem(key)||"").trim();
-      const token=local||session;
-
-      if(token){
-        if(key!==GITHUB_TOKEN_KEY){
-          try{ localStorage.setItem(GITHUB_TOKEN_KEY,token); }catch(_){}
+      const parsed=JSON.parse(value);
+      if(parsed&&typeof parsed==="object"){
+        const candidates=[
+          parsed.token,
+          parsed.githubToken,
+          parsed.github_token,
+          parsed.accessToken,
+          parsed.access_token,
+          parsed.value
+        ];
+        for(const candidate of candidates){
+          if(isGithubToken(candidate))return String(candidate).trim();
         }
-        return token;
+      }
+    }catch(_){}
+
+    return "";
+  };
+
+  const read=(storage,key)=>{
+    try{return extractToken(storage.getItem(key));}catch(_){return "";}
+  };
+
+  // 1. Known keys used by current and previous versions.
+  for(const key of keys){
+    const token=read(localStorage,key)||read(sessionStorage,key);
+    if(token){
+      if(key!==GITHUB_TOKEN_KEY){
+        try{localStorage.setItem(GITHUB_TOKEN_KEY,token)}catch(_){}
+      }
+      return token;
+    }
+  }
+
+  // 2. Recover a token from a legacy key whose name explicitly indicates
+  // GitHub/token storage. This avoids scanning unrelated application data.
+  for(const storage of [localStorage,sessionStorage]){
+    try{
+      for(let i=0;i<storage.length;i++){
+        const key=storage.key(i)||"";
+        const normalized=key.toLowerCase().replace(/[^a-z0-9]/g,"");
+        const githubKey=normalized.includes("github")||normalized.includes("gh");
+        const tokenKey=normalized.includes("token")||normalized.includes("access");
+        if(!githubKey||!tokenKey)continue;
+
+        const token=read(storage,key);
+        if(token){
+          try{localStorage.setItem(GITHUB_TOKEN_KEY,token)}catch(_){}
+          return token;
+        }
       }
     }catch(_){}
   }
@@ -7835,6 +7899,18 @@ async function verifyAdminOtp(){
     if(!token){
       setStorageStatus("OTP verified. Connect your GitHub storage once to continue.",true);
       showGithubStorageSetup();
+      return false;
+    }
+
+    // Token presence is not enough. Validate the existing device token
+    // against the Git-backed files before opening Admin Studio.
+    try{
+      await githubReadJson("data/products.json");
+      await githubReadJson("data/settings.json");
+    }catch(storageError){
+      setStorageStatus(
+        storageError?.message||"The saved GitHub token could not be verified on this device."
+      );
       return false;
     }
 
