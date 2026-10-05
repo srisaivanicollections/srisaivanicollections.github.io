@@ -403,9 +403,7 @@ function render(){
   }
   const q=$("#search").value.trim().toLowerCase(),pf=$("#price").value;
   let list=products
-    .sort((a,b)=>{const rank=p=>p.newArrival&&p.bestSeller?0:(p.newArrival||p.bestSeller?1:2);return rank(a)-rank(b)})
-    .filter(p=>!pf||(pf==="0-2000"?p.price<2000:pf==="2000-4000"?p.price>=2000&&p.price<4000:pf==="4000-7000"?p.price>=4000&&p.price<7000:p.price>=7000));
-  const grid=$("#products");
+  let list=products.filter(p=>{const matchesCollection=category==="All"?true:category==="Best Seller"?(p.bestSeller===true||p.bestSeller==="true"||p.bestSeller===1||p.bestSeller==="1"):String(p.category||"").toLowerCase()===String(category||"").toLowerCase(); const matchesSearch=!q||String(p.name||"").toLowerCase().includes(q)||String(p.category||"").toLowerCase().includes(q); return matchesCollection&&matchesSearch}).sort((a,b)=>{const rank=p=>p.newArrival&&p.bestSeller?0:(p.newArrival||p.bestSeller?1:2);return rank(a)-rank(b)}).filter(p=>!pf||(pf==="0-2000"?Number(p.price)<2000:pf==="2000-4000"?Number(p.price)>=2000&&Number(p.price)<4000:pf==="4000-7000"?Number(p.price)>=4000&&Number(p.price)<7000:Number(p.price)>=7000));
   if(!list.length){
     grid.innerHTML='<div class="lux-empty"><strong>No pieces found</strong><br><span>Try another category or search.</span><br><button type="button" class="btn dark" id="clearCatalogFilters">CLEAR FILTERS</button></div>';
     const clear=$("#clearCatalogFilters");
