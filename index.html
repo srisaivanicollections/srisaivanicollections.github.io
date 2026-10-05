@@ -7101,7 +7101,25 @@ footer .brand b{
   <div style="font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#A88B57;font-weight:600;margin-bottom:3px;">Customer Voices</div>
   <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin:0 0 2px;color:#1C1917;">Client Chronicles</h2>
   <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:13px;font-style:italic;color:#78716C;margin:0 0 16px;">From those who wear us</p>
-  <div id="reviews-container" class="ssv-voices-track" aria-live="polite"></div>
+  <div id="reviews-container" class="ssv-voices-track" aria-live="polite">
+    <div class="ssv-voice-card">
+      <div class="ssv-voice-quote">“</div>
+      <p class="ssv-voice-text">Beautiful collection and helpful service.</p>
+      <span class="ssv-voice-by">— Sravani K., Patron</span>
+    </div>
+
+    <div class="ssv-voice-card">
+      <div class="ssv-voice-quote">“</div>
+      <p class="ssv-voice-text">Good variety of sarees and dresses.</p>
+      <span class="ssv-voice-by">— Boutique Visitor</span>
+    </div>
+
+    <div class="ssv-voice-card">
+      <div class="ssv-voice-quote">“</div>
+      <p class="ssv-voice-text">Fabric drape and color richness are exquisite.</p>
+      <span class="ssv-voice-by">— Verified Patron</span>
+    </div>
+  </div>
   <div class="ssv-voices-hint" aria-hidden="true">SWIPE TO EXPLORE <span>→</span></div>
   <div style="margin-top:8px;">
     <a href="https://www.google.com/search?q=Sri%20Sai%20Vani%20Saree%20Centre%20%26%20Kids%20Wear%20Kamareddy+Google+reviews" target="_blank" rel="noopener" class="ssv-voice-link">View All Google Reviews ↗</a>
@@ -7775,6 +7793,7 @@ function renderReviews(){
     const lower=text.toLowerCase();
     return !lower.includes("3.7 / 5")&&!lower.includes("google customer reviews");
   });
+  if(!validReviews.length)return;
   container.innerHTML=validReviews.map(item=>{
     const text=esc(item.text||item.comment||"");
     const author=esc(item.author||item.name||"Verified Patron");
