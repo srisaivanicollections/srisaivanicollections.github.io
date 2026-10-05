@@ -402,7 +402,28 @@ function render(){
     return;
   }
   const q=$("#search").value.trim().toLowerCase(),pf=$("#price").value;
-  let list=products
+  let list=products.filter(p=>{
+    const productCategory=String(p.category||"").trim().toLowerCase();
+    const selectedCategory=String(category||"All").trim().toLowerCase();
+    const isBestSeller=p.bestSeller===true||p.bestSeller==="true"||p.bestSeller===1||p.bestSeller==="1";
+    const matchesCollection=
+      selectedCategory==="all" ||
+      (selectedCategory==="best seller" ? isBestSeller : productCategory===selectedCategory);
+    const matchesSearch=
+      !q ||
+      String(p.name||"").toLowerCase().includes(q) ||
+      productCategory.includes(q);
+    return matchesCollection && matchesSearch;
+  }).filter(p=>{
+    if(!pf)return true;
+    const price=Number(p.price);
+    if(!Number.isFinite(price))return false;
+    if(pf==="0-2000")return price<2000;
+    if(pf==="2000-4000")return price>=2000&&price<4000;
+    if(pf==="4000-7000")return price>=4000&&price<7000;
+    if(pf==="7000+")return price>=7000;
+    return true;
+  });
   if(!list.length){
     grid.innerHTML='<div class="lux-empty"><strong>No pieces found</strong><br><span>Try another category or search.</span><br><button type="button" class="btn dark" id="clearCatalogFilters">CLEAR FILTERS</button></div>';
     const clear=$("#clearCatalogFilters");
