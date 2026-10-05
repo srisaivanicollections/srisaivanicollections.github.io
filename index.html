@@ -1685,6 +1685,55 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 #studioBody .btn{
   margin-top:2px;
 }
+.github-storage-setup{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.github-storage-title{
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.2;
+  letter-spacing:.16em;
+  font-weight:700;
+}
+.github-storage-copy{
+  margin:0 0 10px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.55;
+}
+.github-storage-setup input{
+  width:100%;
+  height:40px;
+  margin:0 0 9px;
+  padding:0 11px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  font-size:12px;
+  outline:none;
+}
+.github-storage-setup input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px var(--gold);
+}
+.github-storage-setup .btn{
+  width:100%;
+  min-height:40px;
+}
+.github-storage-setup .text-link{
+  display:block;
+  margin:9px auto 0;
+  border:0;
+  background:none;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
 @media(max-width:600px){
   #studioBody>input,
   #studioBody>select{
@@ -6840,11 +6889,8 @@ function getSavedGithubToken(){
       const token=local||session;
 
       if(token){
-        // Migrate an older key to the current key without exposing it in UI.
         if(key!==GITHUB_TOKEN_KEY){
-          try{
-            localStorage.setItem(GITHUB_TOKEN_KEY,token);
-          }catch(_){}
+          try{ localStorage.setItem(GITHUB_TOKEN_KEY,token); }catch(_){}
         }
         return token;
       }
@@ -6853,6 +6899,10 @@ function getSavedGithubToken(){
 
   return "";
 }
+
+/* Keep the token accessor available to every Admin handler.
+   This also protects older cached page instances from a missing global binding. */
+window.getSavedGithubToken=getSavedGithubToken;
 let products=[],settings={},category="All",adminPassword="",reviewsArray=[],githubOriginalIds=new Set();
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
@@ -7606,6 +7656,94 @@ function setStorageStatus(message,connected=false){
   el.classList.toggle("connected",!!connected);
   el.style.color=connected?"#10B981":"#78716C";
 }
+function showGithubStorageSetup(){
+  const login=$("#login");
+  if(!login)return;
+
+  let panel=$("#githubStorageSetup");
+  if(!panel){
+    panel=document.createElement("div");
+    panel.id="githubStorageSetup";
+    panel.className="github-storage-setup";
+    panel.innerHTML=
+      '<div class="github-storage-title">CONNECT GITHUB STORAGE</div>'+
+      '<p class="github-storage-copy">OTP is verified. Connect your existing GitHub token once on this device. It will be stored locally and will not be shown again.</p>'+
+      '<input id="githubStorageToken" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Paste GitHub token">'+
+      '<button type="button" id="connectGithubStorageBtn" class="btn dark">CONNECT GITHUB</button>'+
+      '<button type="button" id="cancelGithubStorageBtn" class="text-link">CANCEL</button>';
+    login.appendChild(panel);
+  }
+
+  panel.hidden=false;
+  const input=$("#githubStorageToken");
+  const connect=$("#connectGithubStorageBtn");
+  if(input){
+    input.value="";
+    input.focus();
+  }
+  if(connect){
+    connect.disabled=false;
+    connect.textContent="CONNECT GITHUB";
+  }
+}
+
+function hideGithubStorageSetup(){
+  const panel=$("#githubStorageSetup");
+  if(panel)panel.remove();
+}
+
+async function connectGithubStorage(){
+  const input=$("#githubStorageToken");
+  const btn=$("#connectGithubStorageBtn");
+  const token=String(input?.value||"").trim();
+
+  if(!token){
+    setStorageStatus("Paste your GitHub token to continue.");
+    input?.focus();
+    return false;
+  }
+
+  const previousLocal=localStorage.getItem(GITHUB_TOKEN_KEY)||"";
+  const previousSession=sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
+
+  if(btn){
+    btn.disabled=true;
+    btn.textContent="CONNECTING...";
+  }
+
+  try{
+    localStorage.setItem(GITHUB_TOKEN_KEY,token);
+
+    // Validate the token against both Git-backed files before opening Admin Studio.
+    await githubReadJson("data/products.json");
+    await githubReadJson("data/settings.json");
+
+    otpAdminSession=true;
+    adminSessionActive=true;
+    adminPassword="";
+    hideGithubStorageSetup();
+    setStorageStatus("GitHub connected. Signed in successfully.",true);
+    if($("#adminOtp"))$("#adminOtp").value="";
+    updateAdminView();
+    showView("products");
+    return true;
+  }catch(e){
+    if(previousLocal)localStorage.setItem(GITHUB_TOKEN_KEY,previousLocal);
+    else localStorage.removeItem(GITHUB_TOKEN_KEY);
+
+    if(previousSession)sessionStorage.setItem(GITHUB_TOKEN_KEY,previousSession);
+    else sessionStorage.removeItem(GITHUB_TOKEN_KEY);
+
+    setStorageStatus(e?.message||"GitHub token could not be verified.");
+    return false;
+  }finally{
+    if(btn){
+      btn.disabled=false;
+      btn.textContent="CONNECT GITHUB";
+    }
+  }
+}
+
 function resetOtpScreen(){
   const email=$("#adminEmail");
   const otp=$("#adminOtp");
@@ -7690,12 +7828,16 @@ async function verifyAdminOtp(){
   if(btn){btn.disabled=true;btn.textContent="VERIFYING...";}
   try{
     await callOtpWorker("verify",email,otp);
-    const token=getSavedGithubToken();
-    if(!token){
-      throw new Error("OTP verified successfully, but GitHub Admin storage is not connected on this device. Add your existing GitHub token once in Admin storage, then sign in with OTP again.");
-    }
     otpAdminSession=true;
     otpAdminEmail=email;
+
+    const token=getSavedGithubToken();
+    if(!token){
+      setStorageStatus("OTP verified. Connect your GitHub storage once to continue.",true);
+      showGithubStorageSetup();
+      return false;
+    }
+
     adminSessionActive=true;
     adminPassword="";
     setStorageStatus("Signed in successfully.",true);
@@ -7743,6 +7885,12 @@ if(!window.__LIBAS_ADMIN_OTP_BOUND){
     if(send){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await requestAdminOtp();return;}
     const verify=e.target.closest("#verifyOtpBtn");
     if(verify){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await verifyAdminOtp();return;}
+
+    const connect=e.target.closest("#connectGithubStorageBtn");
+    if(connect){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await connectGithubStorage();return;}
+
+    const cancelConnect=e.target.closest("#cancelGithubStorageBtn");
+    if(cancelConnect){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();hideGithubStorageSetup();setStorageStatus("GitHub connection cancelled.");return;}
   },true);
   document.addEventListener("keydown",(e)=>{
     if(e.key==="Escape"&&$("#admin")&&!$("#admin").classList.contains("hidden")){
