@@ -5947,7 +5947,7 @@ footer .brand b{
   #shop .lux-item-media{position:relative !important;}
   #shop .ssv-badge-dock{
     position:absolute !important;
-    top:6px !important;
+    top:28px !important;
     left:6px !important;
     z-index:5 !important;
     display:flex !important;
