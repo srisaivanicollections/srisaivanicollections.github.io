@@ -7111,6 +7111,126 @@ footer .brand b{
 .testimonial-author {
   display: none !important;
 }
+/* Customer Voices structural defense: quote and review text only */
+#client-chronicles-section .ssv-voice-card > *:not(.ssv-voice-quote):not(.ssv-voice-text),
+#client-chronicles-section .ssv-voice-by,
+.ssv-voice-by,
+.chronicle-author,
+.cc-author {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Clean static Customer Voices presentation */
+#client-chronicles-section{
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:76px 34px 72px;
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+  box-sizing:border-box;
+}
+#client-chronicles-section .cc-header{text-align:center;margin:0 auto 30px;}
+#client-chronicles-section .cc-eyebrow{
+  margin:0 0 10px;
+  color:var(--gold);
+  font-size:9px;
+  line-height:1.2;
+  letter-spacing:.22em;
+  font-weight:700;
+}
+#client-chronicles-section .cc-title{
+  margin:0;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(44px,5vw,68px);
+  font-weight:400;
+  line-height:.95;
+  letter-spacing:-.035em;
+}
+#client-chronicles-section .cc-subtitle{
+  max-width:420px;
+  margin:15px auto 0;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+}
+#client-chronicles-section .ssv-voices-track{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding:4px 2px 16px;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+#client-chronicles-section .ssv-voices-track::-webkit-scrollbar{display:none}
+#client-chronicles-section .ssv-voice-card{
+  flex:0 0 300px;
+  min-height:170px;
+  padding:28px 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  scroll-snap-align:start;
+  background:#fff;
+  border:1px solid var(--line);
+  box-sizing:border-box;
+}
+#client-chronicles-section .ssv-voice-quote{
+  margin:0 0 8px;
+  color:var(--gold);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:34px;
+  line-height:.8;
+}
+#client-chronicles-section .ssv-voice-text{
+  margin:0;
+  color:var(--ink);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:18px;
+  font-style:italic;
+  line-height:1.45;
+}
+#client-chronicles-section .ssv-voices-hint{
+  margin:7px 0 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.2;
+  letter-spacing:.18em;
+  font-weight:600;
+}
+#client-chronicles-section .cc-footer-cta{
+  display:flex;
+  justify-content:center;
+  margin-top:18px;
+}
+#client-chronicles-section .cc-google-link{
+  display:inline-block;
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  font-size:9px;
+  line-height:1.2;
+  letter-spacing:.15em;
+  font-weight:600;
+}
+@media(max-width:600px){
+  #client-chronicles-section{padding:52px 16px 50px}
+  #client-chronicles-section .ssv-voices-track{gap:10px;padding-inline:0}
+  #client-chronicles-section .ssv-voice-card{
+    flex-basis:74vw;
+    min-height:155px;
+    padding:22px 18px;
+  }
+  #client-chronicles-section .ssv-voice-text{font-size:16px}
+}
 </style>
 
 </head>
@@ -7187,6 +7307,35 @@ footer .brand b{
   </div>
 </section>
 </main>
+
+<section class="chronicles-section" id="client-chronicles-section" aria-labelledby="client-chronicles-title">
+  <div class="cc-header">
+    <p class="cc-eyebrow">CLIENT CHRONICLES</p>
+    <h2 class="cc-title" id="client-chronicles-title">Customer Voices</h2>
+    <p class="cc-subtitle">A few words from our customers.</p>
+  </div>
+
+  <div class="ssv-voices-track" aria-label="Customer reviews">
+    <article class="ssv-voice-card">
+      <div class="ssv-voice-quote" aria-hidden="true">“</div>
+      <p class="ssv-voice-text">Beautiful collection and helpful service.</p>
+    </article>
+    <article class="ssv-voice-card">
+      <div class="ssv-voice-quote" aria-hidden="true">“</div>
+      <p class="ssv-voice-text">Good variety of sarees and dresses.</p>
+    </article>
+    <article class="ssv-voice-card">
+      <div class="ssv-voice-quote" aria-hidden="true">“</div>
+      <p class="ssv-voice-text">Fabric drape and color richness are exquisite.</p>
+    </article>
+  </div>
+
+  <p class="ssv-voices-hint" aria-hidden="true">SWIPE TO EXPLORE</p>
+
+  <div class="cc-footer-cta">
+    <a class="ssv-voice-link cc-google-link" href="https://www.google.com/search?q=Sri+Sai+Vani+Collections+Devunipally+Kamareddy+Google+reviews" target="_blank" rel="noopener noreferrer">View All Google Reviews ↗</a>
+  </div>
+</section>
 
 <!-- ==========================================================================
      CURATED DRAPE EDITORIAL
@@ -7836,8 +7985,6 @@ function productImageSrc(value){
   return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
 }
 function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();const waMain=$("#waMain");if(waMain)waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";const instagram=$("#instagram");if(instagram)instagram.href=settings.instagram||"#"}
-async 
-
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
   renderTabs();
