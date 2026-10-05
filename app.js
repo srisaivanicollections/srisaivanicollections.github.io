@@ -418,11 +418,6 @@ function render(){
     const price=Number(p.price||0);
     const discount=original>price?Math.round((1-price/original)*100):0;
     const categoryTag=String(p.tag||p.label||"").trim();
-  grid.innerHTML=list.map(p=>{
-    const original=Number(p.originalPrice||0);
-    const price=Number(p.price||0);
-    const discount=original>price?Math.round((1-price/original)*100):0;
-    const categoryTag=String(p.tag||p.label||"").trim();
     const badgeDock=(p.newArrival||p.bestSeller)?'<div class="ssv-badge-dock">'+
       (p.newArrival?'<span class="ssv-badge-pill pill-new">NEW</span>':"")+
       (p.bestSeller?'<span class="ssv-badge-pill pill-best">BEST SELLER</span>':"")+
