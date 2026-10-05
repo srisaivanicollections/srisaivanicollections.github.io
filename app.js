@@ -418,10 +418,19 @@ function render(){
     const price=Number(p.price||0);
     const discount=original>price?Math.round((1-price/original)*100):0;
     const categoryTag=String(p.tag||p.label||"").trim();
+  grid.innerHTML=list.map(p=>{
+    const original=Number(p.originalPrice||0);
+    const price=Number(p.price||0);
+    const discount=original>price?Math.round((1-price/original)*100):0;
+    const categoryTag=String(p.tag||p.label||"").trim();
+    const badgeDock=(p.newArrival||p.bestSeller)?'<div class="ssv-badge-dock">'+
+      (p.newArrival?'<span class="ssv-badge-pill pill-new">NEW</span>':"")+
+      (p.bestSeller?'<span class="ssv-badge-pill pill-best">BEST SELLER</span>':"")+
+      '</div>':"";
     return '<article class="lux-item-card">'+
       '<div class="lux-item-media">'+
         '<img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.closest(".lux-item-media").classList.add("image-missing");this.classList.add("image-failed");">'+
-        (p.newArrival?'<span class="lux-badge-new" aria-label="New">NEW</span>':"")+(p.bestSeller?'<span class="lux-badge-best" aria-label="Best Seller">BEST SELLER</span>':"")+
+        badgeDock+
       '</div>'+
       '<div class="lux-item-body">'+
         (categoryTag?'<div class="lux-item-cat">'+esc(categoryTag)+'</div>':"")+
