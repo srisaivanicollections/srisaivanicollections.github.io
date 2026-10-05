@@ -7112,7 +7112,7 @@ footer .brand b{
   display: none !important;
 }
 </style>
-<!-- Pages deployment refresh: Customer Voices source is current -->
+
 </head>
 <script>
 (function(){
@@ -7187,32 +7187,7 @@ footer .brand b{
   </div>
 </section>
 </main>
-<section id="client-chronicles-section" class="chronicles-section" style="padding:24px 0 20px;background:#FAF8F5;text-align:center;" aria-label="Customer Testimonials">
-  <div style="font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#A88B57;font-weight:600;margin-bottom:3px;">Customer Voices</div>
-  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin:0 0 2px;color:#1C1917;">Client Chronicles</h2>
-  <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:13px;font-style:italic;color:#78716C;margin:0 0 16px;">From those who wear us</p>
-  <!-- Customer Voices renderer: quote-only v4 -->
-    <div id="reviews-container" class="ssv-voices-track" aria-live="polite">
-    <div class="ssv-voice-card">
-      <div class="ssv-voice-quote">“</div>
-      <p class="ssv-voice-text">Beautiful collection and helpful service.</p>
-    </div>
 
-    <div class="ssv-voice-card">
-      <div class="ssv-voice-quote">“</div>
-      <p class="ssv-voice-text">Good variety of sarees and dresses.</p>
-    </div>
-
-    <div class="ssv-voice-card">
-      <div class="ssv-voice-quote">“</div>
-      <p class="ssv-voice-text">Fabric drape and color richness are exquisite.</p>
-    </div>
-  </div>
-  <div class="ssv-voices-hint" aria-hidden="true">SWIPE TO EXPLORE <span>→</span></div>
-  <div style="margin-top:8px;">
-    <a href="https://www.google.com/search?q=Sri%20Sai%20Vani%20Saree%20Centre%20%26%20Kids%20Wear%20Kamareddy+Google+reviews" target="_blank" rel="noopener" class="ssv-voice-link">View All Google Reviews ↗</a>
-  </div>
-</section>
 <!-- ==========================================================================
      CURATED DRAPE EDITORIAL
      ========================================================================== -->
@@ -7495,7 +7470,7 @@ function getSavedGithubToken(){
 /* Keep the token accessor available to every Admin handler.
    This also protects older cached page instances from a missing global binding. */
 window.getSavedGithubToken=getSavedGithubToken;
-let products=[],settings={},category="All",adminPassword="",reviewsArray=[],githubOriginalIds=new Set();
+let products=[],settings={},category="All",adminPassword="",githubOriginalIds=new Set();
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
   // GitHub is the single source of truth for catalog/settings.
@@ -7802,8 +7777,7 @@ async function load(){
     delete settings.githubToken;
     apply();
     render();
-    loadReviews();
-    return true;
+return true;
   }catch(e){
     console.error("Public catalog load failed:",e);
     if(Array.isArray(products)&&products.length){
@@ -7862,39 +7836,8 @@ function productImageSrc(value){
   return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
 }
 function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();const waMain=$("#waMain");if(waMain)waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";const instagram=$("#instagram");if(instagram)instagram.href=settings.instagram||"#"}
-async function loadReviews(){
-  try{
-    const r=await fetch("data/reviews.json",{cache:"no-store"});
-    if(!r.ok)throw new Error("Reviews unavailable");
-    const data=await r.json();
-    reviewsArray=Array.isArray(data)?data:[];
-  }catch(_){
-    reviewsArray=[];
-  }
-  renderReviews();
-}
-function renderReviews(){
-  const container = document.getElementById("reviews-container");
-  if (!container) return;
+async 
 
-  const validReviews = reviewsArray.filter(item => {
-    const text = String(item?.text || item?.comment || "");
-    const lower = text.toLowerCase();
-    return text.trim() &&
-      !lower.includes("3.7 / 5") &&
-      !lower.includes("google customer reviews");
-  });
-
-  const quotes = validReviews.length ? validReviews.map(i => esc(i.text || i.comment || "")) : [
-    "Beautiful collection and helpful service.",
-    "Good variety of sarees and dresses.",
-    "Fabric drape and color richness are exquisite."
-  ];
-
-  container.innerHTML = quotes.map(text =>
-    '<div class="ssv-voice-card"><div class="ssv-voice-quote">“</div><p class="ssv-voice-text">' + text + '</p></div>'
-  ).join("");
-}
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
   renderTabs();
@@ -8553,6 +8496,6 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
 $("#search").oninput=render;$("#price").onchange=render;load();
 
 </script>
-  <!-- deployment refresh: customer voices quote-only markup -->
+
 </body>
 </html>
