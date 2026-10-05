@@ -6,7 +6,7 @@ const GITHUB_BRANCH = "main";
 const GITHUB_TOKEN_KEY = "ssv_github_token_v1";
 const ADMIN_TOKEN_KEY = "gh_admin_token_libas";
 const LEGACY_TOKEN_KEY = "github_token";
-let products=[],settings={},category="All",adminPassword="",reviewsArray=[],githubOriginalIds=new Set();
+let products=[],settings={},category="All",adminPassword="",githubOriginalIds=new Set();
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
   // GitHub is the single source of truth for catalog/settings.
@@ -309,8 +309,7 @@ async function load(){
     delete settings.githubToken;
     apply();
     render();
-    loadReviews();
-    return true;
+     return true;
   }catch(e){
     console.error("Public catalog load failed:",e);
     if(Array.isArray(products)&&products.length){
@@ -369,39 +368,8 @@ function productImageSrc(value){
   return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
 }
 function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();$("#waMain").href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";$("#instagram").href=settings.instagram}
-async function loadReviews(){
-  try{
-    const r=await fetch("data/reviews.json",{cache:"no-store"});
-    if(!r.ok)throw new Error("Reviews unavailable");
-    const data=await r.json();
-    reviewsArray=Array.isArray(data)?data:[];
-  }catch(_){
-    reviewsArray=[];
-  }
-  renderReviews();
-}
-function renderReviews(){
-  const container=document.getElementById("reviews-container");
-  if(!container)return;
 
-  const validReviews=reviewsArray.filter(item=>{
-    const text=String(item?.text||item?.comment||"");
-    const lower=text.toLowerCase();
-    return text.trim() &&
-      !lower.includes("3.7 / 5") &&
-      !lower.includes("google customer reviews");
-  });
 
-  const quotes=validReviews.length ? validReviews.map(i=>esc(i.text||i.comment||"")) : [
-    "Beautiful collection and helpful service.",
-    "Good variety of sarees and dresses.",
-    "Fabric drape and color richness are exquisite."
-  ];
-
-  container.innerHTML=quotes.map(text=>
-    '<div class="ssv-voice-card"><div class="ssv-voice-quote">“</div><p class="ssv-voice-text">'+text+'</p></div>'
-  ).join("");
-}
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
   renderTabs();
