@@ -6031,3 +6031,15 @@ footer .brand b{
     height: 15px !important;
   }
 }
+
+/* Structural defense: legacy review author UI must never be visible */
+#client-chronicles-section .cc-card > .cc-author,
+#client-chronicles-section .cc-card .cc-author,
+.cc-card > .cc-author,
+.cc-author {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
