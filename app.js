@@ -397,6 +397,8 @@ function renderReviews(){
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
   renderTabs();
+  const grid=$("#products");
+  if(!grid)return;
   if(!Array.isArray(products)||products.length===0){
     $("#products").innerHTML='<div class="lux-empty"><strong>No pieces found</strong><br><span>Try another category or search.</span></div>';
     return;
