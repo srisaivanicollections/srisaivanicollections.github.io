@@ -7861,7 +7861,7 @@ function productImageSrc(value){
   // available independently of GitHub Pages deployment propagation.
   return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
 }
-function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();$("#waMain").href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";$("#instagram").href=settings.instagram}
+function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();const waMain=$("#waMain");if(waMain)waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";const instagram=$("#instagram");if(instagram)instagram.href=settings.instagram||"#"}
 async function loadReviews(){
   try{
     const r=await fetch("data/reviews.json",{cache:"no-store"});
