@@ -6050,6 +6050,257 @@ footer .brand b{
   #shop .lux-product-grid,#shop .products{grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:6px!important;row-gap:14px!important;}
   #shop.catalog,.lux-catalog-section{padding-left:8px!important;padding-right:8px!important;}
 }
+
+/* ==========================================================================
+   FINAL LIBAS MOBILE PRODUCT GRID + SINGLE PRIORITY BADGE SYSTEM
+   ========================================================================== */
+@media(max-width:600px){
+  #shop .products,
+  #shop .lux-product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    column-gap:6px !important;
+    row-gap:12px !important;
+    padding:8px 8px 32px !important;
+  }
+
+  #shop .lux-item-card{
+    margin-bottom:0 !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+}
+
+/* One badge only. Priority: OUT OF STOCK > BEST SELLER > NEW. */
+#shop .lux-item-media .ssv-badge-dock{
+  position:absolute !important;
+  top:6px !important;
+  left:6px !important;
+  right:auto !important;
+  bottom:auto !important;
+  z-index:20 !important;
+  width:fit-content !important;
+  max-width:calc(100% - 12px) !important;
+  display:block !important;
+  margin:0 !important;
+  padding:0 !important;
+  pointer-events:none !important;
+}
+
+#shop .lux-item-media .ssv-badge-pill{
+  display:inline-block !important;
+  width:fit-content !important;
+  max-width:100% !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:2px 5px !important;
+  border:0 !important;
+  border-radius:1px !important;
+  box-shadow:none !important;
+  font-family:"Inter",Arial,sans-serif !important;
+  font-size:6.5px !important;
+  font-weight:700 !important;
+  letter-spacing:.08em !important;
+  line-height:1 !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+}
+
+#shop .lux-item-media .ssv-badge-pill.pill-out,
+#shop .lux-item-media .ssv-badge-pill.pill-best{
+  background:rgba(28,25,23,.88) !important;
+  color:#FAF8F5 !important;
+}
+
+#shop .lux-item-media .ssv-badge-pill.pill-new{
+  background:rgba(255,255,255,.92) !important;
+  color:#702040 !important;
+}
+
+#shop .lux-item-media.is-out-of-stock img{
+  opacity:.75 !important;
+}
+
+/* Compact product information, flush to image. */
+#shop .lux-item-body{
+  min-width:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+
+#shop .lux-item-cat{
+  display:none !important;
+}
+
+#shop .lux-item-title{
+  display:block !important;
+  min-width:0 !important;
+  width:100% !important;
+  margin:4px 0 2px !important;
+  padding:0 2px !important;
+  color:#1C1917 !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-size:12px !important;
+  font-weight:400 !important;
+  line-height:1.2 !important;
+  letter-spacing:0 !important;
+  text-transform:capitalize !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+#shop .lux-item-footer{
+  width:100% !important;
+  min-width:0 !important;
+  height:22px !important;
+  min-height:22px !important;
+  margin:0 !important;
+  padding:0 2px !important;
+  display:flex !important;
+  align-items:baseline !important;
+  justify-content:space-between !important;
+  gap:4px !important;
+}
+
+#shop .lux-pricing-block{
+  min-width:0 !important;
+  flex:1 1 auto !important;
+  display:flex !important;
+  align-items:baseline !important;
+  flex-wrap:nowrap !important;
+  gap:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+}
+
+#shop .lux-price-current{
+  flex:0 0 auto !important;
+  min-width:0 !important;
+  color:#1C1917 !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+
+#shop .lux-price-original{
+  flex:0 0 auto !important;
+  min-width:0 !important;
+  margin:0 0 0 4px !important;
+  color:#9E9E9E !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-size:10px !important;
+  font-weight:400 !important;
+  line-height:1 !important;
+  text-decoration:line-through !important;
+  white-space:nowrap !important;
+}
+
+#shop .lux-price-discount{
+  flex:0 0 auto !important;
+  min-width:0 !important;
+  margin:0 0 0 4px !important;
+  color:#C2185B !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-size:9.5px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+
+#shop .lux-wa-action{
+  flex:0 0 22px !important;
+  width:22px !important;
+  height:22px !important;
+  min-width:22px !important;
+  min-height:22px !important;
+  align-self:center !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:none !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:#25D366 !important;
+  text-decoration:none !important;
+  line-height:0 !important;
+}
+
+#shop .lux-wa-action:hover,
+#shop .lux-wa-action:focus-visible{
+  border:none !important;
+  background:transparent !important;
+  color:#25D366 !important;
+}
+
+#shop .lux-wa-action svg{
+  width:16px !important;
+  height:16px !important;
+  display:block !important;
+  fill:currentColor !important;
+}
+
+/* Keep hero CTAs visually tight without changing their click behavior. */
+.hero-cta-group{
+  padding:8px 0 10px !important;
+}
+
+/* The temporary ADMIN bar is hidden, while its underlying admin logic remains intact. */
+.admin-link{
+  display:none !important;
+}
+
+/* Quiet editorial Instagram invitation. No player, iframe, or Reel embed. */
+.drape-editorial-section{
+  background:#F4EFEA !important;
+  border-top:1px solid rgba(28,25,23,.07) !important;
+  border-bottom:1px solid rgba(28,25,23,.07) !important;
+  padding:56px 20px !important;
+}
+
+.drape-editorial-title{
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-weight:400 !important;
+}
+
+.drape-editorial-cta{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:12px !important;
+  min-height:42px !important;
+  padding:0 18px !important;
+  background:#1C1917 !important;
+  color:#FAF8F5 !important;
+  border:1px solid #1C1917 !important;
+  text-decoration:none !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:600 !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase !important;
+}
+
+.drape-editorial-cta:hover{
+  background:#B38E5D !important;
+  border-color:#B38E5D !important;
+  color:#1C1917 !important;
+}
+
+@media(max-width:600px){
+  .drape-editorial-section{
+    padding:46px 18px !important;
+  }
+
+  .drape-editorial-title{
+    font-size:clamp(34px,9.5vw,44px) !important;
+  }
+}
 </style>
 </head>
 <script>
@@ -6764,12 +7015,17 @@ function render(){
     const price=Number(p.price||0);
     const discount=original>price?Math.round((1-price/original)*100):0;
     const categoryTag=String(p.tag||p.label||"").trim();
-    const badgeDock=(p.newArrival||p.bestSeller)?'<div class="ssv-badge-dock">'+
-      (p.newArrival?'<span class="ssv-badge-pill pill-new">NEW</span>':"")+
-      (p.bestSeller?'<span class="ssv-badge-pill pill-best">BEST SELLER</span>':"")+
-      '</div>':"";
+    const outOfStock=(p.inStock===false||p.availability===false||p.outOfStock===true);
+    let badgeDock="";
+    if(outOfStock){
+      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-out">OUT OF STOCK</span></div>';
+    }else if(p.bestSeller===true){
+      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-best">BEST SELLER</span></div>';
+    }else if(p.newArrival===true){
+      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-new">NEW</span></div>';
+    }
     return '<article class="lux-item-card">'+
-      '<div class="lux-item-media">'+
+      '<div class="lux-item-media'+(outOfStock?' is-out-of-stock':'')+'">'+
         '<img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.closest(".lux-item-media").classList.add("image-missing");this.classList.add("image-failed");">'+
         badgeDock+
       '</div>'+
