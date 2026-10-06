@@ -9381,6 +9381,55 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 
+
+/* STORE ADDRESS REFINEMENT */
+#visit .option3-store-details{
+  display:grid !important;
+  grid-template-columns:1.25fr .75fr !important;
+  align-items:stretch !important;
+}
+#visit .option3-store-block{
+  padding:20px 18px !important;
+  gap:13px !important;
+  align-items:flex-start !important;
+}
+#visit .option3-store-block+.option3-store-block{
+  border-left:1px solid #D8C8B4 !important;
+}
+#visit .option3-store-block .option3-store-icon{
+  margin-top:2px !important;
+  flex:0 0 32px !important;
+  width:32px !important;
+  height:32px !important;
+}
+#visit .option3-store-block > div{
+  min-width:0 !important;
+}
+#visit .option3-store-block .lux3-label{
+  margin:0 0 8px !important;
+  white-space:nowrap !important;
+}
+#visit .option3-store-block p:not(.lux3-label){
+  font-family:"Inter",Arial,sans-serif !important;
+  font-size:11px !important;
+  font-weight:400 !important;
+  line-height:1.55 !important;
+  letter-spacing:0 !important;
+  color:#4E4740 !important;
+}
+@media(max-width:760px){
+  #visit .option3-store-details{
+    grid-template-columns:1fr !important;
+  }
+  #visit .option3-store-block+.option3-store-block{
+    border-left:0 !important;
+    border-top:1px solid #D8C8B4 !important;
+  }
+  #visit .option3-store-block{
+    padding:17px 2px !important;
+  }
+}
+
 </style>
 
 
