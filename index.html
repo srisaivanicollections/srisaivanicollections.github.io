@@ -7631,7 +7631,7 @@ HERO DEPLOYMENT SAFETY GUARD
       <p class="hero-description">From wedding sarees to modern festive styles, find something special for every celebration. Message us on WhatsApp for sizes, availability, and styling assistance.</p>
       <div class="hero-cta-group">
         <a href="#shop" class="hero-primary-btn">Explore Collection</a>
-        <a href="https://wa.me/919999999999?text=Hi%2C%20I'd%20like%20to%20inquire%20about%20your%20latest%20festive%20arrivals"
+        <a id="heroWhatsAppBtn" href="#"
            class="hero-secondary-btn"
            target="_blank"
            rel="noopener">
@@ -7763,7 +7763,7 @@ HERO DEPLOYMENT SAFETY GUARD
       <a class="option3-outline-button" href="https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac" target="_blank" rel="noopener noreferrer">
         <img src="assets/google-maps-icon.png" alt="" loading="lazy"><span>Open in Google Maps</span><span aria-hidden="true">↗</span>
       </a>
-      <a class="option3-dark-button" href="https://wa.me/919999999999?text=Hi%20Sri%20Sai%20Vani%2C%20I%27d%20like%20to%20know%20more%20about%20your%20collection" target="_blank" rel="noopener noreferrer">
+      <a id="storeWhatsAppBtn" class="option3-dark-button" href="#" target="_blank" rel="noopener noreferrer">
         <img src="assets/whatsapp-icon.png" alt="" loading="lazy"><span>Message on WhatsApp</span><span aria-hidden="true">↗</span>
       </a>
     </div>
@@ -8379,7 +8379,26 @@ function productImageSrc(value){
   // available independently of GitHub Pages deployment propagation.
   return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
 }
-function apply(){all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");const n=waNumber();const waMain=$("#waMain");if(waMain)waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I would like to know about your collection."): "#";const instagram=$("#instagram");if(instagram)instagram.href=settings.instagram||"#"}
+function apply(){
+  all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
+  const n=waNumber();
+  const collectionMessage="Hi Sri Sai Vani, I would like to know about your collection.";
+  const heroMessage="Hi Sri Sai Vani, I'd like to inquire about your latest festive arrivals";
+  const waMain=$("#waMain");
+  if(waMain)waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent(collectionMessage):"#";
+  const heroWa=$("#heroWhatsAppBtn");
+  if(heroWa){
+    heroWa.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent(heroMessage):"#";
+    heroWa.setAttribute("aria-disabled",n?"false":"true");
+  }
+  const storeWa=$("#storeWhatsAppBtn");
+  if(storeWa){
+    storeWa.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent(collectionMessage):"#";
+    storeWa.setAttribute("aria-disabled",n?"false":"true");
+  }
+  const instagram=$("#instagram");
+  if(instagram)instagram.href=settings.instagram||"#";
+}
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
   renderTabs();
