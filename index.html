@@ -8317,15 +8317,15 @@ HERO DEPLOYMENT SAFETY GUARD
    ========================================================= */
 #instagram-editorial{
   position:relative !important;
-  display:grid !important;
-  grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr) !important;
+  display:block !important;
+  
   min-height:560px !important;
   padding:0 !important;
   background:#F7F2EA url("assets/instagram-editorial-bg.jpg") center center / cover no-repeat !important;
   border-top:1px solid #E4D8C5 !important;
   border-bottom:1px solid #E4D8C5 !important;
   overflow:hidden !important;
-  text-align:left !important;
+  text-align:right !important;
 }
 
 #instagram-editorial .option3-instagram-image{
@@ -8333,8 +8333,7 @@ HERO DEPLOYMENT SAFETY GUARD
   min-height:560px !important;
   overflow:hidden !important;
   background:#3A281E !important;
-  grid-column:1 !important;
-  grid-row:1 !important;
+  display:none !important;
 }
 
 #instagram-editorial .option3-instagram-image:after{
@@ -8355,16 +8354,15 @@ HERO DEPLOYMENT SAFETY GUARD
 
 #instagram-editorial .option3-instagram-copy{
   position:relative !important;
-  grid-column:2 !important;
-  grid-row:1 !important;
+  
   min-height:560px !important;
   box-sizing:border-box !important;
-  padding:72px clamp(34px,5vw,72px) !important;
+  padding:72px clamp(34px,7vw,110px) !important;
   display:flex !important;
   flex-direction:column !important;
-  align-items:flex-start !important;
+  align-items:flex-end !important;
   justify-content:center !important;
-  background:rgba(247,242,234,.88) !important;
+  background:linear-gradient(90deg,rgba(247,242,234,.08) 0%,rgba(247,242,234,.18) 38%,rgba(247,242,234,.78) 100%) !important;
   overflow:hidden !important;
   text-align:left !important;
 }
@@ -8387,8 +8385,8 @@ HERO DEPLOYMENT SAFETY GUARD
 }
 
 #instagram-editorial .option3-instagram-copy h2{
-  max-width:470px !important;
-  margin:0 !important;
+  max-width:430px !important;
+  margin:0 0 0 auto !important;
   color:#241F1B !important;
   font-family:"Cormorant Garamond",Georgia,serif !important;
   font-size:clamp(48px,5vw,70px) !important;
@@ -8403,7 +8401,7 @@ HERO DEPLOYMENT SAFETY GUARD
   min-height:50px !important;
   height:50px !important;
   box-sizing:border-box !important;
-  margin:30px 0 0 !important;
+  margin:30px 0 0 auto !important;
   padding:0 15px !important;
   display:flex !important;
   align-items:center !important;
@@ -8454,18 +8452,14 @@ HERO DEPLOYMENT SAFETY GUARD
 
 @media(max-width:760px){
   #instagram-editorial{
-    display:flex !important;
+    display:block !important;
     flex-direction:column !important;
     min-height:0 !important;
-    background:rgba(247,242,234,.88) !important;
+    background:#F7F2EA url("assets/instagram-editorial-bg.jpg") 35% center / cover no-repeat !important;
   }
 
   #instagram-editorial .option3-instagram-image{
-    order:1 !important;
-    width:100% !important;
-    height:330px !important;
-    min-height:330px !important;
-    flex:0 0 330px !important;
+    display:none !important;
   }
 
   #instagram-editorial .option3-instagram-image:after{
@@ -8473,11 +8467,11 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 
   #instagram-editorial .option3-instagram-copy{
-    order:2 !important;
     width:100% !important;
-    min-height:300px !important;
-    height:auto !important;
-    padding:48px 24px 54px !important;
+    min-height:470px !important;
+    height:470px !important;
+    padding:52px 24px 54px !important;
+    background:linear-gradient(180deg,rgba(247,242,234,.10),rgba(247,242,234,.76)) !important;
     align-items:center !important;
     justify-content:center !important;
     text-align:center !important;
