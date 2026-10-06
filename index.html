@@ -6631,6 +6631,213 @@ html,body{overflow-x:hidden!important;}
   #visit .ssv-store-actions{gap:10px!important;}
   #visit .ssv-store-btn{width:min(100%,610px)!important;box-sizing:border-box!important;padding:14px 18px!important;}
 }
+
+
+/* FINAL THREE-SECTION UI AUTHORITY
+   Scoped to Client Chronicles, Our Collection and Store Details only. */
+#client-chronicles-section{
+  width:100%;
+  max-width:none;
+  padding:72px 20px 68px!important;
+  margin:0!important;
+  background:#FAF8F5!important;
+  border-top:1px solid #E7E0D8!important;
+  border-bottom:1px solid #E7E0D8!important;
+  text-align:center;
+  overflow:hidden;
+}
+#client-chronicles-section .ssv-editorial-shell{width:min(1080px,100%);margin:0 auto}
+#client-chronicles-section .cc-header{margin:0 auto 30px!important}
+#client-chronicles-section .cc-eyebrow,
+#instagram-editorial .drape-editorial-eyebrow,
+#visit .ssv-store-eyebrow,
+#visit .ssv-store-label{
+  color:#A88A60!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:10px!important;
+  line-height:1.2!important;
+  font-weight:600!important;
+  letter-spacing:.24em!important;
+  text-transform:uppercase!important;
+}
+#client-chronicles-section .cc-title,
+#instagram-editorial .drape-editorial-title,
+#visit .ssv-store-title{
+  color:#25211F!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+#client-chronicles-section .cc-title{font-size:clamp(38px,6vw,62px)!important;line-height:.95!important;letter-spacing:.035em!important}
+#client-chronicles-section .cc-subtitle,
+#instagram-editorial .drape-editorial-subtitle,
+#visit .ssv-store-subtitle{
+  color:#77706A!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:18px!important;
+  line-height:1.45!important;
+  font-style:italic!important;
+}
+#client-chronicles-section .cc-subtitle{margin:9px 0 0!important}
+#client-chronicles-section .ssv-voices-track{
+  display:flex!important;
+  gap:14px!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:4px 2px 12px!important;
+  overflow-x:auto!important;
+  scroll-snap-type:x mandatory!important;
+  scrollbar-width:none!important;
+}
+#client-chronicles-section .ssv-voices-track::-webkit-scrollbar{display:none}
+#client-chronicles-section .ssv-voice-card{
+  flex:0 0 min(430px,78vw)!important;
+  min-height:190px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  padding:28px 28px 26px!important;
+  border:1px solid #E5DDD3!important;
+  border-radius:2px!important;
+  background:#FFFDF9!important;
+  box-shadow:0 10px 28px rgba(38,31,26,.045)!important;
+  text-align:left!important;
+  scroll-snap-align:start!important;
+}
+#client-chronicles-section .ssv-voice-quote{margin:0 0 9px!important;color:#B38E5D!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:42px!important;line-height:.55!important}
+#client-chronicles-section .ssv-voice-text{margin:0!important;color:#2D2926!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:20px!important;line-height:1.38!important;font-weight:400!important}
+#client-chronicles-section .ssv-voices-hint{margin:17px 0 19px!important;color:#A88A60!important;font-family:"Montserrat","Inter",Arial,sans-serif!important;font-size:9px!important;letter-spacing:.23em!important;font-weight:600!important}
+#client-chronicles-section .ssv-voices-hint span{font-size:14px;margin-left:4px}
+#client-chronicles-section .cc-footer-cta{display:flex;justify-content:center}
+#client-chronicles-section .cc-google-link{
+  display:inline-block!important;
+  padding:0 0 6px!important;
+  border-bottom:1px solid #B9A993!important;
+  color:#4C4742!important;
+  background:transparent!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:10px!important;
+  line-height:1.2!important;
+  letter-spacing:.18em!important;
+  font-weight:600!important;
+  text-decoration:none!important;
+  text-transform:uppercase!important;
+}
+#client-chronicles-section .ssv-voice-card > *:not(.ssv-voice-quote):not(.ssv-voice-text),
+#client-chronicles-section .ssv-voice-by,
+.ssv-voice-by,
+.chronicle-author,
+.cc-author{
+  display:none!important;
+  visibility:hidden!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+#instagram-editorial{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:86px 20px 82px!important;
+  background:#F7F3ED!important;
+  border-bottom:1px solid #E7E0D8!important;
+  text-align:center!important;
+  overflow:hidden!important;
+}
+#instagram-editorial .drape-editorial-content{width:min(760px,100%);margin:0 auto!important}
+#instagram-editorial .ssv-section-mark{width:46px;height:46px;margin:0 auto 24px;border:1px solid #DED3C4;border-radius:50%;display:grid;place-items:center;background:#FAF8F5}
+#instagram-editorial .ssv-section-mark img{width:23px;height:23px;object-fit:contain;opacity:.72}
+#instagram-editorial .drape-editorial-title{margin:12px 0 15px!important;font-size:clamp(42px,7vw,72px)!important;line-height:.95!important}
+#instagram-editorial .drape-editorial-subtitle{max-width:540px;margin:0 auto!important;font-size:19px!important}
+#instagram-editorial .drape-editorial-cta{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:18px!important;
+  min-width:250px!important;
+  min-height:52px!important;
+  margin-top:31px!important;
+  padding:15px 22px!important;
+  border:1px solid #55504B!important;
+  background:transparent!important;
+  color:#2C2926!important;
+  text-decoration:none!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  transition:background .2s ease,color .2s ease,border-color .2s ease!important;
+}
+#instagram-editorial .drape-editorial-cta:hover{background:#211E1C!important;color:#FAF8F5!important;border-color:#211E1C!important}
+
+#visit{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:84px 20px 88px!important;
+  background:#FAF8F5!important;
+  border-bottom:1px solid #E7E0D8!important;
+  text-align:center!important;
+}
+#visit .ssv-store-header{width:min(850px,100%);margin:0 auto 42px!important}
+#visit .ssv-store-title{margin:12px 0 14px!important;font-size:clamp(43px,7vw,72px)!important;line-height:.95!important}
+#visit .ssv-store-subtitle{margin:0!important;font-size:19px!important}
+#visit .ssv-store-grid{width:min(820px,100%);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #E3DCD4;border-bottom:1px solid #E3DCD4}
+#visit .ssv-store-col{padding:29px 24px 31px!important}
+#visit .ssv-store-col+ .ssv-store-col{border-left:1px solid #E3DCD4}
+#visit .ssv-store-icon{width:38px;height:38px;margin:0 auto 14px;display:grid;place-items:center;border:1px solid #E2D8CA;border-radius:50%;background:#FFFDF9}
+#visit .ssv-store-icon img{width:20px;height:20px;object-fit:contain;opacity:.68}
+#visit .ssv-store-label{display:block!important;margin-bottom:11px!important}
+#visit .ssv-store-val{margin:0!important;color:#37322E!important;font-family:"Inter",Arial,sans-serif!important;font-size:13px!important;line-height:1.75!important;font-weight:400!important}
+#visit .ssv-store-actions{width:min(820px,100%);margin:30px auto 0!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}
+#visit .ssv-store-btn{
+  min-height:56px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:11px!important;
+  padding:14px 18px!important;
+  border:1px solid #5A554F!important;
+  background:transparent!important;
+  color:#272421!important;
+  text-decoration:none!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+}
+#visit .ssv-store-btn img{width:19px;height:19px;object-fit:contain;opacity:.72}
+#visit .ssv-store-btn-secondary{background:#211E1C!important;border-color:#211E1C!important;color:#FAF8F5!important}
+#visit .ssv-store-btn:hover{background:#211E1C!important;color:#FAF8F5!important;border-color:#211E1C!important}
+#visit .ssv-store-btn-secondary:hover{background:#B38E5D!important;border-color:#B38E5D!important;color:#211E1C!important}
+
+@media(max-width:600px){
+  #client-chronicles-section{padding:58px 16px 54px!important}
+  #client-chronicles-section .cc-header{margin-bottom:25px!important}
+  #client-chronicles-section .cc-title{font-size:39px!important;letter-spacing:.02em!important}
+  #client-chronicles-section .cc-subtitle{font-size:17px!important}
+  #client-chronicles-section .ssv-voices-track{gap:10px!important;padding-inline:0!important}
+  #client-chronicles-section .ssv-voice-card{flex-basis:82vw!important;min-height:176px!important;padding:25px 21px!important}
+  #client-chronicles-section .ssv-voice-text{font-size:19px!important}
+  #instagram-editorial{padding:66px 18px 62px!important}
+  #instagram-editorial .ssv-section-mark{margin-bottom:20px}
+  #instagram-editorial .drape-editorial-title{font-size:44px!important}
+  #instagram-editorial .drape-editorial-subtitle{font-size:17px!important}
+  #instagram-editorial .drape-editorial-cta{width:min(100%,320px);min-width:0;margin-top:27px!important}
+  #visit{padding:65px 16px 68px!important}
+  #visit .ssv-store-header{margin-bottom:31px!important}
+  #visit .ssv-store-title{font-size:45px!important}
+  #visit .ssv-store-subtitle{font-size:17px!important}
+  #visit .ssv-store-grid{grid-template-columns:1fr}
+  #visit .ssv-store-col{padding:27px 12px 29px!important}
+  #visit .ssv-store-col+.ssv-store-col{border-left:0;border-top:1px solid #E3DCD4}
+  #visit .ssv-store-actions{grid-template-columns:1fr!important;margin-top:24px!important;gap:10px!important}
+}
 </style>
 
 
@@ -6714,7 +6921,7 @@ html,body{overflow-x:hidden!important;}
     <div class="cc-header">
       <p class="cc-eyebrow">CUSTOMER VOICES</p>
       <h2 class="cc-title" id="client-chronicles-title">CLIENT CHRONICLES</h2>
-      <p class="cc-subtitle">From those who wear us.</p>
+      <p class="cc-subtitle">Real words from our customers.</p>
     </div>
     <div class="ssv-voices-track" aria-label="Customer reviews">
       <article class="ssv-voice-card"><div class="ssv-voice-quote" aria-hidden="true">“</div><p class="ssv-voice-text">The saree looked beautiful when worn, and the fabric felt lovely.</p></article>
@@ -6722,15 +6929,18 @@ html,body{overflow-x:hidden!important;}
       <article class="ssv-voice-card"><div class="ssv-voice-quote" aria-hidden="true">“</div><p class="ssv-voice-text">Quick WhatsApp service and a lovely collection. It was easy to choose from Hyderabad.</p></article>
       <article class="ssv-voice-card"><div class="ssv-voice-quote" aria-hidden="true">“</div><p class="ssv-voice-text">Good choice for sarees when shopping from Nizamabad. The colours and fabric were lovely.</p></article>
     </div>
-    <p class="ssv-voices-hint" aria-hidden="true">SWIPE TO EXPLORE</p>
+    <p class="ssv-voices-hint" aria-hidden="true">SWIPE TO EXPLORE <span>→</span></p>
     <div class="cc-footer-cta"><a class="ssv-voice-link cc-google-link" href="https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews" target="_blank" rel="noopener noreferrer">Read More Reviews on Google ↗</a></div>
   </div>
 </section>
 
 <section class="drape-editorial-section" id="instagram-editorial" aria-label="Our Collection">
   <div class="drape-editorial-content">
+    <div class="ssv-section-mark" aria-hidden="true">
+      <img src="./assets/instagram-icon.png" alt="" loading="lazy">
+    </div>
     <p class="drape-editorial-eyebrow">OUR COLLECTION</p>
-    <h2 class="drape-editorial-title">See our collection.</h2>
+    <h2 class="drape-editorial-title">Find something you'll love.</h2>
     <p class="drape-editorial-subtitle">See our latest sarees, dresses and new arrivals on Instagram.</p>
     <a class="drape-editorial-cta" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="See our collection on Instagram"><span>View on Instagram</span><span aria-hidden="true">↗</span></a>
   </div>
@@ -6739,16 +6949,30 @@ html,body{overflow-x:hidden!important;}
 <section class="ssv-store-section" id="visit" aria-label="Store Details">
   <div class="ssv-store-header">
     <span class="ssv-store-eyebrow">STORE DETAILS</span>
-    <h2 class="ssv-store-title">Just visit us.</h2>
+    <h2 class="ssv-store-title">Visit us in Kamareddy.</h2>
     <p class="ssv-store-subtitle">Come in, take your time, and see the collection in person.</p>
   </div>
+
   <div class="ssv-store-grid">
-    <div class="ssv-store-col"><span class="ssv-store-label">THE BOUTIQUE</span><p class="ssv-store-val">SRI SAI VANI COLLECTIONS<br>Nizamsagar Rd, Vidhya Nagar Colony<br>Kamareddy, Telangana 503111</p></div>
-    <div class="ssv-store-col"><span class="ssv-store-label">VISITING HOURS</span><p class="ssv-store-val">Monday – Sunday<br>10:00 AM – 9:00 PM</p></div>
+    <div class="ssv-store-col">
+      <span class="ssv-store-icon" aria-hidden="true"><img src="./assets/location-icon.png" alt="" loading="lazy"></span>
+      <span class="ssv-store-label">THE BOUTIQUE</span>
+      <p class="ssv-store-val">SRI SAI VANI COLLECTIONS<br>Nizamsagar Rd, Vidhya Nagar Colony<br>Kamareddy, Telangana 503111</p>
+    </div>
+    <div class="ssv-store-col">
+      <span class="ssv-store-icon" aria-hidden="true"><img src="./assets/clock-icon.png" alt="" loading="lazy"></span>
+      <span class="ssv-store-label">VISITING HOURS</span>
+      <p class="ssv-store-val">Monday – Sunday<br>10:00 AM – 9:00 PM</p>
+    </div>
   </div>
+
   <div class="ssv-store-actions">
-    <a class="ssv-store-btn" href="https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac" target="_blank" rel="noopener noreferrer">Open in Google Maps ↗</a>
-    <a class="ssv-store-btn ssv-store-btn-secondary" href="https://wa.me/919999999999?text=Hi%20Sri%20Sai%20Vani%2C%20I%27d%20like%20to%20know%20more%20about%20your%20collection" target="_blank" rel="noopener noreferrer">Message on WhatsApp ↗</a>
+    <a class="ssv-store-btn" href="https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac" target="_blank" rel="noopener noreferrer">
+      <img src="./assets/google-maps-icon.png" alt="" loading="lazy"><span>Open in Google Maps</span><span aria-hidden="true">↗</span>
+    </a>
+    <a class="ssv-store-btn ssv-store-btn-secondary" href="https://wa.me/919999999999?text=Hi%20Sri%20Sai%20Vani%2C%20I%27d%20like%20to%20know%20more%20about%20your%20collection" target="_blank" rel="noopener noreferrer">
+      <img src="./assets/whatsapp-icon.png" alt="" loading="lazy"><span>Message on WhatsApp</span><span aria-hidden="true">↗</span>
+    </a>
   </div>
 </section>
 
