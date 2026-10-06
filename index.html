@@ -6872,7 +6872,94 @@ html,body{overflow-x:hidden!important;}
   #visit .ssv-store-col+.ssv-store-col{border-left:0;border-top:1px solid #E3DCD4}
   #visit .ssv-store-actions{grid-template-columns:1fr!important;margin-top:24px!important;gap:10px!important}
 }
-</style>
+<style id="lux3-editorial-overhaul">
+/* =========================================================
+   STYLE 3: EDITORIAL LUXURY
+   Scoped only to the three public editorial sections.
+   Existing catalogue/admin functionality is untouched.
+   ========================================================= */
+.lux3-section{position:relative;width:100%;overflow:hidden;border-bottom:1px solid #E4D8C5;color:#1C1917;background:#F8F3EB}
+.lux3-inner{position:relative;z-index:2;width:min(1180px,100%);margin:0 auto;padding:72px 32px}
+.lux3-heading{text-align:center}
+.lux3-heading-center{max-width:900px;margin:0 auto 42px}
+.lux3-eyebrow{margin:0 0 12px;color:#9D7C4E;font:600 10px/1 "Montserrat",Arial,sans-serif;letter-spacing:.27em;text-transform:uppercase}
+.lux3-heading h2{margin:0;font:400 clamp(42px,5.2vw,68px)/.94 "Cormorant Garamond",Georgia,serif;letter-spacing:-.035em}
+.lux3-intro{margin:15px 0 0;color:#706963;font:italic 400 20px/1.35 "Cormorant Garamond",Georgia,serif}
+
+/* Client Chronicles */
+.lux3-reviews{background:
+  radial-gradient(circle at 12% 20%,rgba(179,142,93,.08),transparent 26%),
+  #F8F3EB}
+.lux3-review-rail{display:grid;grid-template-columns:minmax(115px,.45fr) minmax(280px,1fr) minmax(280px,1fr) minmax(115px,.45fr);gap:14px;align-items:stretch;overflow:hidden}
+.lux3-review-image{min-height:220px;background:#E7DCCB;overflow:hidden}
+.lux3-review-image img{display:block;width:100%;height:100%;object-fit:cover}
+.lux3-review-card{min-height:220px;padding:25px 26px 23px;background:rgba(255,252,247,.92);border:1px solid #E2D6C7;border-radius:8px;box-shadow:0 12px 30px rgba(63,45,28,.055);display:flex;flex-direction:column;justify-content:flex-start}
+.lux3-quote{display:block;color:#B38E5D;font:600 44px/0.7 Georgia,serif}
+.lux3-review-card p{margin:27px 0 22px;max-width:360px;font:400 21px/1.25 "Cormorant Garamond",Georgia,serif}
+.lux3-stars{margin-top:auto;color:#B38E5D;font:500 16px/1 "Montserrat",Arial,sans-serif;letter-spacing:.08em}
+.lux3-review-nav{display:flex;align-items:center;justify-content:center;gap:9px;margin:18px 0 20px;color:#8C7760;font:300 22px/1 "Cormorant Garamond",Georgia,serif}
+.lux3-review-nav i{width:8px;height:8px;border:1px solid #B9A78E;border-radius:50%;display:block}
+.lux3-review-nav i.active{background:#A77D45;border-color:#A77D45}
+.lux3-text-link{display:block;width:max-content;max-width:100%;margin:0 auto;color:#4B443E;text-decoration:none;border-bottom:1px solid #BDAF9E;padding-bottom:5px;font:500 9px/1 "Montserrat",Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+
+/* Our Collection */
+.lux3-collection{min-height:360px;background:#7B5A3B}
+.lux3-collection-media{position:absolute;inset:0;background-image:url("/premium_saree_website_libas/assets/instagram-bg.jpg");background-size:cover;background-position:center}
+.lux3-collection-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(54,36,23,.78) 0%,rgba(68,44,27,.48) 46%,rgba(53,34,20,.18) 100%)}
+.lux3-collection-content{position:relative;z-index:2;width:min(560px,100%);padding:74px 32px 78px;margin-left:max(0px,calc((100vw - 1180px)/2));color:#FFF9F0}
+.lux3-collection .lux3-eyebrow{color:#E7CFA7}
+.lux3-collection h2{margin:0;font:400 clamp(43px,5.2vw,68px)/.9 "Cormorant Garamond",Georgia,serif;letter-spacing:-.035em}
+.lux3-collection-content>p:not(.lux3-eyebrow){max-width:390px;margin:18px 0 25px;color:#F1E5D6;font:400 17px/1.45 "Cormorant Garamond",Georgia,serif}
+.lux3-gold-button{display:flex;align-items:center;justify-content:center;gap:12px;width:245px;min-height:52px;padding:12px 16px;background:#B38E5D;color:#201914;text-decoration:none;font:600 9px/1 "Montserrat",Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.lux3-gold-button img{width:18px;height:18px;object-fit:contain}
+.lux3-gold-button span:last-child{margin-left:auto;font-size:15px;letter-spacing:0}
+
+/* Store */
+.lux3-store{background:#EDE3D4}
+.lux3-store-media{position:absolute;inset:0;background-image:url("/premium_saree_website_libas/assets/section-bg-linen.jpg");background-size:cover;background-position:center}
+.lux3-store-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,246,239,.95) 0%,rgba(250,246,239,.86) 55%,rgba(224,205,180,.58) 100%)}
+.lux3-store-inner{padding-top:64px;padding-bottom:70px}
+.lux3-store-details{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:900px;margin:0 auto;border-top:1px solid rgba(133,108,78,.28);border-bottom:1px solid rgba(133,108,78,.28)}
+.lux3-store-block{display:flex;gap:16px;align-items:flex-start;padding:27px 28px}
+.lux3-store-block+ .lux3-store-block{border-left:1px solid rgba(133,108,78,.28)}
+.lux3-store-icon{width:38px;height:38px;flex:0 0 38px;border:1px solid #CDBD9F;border-radius:50%;display:grid;place-items:center;background:rgba(255,250,241,.55)}
+.lux3-store-icon img{width:19px;height:19px;object-fit:contain}
+.lux3-store-block p{margin:0;color:#4E4740;font:400 13px/1.65 "Inter",Arial,sans-serif}
+.lux3-store-block .lux3-label{margin-bottom:7px;color:#8B6B43;font:600 9px/1.2 "Montserrat",Arial,sans-serif;letter-spacing:.22em}
+.lux3-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:900px;margin:20px auto 0}
+.lux3-outline-button,.lux3-dark-button{min-height:52px;padding:13px 18px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font:600 9px/1 "Montserrat",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.lux3-outline-button{border:1px solid #8D7A63;color:#302A25;background:rgba(255,252,247,.5)}
+.lux3-dark-button{border:1px solid #1C1917;color:#FAF7F2;background:#1C1917}
+.lux3-dark-button img{width:17px;height:17px;object-fit:contain}
+.lux3-outline-button span:last-child,.lux3-dark-button span:last-child{margin-left:auto;font-size:14px;letter-spacing:0}
+
+@media(max-width:760px){
+  .lux3-inner{padding:56px 18px}
+  .lux3-heading-center{margin-bottom:30px}
+  .lux3-eyebrow{font-size:9px;letter-spacing:.24em}
+  .lux3-intro{font-size:18px}
+  .lux3-review-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+  .lux3-review-rail::-webkit-scrollbar{display:none}
+  .lux3-review-image,.lux3-review-card{flex:0 0 78vw;min-height:230px;scroll-snap-align:center}
+  .lux3-review-image{flex-basis:28vw}
+  .lux3-review-card{padding:24px 22px}
+  .lux3-review-card p{font-size:20px}
+  .lux3-review-nav{margin-top:16px}
+  .lux3-text-link{font-size:8px;letter-spacing:.18em}
+  .lux3-collection{min-height:390px}
+  .lux3-collection-media{background-position:58% center}
+  .lux3-collection-overlay{background:linear-gradient(90deg,rgba(54,36,23,.82),rgba(54,36,23,.34))}
+  .lux3-collection-content{width:100%;padding:64px 22px 70px;margin:0}
+  .lux3-collection h2{font-size:48px}
+  .lux3-collection-content>p:not(.lux3-eyebrow){font-size:17px}
+  .lux3-gold-button{width:100%;max-width:300px}
+  .lux3-store-overlay{background:rgba(250,246,239,.9)}
+  .lux3-store-details{grid-template-columns:1fr}
+  .lux3-store-block{padding:22px 8px}
+  .lux3-store-block+ .lux3-store-block{border-left:0;border-top:1px solid rgba(133,108,78,.28)}
+  .lux3-actions{grid-template-columns:1fr;gap:10px}
+}
+</style></style>
 
 
 </head>
@@ -6950,66 +7037,93 @@ html,body{overflow-x:hidden!important;}
 </section>
 </main>
 
-<section class="chronicles-section" id="client-chronicles-section" aria-labelledby="client-chronicles-title">
-  <div class="ssv-editorial-shell">
-    <div class="cc-header">
-      <p class="cc-eyebrow">CUSTOMER VOICES</p>
-      <h2 class="cc-title" id="client-chronicles-title">CLIENT CHRONICLES</h2>
-      <p class="cc-subtitle">Real words from our customers.</p>
+<section class="lux3-section lux3-reviews" id="client-chronicles-section" aria-labelledby="lux3-reviews-title">
+  <div class="lux3-inner">
+    <header class="lux3-heading lux3-heading-center">
+      <p class="lux3-eyebrow">CUSTOMER VOICES</p>
+      <h2 id="lux3-reviews-title">Client Chronicles</h2>
+      <p class="lux3-intro">Real words from our customers.</p>
+    </header>
+
+    <div class="lux3-review-rail" aria-label="Customer reviews">
+      <div class="lux3-review-image" aria-hidden="true">
+        <img src="/premium_saree_website_libas/assets/fabric-accent.jpg" alt="" loading="lazy">
+      </div>
+
+      <article class="lux3-review-card">
+        <span class="lux3-quote" aria-hidden="true">“</span>
+        <p>The saree looked beautiful when worn, and the fabric felt lovely.</p>
+        <div class="lux3-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      </article>
+
+      <article class="lux3-review-card">
+        <span class="lux3-quote" aria-hidden="true">“</span>
+        <p>We came for wedding shopping in Kamareddy and found exactly what we wanted. The service was very helpful.</p>
+        <div class="lux3-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      </article>
+
+      <div class="lux3-review-image" aria-hidden="true">
+        <img src="/premium_saree_website_libas/assets/collection-flow.png?v=20261006" alt="" loading="lazy">
+      </div>
     </div>
-    <div class="ssv-voices-track" aria-label="Customer reviews">
-      <article class="ssv-voice-card"><div class="ssv-voice-quote" aria-hidden="true">“</div><p class="ssv-voice-text">The saree looked beautiful when worn, and the fabric felt lovely.</p></article>
-      <article class="ssv-voice-card"><div class="ssv-voice-quote" aria-hidden="true">“</div><p class="ssv-voice-text">I came for wedding shopping from Kamareddy and found exactly what I wanted. The service was very helpful.</p></article>
-      <article class="ssv-voice-card"><div class="ssv-voice-quote" aria-hidden="true">“</div><p class="ssv-voice-text">Quick WhatsApp service and a lovely collection. It was easy to choose from Hyderabad.</p></article>
-      <article class="ssv-voice-card"><div class="ssv-voice-quote" aria-hidden="true">“</div><p class="ssv-voice-text">Good choice for sarees when shopping from Nizamabad. The colours and fabric were lovely.</p></article>
+
+    <div class="lux3-review-nav" aria-hidden="true">
+      <span>‹</span><i class="active"></i><i></i><i></i><span>›</span>
     </div>
-    <p class="ssv-voices-hint" aria-hidden="true">SWIPE TO EXPLORE <span>→</span></p>
-    <div class="cc-footer-cta"><a class="ssv-voice-link cc-google-link" href="https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews" target="_blank" rel="noopener noreferrer">Read More Reviews on Google ↗</a></div>
+    <a class="lux3-text-link" href="https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews" target="_blank" rel="noopener noreferrer">View all Google reviews ↗</a>
   </div>
 </section>
 
-<section class="drape-editorial-section" id="instagram-editorial" aria-label="Our Collection">
-  <div class="drape-editorial-content">
-    <div class="ssv-section-mark" aria-hidden="true">
+<section class="lux3-section lux3-collection" id="instagram-editorial" aria-labelledby="lux3-collection-title">
+  <div class="lux3-collection-media" aria-hidden="true"></div>
+  <div class="lux3-collection-overlay"></div>
+  <div class="lux3-collection-content">
+    <p class="lux3-eyebrow">OUR COLLECTION</p>
+    <h2 id="lux3-collection-title">Find something<br>you’ll love.</h2>
+    <p>See our latest sarees, dresses and new arrivals on Instagram.</p>
+    <a class="lux3-gold-button" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="View our collection on Instagram">
       <img src="/premium_saree_website_libas/assets/instagram-icon.png" alt="" loading="lazy">
-    </div>
-    <p class="drape-editorial-eyebrow">OUR COLLECTION</p>
-    <h2 class="drape-editorial-title">See our collection.</h2>
-    <p class="drape-editorial-subtitle">See our latest sarees, dresses and new arrivals on Instagram.</p>
-    <div class="collection-flow-frame" aria-hidden="true">
-      <img class="collection-flow-image" src="assets/collection-flow.png?v=20261006" alt="" loading="eager" decoding="async">
-    </div>
-    <a class="drape-editorial-cta" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="See our collection on Instagram"><span>View on Instagram</span><span aria-hidden="true">↗</span></a>
+      <span>View on Instagram</span><span aria-hidden="true">↗</span>
+    </a>
   </div>
 </section>
 
-<section class="ssv-store-section" id="visit" aria-label="Store Details">
-  <div class="ssv-store-header">
-    <span class="ssv-store-eyebrow">STORE DETAILS</span>
-    <h2 class="ssv-store-title">Visit us in Kamareddy.</h2>
-    <p class="ssv-store-subtitle">Come in, take your time, and see the collection in person.</p>
-  </div>
+<section class="lux3-section lux3-store" id="visit" aria-labelledby="lux3-store-title">
+  <div class="lux3-store-media" aria-hidden="true"></div>
+  <div class="lux3-store-overlay"></div>
+  <div class="lux3-inner lux3-store-inner">
+    <header class="lux3-heading lux3-heading-center">
+      <p class="lux3-eyebrow">STORE DETAILS</p>
+      <h2 id="lux3-store-title">Visit us in Kamareddy.</h2>
+      <p class="lux3-intro">Come in, take your time, and see the collection in person.</p>
+    </header>
 
-  <div class="ssv-store-grid">
-    <div class="ssv-store-col">
-      <span class="ssv-store-icon" aria-hidden="true"><img src="/premium_saree_website_libas/assets/location-icon.png" alt="" loading="lazy"></span>
-      <span class="ssv-store-label">THE BOUTIQUE</span>
-      <p class="ssv-store-val">SRI SAI VANI COLLECTIONS<br>Nizamsagar Rd, Vidhya Nagar Colony<br>Kamareddy, Telangana 503111</p>
+    <div class="lux3-store-details">
+      <div class="lux3-store-block">
+        <span class="lux3-store-icon"><img src="/premium_saree_website_libas/assets/location-icon.png" alt="" loading="lazy"></span>
+        <div>
+          <p class="lux3-label">THE BOUTIQUE</p>
+          <p>SRI SAI VANI COLLECTIONS<br>Nizamsagar Rd, Vidhya Nagar Colony<br>Kamareddy, Telangana 503111</p>
+        </div>
+      </div>
+      <div class="lux3-store-block">
+        <span class="lux3-store-icon"><img src="/premium_saree_website_libas/assets/clock-icon.png" alt="" loading="lazy"></span>
+        <div>
+          <p class="lux3-label">VISITING HOURS</p>
+          <p>Monday – Sunday<br>10:00 AM – 9:00 PM</p>
+        </div>
+      </div>
     </div>
-    <div class="ssv-store-col">
-      <span class="ssv-store-icon" aria-hidden="true"><img src="/premium_saree_website_libas/assets/clock-icon.png" alt="" loading="lazy"></span>
-      <span class="ssv-store-label">VISITING HOURS</span>
-      <p class="ssv-store-val">Monday – Sunday<br>10:00 AM – 9:00 PM</p>
-    </div>
-  </div>
 
-  <div class="ssv-store-actions">
-    <a class="ssv-store-btn" href="https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac" target="_blank" rel="noopener noreferrer">
-      <img src="/premium_saree_website_libas/assets/google-maps-icon.png" alt="" loading="lazy"><span>Open in Google Maps</span><span aria-hidden="true">↗</span>
-    </a>
-    <a class="ssv-store-btn ssv-store-btn-secondary" href="https://wa.me/919999999999?text=Hi%20Sri%20Sai%20Vani%2C%20I%27d%20like%20to%20know%20more%20about%20your%20collection" target="_blank" rel="noopener noreferrer">
-      <img src="/premium_saree_website_libas/assets/whatsapp-icon.png" alt="" loading="lazy"><span>Message on WhatsApp</span><span aria-hidden="true">↗</span>
-    </a>
+    <div class="lux3-actions">
+      <a class="lux3-outline-button" href="https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac" target="_blank" rel="noopener noreferrer">
+        <span>Open in Google Maps</span><span aria-hidden="true">↗</span>
+      </a>
+      <a class="lux3-dark-button" href="https://wa.me/919999999999?text=Hi%20Sri%20Sai%20Vani%2C%20I%27d%20like%20to%20know%20more%20about%20your%20collection" target="_blank" rel="noopener noreferrer">
+        <img src="/premium_saree_website_libas/assets/whatsapp-icon.png" alt="" loading="lazy">
+        <span>Message on WhatsApp</span><span aria-hidden="true">↗</span>
+      </a>
+    </div>
   </div>
 </section>
 
