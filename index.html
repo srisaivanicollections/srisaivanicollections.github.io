@@ -9063,6 +9063,61 @@ HERO DEPLOYMENT SAFETY GUARD
     inset:14px !important;
   }
 }
+
+/* FINAL STORE DETAILS FIX: restore Case 2 architectural panel */
+#visit.option3-store{
+  display:grid !important;
+  grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr) !important;
+  min-height:500px !important;
+  background:#FAF8F5 !important;
+}
+#visit .option3-store-media{
+  display:block !important;
+  visibility:visible !important;
+  min-height:500px !important;
+  height:100% !important;
+  position:relative !important;
+  overflow:hidden !important;
+  background:#E8DED1 url("assets/store-bg.jpg?v=5") center/cover no-repeat !important;
+}
+#visit .option3-store-media > img{
+  display:none !important;
+  visibility:hidden !important;
+}
+#visit .option3-store-media:before{
+  content:"" !important;
+  position:absolute !important;
+  inset:18px !important;
+  border:1px solid rgba(255,253,249,.78) !important;
+  z-index:2 !important;
+  pointer-events:none !important;
+}
+#visit .option3-store-media:after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background:linear-gradient(90deg,rgba(28,25,23,.02),rgba(28,25,23,.10)) !important;
+  z-index:1 !important;
+}
+#visit .option3-store-content{
+  min-width:0 !important;
+  background:#FAF8F5 !important;
+  padding:58px clamp(28px,4.5vw,64px) !important;
+}
+@media(max-width:760px){
+  #visit.option3-store{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+  }
+  #visit .option3-store-media{
+    display:block !important;
+    height:270px !important;
+    min-height:270px !important;
+  }
+  #visit .option3-store-content{
+    padding:46px 22px 50px !important;
+  }
+}
 </style>
 
 
