@@ -6616,6 +6616,21 @@ footer .brand b{
   #instagram-editorial .drape-editorial-title{font-size:43px!important;}
   #instagram-editorial .drape-editorial-subtitle{font-size:16px!important;}
 }
+
+/* Mobile Store Details correction: contain horizontal overflow and tighten the opening rhythm */
+html,body{overflow-x:hidden!important;}
+#visit.ssv-store-section{position:relative;overflow:hidden!important;}
+@media(max-width:600px){
+  #visit.ssv-store-section{padding:42px 14px 48px!important;}
+  #visit .ssv-store-header{margin-bottom:24px!important;}
+  #visit .ssv-store-title{font-size:clamp(34px,9vw,42px)!important;line-height:1.02!important;}
+  #visit .ssv-store-subtitle{font-size:16px!important;line-height:1.35!important;}
+  #visit .ssv-store-grid{margin-bottom:24px!important;}
+  #visit .ssv-store-col{padding:18px 8px!important;}
+  #visit .ssv-store-val{font-size:13px!important;line-height:1.55!important;}
+  #visit .ssv-store-actions{gap:10px!important;}
+  #visit .ssv-store-btn{width:min(100%,610px)!important;box-sizing:border-box!important;padding:14px 18px!important;}
+}
 </style>
 
 
