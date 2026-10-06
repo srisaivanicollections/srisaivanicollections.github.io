@@ -6872,7 +6872,7 @@ html,body{overflow-x:hidden!important;}
   #visit .ssv-store-col+.ssv-store-col{border-left:0;border-top:1px solid #E3DCD4}
   #visit .ssv-store-actions{grid-template-columns:1fr!important;margin-top:24px!important;gap:10px!important}
 }
-<style id="lux3-editorial-overhaul">
+/* STYLE 3: EDITORIAL LUXURY */
 /* =========================================================
    STYLE 3: EDITORIAL LUXURY
    Scoped only to the three public editorial sections.
@@ -6959,7 +6959,100 @@ html,body{overflow-x:hidden!important;}
   .lux3-store-block+ .lux3-store-block{border-left:0;border-top:1px solid rgba(133,108,78,.28)}
   .lux3-actions{grid-template-columns:1fr;gap:10px}
 }
-</style></style>
+
+/* =========================================================
+   HERO RECOVERY GUARD
+   Restores the existing hero presentation after the Style 3
+   section insertion. No catalog, product, admin, auth or CRUD
+   selectors are modified.
+   ========================================================= */
+.hero-editorial{
+  display:block !important;
+  position:relative !important;
+  width:100% !important;
+  min-height:0 !important;
+  height:auto !important;
+  overflow:hidden !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+.hero-image-wrapper{
+  position:relative !important;
+  width:100% !important;
+  overflow:hidden !important;
+}
+.hero-banner-img{
+  display:block !important;
+  width:100% !important;
+}
+.hero-content-container{
+  position:relative !important;
+  z-index:2 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+.hero-editorial-card{
+  visibility:visible !important;
+  opacity:1 !important;
+}
+@media (min-width:769px){
+  .hero-editorial{
+    min-height:520px !important;
+    max-height:640px !important;
+    display:flex !important;
+    align-items:center !important;
+  }
+  .hero-image-wrapper{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    z-index:1 !important;
+  }
+  .hero-banner-img{
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:85% center !important;
+  }
+}
+@media (max-width:768px){
+  .hero-editorial{
+    display:flex !important;
+    flex-direction:column !important;
+    min-height:0 !important;
+    max-height:none !important;
+  }
+  .hero-image-wrapper{
+    position:relative !important;
+    inset:auto !important;
+    width:100% !important;
+    height:330px !important;
+    min-height:330px !important;
+    z-index:1 !important;
+    background:#F3EFEA !important;
+  }
+  .hero-banner-img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:78% 12% !important;
+  }
+  .hero-content-container{
+    position:relative !important;
+    z-index:2 !important;
+    width:100% !important;
+    padding:32px 22px 28px !important;
+    background:#FAF8F5 !important;
+    box-sizing:border-box !important;
+  }
+  .hero-editorial-card{
+    width:100% !important;
+    max-width:360px !important;
+    margin:0 auto !important;
+    text-align:center !important;
+  }
+}
+\n</style>
 
 
 </head>
