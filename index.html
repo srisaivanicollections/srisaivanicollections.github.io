@@ -7948,14 +7948,19 @@ HERO DEPLOYMENT SAFETY GUARD
 }
 
 
-/* Final background-layer cleanup: exactly one intentional visual background per section */
-.option3-reviews{background-image:none !important;}
+/* Final background-layer cleanup: keep exactly one intentional background per section */
 .option3-instagram-copy:before{display:none !important;background:none !important;content:none !important;}
-.option3-instagram-copy{background:#463A32 !important;}
 #instagram-editorial .option3-instagram-image > img,
 #visit .option3-store-media > img{display:none !important;visibility:hidden !important;}
 #instagram-editorial .option3-instagram-image{background-color:#463A32 !important;}
 #visit .option3-store-media{background-color:#E8DDD0 !important;}
+/* Preserve the newly uploaded Customer Voices background after cleanup. */
+#client-chronicles-section.option3-reviews{
+  background-image:linear-gradient(rgba(250,248,245,.62),rgba(250,248,245,.70)),url('assets/file_000000006eb482118bd2d6baebd10ffa.png') !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}
 
 </style>
 
