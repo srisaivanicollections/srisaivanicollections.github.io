@@ -8512,7 +8512,7 @@ function productImageSrc(value){
   // Keep repository-owned product images same-origin on GitHub Pages.
   // This avoids an unnecessary raw.githubusercontent.com dependency and
   // makes the catalog more reliable on mobile/slow networks.
-  return src.replace(/^\.\//,"").replace(/^\/+,"");
+  return src.replace(/^\.\//,"").replace(/^\/+/, "");
 }
 function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
