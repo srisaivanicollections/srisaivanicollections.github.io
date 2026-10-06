@@ -9118,6 +9118,81 @@ HERO DEPLOYMENT SAFETY GUARD
     padding:46px 22px 50px !important;
   }
 }
+
+/* FINAL OVERRIDE v6: visible light editorial Store Details */
+#visit.option3-store{
+  display:grid !important;
+  grid-template-columns:42% 58% !important;
+  min-height:480px !important;
+  height:auto !important;
+  background:#FAF8F5 !important;
+}
+#visit .option3-store-media{
+  display:block !important;
+  visibility:visible !important;
+  width:100% !important;
+  height:480px !important;
+  min-height:480px !important;
+  position:relative !important;
+  overflow:hidden !important;
+  background:#EDE4D8 !important;
+}
+#visit .option3-store-media > img{
+  display:block !important;
+  visibility:visible !important;
+  width:100% !important;
+  height:100% !important;
+  min-width:100% !important;
+  min-height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  filter:none !important;
+}
+#visit .option3-store-media:before{
+  content:"" !important;
+  position:absolute !important;
+  inset:18px !important;
+  z-index:2 !important;
+  border:1px solid rgba(255,253,249,.85) !important;
+  pointer-events:none !important;
+}
+#visit .option3-store-media:after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  background:linear-gradient(90deg,rgba(250,248,245,.02),rgba(28,25,23,.08)) !important;
+  pointer-events:none !important;
+}
+#visit .option3-store-content{
+  display:flex !important;
+  visibility:visible !important;
+  min-width:0 !important;
+  background:#FAF8F5 !important;
+  padding:58px clamp(28px,4.5vw,64px) !important;
+}
+@media(max-width:760px){
+  #visit.option3-store{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    min-height:0 !important;
+  }
+  #visit .option3-store-media{
+    display:block !important;
+    width:100% !important;
+    height:260px !important;
+    min-height:260px !important;
+  }
+  #visit .option3-store-media > img{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+  }
+  #visit .option3-store-media:before{inset:14px !important}
+  #visit .option3-store-content{
+    padding:46px 22px 50px !important;
+  }
+}
 </style>
 
 
@@ -9261,7 +9336,7 @@ HERO DEPLOYMENT SAFETY GUARD
 
 <section class="lux3-section option3-store" id="visit" aria-labelledby="lux3-store-title">
   <div class="option3-store-media">
-    <img src="assets/store-image.jpg" alt="" loading="lazy">
+    <img src="assets/store-image.jpg?v=6" alt="" loading="lazy">
   </div>
   <div class="option3-store-content">
     <header class="lux3-heading">
