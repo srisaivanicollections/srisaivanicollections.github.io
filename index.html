@@ -2557,6 +2557,31 @@ footer a{
 }
 
 
+/* Collection editorial visual: uses the uploaded asset without changing storefront behavior. */
+.collection-flow-frame{
+  width:min(100%,360px);
+  margin:24px auto 26px;
+  overflow:hidden;
+  border:1px solid rgba(228,216,197,.9);
+  background:#F5F1EA;
+}
+.collection-flow-image{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:220px;
+  object-fit:cover;
+}
+@media(max-width:768px){
+  .collection-flow-frame{
+    width:min(100%,330px);
+    margin:22px auto 24px;
+  }
+  .collection-flow-image{
+    max-height:190px;
+  }
+}
+
 /* Final Instagram CTA: visible boxed action, matching Explore Collection */
 .drape-editorial-cta{
   display:inline-flex !important;
@@ -6949,8 +6974,11 @@ html,body{overflow-x:hidden!important;}
       <img src="/premium_saree_website_libas/assets/instagram-icon.png" alt="" loading="lazy">
     </div>
     <p class="drape-editorial-eyebrow">OUR COLLECTION</p>
-    <h2 class="drape-editorial-title">Find something you'll love.</h2>
+    <h2 class="drape-editorial-title">See our collection.</h2>
     <p class="drape-editorial-subtitle">See our latest sarees, dresses and new arrivals on Instagram.</p>
+    <div class="collection-flow-frame" aria-hidden="true">
+      <img class="collection-flow-image" src="/premium_saree_website_libas/assets/collection-flow.png" alt="" loading="lazy">
+    </div>
     <a class="drape-editorial-cta" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="See our collection on Instagram"><span>View on Instagram</span><span aria-hidden="true">↗</span></a>
   </div>
 </section>
