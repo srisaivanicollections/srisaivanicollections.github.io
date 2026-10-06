@@ -7586,6 +7586,140 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 
+/* FINAL ICON ALIGNMENT: Reviews / Instagram / Store */
+/* Reviews */
+#client-chronicles-section .option3-review-top{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+}
+#client-chronicles-section .option3-review-top > img{
+  display:block !important;
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  max-width:44px !important;
+  min-height:44px !important;
+  max-height:44px !important;
+  flex:0 0 44px !important;
+  object-fit:cover !important;
+  border-radius:50% !important;
+}
+#client-chronicles-section .option3-rating{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:9px !important;
+  min-height:20px !important;
+}
+#client-chronicles-section .option3-rating > img{
+  display:block !important;
+  width:68px !important;
+  height:14px !important;
+  min-width:68px !important;
+  max-width:68px !important;
+  min-height:14px !important;
+  max-height:14px !important;
+  flex:0 0 68px !important;
+  object-fit:contain !important;
+}
+
+/* Instagram CTA icon */
+#instagram-editorial .option3-instagram-button{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+}
+#instagram-editorial .option3-instagram-button > img{
+  display:block !important;
+  width:18px !important;
+  height:18px !important;
+  min-width:18px !important;
+  max-width:18px !important;
+  min-height:18px !important;
+  max-height:18px !important;
+  flex:0 0 18px !important;
+  object-fit:contain !important;
+}
+#instagram-editorial .option3-instagram-button > span:nth-of-type(1){
+  min-width:0 !important;
+  flex:1 1 auto !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+  text-overflow:ellipsis !important;
+}
+#instagram-editorial .option3-instagram-button > span:last-child{
+  flex:0 0 auto !important;
+  margin-left:auto !important;
+}
+
+/* Store information icons */
+#visit .option3-store-icon{
+  display:grid !important;
+  place-items:center !important;
+  width:36px !important;
+  height:36px !important;
+  min-width:36px !important;
+  max-width:36px !important;
+  min-height:36px !important;
+  max-height:36px !important;
+  flex:0 0 36px !important;
+  overflow:hidden !important;
+}
+#visit .option3-store-icon > img{
+  display:block !important;
+  width:17px !important;
+  height:17px !important;
+  min-width:17px !important;
+  max-width:17px !important;
+  min-height:17px !important;
+  max-height:17px !important;
+  flex:0 0 17px !important;
+  object-fit:contain !important;
+}
+
+/* Store action icons */
+#visit .option3-outline-button,
+#visit .option3-dark-button{
+  display:flex !important;
+  align-items:center !important;
+  gap:9px !important;
+}
+#visit .option3-outline-button > img,
+#visit .option3-dark-button > img{
+  display:block !important;
+  width:18px !important;
+  height:18px !important;
+  min-width:18px !important;
+  max-width:18px !important;
+  min-height:18px !important;
+  max-height:18px !important;
+  flex:0 0 18px !important;
+  object-fit:contain !important;
+}
+#visit .option3-outline-button > span:first-of-type,
+#visit .option3-dark-button > span:first-of-type{
+  min-width:0 !important;
+  flex:1 1 auto !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+  text-overflow:ellipsis !important;
+}
+#visit .option3-outline-button > span:last-child,
+#visit .option3-dark-button > span:last-child{
+  flex:0 0 auto !important;
+  margin-left:auto !important;
+}
+
+/* Keep legacy rules from resizing these exact icons */
+@media(max-width:760px){
+  #client-chronicles-section .option3-rating > img{width:68px !important;height:14px !important}
+  #instagram-editorial .option3-instagram-button > img{width:18px !important;height:18px !important}
+  #visit .option3-store-icon > img{width:17px !important;height:17px !important}
+  #visit .option3-outline-button > img,
+  #visit .option3-dark-button > img{width:18px !important;height:18px !important}
+}
+
 </style>
 
 
