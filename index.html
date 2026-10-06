@@ -8509,9 +8509,10 @@ function productImageSrc(value){
   const src=String(value||"").trim();
   if(!src)return "";
   if(/^(https?:|data:|blob:)/i.test(src))return src;
-  // GitHub raw is used for repository assets so newly uploaded images become
-  // available independently of GitHub Pages deployment propagation.
-  return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+src.replace(/^\.\//,"");
+  // Keep repository-owned product images same-origin on GitHub Pages.
+  // This avoids an unnecessary raw.githubusercontent.com dependency and
+  // makes the catalog more reliable on mobile/slow networks.
+  return src.replace(/^\.\//,"").replace(/^\/+,"");
 }
 function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
