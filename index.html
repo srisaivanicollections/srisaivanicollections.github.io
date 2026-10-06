@@ -9007,6 +9007,62 @@ HERO DEPLOYMENT SAFETY GUARD
   background:transparent !important;
   background-image:none !important;
 }
+
+/* STORE DETAILS: CASE 2 - ARCHITECTURAL EDITORIAL */
+#visit.option3-store{
+  grid-template-columns:minmax(300px,.78fr) minmax(0,1.22fr) !important;
+  background:#FAF8F5 !important;
+}
+#visit .option3-store-media{
+  position:relative !important;
+  min-height:500px !important;
+  overflow:hidden !important;
+  background:#EDE5DA !important;
+}
+#visit .option3-store-media img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  filter:saturate(.78) contrast(.94) brightness(1.04) !important;
+}
+#visit .option3-store-media:before{
+  content:"" !important;
+  position:absolute !important;
+  inset:20px !important;
+  z-index:2 !important;
+  border:1px solid rgba(255,253,249,.72) !important;
+  pointer-events:none !important;
+}
+#visit .option3-store-media:after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  background:linear-gradient(90deg,rgba(28,25,23,.02),rgba(28,25,23,.12)) !important;
+  pointer-events:none !important;
+}
+#visit .option3-store-content{
+  background:#FAF8F5 !important;
+  background-image:linear-gradient(rgba(250,248,245,.96),rgba(250,248,245,.96)),url("assets/section-bg-linen.jpg") !important;
+  background-size:cover !important;
+}
+#visit .option3-store-content .lux3-heading h2{
+  max-width:500px !important;
+  line-height:.98 !important;
+}
+@media(max-width:760px){
+  #visit.option3-store{
+    grid-template-columns:1fr !important;
+  }
+  #visit .option3-store-media{
+    min-height:280px !important;
+    height:280px !important;
+  }
+  #visit .option3-store-media:before{
+    inset:14px !important;
+  }
+}
 </style>
 
 
