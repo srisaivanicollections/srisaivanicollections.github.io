@@ -7107,9 +7107,28 @@ html,body{overflow-x:hidden!important;}
 @media(max-width:760px){
   .option3-reviews .lux3-inner{padding-top:52px;padding-bottom:50px}
   .option3-reviews .lux3-heading-center{margin-bottom:26px}
-  .option3-review-grid{grid-template-columns:1fr;gap:12px}
-  .option3-review-card,.option3-review-featured{min-height:235px;padding:21px 20px 19px}
-  .option3-review-card:nth-child(n+3){display:none}
+  .option3-review-grid{
+    display:flex;
+    grid-template-columns:none;
+    gap:12px;
+    max-width:none;
+    margin:0 -20px;
+    padding:0 20px 8px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:20px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .option3-review-grid::-webkit-scrollbar{display:none}
+  .option3-review-card,.option3-review-featured{
+    flex:0 0 calc(100vw - 52px);
+    min-height:235px;
+    padding:21px 20px 19px;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
   .option3-review-card p{font-size:19px}
   .option3-review-footer{flex-direction:column;gap:15px;margin-top:20px}
   .option3-instagram{grid-template-columns:1fr;min-height:0}
