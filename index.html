@@ -7974,6 +7974,85 @@ HERO DEPLOYMENT SAFETY GUARD
   background-repeat:no-repeat !important;
 }
 
+
+/* =========================================================
+   TRUE FULL-BLEED BACKGROUNDS
+   Instagram + Store Details
+   The uploaded artwork belongs to the entire section,
+   not a left-side media panel.
+   ========================================================= */
+#instagram-editorial.option3-instagram{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1.06fr) minmax(360px,.94fr) !important;
+  min-height:500px !important;
+  background-image:linear-gradient(rgba(42,33,27,.18),rgba(42,33,27,.22)),url('assets/file_00000000aa7c8211ac409c2f449a68fb.png') !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}
+#instagram-editorial .option3-instagram-image{
+  display:none !important;
+}
+#instagram-editorial .option3-instagram-copy{
+  grid-column:2 !important;
+  background:rgba(48,37,30,.72) !important;
+  backdrop-filter:blur(2px) !important;
+  -webkit-backdrop-filter:blur(2px) !important;
+}
+#instagram-editorial .option3-instagram-cards{
+  z-index:4 !important;
+}
+
+#visit.option3-store{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:minmax(350px,.92fr) minmax(0,1.08fr) !important;
+  min-height:480px !important;
+  background-image:linear-gradient(rgba(88,67,49,.10),rgba(88,67,49,.10)),url('assets/file_00000000234c8211a78f686ca707019f.png') !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}
+#visit .option3-store-media{
+  display:none !important;
+}
+#visit .option3-store-content{
+  grid-column:2 !important;
+  background:rgba(247,240,231,.88) !important;
+  backdrop-filter:blur(2px) !important;
+  -webkit-backdrop-filter:blur(2px) !important;
+}
+
+@media(max-width:760px){
+  #instagram-editorial.option3-instagram{
+    display:block !important;
+    min-height:520px !important;
+    background-position:center center !important;
+  }
+  #instagram-editorial .option3-instagram-copy{
+    display:flex !important;
+    min-height:520px !important;
+    padding:48px 22px 106px !important;
+    background:rgba(48,37,30,.70) !important;
+  }
+  #instagram-editorial .option3-instagram-cards{
+    right:18px !important;
+    bottom:20px !important;
+  }
+
+  #visit.option3-store{
+    display:block !important;
+    min-height:560px !important;
+    background-position:center center !important;
+  }
+  #visit .option3-store-content{
+    min-height:560px !important;
+    padding:48px 20px 52px !important;
+    background:rgba(247,240,231,.88) !important;
+  }
+}
+
 </style>
 
 
