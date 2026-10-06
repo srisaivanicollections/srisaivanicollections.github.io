@@ -6961,6 +6961,36 @@ html,body{overflow-x:hidden!important;}
 }
 
 /* =========================================================
+   HERO DEPLOYMENT SAFETY GUARD
+   Scoped only to the existing hero. Does not alter catalog, admin,
+   authentication, storage, CRUD, product rendering, or collection logic.
+   ========================================================= */
+#hero.hero-editorial{
+  display:flex !important;
+  position:relative !important;
+  width:100% !important;
+  min-height:520px !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+#hero .hero-content-container{
+  position:relative !important;
+  z-index:2 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+#hero .hero-banner-img{
+  display:block !important;
+}
+@media(max-width:768px){
+  #hero.hero-editorial{
+    display:flex !important;
+    flex-direction:column !important;
+    min-height:0 !important;
+  }
+}
+
+/* =========================================================
    HERO RECOVERY GUARD
    Restores the existing hero presentation after the Style 3
    section insertion. No catalog, product, admin, auth or CRUD
@@ -7081,7 +7111,7 @@ html,body{overflow-x:hidden!important;}
 <section class="hero-editorial" id="hero" aria-label="Boutique Introduction">
   <div class="hero-image-wrapper">
     <img
-      src="/premium_saree_website_libas/assets/hero-banner.webp?v=1"
+      src="assets/hero-banner.webp?v=20261006"
       alt="Curated festive silk saree collection"
       class="hero-banner-img"
       loading="eager"
