@@ -6961,7 +6961,67 @@ html,body{overflow-x:hidden!important;}
 }
 
 /* =========================================================
-   OPTION 3 — EDITORIAL LUXURY
+   /* =========================================================
+   MOBILE ICON + WIDTH SAFETY
+   Applies only to the Reviews / Instagram / Store sections.
+   Prevents legacy image rules from enlarging action icons.
+   ========================================================= */
+@media(max-width:760px){
+  #instagram-editorial,
+  #client-chronicles-section,
+  #visit{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    overflow-x:hidden !important;
+  }
+
+  #instagram-editorial .option3-instagram-button,
+  #instagram-editorial .drape-editorial-cta,
+  #visit .option3-outline-button,
+  #visit .option3-dark-button,
+  #visit .ssv-store-btn{
+    box-sizing:border-box !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+  }
+
+  #instagram-editorial .option3-instagram-button img,
+  #instagram-editorial .drape-editorial-cta img,
+  #instagram-editorial .ssv-section-mark img,
+  #visit .option3-outline-button img,
+  #visit .option3-dark-button img,
+  #visit .ssv-store-btn img,
+  #visit .option3-store-icon img,
+  #visit .ssv-store-icon img{
+    display:block !important;
+    width:18px !important;
+    height:18px !important;
+    max-width:18px !important;
+    max-height:18px !important;
+    min-width:18px !important;
+    min-height:18px !important;
+    flex:0 0 18px !important;
+    object-fit:contain !important;
+  }
+
+  #client-chronicles-section .option3-review-top img,
+  #client-chronicles-section .ssv-voice-avatar,
+  #client-chronicles-section .lux3-review-image img{
+    width:44px !important;
+    height:44px !important;
+    max-width:44px !important;
+    max-height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    flex:0 0 44px !important;
+    object-fit:cover !important;
+    border-radius:50% !important;
+  }
+}
+OPTION 3 — EDITORIAL LUXURY
    Scoped exclusively to Reviews, Instagram and Store Details.
    ========================================================= */
 .option3-reviews{
