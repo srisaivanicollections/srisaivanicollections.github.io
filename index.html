@@ -6967,159 +6967,170 @@ html,body{overflow-x:hidden!important;}
 .option3-reviews{
   background:#FAF8F5 url("assets/reviews-bg.jpg") center/cover no-repeat;
 }
+.option3-reviews .lux3-inner{padding-top:68px;padding-bottom:62px}
+.option3-reviews .lux3-heading-center{margin-bottom:34px}
 .option3-review-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
+  gap:16px;
   max-width:1080px;
   margin:0 auto;
 }
 .option3-review-card{
   position:relative;
-  min-height:285px;
-  padding:25px 25px 22px;
-  background:rgba(255,253,249,.94);
+  min-height:250px;
+  padding:23px 24px 21px;
+  background:rgba(255,253,249,.96);
   border:1px solid #E4D8C5;
-  box-shadow:0 16px 36px rgba(63,45,28,.07);
+  box-shadow:0 10px 26px rgba(63,45,28,.055);
   display:flex;
   flex-direction:column;
+  transition:box-shadow .2s ease,transform .2s ease;
 }
-.option3-review-featured{transform:translateY(-10px);background:#FFFDF9}
-.option3-review-top{display:flex;align-items:center;gap:12px}
+.option3-review-card:hover{box-shadow:0 14px 30px rgba(63,45,28,.08)}
+.option3-review-featured{transform:none;background:#FFFDF9}
+.option3-review-top{display:flex;align-items:center;gap:11px}
 .option3-review-top img{
-  width:46px;height:46px;border-radius:50%;object-fit:cover;
-  border:1px solid #D9C7AE;
+  width:44px;height:44px;border-radius:50%;object-fit:cover;
+  border:1px solid #D9C7AE;flex:0 0 44px;
 }
 .option3-review-top strong{
-  display:block;color:#2A2521;font:600 11px/1.2 "Montserrat",Arial,sans-serif;
-  letter-spacing:.04em;
+  display:block;color:#2A2521;font:600 10px/1.25 "Montserrat",Arial,sans-serif;
+  letter-spacing:.035em;
 }
-.option3-stars{display:block;margin-top:5px;color:#A9804C;font:600 10px/1 "Montserrat",Arial,sans-serif;letter-spacing:.12em}
-.option3-quote{margin-top:24px;color:#B38E5D;font:400 48px/.5 Georgia,serif}
+.option3-stars{display:block;margin-top:5px;color:#A9804C;font:600 9px/1 "Montserrat",Arial,sans-serif;letter-spacing:.11em}
+.option3-quote{margin-top:20px;color:#B38E5D;font:400 40px/.5 Georgia,serif}
 .option3-review-card p{
-  margin:18px 0 18px;max-width:330px;color:#403A35;
-  font:400 21px/1.3 "Cormorant Garamond",Georgia,serif;
+  margin:15px 0 16px;max-width:330px;color:#403A35;
+  font:400 20px/1.28 "Cormorant Garamond",Georgia,serif;
 }
 .option3-review-meta{
-  margin-top:auto;color:#8B7A68;font:500 8px/1 "Montserrat",Arial,sans-serif;
-  letter-spacing:.17em;text-transform:uppercase;
+  margin-top:auto;color:#8B7A68;font:500 7.5px/1 "Montserrat",Arial,sans-serif;
+  letter-spacing:.15em;text-transform:uppercase;
 }
 .option3-review-footer{
-  display:flex;align-items:center;justify-content:center;gap:30px;
-  margin-top:30px;
+  display:flex;align-items:center;justify-content:center;gap:26px;
+  margin-top:25px;
 }
-.option3-rating{display:flex;align-items:center;gap:10px;color:#75675A;font:500 8px/1 "Montserrat",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
-.option3-rating img{width:72px;height:auto;display:block}
+.option3-rating{display:flex;align-items:center;gap:9px;color:#75675A;font:500 7.5px/1 "Montserrat",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.option3-rating img{width:68px;height:auto;display:block}
 
 .option3-instagram{
-  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);
+  position:relative;
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(360px,.94fr);
   min-height:500px;background:#2A211B;color:#FFF9F0;
   border-bottom:1px solid #E4D8C5;
 }
 .option3-instagram-image{position:relative;min-height:500px;overflow:hidden}
 .option3-instagram-image:after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(35,26,20,.02),rgba(35,26,20,.16));
+  background:linear-gradient(90deg,rgba(35,26,20,.02),rgba(35,26,20,.2));
 }
-.option3-instagram-image img{width:100%;height:100%;object-fit:cover;display:block}
+.option3-instagram-image img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .option3-instagram-copy{
-  position:relative;padding:72px 58px 74px;display:flex;flex-direction:column;
+  position:relative;padding:64px 58px 72px;display:flex;flex-direction:column;
   justify-content:center;background:#30251E;overflow:hidden;
 }
 .option3-instagram-copy:before{
   content:"";position:absolute;inset:0;background:url("assets/instagram-bg.jpg") center/cover no-repeat;
-  opacity:.16;mix-blend-mode:screen;
+  opacity:.1;mix-blend-mode:screen;
 }
 .option3-instagram-copy>*{position:relative;z-index:1}
 .option3-instagram .lux3-eyebrow{color:#D9B982}
 .option3-instagram h2{
-  margin:0;font:400 clamp(46px,5vw,70px)/.9 "Cormorant Garamond",Georgia,serif;
+  margin:0;font:400 clamp(44px,4.8vw,64px)/.92 "Cormorant Garamond",Georgia,serif;
   letter-spacing:-.035em;
 }
 .option3-instagram-copy>p:not(.lux3-eyebrow){
-  max-width:390px;margin:20px 0 28px;color:#EBDDCF;
-  font:400 18px/1.45 "Cormorant Garamond",Georgia,serif;
+  max-width:370px;margin:17px 0 25px;color:#EBDDCF;
+  font:400 17px/1.48 "Cormorant Garamond",Georgia,serif;
 }
 .option3-instagram-button{
-  display:flex;align-items:center;gap:12px;width:250px;min-height:52px;
-  padding:0 16px;background:#E4D0AF;color:#211A15;text-decoration:none;
-  font:600 9px/1 "Montserrat",Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;
+  display:flex;align-items:center;gap:11px;width:240px;min-height:50px;
+  padding:0 15px;background:#E4D0AF;color:#211A15;text-decoration:none;
+  font:600 8.5px/1 "Montserrat",Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase;
 }
-.option3-instagram-button img{width:18px;height:18px;object-fit:contain}
-.option3-instagram-button span:last-child{margin-left:auto;font-size:14px;letter-spacing:0}
+.option3-instagram-button img{width:17px;height:17px;object-fit:contain}
+.option3-instagram-button span:last-child{margin-left:auto;font-size:13px;letter-spacing:0}
 .option3-instagram-cards{
-  position:absolute;right:28px;bottom:24px;z-index:3;
-  display:flex;gap:8px;transform:translateY(40%);
+  position:absolute;right:28px;bottom:22px;z-index:3;
+  display:flex;gap:7px;transform:none;
 }
 .option3-instagram-cards img{
-  width:68px;height:88px;object-fit:cover;border:2px solid #F6ECDD;
-  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  width:60px;height:78px;object-fit:cover;border:2px solid #F6ECDD;
+  box-shadow:0 7px 18px rgba(0,0,0,.22);
 }
-.option3-instagram-cards img:nth-child(2){transform:translateY(-12px)}
-.option3-instagram-cards img:nth-child(3){transform:translateY(-4px)}
+.option3-instagram-cards img:nth-child(2){transform:translateY(-9px)}
+.option3-instagram-cards img:nth-child(3){transform:translateY(-3px)}
 
 .option3-store{
-  display:grid;grid-template-columns:minmax(330px,.9fr) minmax(0,1.1fr);
-  min-height:510px;background:#F2E9DC;
+  display:grid;grid-template-columns:minmax(350px,.92fr) minmax(0,1.08fr);
+  min-height:480px;background:#F2E9DC;
 }
-.option3-store-media{min-height:510px;overflow:hidden;position:relative}
+.option3-store-media{min-height:480px;overflow:hidden;position:relative}
 .option3-store-media:after{
-  content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,25,23,.02),rgba(28,25,23,.15));
+  content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,25,23,.02),rgba(28,25,23,.12));
 }
-.option3-store-media img{width:100%;height:100%;object-fit:cover;display:block}
+.option3-store-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .option3-store-content{
-  padding:68px clamp(28px,5vw,72px);display:flex;flex-direction:column;justify-content:center;
+  padding:58px clamp(28px,4.5vw,64px);display:flex;flex-direction:column;justify-content:center;
   background:#F7F0E7;
 }
-.option3-store-content .lux3-heading{text-align:left;margin-bottom:32px}
-.option3-store-content .lux3-heading h2{font-size:clamp(44px,4.8vw,64px)}
+.option3-store-content .lux3-heading{text-align:left;margin-bottom:27px}
+.option3-store-content .lux3-heading h2{font-size:clamp(42px,4.4vw,60px)}
+.option3-store-content .lux3-intro{font-size:18px}
 .option3-store-details{
   display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #D8C8B4;border-bottom:1px solid #D8C8B4;
 }
-.option3-store-block{display:flex;gap:14px;padding:22px 18px;align-items:flex-start}
+.option3-store-block{display:flex;gap:12px;padding:20px 16px;align-items:flex-start}
 .option3-store-block+.option3-store-block{border-left:1px solid #D8C8B4}
 .option3-store-icon{
-  width:38px;height:38px;flex:0 0 38px;border:1px solid #CDBD9F;border-radius:50%;
+  width:36px;height:36px;flex:0 0 36px;border:1px solid #CDBD9F;border-radius:50%;
   display:grid;place-items:center;background:#FFF9F0;
 }
-.option3-store-icon img{width:18px;height:18px;object-fit:contain}
-.option3-store-block p{margin:0;color:#4E4740;font:400 12px/1.65 "Inter",Arial,sans-serif}
+.option3-store-icon img{width:17px;height:17px;object-fit:contain}
+.option3-store-block p{margin:0;color:#4E4740;font:400 11.5px/1.6 "Inter",Arial,sans-serif}
 .option3-store-block .lux3-label{
-  margin-bottom:7px;color:#8B6B43;font:600 8px/1.2 "Montserrat",Arial,sans-serif;
-  letter-spacing:.2em;
+  margin-bottom:6px;color:#8B6B43;font:600 8px/1.2 "Montserrat",Arial,sans-serif;
+  letter-spacing:.18em;
 }
-.option3-store-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.option3-store-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .option3-outline-button,.option3-dark-button{
-  min-height:50px;padding:12px 15px;display:flex;align-items:center;justify-content:center;gap:9px;
-  text-decoration:none;font:600 8px/1 "Montserrat",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  min-height:48px;padding:11px 14px;display:flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;font:600 8px/1 "Montserrat",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;
 }
 .option3-outline-button{border:1px solid #8D7A63;color:#302A25;background:#FFF9F0}
 .option3-dark-button{border:1px solid #1C1917;color:#FAF7F2;background:#1C1917}
-.option3-outline-button img,.option3-dark-button img{width:17px;height:17px;object-fit:contain}
-.option3-outline-button span:last-child,.option3-dark-button span:last-child{margin-left:auto;font-size:13px;letter-spacing:0}
+.option3-outline-button img,.option3-dark-button img{width:16px;height:16px;object-fit:contain}
+.option3-outline-button span:last-child,.option3-dark-button span:last-child{margin-left:auto;font-size:12px;letter-spacing:0}
 
 @media(max-width:760px){
+  .option3-reviews .lux3-inner{padding-top:52px;padding-bottom:50px}
+  .option3-reviews .lux3-heading-center{margin-bottom:26px}
   .option3-review-grid{grid-template-columns:1fr;gap:12px}
-  .option3-review-card,.option3-review-featured{min-height:250px;transform:none}
+  .option3-review-card,.option3-review-featured{min-height:235px;padding:21px 20px 19px}
   .option3-review-card:nth-child(n+3){display:none}
-  .option3-review-footer{flex-direction:column;gap:18px;margin-top:22px}
+  .option3-review-card p{font-size:19px}
+  .option3-review-footer{flex-direction:column;gap:15px;margin-top:20px}
   .option3-instagram{grid-template-columns:1fr;min-height:0}
-  .option3-instagram-image{height:330px;min-height:330px}
-  .option3-instagram-copy{padding:52px 22px 100px}
-  .option3-instagram h2{font-size:50px}
-  .option3-instagram-cards{right:18px;bottom:22px;transform:none}
-  .option3-instagram-cards img{width:58px;height:76px}
+  .option3-instagram-image{height:320px;min-height:320px}
+  .option3-instagram-copy{padding:48px 22px 106px}
+  .option3-instagram h2{font-size:47px}
+  .option3-instagram-copy>p:not(.lux3-eyebrow){font-size:17px;margin-top:15px;margin-bottom:22px}
+  .option3-instagram-button{width:100%;max-width:285px}
+  .option3-instagram-cards{right:18px;bottom:20px}
+  .option3-instagram-cards img{width:54px;height:70px}
   .option3-store{grid-template-columns:1fr;min-height:0}
-  .option3-store-media{height:300px;min-height:300px}
-  .option3-store-content{padding:52px 20px 58px}
-  .option3-store-content .lux3-heading{text-align:center}
+  .option3-store-media{height:285px;min-height:285px}
+  .option3-store-content{padding:48px 20px 52px}
+  .option3-store-content .lux3-heading{text-align:center;margin-bottom:24px}
+  .option3-store-content .lux3-heading h2{font-size:44px}
   .option3-store-details{grid-template-columns:1fr}
-  .option3-store-block{padding:18px 4px}
+  .option3-store-block{padding:17px 2px}
   .option3-store-block+.option3-store-block{border-left:0;border-top:1px solid #D8C8B4}
-  .option3-store-actions{grid-template-columns:1fr;gap:10px}
+  .option3-store-actions{grid-template-columns:1fr;gap:9px;margin-top:14px}
 }
-/* =========================================================
-   HERO DEPLOYMENT SAFETY GUARD
+HERO DEPLOYMENT SAFETY GUARD
    Scoped only to the existing hero. Does not alter catalog, admin,
    authentication, storage, CRUD, product rendering, or collection logic.
    ========================================================= */
