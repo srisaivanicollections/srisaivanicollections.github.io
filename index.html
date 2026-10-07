@@ -5975,144 +5975,9 @@ footer .brand b{
   }
 }
 
-/* Final testimonial / concierge micro-finish - scoped only to affected sections */
-#client-chronicles-section .ssv-voice-card{
-  padding:16px 14px!important;
-  min-height:auto!important;
-}
-.whatsapp-banner-section{
-  margin-bottom:24px!important;
-  padding-bottom:0!important;
-}
-#client-chronicles-section.chronicles-section{
-  padding-top:16px!important;
-}
 
-/* Review byline hard-stop: customer voices must not expose reviewer names */
-#client-chronicles-section .ssv-voice-by{display:none!important;}
 
-/* Customer Voices structural defense: quote and review text only */
-#client-chronicles-section .ssv-voice-card > *:not(.ssv-voice-quote):not(.ssv-voice-text),
-#client-chronicles-section .ssv-voice-by,
-.ssv-voice-by,
-.chronicle-author,
-.cc-author {
-  display:none !important;
-  visibility:hidden !important;
-  height:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-}
-/* Clean static Customer Voices presentation */
-#client-chronicles-section{
-  background-image:linear-gradient(rgba(250,248,245,.94),rgba(250,248,245,.94)),url('/premium_saree_website_libas/assets/section-bg-linen.jpg')!important;
-  background-size:cover!important;
-  background-position:center!important;
-  width:100%;
-  max-width:var(--container);
-  margin:0 auto;
-  padding:76px 34px 72px;
-  border-bottom:1px solid var(--line);
-  background:var(--paper);
-  box-sizing:border-box;
-}
-#client-chronicles-section .cc-header{text-align:center;margin:0 auto 30px;}
-#client-chronicles-section .cc-eyebrow{
-  margin:0 0 10px;
-  color:var(--gold);
-  font-size:9px;
-  line-height:1.2;
-  letter-spacing:.22em;
-  font-weight:700;
-}
-#client-chronicles-section .cc-title{
-  margin:0;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:clamp(44px,5vw,68px);
-  font-weight:400;
-  line-height:.95;
-  letter-spacing:-.035em;
-}
-#client-chronicles-section .cc-subtitle{
-  max-width:420px;
-  margin:15px auto 0;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.7;
-}
-#client-chronicles-section .ssv-voices-track{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  padding:4px 2px 16px;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
-}
-#client-chronicles-section .ssv-voices-track::-webkit-scrollbar{display:none}
-#client-chronicles-section .ssv-voice-card{
-  flex:0 0 300px;
-  min-height:170px;
-  padding:28px 24px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  scroll-snap-align:start;
-  background:#fff;
-  border:1px solid var(--line);
-  box-sizing:border-box;
-}
-#client-chronicles-section .ssv-voice-quote{
-  margin:0 0 8px;
-  color:var(--gold);
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:34px;
-  line-height:.8;
-}
-#client-chronicles-section .ssv-voice-text{
-  margin:0;
-  color:var(--ink);
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:18px;
-  font-style:italic;
-  line-height:1.45;
-}
-#client-chronicles-section .ssv-voices-hint{
-  margin:7px 0 0;
-  text-align:center;
-  color:var(--muted);
-  font-size:8px;
-  line-height:1.2;
-  letter-spacing:.18em;
-  font-weight:600;
-}
-#client-chronicles-section .cc-footer-cta{
-  display:flex;
-  justify-content:center;
-  margin-top:18px;
-}
-#client-chronicles-section .cc-google-link{
-  display:inline-block;
-  color:var(--ink);
-  text-decoration:underline;
-  text-underline-offset:4px;
-  font-size:9px;
-  line-height:1.2;
-  letter-spacing:.15em;
-  font-weight:600;
-}
-@media(max-width:600px){
-  #client-chronicles-section{padding:52px 16px 50px}
-  #client-chronicles-section .ssv-voices-track{gap:10px;padding-inline:0}
-  #client-chronicles-section .ssv-voice-card{
-    flex-basis:74vw;
-    min-height:155px;
-    padding:22px 18px;
-  }
-  #client-chronicles-section .ssv-voice-text{font-size:16px}
-}
+
 
 /* Final typography authority: Client Chronicles / Our Collection / Store Details */
 #client-chronicles-section .cc-eyebrow,
@@ -6906,21 +6771,6 @@ html,body{overflow-x:hidden!important;}
 .lux3-heading h2{margin:0;font:400 clamp(42px,5.2vw,68px)/.94 "Cormorant Garamond",Georgia,serif;letter-spacing:-.035em}
 .lux3-intro{margin:15px 0 0;color:#706963;font:italic 400 20px/1.35 "Cormorant Garamond",Georgia,serif}
 
-/* Client Chronicles */
-.lux3-reviews{background:
-  radial-gradient(circle at 12% 20%,rgba(179,142,93,.08),transparent 26%),
-  #F8F3EB}
-.lux3-review-rail{display:grid;grid-template-columns:minmax(115px,.45fr) minmax(280px,1fr) minmax(280px,1fr) minmax(115px,.45fr);gap:14px;align-items:stretch;overflow:hidden}
-.lux3-review-image{min-height:220px;background:#E7DCCB;overflow:hidden}
-.lux3-review-image img{display:block;width:100%;height:100%;object-fit:cover}
-.lux3-review-card{min-height:220px;padding:25px 26px 23px;background:rgba(255,252,247,.92);border:1px solid #E2D6C7;border-radius:8px;box-shadow:0 12px 30px rgba(63,45,28,.055);display:flex;flex-direction:column;justify-content:flex-start}
-.lux3-quote{display:block;color:#B38E5D;font:600 44px/0.7 Georgia,serif}
-.lux3-review-card p{margin:27px 0 22px;max-width:360px;font:400 21px/1.25 "Cormorant Garamond",Georgia,serif}
-.lux3-stars{margin-top:auto;color:#B38E5D;font:500 16px/1 "Montserrat",Arial,sans-serif;letter-spacing:.08em}
-.lux3-review-nav{display:flex;align-items:center;justify-content:center;gap:9px;margin:18px 0 20px;color:#8C7760;font:300 22px/1 "Cormorant Garamond",Georgia,serif}
-.lux3-review-nav i{width:8px;height:8px;border:1px solid #B9A78E;border-radius:50%;display:block}
-.lux3-review-nav i.active{background:#A77D45;border-color:#A77D45}
-.lux3-text-link{display:block;width:max-content;max-width:100%;margin:0 auto;color:#4B443E;text-decoration:none;border-bottom:1px solid #BDAF9E;padding-bottom:5px;font:500 9px/1 "Montserrat",Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase}
 
 /* Our Collection */
 .lux3-collection{min-height:360px;background:#7B5A3B}
