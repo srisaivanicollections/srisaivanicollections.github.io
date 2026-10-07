@@ -11643,8 +11643,8 @@ $("#search").oninput=render;$("#price").onchange=render;load();
     var minutes=ist.getHours()*60+ist.getMinutes();
     var open=minutes>=600 && minutes<1260;
     badge.classList.toggle('is-closed',!open);
-    badge.textContent=open?'● Open Now':'○ '+(minutes<600?'Opens at 10 AM':'Closed · Opens at 10 AM');
-    badge.setAttribute('aria-label',open?'Store is open now':(minutes<600?'Store opens at 10 AM':'Store is closed and opens at 10 AM'));
+    badge.textContent=open?'● OPEN':'○ CLOSED';
+    badge.setAttribute('aria-label',open?'Store is open':'Store is closed');
   }
   updateStoreStatus();
   setInterval(updateStoreStatus,60000);
