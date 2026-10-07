@@ -9907,20 +9907,22 @@ HERO DEPLOYMENT SAFETY GUARD
 
 <style id="store-details-refined">
 #visit.option3-store{
-  padding:72px 18px 76px !important;
-  background:#F6F0E6 url("assets/store-bg.jpg") center/cover no-repeat !important;
+  padding:68px 20px 72px !important;
+  background:#F7F2E9 !important;
 }
-#visit.option3-store::before{background:rgba(249,246,239,.72) !important;}
+#visit.option3-store::before{display:none !important;}
 #visit.option3-store .option3-store-content{
-  width:min(900px,100%) !important;
-  padding:46px clamp(22px,5vw,58px) 38px !important;
+  width:min(980px,100%) !important;
+  margin:0 auto !important;
+  padding:0 !important;
   background:transparent !important;
   border:0 !important;
   box-shadow:none !important;
 }
 #visit.option3-store .lux3-heading{
   text-align:left !important;
-  margin-bottom:25px !important;
+  margin:0 0 34px !important;
+  max-width:760px !important;
 }
 #visit.option3-store .lux3-eyebrow{
   font-family:"Montserrat","Inter",sans-serif !important;
@@ -9931,30 +9933,36 @@ HERO DEPLOYMENT SAFETY GUARD
 #visit.option3-store .lux3-heading h2{
   font-family:"Cormorant Garamond",Georgia,serif !important;
   font-weight:500 !important;
-  font-size:clamp(43px,6vw,62px) !important;
-  line-height:.98 !important;
-  letter-spacing:-.02em !important;
+  font-size:clamp(42px,6vw,64px) !important;
+  line-height:.94 !important;
+  letter-spacing:-.025em !important;
   color:#29241F !important;
-  margin:7px 0 10px !important;
+  margin:8px 0 12px !important;
 }
 #visit.option3-store .lux3-intro{
   font-family:"Cormorant Garamond",Georgia,serif !important;
   font-size:18px !important;
   font-style:italic !important;
-  line-height:1.4 !important;
+  line-height:1.35 !important;
   color:#776D62 !important;
+  margin:0 !important;
 }
 #visit.option3-store .option3-store-details{
-  grid-template-columns:1.45fr .8fr !important;
+  display:grid !important;
+  grid-template-columns:1.35fr .85fr !important;
   background:transparent !important;
   border:0 !important;
-  border-radius:0 !important;
+  border-top:1px solid rgba(154,119,74,.28) !important;
+  border-bottom:1px solid rgba(154,119,74,.28) !important;
 }
 #visit.option3-store .option3-store-block{
-  padding:23px 24px !important;
+  display:flex !important;
+  align-items:flex-start !important;
+  gap:15px !important;
+  padding:24px 22px !important;
 }
 #visit.option3-store .option3-store-block+.option3-store-block{
-  border-left:1px solid rgba(184,158,121,.28) !important;
+  border-left:1px solid rgba(154,119,74,.22) !important;
 }
 #visit.option3-store .lux3-label{
   font-family:"Montserrat","Inter",sans-serif !important;
@@ -10007,6 +10015,35 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 </style>
+#visit.option3-store .option3-store-icon{
+  flex:0 0 42px !important;width:42px !important;height:42px !important;
+  display:grid !important;place-items:center !important;
+  border:1px solid rgba(154,119,74,.28) !important;
+  border-radius:50% !important;background:rgba(255,252,247,.45) !important;
+}
+#visit.option3-store .option3-store-icon img{width:19px !important;height:19px !important;}
+#visit.option3-store .lux3-label{margin:1px 0 8px !important;}
+#visit.option3-store .option3-store-block p:not(.lux3-label){margin:0 !important;}
+#visit.option3-store .option3-store-actions{
+  display:grid !important;grid-template-columns:1fr 1fr !important;
+  gap:10px !important;margin:18px 0 0 !important;
+}
+#visit.option3-store .option3-outline-button,#visit.option3-store .option3-dark-button{
+  min-height:50px !important;border-radius:0 !important;
+}
+@media(max-width:760px){
+  #visit.option3-store{padding:52px 18px 58px !important;}
+  #visit.option3-store .lux3-heading{margin-bottom:26px !important;}
+  #visit.option3-store .lux3-heading h2{font-size:46px !important;line-height:.95 !important;}
+  #visit.option3-store .lux3-intro{font-size:17px !important;max-width:340px !important;}
+  #visit.option3-store .option3-store-details{grid-template-columns:1fr !important;}
+  #visit.option3-store .option3-store-block{padding:20px 0 !important;gap:14px !important;}
+  #visit.option3-store .option3-store-block+.option3-store-block{
+    border-left:0 !important;border-top:1px solid rgba(154,119,74,.22) !important;
+  }
+  #visit.option3-store .option3-store-actions{grid-template-columns:1fr !important;margin-top:16px !important;}
+}
+
 </head>
 <script>
 (function(){
