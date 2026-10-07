@@ -9522,6 +9522,90 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 
+
+/* STORE DETAILS MOBILE UX REFINEMENT - FINAL */
+/* Keep the editorial desktop composition, but make mobile calmer and easier to scan. */
+#visit .option3-store-content{
+  text-align:left !important;
+}
+#visit .option3-store-details{
+  border-radius:0 !important;
+  overflow:hidden !important;
+}
+#visit .option3-store-block{
+  min-width:0 !important;
+}
+#visit .option3-store-block p:not(.lux3-label){
+  overflow-wrap:anywhere !important;
+}
+#visit .option3-store-actions{
+  align-items:stretch !important;
+}
+@media(max-width:760px){
+  #visit .option3-store-content{
+    padding:34px 20px 38px !important;
+  }
+  #visit .option3-store-content .lux3-heading{
+    margin-bottom:20px !important;
+  }
+  #visit .option3-store-content .lux3-heading h2{
+    font-size:40px !important;
+    line-height:.98 !important;
+    letter-spacing:-.035em !important;
+    max-width:330px !important;
+  }
+  #visit .option3-store-content .lux3-intro{
+    font-size:16px !important;
+    line-height:1.35 !important;
+    max-width:320px !important;
+    margin-top:12px !important;
+  }
+  #visit .option3-store-details{
+    display:block !important;
+    margin-top:4px !important;
+  }
+  #visit .option3-store-block{
+    padding:17px 5px !important;
+    gap:14px !important;
+  }
+  #visit .option3-store-block + .option3-store-block{
+    border-left:0 !important;
+    border-top:1px solid #D8C8B4 !important;
+  }
+  #visit .option3-store-icon{
+    width:38px !important;
+    height:38px !important;
+    flex:0 0 38px !important;
+  }
+  #visit .option3-store-block p:not(.lux3-label){
+    font-size:12px !important;
+    line-height:1.55 !important;
+  }
+  #visit .option3-store-block .lux3-label{
+    font-size:8px !important;
+    letter-spacing:.2em !important;
+    margin-bottom:7px !important;
+  }
+  #visit .option3-store-actions{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+    margin-top:14px !important;
+  }
+  #visit .option3-outline-button,
+  #visit .option3-dark-button{
+    min-height:48px !important;
+    padding:12px 14px !important;
+    font-size:8px !important;
+    letter-spacing:.14em !important;
+  }
+}
+@media(min-width:761px){
+  #visit .option3-store-actions{
+    max-width:100% !important;
+  }
+}
+
 </style>
 
 
