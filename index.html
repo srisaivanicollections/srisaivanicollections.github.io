@@ -9964,15 +9964,17 @@ HERO DEPLOYMENT SAFETY GUARD
 }
 #visit.option3-store .option3-outline-button span{
   display:inline-block;
-  animation:mapsTextSlide 2.4s ease-in-out infinite;
+  animation:mapsTextSlide 3.2s ease-in-out infinite;
 }
 #visit.option3-store .option3-outline-button:hover{
   box-shadow:0 7px 18px rgba(60,48,35,.10);
   border-color:#B38E5D!important;
 }
 @keyframes mapsTextSlide{
-  0%,100%{transform:translateX(5px)}
-  50%{transform:translateX(-5px)}
+  0%,18%{transform:translateX(0)}
+  38%{transform:translateX(-4px)}
+  55%{transform:translateX(-4px)}
+  78%,100%{transform:translateX(0)}
 }
 @media(prefers-reduced-motion:reduce){
   #visit.option3-store .option3-outline-button span{animation:none}
