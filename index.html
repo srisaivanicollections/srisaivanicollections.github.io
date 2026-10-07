@@ -3365,6 +3365,15 @@ nav a,
 }
 
 
+/* FINAL ALIGNMENT FIX: catalog controls stay on-grid at every viewport */
+#shop .lux-catalog-toolbar{display:flex !important;flex-direction:column !important;align-items:stretch !important;gap:16px !important;}
+#shop .lux-tools{display:grid !important;grid-template-columns:minmax(0,1fr) 150px !important;gap:10px !important;align-items:stretch !important;}
+#shop .lux-search{width:100% !important;min-width:0 !important;}
+#shop .lux-search-input,#shop .lux-price-select{width:100% !important;min-width:0 !important;height:42px !important;box-sizing:border-box !important;}
+@media(max-width:430px){
+  #shop .lux-tools{grid-template-columns:minmax(0,1fr) 112px !important;gap:8px !important;}
+  #shop .lux-search-input,#shop .lux-price-select{height:40px !important;}
+}
 /* ==========================================================================
    FINAL PRINCIPAL UI/UX CATALOG LAYER
    Single authoritative storefront rule-set. Keep this block last.
