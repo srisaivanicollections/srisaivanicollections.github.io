@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="silk" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f8f3e9"/>
+    <stop offset=".28" stop-color="#eee2d1"/>
+    <stop offset=".52" stop-color="#faf6ee"/>
+    <stop offset=".76" stop-color="#e9dac6"/>
+    <stop offset="1" stop-color="#f8f2e7"/>
+  </linearGradient>
+  <linearGradient id="fold1" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#c9ae89" stop-opacity="0"/>
+    <stop offset=".35" stop-color="#b7976e" stop-opacity=".20"/>
+    <stop offset=".52" stop-color="#fffaf1" stop-opacity=".55"/>
+    <stop offset=".72" stop-color="#b99a72" stop-opacity=".16"/>
+    <stop offset="1" stop-color="#c9ae89" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="fold2" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#fffaf1" stop-opacity=".6"/>
+    <stop offset=".45" stop-color="#b49369" stop-opacity=".16"/>
+    <stop offset=".7" stop-color="#fffaf1" stop-opacity=".35"/>
+    <stop offset="1" stop-color="#b49369" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="7"/>
+    <feColorMatrix values="1 0 0 0 .82  0 1 0 0 .75  0 0 1 0 .62  0 0 0 .10 0"/>
+  </filter>
+</defs>
+<rect width="1600" height="1000" fill="url(#silk)"/>
+<path d="M-180 880 C260 420 520 360 900 720 S1370 1090 1780 470" fill="none" stroke="url(#fold1)" stroke-width="230" filter="url(#soft)"/>
+<path d="M-120 250 C300 620 520 640 860 300 S1280 60 1720 330" fill="none" stroke="url(#fold2)" stroke-width="180" filter="url(#soft)"/>
+<path d="M-200 720 C250 300 560 420 850 760 S1300 950 1800 520" fill="none" stroke="#fffaf0" stroke-opacity=".22" stroke-width="32"/>
+<rect width="1600" height="1000" filter="url(#grain)" opacity=".34"/>
+</svg>
