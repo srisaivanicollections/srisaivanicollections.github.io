@@ -11642,7 +11642,31 @@ function updateStoreStatus(){
 }
 updateStoreStatus(); setInterval(updateStoreStatus,60000);
 })();
-</script></body>
+</script><!-- store-hours-dynamic-v1 -->
+<script id="store-hours-dynamic-v1">
+(function(){
+  function updateStoreStatus(){
+    var badge=document.getElementById('store-status-badge');
+    if(!badge)return;
+    var now=new Date();
+    var ist=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));
+    var minutes=ist.getHours()*60+ist.getMinutes();
+    var open=minutes>=600 && minutes<1260;
+    if(open){
+      badge.textContent='● Open Now';
+      badge.classList.remove('is-closed');
+      badge.setAttribute('aria-label','Store is open now');
+    }else{
+      badge.classList.add('is-closed');
+      badge.textContent=minutes<600?'○ Opens at 10 AM':'○ Closed · Opens at 10 AM';
+      badge.setAttribute('aria-label',minutes<600?'Store opens at 10 AM':'Store is closed and opens at 10 AM');
+    }
+  }
+  updateStoreStatus();
+  setInterval(updateStoreStatus,60000);
+})();
+</script>
+</body>
 <style id="store-final-mobile-fix">
 /* FINAL Store Details pass: compact, calm, theme-matched */
 #visit.option3-store{
