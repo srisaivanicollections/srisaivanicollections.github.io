@@ -9958,7 +9958,42 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 </style><!-- restore baseline after button-spacing rollback -->
-</head>
+<style id="maps-button-motion">
+#visit.option3-store .option3-outline-button{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important;
+}
+#visit.option3-store .option3-outline-button::after{
+  content:"";
+  position:absolute;
+  top:-20%;
+  bottom:-20%;
+  left:-45%;
+  width:28%;
+  background:linear-gradient(90deg,transparent,rgba(179,142,93,.30),transparent);
+  transform:skewX(-18deg);
+  animation:mapsButtonShine 3.2s ease-in-out infinite;
+  pointer-events:none;
+  z-index:0;
+}
+#visit.option3-store .option3-outline-button img,
+#visit.option3-store .option3-outline-button span{position:relative;z-index:1}
+#visit.option3-store .option3-outline-button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 7px 18px rgba(60,48,35,.10);
+  border-color:#B38E5D!important;
+}
+@keyframes mapsButtonShine{
+  0%,58%{left:-45%;opacity:0}
+  68%{opacity:1}
+  88%,100%{left:125%;opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  #visit.option3-store .option3-outline-button::after{animation:none}
+}
+</style></head>
 <script>
 (function(){
   function purgeLegacyInstagramEmbeds(){
