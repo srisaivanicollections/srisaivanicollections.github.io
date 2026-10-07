@@ -38,6 +38,13 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 .admin-link:hover{border-color:var(--ink);background:var(--ink);color:#fff}
 .menu{display:none;border:0;background:transparent;padding:8px}
 .menu i{display:block;width:21px;height:1px;margin:4px 0;background:var(--ink)}
+.mobile-social-actions{display:none}
+@media(max-width:600px){
+  .mobile-social-actions{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .mobile-social-actions a{display:flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--ink);text-decoration:none}
+  .mobile-social-actions svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .mobile-social-actions a:last-child svg{stroke-width:1.55}
+}
 
 /* Shared */
 .catalog,.reviews,footer{width:min(var(--container),100%);margin-inline:auto}
@@ -9962,7 +9969,7 @@ HERO DEPLOYMENT SAFETY GUARD
 })();
 </script>
 <body data-build="20261004-instagram-clean">
-<header class="header"><div class="header-inner"><button class="menu" id="menu" aria-label="Menu"><i></i><i></i><i></i></button><a class="brand" href="#home"><span><b>SRI SAI VANI</b><small>COLLECTIONS</small></span></a><nav id="nav"><a href="#shop" class="shop-link">SHOP NOW</a><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener">INSTAGRAM</a><button id="adminOpen" type="button" class="admin-link" aria-label="Open Admin Studio">ADMIN</button></nav></div></header>
+<header class="header"><div class="header-inner"><button class="menu" id="menu" aria-label="Menu"><i></i><i></i><i></i></button><a class="brand" href="#home"><span><b>SRI SAI VANI</b><small>COLLECTIONS</small></span></a><div class="mobile-social-actions" aria-label="Quick contact"><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg></a><a id="mobileHeaderWhatsApp" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.6-4.1A8 8 0 1 1 20 11.5Z"></path><path d="M9.3 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.5c.1.2.1.4-.1.6l-.5.6c.6 1.1 1.4 1.8 2.5 2.3l.5-.5c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.3.6-.2.7-.8 1.2-1.5 1.2-2.8-.1-6.2-2.9-6.7-5.9-.1-.4.1-.7.5-1Z"></path></svg></a></div><nav id="nav"><a href="#shop" class="shop-link">SHOP NOW</a><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener">INSTAGRAM</a><button id="adminOpen" type="button" class="admin-link" aria-label="Open Admin Studio">ADMIN</button></nav></div></header>
 <section class="womens-world-marquee-section" aria-label="Saree and dress varieties">
   <div class="womens-world-marquee-viewport">
     <div class="womens-world-marquee-track">
@@ -11047,6 +11054,14 @@ async function saveProduct(id){
   }
 }
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
+const mobileHeaderWhatsApp=document.getElementById("mobileHeaderWhatsApp");
+if(mobileHeaderWhatsApp){
+  mobileHeaderWhatsApp.addEventListener("click",function(e){
+    const n=typeof waNumber==="function"?waNumber():"";
+    if(!n){e.preventDefault();return;}
+    this.href="https://wa.me/"+n;
+  });
+}
 let adminSessionActive=false;
 let otpAdminSession=false;
 let otpAdminEmail="";
