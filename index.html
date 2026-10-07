@@ -2621,15 +2621,15 @@ footer a{
 }
 
 /* ---------- Google Reviews: single authoritative CTA ---------- */
-#client-chronicles-section .cc-footer-cta{
-  display:flex;
-  justify-content:center;
-  align-items:center;
+#client-chronicles-section .option3-review-footer{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
   width:100%;
-  margin:1.75rem 0 0;
+  margin:18px 0 0 !important;
   padding:0;
 }
-#client-chronicles-section .cc-google-link{
+#client-chronicles-section .lux3-text-link{
   display:inline-flex !important;
   align-items:center;
   justify-content:center;
@@ -2650,38 +2650,21 @@ footer a{
   letter-spacing:.14em !important;
   text-transform:uppercase;
   text-decoration:none !important;
-  text-underline-offset:0 !important;
   transition:background-color .25s ease,border-color .25s ease,color .25s ease;
 }
-#client-chronicles-section .cc-google-link::before,
-#client-chronicles-section .cc-google-link::after{
-  display:none !important;
-  content:none !important;
-}
-#client-chronicles-section .cc-google-link:hover{
+#client-chronicles-section .lux3-text-link:hover{
   background:#1C1917 !important;
   color:#FAF8F5 !important;
   border-color:#1C1917 !important;
 }
 @media(max-width:600px){
-  #client-chronicles-section .cc-footer-cta{
-    margin-top:1.5rem;
-  }
-  #client-chronicles-section .cc-google-link{
+  #client-chronicles-section .option3-review-footer{margin-top:16px !important}
+  #client-chronicles-section .lux3-text-link{
     min-height:36px;
     padding:9px 14px !important;
     font-size:.6rem !important;
     letter-spacing:.12em !important;
   }
-}
-
-
-@media(max-width:600px){
-  .admin-product-thumb{width:46px;height:58px;flex-basis:46px}
-  .admin-product-main{gap:9px}
-  .admin-product-copy strong{max-width:45vw;font-size:15px}
-  .admin-item{padding:10px 11px;gap:8px}
-  .admin-item .danger{padding:8px 9px;font-size:7px;white-space:nowrap}
 }
 
 /* Product image failure state: preserve card proportions and provide a quiet branded fallback. */
