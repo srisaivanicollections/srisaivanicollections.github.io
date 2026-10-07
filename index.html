@@ -10012,12 +10012,10 @@ HERO DEPLOYMENT SAFETY GUARD
           <span class="lux-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l5 5"></path></svg></span>
           <input id="search" class="lux-search-input" type="search" placeholder="Search collection" autocomplete="off" aria-label="Search collection">
         </label>
-        <select id="price" class="lux-price-select" aria-label="Filter by price">
-          <option value="">All prices</option>
-          <option value="0-2000">Under ₹2,000</option>
-          <option value="2000-4000">₹2,000–₹4,000</option>
-          <option value="4000-7000">₹4,000–₹7,000</option>
-          <option value="7000">₹7,000+</option>
+        <select id="price" class="lux-price-select" aria-label="Sort by price">
+          <option value="">Sort by Price</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
         </select>
       </div>
     </div>
@@ -10784,16 +10782,12 @@ function render(){
       String(p.name||"").toLowerCase().includes(q) ||
       productCategory.includes(q);
     return matchesCollection && matchesSearch;
-  }).filter(p=>{
-    if(!pf)return true;
-    const price=Number(p.price);
-    if(!Number.isFinite(price))return false;
-    if(pf==="0-2000")return price<2000;
-    if(pf==="2000-4000")return price>=2000&&price<4000;
-    if(pf==="4000-7000")return price>=4000&&price<7000;
-    if(pf==="7000+")return price>=7000;
-    return true;
   });
+  if(pf==="low-high"){
+    list.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
+  }else if(pf==="high-low"){
+    list.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
+  }
   if(!list.length){
     grid.innerHTML='<div class="lux-empty"><strong>No pieces found</strong><br><span>Try another category or search.</span><br><button type="button" class="btn dark" id="clearCatalogFilters">CLEAR FILTERS</button></div>';
     const clear=$("#clearCatalogFilters");
