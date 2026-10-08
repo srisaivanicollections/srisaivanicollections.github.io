@@ -10563,58 +10563,117 @@ HERO DEPLOYMENT SAFETY GUARD
 }
 </style>
 /* =========================================================
-   REVIEWS -> INSTAGRAM | FINAL MOBILE UX PASS
-   Layout only. Existing carousel/admin/catalog JS untouched.
+   FINAL MOBILE UX FIX
+   Customer Voices -> Instagram
+   Scoped to these two sections only.
    ========================================================= */
+
 #client-chronicles-section.option3-reviews,
 #instagram-editorial.option3-instagram{
   margin:0 !important;
   border:0 !important;
   background-color:#FAF8F5 !important;
   background-image:
-    linear-gradient(180deg,rgba(255,255,255,.34) 0%,rgba(250,248,245,.92) 48%,rgba(250,248,245,.98) 100%),
+    linear-gradient(180deg,rgba(250,248,245,.62) 0%,rgba(250,248,245,.84) 55%,rgba(250,248,245,.96) 100%),
     url("assets/reviews-bg.jpg") !important;
   background-size:cover !important;
-  background-position:center top !important;
+  background-position:center center !important;
   background-repeat:no-repeat !important;
+  box-sizing:border-box !important;
+}
+
+/* Reviews: let the content determine the section height. */
+#client-chronicles-section.option3-reviews{
+  padding:48px 24px 0 !important;
+  overflow:hidden !important;
 }
 #client-chronicles-section.option3-reviews .lux3-inner{
+  width:min(1080px,100%) !important;
+  max-width:none !important;
   margin:0 auto !important;
-}
-#client-chronicles-section.option3-reviews .option3-review-grid{
-  margin:0 !important;
   padding:0 !important;
+  box-sizing:border-box !important;
+}
+#client-chronicles-section.option3-reviews .lux3-heading-center{
+  margin:0 0 22px !important;
+}
+
+/* Carousel: no artificial height or bottom whitespace. */
+#client-chronicles-section.option3-reviews .option3-review-grid{
+  display:flex !important;
+  width:100% !important;
+  max-width:none !important;
   height:auto !important;
   min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  gap:12px !important;
   align-items:flex-start !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  scroll-snap-type:x mandatory !important;
+  scrollbar-width:none !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-grid::-webkit-scrollbar{
+  display:none !important;
 }
 #client-chronicles-section.option3-reviews .option3-review-card,
 #client-chronicles-section.option3-reviews .option3-review-featured{
-  height:auto !important;
-  min-height:0 !important;
-  max-height:none !important;
-  align-self:flex-start !important;
   box-sizing:border-box !important;
+  align-self:flex-start !important;
+  transform:none !important;
+}
+
+/* Mobile review cards are compact and equal-height. */
+#client-chronicles-section.option3-reviews .option3-review-card{
+  flex:0 0 100% !important;
+  width:100% !important;
+  min-width:100% !important;
+  max-width:100% !important;
+  height:230px !important;
+  min-height:230px !important;
+  max-height:230px !important;
+  padding:20px 18px !important;
+  overflow:hidden !important;
+  scroll-snap-align:start !important;
 }
 #client-chronicles-section.option3-reviews .option3-review-card p{
-  margin:14px 0 0 !important;
+  margin:12px auto 0 !important;
+  max-width:100% !important;
+  font-size:18px !important;
+  line-height:1.32 !important;
 }
+#client-chronicles-section.option3-reviews .option3-quote{
+  margin-top:12px !important;
+  font-size:34px !important;
+  line-height:.5 !important;
+}
+
+/* Dots directly under the review card. */
 #client-chronicles-section.option3-reviews .ssv-review-dots{
-  height:8px !important;
-  margin:8px 0 6px !important;
+  height:10px !important;
+  margin:8px 0 8px !important;
   padding:0 !important;
   line-height:0 !important;
 }
+
+/* Google CTA directly under the dots. */
 #client-chronicles-section.option3-reviews .option3-review-footer{
   display:flex !important;
-  justify-content:center !important;
-  align-items:center !important;
   width:100% !important;
   margin:0 !important;
-  padding:0 !important;
+  padding:0 0 0 !important;
+  justify-content:center !important;
+  align-items:center !important;
 }
+
+/* Exact same CTA geometry for both buttons. */
 #client-chronicles-section.option3-reviews .lux3-text-link,
 #instagram-editorial.option3-instagram .option3-instagram-button{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
   width:320px !important;
   max-width:calc(100vw - 32px) !important;
   min-width:0 !important;
@@ -10624,16 +10683,15 @@ HERO DEPLOYMENT SAFETY GUARD
   margin:0 auto !important;
   padding:0 18px !important;
   box-sizing:border-box !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
   border:1px solid #D8C8B4 !important;
   border-radius:2px !important;
   background:rgba(255,255,255,.58) !important;
-  box-shadow:none !important;
   color:#1C1917 !important;
+  box-shadow:none !important;
   line-height:1 !important;
 }
+
+/* Instagram starts immediately after the Reviews CTA. */
 #instagram-editorial.option3-instagram{
   min-height:0 !important;
   padding:0 !important;
@@ -10643,83 +10701,87 @@ HERO DEPLOYMENT SAFETY GUARD
   min-height:0 !important;
   height:auto !important;
   margin:0 !important;
-  padding:6px 16px 44px !important;
+  padding:12px 16px 54px !important;
   box-sizing:border-box !important;
   background:transparent !important;
   border:0 !important;
   text-align:center !important;
+  justify-content:flex-start !important;
 }
 #instagram-editorial.option3-instagram .lux3-eyebrow{
   margin:0 0 8px !important;
 }
 #instagram-editorial.option3-instagram h2{
   margin:0 auto !important;
+  max-width:330px !important;
+  font-size:40px !important;
+  line-height:1 !important;
 }
 #instagram-editorial.option3-instagram .option3-instagram-story{
-  margin:12px auto 18px !important;
+  margin:13px auto 0 !important;
+  max-width:330px !important;
 }
 #instagram-editorial.option3-instagram .option3-instagram-button{
-  margin:0 auto !important;
+  margin:20px auto 0 !important;
 }
+#instagram-editorial.option3-instagram .option3-instagram-button img{
+  width:16px !important;
+  height:16px !important;
+  min-width:16px !important;
+  min-height:16px !important;
+  flex:0 0 16px !important;
+  object-fit:contain !important;
+}
+
+@media(min-width:761px){
+  #client-chronicles-section.option3-reviews{
+    padding:64px 24px 0 !important;
+  }
+  #client-chronicles-section.option3-reviews .option3-review-card{
+    flex:1 0 0 !important;
+    width:auto !important;
+    min-width:0 !important;
+    max-width:none !important;
+    height:auto !important;
+    min-height:224px !important;
+    max-height:none !important;
+  }
+}
+
 @media(max-width:760px){
   #client-chronicles-section.option3-reviews{
     padding:42px 16px 0 !important;
-    overflow:hidden !important;
-  }
-  #client-chronicles-section.option3-reviews .lux3-inner{
-    width:100% !important;
-    max-width:100% !important;
-    padding:0 !important;
   }
   #client-chronicles-section.option3-reviews .lux3-heading-center{
-    margin:0 0 18px !important;
+    margin-bottom:18px !important;
   }
   #client-chronicles-section.option3-reviews .option3-review-grid{
-    width:100% !important;
-    display:flex !important;
-    gap:12px !important;
-    overflow-x:auto !important;
-    overflow-y:hidden !important;
-    scroll-snap-type:x mandatory !important;
-    scrollbar-width:none !important;
+    gap:10px !important;
   }
-  #client-chronicles-section.option3-reviews .option3-review-grid::-webkit-scrollbar{
-    display:none !important;
-  }
-  #client-chronicles-section.option3-reviews .option3-review-card,
-  #client-chronicles-section.option3-reviews .option3-review-featured{
+  #client-chronicles-section.option3-reviews .option3-review-card{
+    flex-basis:100% !important;
     width:100% !important;
     min-width:100% !important;
-    max-width:100% !important;
-    flex:0 0 100% !important;
-    min-height:0 !important;
-    height:auto !important;
-    padding:20px 18px 20px !important;
-    margin:0 !important;
-    scroll-snap-align:start !important;
-    overflow:hidden !important;
+    height:230px !important;
+    min-height:230px !important;
+    max-height:230px !important;
   }
   #client-chronicles-section.option3-reviews .ssv-review-dots{
-    margin:7px 0 6px !important;
-  }
-  #client-chronicles-section.option3-reviews .option3-review-footer{
-    padding:0 !important;
-    margin:0 !important;
-  }
-  #instagram-editorial.option3-instagram{
-    padding:0 !important;
-    margin:0 !important;
+    margin:7px 0 7px !important;
   }
   #instagram-editorial.option3-instagram .option3-instagram-copy{
-    padding:6px 16px 44px !important;
-    margin:0 !important;
+    padding:10px 16px 48px !important;
   }
-  #instagram-editorial.option3-instagram .option3-instagram-button{
-    width:320px !important;
-    max-width:calc(100vw - 32px) !important;
-    height:48px !important;
-    min-height:48px !important;
-    max-height:48px !important;
+}
+
+@media(max-width:380px){
+  #client-chronicles-section.option3-reviews .option3-review-card{
+    height:224px !important;
+    min-height:224px !important;
+    max-height:224px !important;
+  }
+  #client-chronicles-section.option3-reviews .option3-review-card p{
+    font-size:17px !important;
   }
 }
 </style>
@@ -10841,7 +10903,7 @@ HERO DEPLOYMENT SAFETY GUARD
   </div>
 </section>
 
-<section class="lux3-section option3-instagram instagram-light-saree" id="instagram-editorial" aria-labelledby="lux3-collection-title" style="background-image:linear-gradient(rgba(250,248,245,.55),rgba(250,248,245,.55)),url('assets/reviews-bg.jpg?v=4') !important;background-color:#FAF8F5 !important;background-size:cover !important;background-position:center !important;background-repeat:no-repeat !important;">
+<section class="lux3-section option3-instagram instagram-light-saree" id="instagram-editorial" aria-labelledby="lux3-collection-title">
   <div class="option3-instagram-copy">
     <p class="lux3-eyebrow">WATCH ON INSTAGRAM</p>
     <h2 id="lux3-collection-title">See the collection in motion.</h2>
