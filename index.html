@@ -6814,6 +6814,232 @@ HERO DEPLOYMENT SAFETY GUARD
 
 
 <!-- restore baseline after button-spacing rollback -->
+
+<style id="reviews-instagram-final">
+/* =========================================================
+   FINAL MOBILE UX FIX
+   Customer Voices -> Instagram
+   Scoped to these two sections only.
+   ========================================================= */
+
+#client-chronicles-section.option3-reviews,
+#instagram-editorial.option3-instagram{
+  margin:0 !important;
+  border:0 !important;
+  background-color:#FAF8F5 !important;
+  background-image:
+    linear-gradient(180deg,rgba(250,248,245,.62) 0%,rgba(250,248,245,.84) 55%,rgba(250,248,245,.96) 100%),
+    url("assets/reviews-bg.jpg") !important;
+  background-size:cover !important;
+  background-position:center center !important;
+  background-repeat:no-repeat !important;
+  box-sizing:border-box !important;
+}
+
+/* Reviews: let the content determine the section height. */
+#client-chronicles-section.option3-reviews{
+  padding:48px 24px 0 !important;
+  overflow:hidden !important;
+}
+#client-chronicles-section.option3-reviews .lux3-inner{
+  width:min(1080px,100%) !important;
+  max-width:none !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+}
+#client-chronicles-section.option3-reviews .lux3-heading-center{
+  margin:0 0 22px !important;
+}
+
+/* Carousel: no artificial height or bottom whitespace. */
+#client-chronicles-section.option3-reviews .option3-review-grid{
+  display:flex !important;
+  width:100% !important;
+  max-width:none !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  gap:12px !important;
+  align-items:flex-start !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  scroll-snap-type:x mandatory !important;
+  scrollbar-width:none !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-grid::-webkit-scrollbar{
+  display:none !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-card,
+#client-chronicles-section.option3-reviews .option3-review-featured{
+  box-sizing:border-box !important;
+  align-self:flex-start !important;
+  transform:none !important;
+}
+
+/* Mobile review cards are compact and equal-height. */
+#client-chronicles-section.option3-reviews .option3-review-card{
+  flex:0 0 100% !important;
+  width:100% !important;
+  min-width:100% !important;
+  max-width:100% !important;
+  height:230px !important;
+  min-height:230px !important;
+  max-height:230px !important;
+  padding:20px 18px !important;
+  overflow:hidden !important;
+  scroll-snap-align:start !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-card p{
+  margin:12px auto 0 !important;
+  max-width:100% !important;
+  font-size:18px !important;
+  line-height:1.32 !important;
+}
+#client-chronicles-section.option3-reviews .option3-quote{
+  margin-top:12px !important;
+  font-size:34px !important;
+  line-height:.5 !important;
+}
+
+/* Dots directly under the review card. */
+#client-chronicles-section.option3-reviews .ssv-review-dots{
+  height:10px !important;
+  margin:8px 0 8px !important;
+  padding:0 !important;
+  line-height:0 !important;
+}
+
+/* Google CTA directly under the dots. */
+#client-chronicles-section.option3-reviews .option3-review-footer{
+  display:flex !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 0 0 !important;
+  justify-content:center !important;
+  align-items:center !important;
+}
+
+/* Exact same CTA geometry for both buttons. */
+#client-chronicles-section.option3-reviews .lux3-text-link,
+#instagram-editorial.option3-instagram .option3-instagram-button{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:320px !important;
+  max-width:calc(100vw - 32px) !important;
+  min-width:0 !important;
+  height:48px !important;
+  min-height:48px !important;
+  max-height:48px !important;
+  margin:0 auto !important;
+  padding:0 18px !important;
+  box-sizing:border-box !important;
+  border:1px solid #D8C8B4 !important;
+  border-radius:2px !important;
+  background:rgba(255,255,255,.58) !important;
+  color:#1C1917 !important;
+  box-shadow:none !important;
+  line-height:1 !important;
+}
+
+/* Instagram starts immediately after the Reviews CTA. */
+#instagram-editorial.option3-instagram{
+  min-height:0 !important;
+  padding:0 !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-copy{
+  width:100% !important;
+  min-height:0 !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:12px 16px 54px !important;
+  box-sizing:border-box !important;
+  background:transparent !important;
+  border:0 !important;
+  text-align:center !important;
+  justify-content:flex-start !important;
+}
+#instagram-editorial.option3-instagram .lux3-eyebrow{
+  margin:0 0 8px !important;
+}
+#instagram-editorial.option3-instagram h2{
+  margin:0 auto !important;
+  max-width:330px !important;
+  font-size:40px !important;
+  line-height:1 !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-story{
+  margin:13px auto 0 !important;
+  max-width:330px !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-button{
+  margin:20px auto 0 !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-button img{
+  width:16px !important;
+  height:16px !important;
+  min-width:16px !important;
+  min-height:16px !important;
+  flex:0 0 16px !important;
+  object-fit:contain !important;
+}
+
+@media(min-width:761px){
+  #client-chronicles-section.option3-reviews{
+    padding:64px 24px 0 !important;
+  }
+  #client-chronicles-section.option3-reviews .option3-review-card{
+    flex:1 0 0 !important;
+    width:auto !important;
+    min-width:0 !important;
+    max-width:none !important;
+    height:auto !important;
+    min-height:224px !important;
+    max-height:none !important;
+  }
+}
+
+@media(max-width:760px){
+  #client-chronicles-section.option3-reviews{
+    padding:28px 16px 0 !important;
+  }
+  #client-chronicles-section.option3-reviews .lux3-heading-center{
+    margin-bottom:18px !important;
+  }
+  #client-chronicles-section.option3-reviews .option3-review-grid{
+    gap:10px !important;
+  }
+  #client-chronicles-section.option3-reviews .option3-review-card{
+    flex-basis:100% !important;
+    width:100% !important;
+    min-width:100% !important;
+    height:230px !important;
+    min-height:230px !important;
+    max-height:230px !important;
+  }
+  #client-chronicles-section.option3-reviews .ssv-review-dots{
+    margin:7px 0 7px !important;
+  }
+  #instagram-editorial.option3-instagram .option3-instagram-copy{
+    padding:10px 16px 48px !important;
+  }
+}
+
+@media(max-width:380px){
+  #client-chronicles-section.option3-reviews .option3-review-card{
+    height:224px !important;
+    min-height:224px !important;
+    max-height:224px !important;
+  }
+  #client-chronicles-section.option3-reviews .option3-review-card p{
+    font-size:17px !important;
+  }
+}
+
+</style>
 <style id="sv-reviews-visual-journal">
 /* =========================================================
    SRI SAI VANI | REVIEWS + VISUAL JOURNAL
@@ -7170,6 +7396,906 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 </style>
+<style id="sv-compact-reviews-final">
+/* Compact Client Reflections */
+#reviews.sv-reviews{
+  width:100%;
+  box-sizing:border-box;
+  padding:48px 24px 46px !important;
+  background:#fbf9f6 !important;
+  border-top:1px solid #ebe4d8 !important;
+  border-bottom:1px solid #ebe4d8 !important;
+}
+#reviews.sv-reviews .sv-reviews__inner{
+  width:min(1180px,100%);
+  margin:0 auto;
+}
+#reviews.sv-reviews .sv-section-head{
+  margin:0 0 24px !important;
+  text-align:center;
+}
+#reviews.sv-reviews .sv-eyebrow{
+  margin:0 0 7px !important;
+  color:#9f7944 !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:600 !important;
+  letter-spacing:.22em !important;
+  text-transform:uppercase !important;
+}
+#reviews.sv-reviews .sv-title{
+  margin:0 !important;
+  color:#1a1a1a !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:clamp(30px,4vw,42px) !important;
+  line-height:1.05 !important;
+  font-weight:500 !important;
+}
+#reviews.sv-reviews .sv-reviews__track{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+#reviews.sv-reviews .sv-review-card{
+  min-width:0 !important;
+  min-height:132px !important;
+  height:auto !important;
+  padding:20px 22px 17px !important;
+  background:#fff !important;
+  border:1px solid #ebe4d8 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  box-sizing:border-box !important;
+}
+#reviews.sv-reviews .sv-review-card__quote{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:30px !important;
+  margin:0 0 2px !important;
+  padding:0 !important;
+  color:#c8b08c !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:48px !important;
+  font-weight:500 !important;
+  line-height:1 !important;
+  letter-spacing:0 !important;
+  opacity:.72 !important;
+  overflow:visible !important;
+}
+#reviews.sv-reviews .sv-review-card__text{
+  margin:8px 0 15px !important;
+  color:#332e29 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:19px !important;
+  line-height:1.25 !important;
+  font-weight:500 !important;
+}
+#reviews.sv-reviews .sv-review-card__footer{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:6px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+}
+#reviews.sv-reviews .sv-review-card__badge{
+  display:inline-flex !important;
+  align-items:center !important;
+  color:#8a6a43 !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:8px !important;
+  font-weight:600 !important;
+  letter-spacing:.09em !important;
+  text-transform:uppercase !important;
+}
+#reviews.sv-reviews .sv-reviews__dots{
+  display:none !important;
+}
+
+@media(max-width:760px){
+  #reviews.sv-reviews{
+    padding:38px 16px 38px !important;
+    overflow:hidden !important;
+  }
+  #reviews.sv-reviews .sv-section-head{
+    margin-bottom:18px !important;
+  }
+  #reviews.sv-reviews .sv-title{
+    font-size:31px !important;
+  }
+  #reviews.sv-reviews .sv-reviews__viewport{
+    width:100% !important;
+    overflow:hidden !important;
+  }
+  #reviews.sv-reviews .sv-reviews__track{
+    display:flex !important;
+    width:100% !important;
+    gap:10px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory !important;
+    scrollbar-width:none !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+  #reviews.sv-reviews .sv-reviews__track::-webkit-scrollbar{
+    display:none !important;
+  }
+  #reviews.sv-reviews .sv-review-card{
+    flex:0 0 100% !important;
+    width:100% !important;
+    min-width:100% !important;
+    min-height:118px !important;
+    padding:18px 19px 15px !important;
+    scroll-snap-align:start !important;
+  }
+  #reviews.sv-reviews .sv-review-card__text{
+    font-size:18px !important;
+    margin:7px 0 13px !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:7px !important;
+    margin:12px 0 0 !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots button{
+    width:6px !important;
+    height:6px !important;
+    padding:0 !important;
+    border:1px solid #9f7944 !important;
+    border-radius:50% !important;
+    background:transparent !important;
+    cursor:pointer !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots button.is-active{
+    width:7px !important;
+    height:7px !important;
+    background:#9f7944 !important;
+  }
+}
+</style>
+
+<style id="sv-review-visual-final">
+/* Final customer review presentation */
+#reviews.sv-reviews{
+  padding:46px 20px 44px !important;
+  background:#FAF8F5 !important;
+}
+#reviews.sv-reviews .sv-section-head{
+  margin:0 auto 24px !important;
+  text-align:center !important;
+}
+#reviews.sv-reviews .sv-title{
+  margin:0 !important;
+  font-size:clamp(32px,4vw,46px) !important;
+  line-height:1.04 !important;
+  letter-spacing:-.02em !important;
+}
+#reviews.sv-reviews .sv-reviews__viewport{
+  width:100% !important;
+  overflow:hidden !important;
+}
+#reviews.sv-reviews .sv-reviews__track{
+  display:flex !important;
+  align-items:stretch !important;
+  gap:14px !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  scroll-snap-type:x mandatory !important;
+  scrollbar-width:none !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+#reviews.sv-reviews .sv-reviews__track::-webkit-scrollbar{
+  display:none !important;
+}
+#reviews.sv-reviews .sv-review-card{
+  box-sizing:border-box !important;
+  min-height:0 !important;
+  padding:24px 24px 20px !important;
+  background:#FFFDFC !important;
+  border:1px solid #E6DED2 !important;
+  border-radius:2px !important;
+  box-shadow:0 5px 18px rgba(54,43,31,.035) !important;
+}
+#reviews.sv-reviews .sv-review-card__quote{
+  position:static !important;
+  display:block !important;
+  height:28px !important;
+  min-height:0 !important;
+  margin:0 0 5px !important;
+  color:#B38E5D !important;
+  font-family:Georgia,serif !important;
+  font-size:32px !important;
+  line-height:28px !important;
+  opacity:.72 !important;
+}
+#reviews.sv-reviews .sv-review-card__text{
+  min-height:0 !important;
+  margin:0 !important;
+  color:#332E29 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:21px !important;
+  line-height:1.25 !important;
+  font-weight:500 !important;
+}
+#reviews.sv-reviews .sv-review-card__footer{
+  margin:15px 0 0 !important;
+  padding:0 !important;
+  border:0 !important;
+}
+#reviews.sv-reviews .sv-review-card__badge{
+  padding:5px 7px !important;
+  color:#8A6A43 !important;
+  border:1px solid #DCCCB5 !important;
+  background:transparent !important;
+  font-size:7px !important;
+  letter-spacing:.10em !important;
+}
+#reviews.sv-reviews .sv-reviews__dots{
+  display:none !important;
+}
+
+/* Touch screens: one clean card at a time, swipe + 3 dots */
+@media (pointer:coarse), (max-width:760px){
+  #reviews.sv-reviews{
+    padding:38px 16px 40px !important;
+  }
+  #reviews.sv-reviews .sv-section-head{
+    margin-bottom:20px !important;
+  }
+  #reviews.sv-reviews .sv-title{
+    font-size:34px !important;
+  }
+  #reviews.sv-reviews .sv-reviews__track{
+    gap:10px !important;
+  }
+  #reviews.sv-reviews .sv-review-card{
+    flex:0 0 100% !important;
+    width:100% !important;
+    min-width:100% !important;
+    padding:22px 20px 18px !important;
+    scroll-snap-align:start !important;
+  }
+  #reviews.sv-reviews .sv-review-card__text{
+    font-size:20px !important;
+    line-height:1.24 !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:7px !important;
+    margin:13px 0 0 !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots button{
+    width:7px !important;
+    height:7px !important;
+    padding:0 !important;
+    border:1px solid #B38E5D !important;
+    border-radius:50% !important;
+    background:transparent !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots button.is-active{
+    width:8px !important;
+    height:8px !important;
+    background:#B38E5D !important;
+  }
+}
+
+@media(max-width:380px){
+  #reviews.sv-reviews .sv-title{
+    font-size:31px !important;
+  }
+  #reviews.sv-reviews .sv-review-card__text{
+    font-size:19px !important;
+  }
+}
+</style>
+
+<style id="sv-google-review-link">
+#reviews.sv-reviews .sv-reviews__google{
+  display:flex;
+  justify-content:center;
+  margin:18px 0 0;
+}
+#reviews.sv-reviews .sv-reviews__google a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:40px;
+  padding:0 19px;
+  border:1px solid #B49A68;
+  background:#B49A68;
+  color:#1A1A1A;
+  text-decoration:none;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  transition:all .2s ease;
+}
+#reviews.sv-reviews .sv-reviews__google a:hover{
+  background:#9F7944;
+  color:#FFFFFF;
+  border-color:#9F7944;
+}
+#reviews.sv-reviews .sv-reviews__google a span:last-child{
+  font-size:13px;
+  line-height:1;
+}
+</style>
+<style id="sv-reviews-editorial-style">
+/* Editorial customer reviews */
+#reviews.sv-reviews{
+  padding:64px 18px 48px !important;
+  background:#FBF9F6 !important;
+  border-top:1px solid #E8E0D3 !important;
+  border-bottom:1px solid #E8E0D3 !important;
+}
+#reviews.sv-reviews .sv-reviews__inner{
+  width:min(980px,100%) !important;
+}
+#reviews.sv-reviews .sv-section-head{
+  max-width:760px !important;
+  margin:0 auto 38px !important;
+  text-align:center !important;
+}
+#reviews.sv-reviews .sv-reviews__eyebrow{
+  display:block;
+  margin:0 0 13px;
+  color:#9F7944;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  line-height:1;
+  letter-spacing:.23em;
+  text-transform:uppercase;
+}
+#reviews.sv-reviews .sv-title{
+  font-size:clamp(38px,7vw,56px) !important;
+  line-height:.98 !important;
+  letter-spacing:-.025em !important;
+  font-weight:400 !important;
+  color:#292623 !important;
+}
+#reviews.sv-reviews .sv-reviews__intro{
+  margin:12px 0 0;
+  color:#81766B;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:19px;
+  line-height:1.2;
+  font-style:italic;
+}
+#reviews.sv-reviews .sv-reviews__track{
+  gap:14px !important;
+  padding:2px 0 5px !important;
+}
+#reviews.sv-reviews .sv-reviews__track .sv-review-card{
+  flex:0 0 min(430px,82vw) !important;
+  min-height:0 !important;
+  height:274px !important;
+  padding:34px 28px 25px !important;
+  background:#FFFDFC !important;
+  border:1px solid #E6DED1 !important;
+  box-shadow:none !important;
+}
+#reviews.sv-reviews .sv-review-card__quote{
+  position:static !important;
+  display:block !important;
+  height:38px !important;
+  margin:0 !important;
+  color:#C8B08C !important;
+  font-size:52px !important;
+  line-height:.7 !important;
+  text-align:center !important;
+  opacity:.9 !important;
+}
+#reviews.sv-reviews .sv-review-card__text{
+  min-height:0 !important;
+  margin:28px auto 0 !important;
+  max-width:330px !important;
+  color:#4A4540 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:24px !important;
+  font-style:italic !important;
+  line-height:1.25 !important;
+  text-align:center !important;
+}
+#reviews.sv-reviews .sv-review-card__footer{
+  justify-content:center !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:28px !important;
+}
+#reviews.sv-reviews .sv-review-card__badge{
+  padding:6px 9px !important;
+  border:1px solid #DCCDB7 !important;
+  color:#8C7557 !important;
+  background:#FFFDFC !important;
+  font-size:7px !important;
+  letter-spacing:.12em !important;
+}
+#reviews.sv-reviews .sv-reviews__dots{
+  margin-top:15px !important;
+  gap:6px !important;
+}
+#reviews.sv-reviews .sv-reviews__dots button{
+  width:6px !important;
+  height:6px !important;
+  border:1px solid #B99A70 !important;
+  background:transparent !important;
+}
+#reviews.sv-reviews .sv-reviews__dots button.is-active{
+  width:6px !important;
+  background:#9F7944 !important;
+}
+#reviews.sv-reviews .sv-reviews__google{
+  display:flex;
+  justify-content:center;
+  margin:17px 0 0 !important;
+}
+#reviews.sv-reviews .sv-reviews__google a{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:0 0 5px;
+  border:0;
+  border-bottom:1px solid #9F9A93;
+  background:transparent;
+  color:#6F6A63;
+  text-decoration:none;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+#reviews.sv-reviews .sv-reviews__google a span:last-child{
+  font-size:12px;
+}
+@media(max-width:700px){
+  #reviews.sv-reviews{
+    padding:52px 0 42px !important;
+  }
+  #reviews.sv-reviews .sv-section-head{
+    padding:0 18px;
+    margin-bottom:31px !important;
+  }
+  #reviews.sv-reviews .sv-title{
+    font-size:43px !important;
+  }
+  #reviews.sv-reviews .sv-reviews__intro{
+    font-size:18px;
+  }
+  #reviews.sv-reviews .sv-reviews__viewport{
+    overflow:hidden;
+  }
+  #reviews.sv-reviews .sv-reviews__track{
+    padding-left:32px !important;
+    padding-right:32px !important;
+    gap:20px !important;
+  }
+  #reviews.sv-reviews .sv-reviews__track .sv-review-card{
+    flex:0 0 calc(100vw - 112px) !important;
+    height:190px !important;
+    padding:24px 22px 20px !important;
+  }
+  #reviews.sv-reviews .sv-review-card__text{
+    font-size:20px !important;
+    line-height:1.18 !important;
+    max-width:250px !important;
+  }
+}
+</style>
+<style id="sv-review-ui-authority">
+#reviews.sv-reviews{width:100%!important;max-width:none!important;margin:0!important;padding:68px 20px 58px!important;box-sizing:border-box!important;background:#FAF8F5!important;border-top:1px solid #E4D8C5!important;border-bottom:1px solid #E4D8C5!important;overflow:hidden!important;text-align:center!important}
+#reviews.sv-reviews .sv-reviews__inner{width:min(1040px,100%)!important;margin:0 auto!important}
+#reviews.sv-reviews .sv-section-head{max-width:720px!important;margin:0 auto 34px!important;padding:0!important;text-align:center!important}
+#reviews.sv-reviews .sv-reviews__eyebrow{margin:0 0 11px!important;color:#A88A60!important;font-family:"Montserrat",Arial,sans-serif!important;font-size:8px!important;line-height:1.2!important;font-weight:600!important;letter-spacing:.24em!important;text-transform:uppercase!important}
+#reviews.sv-reviews .sv-title{margin:0!important;color:#292623!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:clamp(40px,5vw,56px)!important;line-height:.98!important;font-weight:400!important;letter-spacing:-.025em!important}
+#reviews.sv-reviews .sv-reviews__intro{margin:10px 0 0!important;color:#81766B!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:18px!important;line-height:1.25!important;font-style:italic!important}
+#reviews.sv-reviews .sv-reviews__viewport{width:100%!important;overflow:hidden!important}
+#reviews.sv-reviews .sv-reviews__track{display:flex!important;align-items:stretch!important;gap:16px!important;width:100%!important;padding:2px 18px 5px!important;box-sizing:border-box!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scroll-behavior:smooth!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important}
+#reviews.sv-reviews .sv-reviews__track::-webkit-scrollbar{display:none!important}
+#reviews.sv-reviews .sv-review-card{position:relative!important;flex:0 0 min(440px,calc(100vw - 112px))!important;width:min(440px,calc(100vw - 112px))!important;min-width:0!important;height:190px!important;box-sizing:border-box!important;padding:24px 27px 22px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;background:#FFFDFC!important;border:1px solid #E4D8C5!important;border-radius:2px!important;box-shadow:0 5px 18px rgba(54,43,31,.025)!important;scroll-snap-align:start!important}
+#reviews.sv-reviews .sv-review-card__quote{display:block!important;height:34px!important;margin:0 0 17px!important;color:#C8B08C!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:43px!important;line-height:.7!important;font-weight:500!important;text-align:left!important;opacity:.88!important}
+#reviews.sv-reviews .sv-review-card__text{margin:0!important;max-width:430px!important;color:#403A35!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:24px!important;line-height:1.22!important;font-weight:500!important;font-style:italic!important;text-align:left!important}
+#reviews.sv-reviews .sv-reviews__dots{display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;margin:17px 0 0!important}
+#reviews.sv-reviews .sv-reviews__dots button{width:6px!important;height:6px!important;padding:0!important;border:1px solid #B38E5D!important;border-radius:50%!important;background:transparent!important;cursor:pointer!important;transition:all .2s ease!important}
+#reviews.sv-reviews .sv-reviews__dots button.is-active{width:7px!important;height:7px!important;background:#B38E5D!important}
+#reviews.sv-reviews .sv-reviews__google{display:flex!important;justify-content:center!important;margin:19px 0 0!important}
+#reviews.sv-reviews .sv-reviews__google a{display:inline-flex!important;align-items:center!important;gap:7px!important;min-height:36px!important;padding:0 0 5px!important;border:0!important;border-bottom:1px solid #9F9A93!important;background:transparent!important;color:#6F6A63!important;text-decoration:none!important;font-family:"Montserrat",Arial,sans-serif!important;font-size:8px!important;line-height:1!important;font-weight:600!important;letter-spacing:.16em!important;text-transform:uppercase!important}
+#reviews.sv-reviews .sv-reviews__google a span:last-child{font-size:12px!important}
+#reviews.sv-reviews .sv-reviews__google a:hover{color:#1C1917!important;border-bottom-color:#1C1917!important}
+@media(max-width:700px){
+  #reviews.sv-reviews{padding:54px 0 46px!important}
+  #reviews.sv-reviews .sv-section-head{padding:0 18px!important;margin-bottom:27px!important}
+  #reviews.sv-reviews .sv-reviews__eyebrow{margin-bottom:10px!important;font-size:8px!important}
+  #reviews.sv-reviews .sv-title{font-size:43px!important}
+  #reviews.sv-reviews .sv-reviews__intro{font-size:17px!important;margin-top:9px!important}
+  #reviews.sv-reviews .sv-reviews__track{gap:12px!important;padding-left:18px!important;padding-right:18px!important}
+  #reviews.sv-reviews .sv-review-card{flex:0 0 calc(100vw - 70px)!important;width:calc(100vw - 70px)!important;height:226px!important;padding:27px 23px 24px!important}
+  #reviews.sv-reviews .sv-review-card__quote{height:30px!important;margin-bottom:16px!important;font-size:39px!important}
+  #reviews.sv-reviews .sv-review-card__text{max-width:300px!important;font-size:22px!important;line-height:1.22!important}
+}
+@media(max-width:380px){
+  #reviews.sv-reviews .sv-title{font-size:39px!important}
+  #reviews.sv-reviews .sv-review-card{flex-basis:calc(100vw - 58px)!important;width:calc(100vw - 58px)!important;height:214px!important;padding:24px 20px 22px!important}
+  #reviews.sv-reviews .sv-review-card__text{font-size:20px!important}
+}
+@media(prefers-reduced-motion:reduce){#reviews.sv-reviews .sv-reviews__track{scroll-behavior:auto!important}}
+</style>
+
+<style id="sv-final-ux-architecture">
+/* FINAL UX ARCHITECTURE: Visual Journal + Store Details */
+#instagram.sv-instagram{
+  padding:64px 24px 68px !important;
+  background:#fbf9f6 !important;
+  border-top:1px solid #ebe4d8 !important;
+  border-bottom:1px solid #ebe4d8 !important;
+}
+#instagram.sv-instagram .sv-instagram__inner{
+  width:min(1180px,100%) !important;
+  margin:0 auto !important;
+}
+#instagram.sv-instagram .sv-section-head{
+  margin:0 auto 30px !important;
+}
+#instagram.sv-instagram .sv-eyebrow{
+  margin-bottom:9px !important;
+}
+#instagram.sv-instagram .sv-title{
+  font-size:clamp(36px,4vw,52px) !important;
+  line-height:1 !important;
+}
+#instagram.sv-instagram .sv-gallery{
+  gap:10px !important;
+}
+#instagram.sv-instagram .sv-gallery__item{
+  border:1px solid #ebe4d8 !important;
+}
+#instagram.sv-instagram .sv-instagram__cta{
+  margin-top:26px !important;
+}
+#instagram.sv-instagram .sv-instagram__button{
+  min-height:42px !important;
+  padding:0 20px !important;
+  border:1px solid #9f7944 !important;
+  color:#1a1a1a !important;
+  background:transparent !important;
+}
+#instagram.sv-instagram .sv-instagram__button:hover,
+#instagram.sv-instagram .sv-instagram__button:focus-visible{
+  background:#9f7944 !important;
+  border-color:#9f7944 !important;
+  color:#fff !important;
+}
+@media(max-width:600px){
+  #instagram.sv-instagram{padding:48px 14px 52px !important}
+  #instagram.sv-instagram .sv-section-head{margin-bottom:22px !important}
+  #instagram.sv-instagram .sv-title{font-size:34px !important}
+  #instagram.sv-instagram .sv-gallery{gap:7px !important}
+  #instagram.sv-instagram .sv-instagram__cta{margin-top:22px !important}
+  #instagram.sv-instagram .sv-instagram__button{min-height:40px !important}
+}
+</style>
+
+<style id="final-ssv-uiux-authority">
+/* =========================================================
+   FINAL SRI SAI VANI UI/UX AUTHORITY
+   Reviews + Latest Collection + Store Details
+   Visual-only layer. Existing content, links and JS preserved.
+   ========================================================= */
+
+:root{
+  --ssv-paper:#FAF8F5;
+  --ssv-card:#FFFDF9;
+  --ssv-ink:#1C1917;
+  --ssv-muted:#756B61;
+  --ssv-line:#E4D8C5;
+  --ssv-gold:#B38E5D;
+  --ssv-gold-soft:#C8B28A;
+}
+
+/* ---------- CUSTOMER REVIEWS ---------- */
+#client-chronicles-section.option3-reviews{
+  width:100%!important;
+  max-width:none!important;
+  padding:48px 20px 38px!important;
+  margin:0!important;
+  background:var(--ssv-paper)!important;
+  border-top:1px solid var(--ssv-line)!important;
+  border-bottom:1px solid var(--ssv-line)!important;
+  overflow:hidden!important;
+}
+
+#client-chronicles-section .lux3-inner{
+  width:min(1120px,100%)!important;
+  padding:0!important;
+  margin:0 auto!important;
+}
+
+#client-chronicles-section .lux3-heading-center{
+  max-width:760px!important;
+  margin:0 auto 24px!important;
+  text-align:center!important;
+}
+
+#client-chronicles-section .lux3-eyebrow{
+  margin:0 0 8px!important;
+  color:var(--ssv-gold)!important;
+  font-size:8px!important;
+  line-height:1.2!important;
+  letter-spacing:.24em!important;
+  font-weight:600!important;
+}
+
+#client-chronicles-section .lux3-heading h2{
+  margin:0!important;
+  color:var(--ssv-ink)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(38px,4.8vw,54px)!important;
+  line-height:.98!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+
+#client-chronicles-section .lux3-intro{
+  margin:8px auto 0!important;
+  color:var(--ssv-muted)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:16px!important;
+  line-height:1.25!important;
+  font-style:italic!important;
+}
+
+#client-chronicles-section .option3-review-grid{
+  width:100%!important;
+  max-width:920px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:flex!important;
+  gap:12px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;
+  scroll-behavior:smooth!important;
+  scrollbar-width:none!important;
+}
+
+#client-chronicles-section .option3-review-grid::-webkit-scrollbar{
+  display:none!important;
+}
+
+#client-chronicles-section .option3-review-card,
+#client-chronicles-section .option3-review-featured{
+  flex:0 0 calc((100% - 24px)/3)!important;
+  width:calc((100% - 24px)/3)!important;
+  min-width:calc((100% - 24px)/3)!important;
+  max-width:calc((100% - 24px)/3)!important;
+  min-height:166px!important;
+  padding:20px 20px 18px!important;
+  background:var(--ssv-card)!important;
+  border:1px solid var(--ssv-line)!important;
+  border-radius:2px!important;
+  box-shadow:0 5px 18px rgba(45,38,31,.035)!important;
+  transform:none!important;
+  scroll-snap-align:start!important;
+}
+
+#client-chronicles-section .option3-review-card:hover,
+#client-chronicles-section .option3-review-featured:hover{
+  box-shadow:0 8px 22px rgba(45,38,31,.06)!important;
+}
+
+#client-chronicles-section .option3-review-top{
+  display:none!important;
+}
+
+#client-chronicles-section .option3-quote{
+  margin:0 0 8px!important;
+  color:var(--ssv-gold)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:31px!important;
+  line-height:.55!important;
+  opacity:.78!important;
+}
+
+#client-chronicles-section .option3-review-card p{
+  margin:9px 0 0!important;
+  max-width:none!important;
+  color:#4F4841!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:18px!important;
+  line-height:1.28!important;
+  font-weight:400!important;
+  font-style:italic!important;
+}
+
+#client-chronicles-section .option3-review-footer{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:100%!important;
+  margin:13px 0 0!important;
+  padding:0!important;
+}
+
+#client-chronicles-section .ssv-review-dots{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:6px!important;
+  margin:0 0 12px!important;
+}
+
+#client-chronicles-section .ssv-review-dots button{
+  width:6px!important;
+  height:6px!important;
+  padding:0!important;
+  border:1px solid var(--ssv-gold-soft)!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  transition:all .2s ease!important;
+}
+
+#client-chronicles-section .ssv-review-dots button.active{
+  width:18px!important;
+  border-radius:8px!important;
+  background:var(--ssv-gold)!important;
+  border-color:var(--ssv-gold)!important;
+}
+
+#client-chronicles-section .lux3-text-link{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-height:38px!important;
+  padding:10px 18px!important;
+  margin:0!important;
+  background:var(--ssv-gold)!important;
+  border:1px solid var(--ssv-gold)!important;
+  border-radius:1px!important;
+  color:#201A16!important;
+  box-shadow:none!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:8px!important;
+  line-height:1!important;
+  font-weight:600!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+}
+
+#client-chronicles-section .lux3-text-link:hover{
+  background:#9D7C4E!important;
+  border-color:#9D7C4E!important;
+  color:#FFFDF9!important;
+}
+
+/* ---------- LATEST COLLECTION / INSTAGRAM ---------- */
+#instagram-editorial{
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  padding:46px 20px 44px!important;
+  background:var(--ssv-paper)!important;
+  background-image:none!important;
+  border-top:0!important;
+  border-bottom:1px solid var(--ssv-line)!important;
+  text-align:center!important;
+  overflow:hidden!important;
+}
+
+#instagram-editorial .option3-instagram-copy{
+  width:min(1180px,100%)!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0 auto!important;
+  background:transparent!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  text-align:center!important;
+}
+
+#instagram-editorial .lux3-eyebrow{
+  margin:0 0 8px!important;
+  color:var(--ssv-gold)!important;
+  font-size:8px!important;
+  letter-spacing:.23em!important;
+}
+
+#instagram-editorial h2{
+  margin:0!important;
+  color:var(--ssv-ink)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(38px,4.8vw,54px)!important;
+  line-height:1!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+
+#instagram-editorial .option3-instagram-story{
+  max-width:480px!important;
+  margin:8px auto 20px!important;
+  color:var(--ssv-muted)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:16px!important;
+  line-height:1.3!important;
+  font-style:italic!important;
+  text-align:center!important;
+}
+
+/* Keep the four visual collection tiles elegant and evenly weighted. */
+#instagram-editorial .option3-instagram-gallery,
+#instagram-editorial .instagram-grid,
+#instagram-editorial .collection-grid{
+  width:min(100%,1080px)!important;
+  margin:0 auto!important;
+}
+
+#instagram-editorial img{
+  border-color:var(--ssv-line)!important;
+}
+
+#instagram-editorial .option3-instagram-button{
+  width:auto!important;
+  min-width:205px!important;
+  max-width:260px!important;
+  min-height:42px!important;
+  height:42px!important;
+  margin:18px auto 0!important;
+  padding:0 17px!important;
+  background:transparent!important;
+  border:1px solid #CDBD9F!important;
+  color:var(--ssv-ink)!important;
+  box-shadow:none!important;
+  justify-content:center!important;
+}
+
+#instagram-editorial .option3-instagram-button:hover{
+  background:var(--ssv-gold)!important;
+  border-color:var(--ssv-gold)!important;
+  color:#201A16!important;
+}
+
+#visit .option3-outline-button,
+#visit .option3-dark-button{
+  width:100%!important;
+  min-height:42px!important;
+  padding:10px 14px!important;
+  border-radius:1px!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:7.5px!important;
+  letter-spacing:.14em!important;
+}
+
+#visit .option3-outline-button{
+  background:#FFFDF9!important;
+  border:1px solid #CDBD9F!important;
+  color:#302A25!important;
+}
+
+#visit .option3-dark-button{
+  background:var(--ssv-ink)!important;
+  border:1px solid var(--ssv-ink)!important;
+  color:var(--ssv-paper)!important;
+}
+</style>
+
 <style id="store-details-clean">
 /* SRI SAI VANI | STORE DETAILS | Single source of truth */
 #visit.option3-store{box-sizing:border-box;width:100%;margin:0;padding:58px 24px 60px;background:#FAF8F5;border-top:1px solid #E7DED2;border-bottom:1px solid #E7DED2;color:#1C1917}
