@@ -1,0 +1,123 @@
+name: Apply review UI polish
+
+on:
+  push:
+    paths:
+      - ".github/workflows/apply-review-ui.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply customer review design
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+
+          start = html.find('<section id="reviews" class="sv-reviews"')
+          end = html.find('</section>', start)
+          if start < 0 or end < 0:
+              raise SystemExit("Customer reviews section not found")
+
+          section = '''<section id="reviews" class="sv-reviews" aria-labelledby="sv-reviews-title">
+            <div class="sv-reviews__inner">
+              <header class="sv-section-head">
+                <p class="sv-reviews__eyebrow">Customer Voices</p>
+                <h2 id="sv-reviews-title" class="sv-title">Client Chronicles</h2>
+                <p class="sv-reviews__intro">From those who shop with us</p>
+              </header>
+
+              <div class="sv-reviews__viewport">
+                <div class="sv-reviews__track" id="svReviewsTrack">
+                  <article class="sv-review-card">
+                    <span class="sv-review-card__quote" aria-hidden="true">“</span>
+                    <p class="sv-review-card__text">Nice collection and best prices</p>
+                  </article>
+                  <article class="sv-review-card">
+                    <span class="sv-review-card__quote" aria-hidden="true">“</span>
+                    <p class="sv-review-card__text">Perfect place for ladies dresses and sarees</p>
+                  </article>
+                  <article class="sv-review-card">
+                    <span class="sv-review-card__quote" aria-hidden="true">“</span>
+                    <p class="sv-review-card__text">Nice collection for women in affordable prices</p>
+                  </article>
+                </div>
+              </div>
+
+              <div class="sv-reviews__dots" id="svReviewsDots" aria-label="Customer reviews">
+                <button type="button" class="is-active" data-review-index="0" aria-label="Review 1"></button>
+                <button type="button" data-review-index="1" aria-label="Review 2"></button>
+                <button type="button" data-review-index="2" aria-label="Review 3"></button>
+              </div>
+
+              <div class="sv-reviews__google">
+                <a href="https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews" target="_blank" rel="noopener noreferrer" aria-label="View all Google reviews">
+                  <span>View all Google reviews</span><span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+          </section>'''
+
+          html = html[:start] + section + html[end + len("</section>"):]
+
+          css = r'''<style id="sv-review-ui-authority">
+          #reviews.sv-reviews{width:100%!important;max-width:none!important;margin:0!important;padding:68px 20px 58px!important;box-sizing:border-box!important;background:#FAF8F5!important;border-top:1px solid #E4D8C5!important;border-bottom:1px solid #E4D8C5!important;overflow:hidden!important;text-align:center!important}
+          #reviews.sv-reviews .sv-reviews__inner{width:min(1040px,100%)!important;margin:0 auto!important}
+          #reviews.sv-reviews .sv-section-head{max-width:720px!important;margin:0 auto 34px!important;padding:0!important;text-align:center!important}
+          #reviews.sv-reviews .sv-reviews__eyebrow{margin:0 0 11px!important;color:#A88A60!important;font-family:"Montserrat",Arial,sans-serif!important;font-size:8px!important;line-height:1.2!important;font-weight:600!important;letter-spacing:.24em!important;text-transform:uppercase!important}
+          #reviews.sv-reviews .sv-title{margin:0!important;color:#292623!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:clamp(40px,5vw,56px)!important;line-height:.98!important;font-weight:400!important;letter-spacing:-.025em!important}
+          #reviews.sv-reviews .sv-reviews__intro{margin:10px 0 0!important;color:#81766B!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:18px!important;line-height:1.25!important;font-style:italic!important}
+          #reviews.sv-reviews .sv-reviews__viewport{width:100%!important;overflow:hidden!important}
+          #reviews.sv-reviews .sv-reviews__track{display:flex!important;align-items:stretch!important;gap:16px!important;width:100%!important;padding:2px 18px 5px!important;box-sizing:border-box!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scroll-behavior:smooth!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important}
+          #reviews.sv-reviews .sv-reviews__track::-webkit-scrollbar{display:none!important}
+          #reviews.sv-reviews .sv-review-card{position:relative!important;flex:0 0 min(560px,calc(100vw - 92px))!important;width:min(560px,calc(100vw - 92px))!important;min-width:0!important;height:236px!important;box-sizing:border-box!important;padding:30px 34px 28px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;background:#FFFDFC!important;border:1px solid #E4D8C5!important;border-radius:2px!important;box-shadow:0 5px 18px rgba(54,43,31,.025)!important;scroll-snap-align:start!important}
+          #reviews.sv-reviews .sv-review-card__quote{display:block!important;height:34px!important;margin:0 0 17px!important;color:#C8B08C!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:43px!important;line-height:.7!important;font-weight:500!important;text-align:left!important;opacity:.88!important}
+          #reviews.sv-reviews .sv-review-card__text{margin:0!important;max-width:430px!important;color:#403A35!important;font-family:"Cormorant Garamond",Georgia,serif!important;font-size:24px!important;line-height:1.22!important;font-weight:500!important;font-style:italic!important;text-align:left!important}
+          #reviews.sv-reviews .sv-reviews__dots{display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;margin:17px 0 0!important}
+          #reviews.sv-reviews .sv-reviews__dots button{width:6px!important;height:6px!important;padding:0!important;border:1px solid #B38E5D!important;border-radius:50%!important;background:transparent!important;cursor:pointer!important;transition:all .2s ease!important}
+          #reviews.sv-reviews .sv-reviews__dots button.is-active{width:7px!important;height:7px!important;background:#B38E5D!important}
+          #reviews.sv-reviews .sv-reviews__google{display:flex!important;justify-content:center!important;margin:19px 0 0!important}
+          #reviews.sv-reviews .sv-reviews__google a{display:inline-flex!important;align-items:center!important;gap:7px!important;min-height:36px!important;padding:0 0 5px!important;border:0!important;border-bottom:1px solid #9F9A93!important;background:transparent!important;color:#6F6A63!important;text-decoration:none!important;font-family:"Montserrat",Arial,sans-serif!important;font-size:8px!important;line-height:1!important;font-weight:600!important;letter-spacing:.16em!important;text-transform:uppercase!important}
+          #reviews.sv-reviews .sv-reviews__google a span:last-child{font-size:12px!important}
+          #reviews.sv-reviews .sv-reviews__google a:hover{color:#1C1917!important;border-bottom-color:#1C1917!important}
+          @media(max-width:700px){
+            #reviews.sv-reviews{padding:54px 0 46px!important}
+            #reviews.sv-reviews .sv-section-head{padding:0 18px!important;margin-bottom:27px!important}
+            #reviews.sv-reviews .sv-reviews__eyebrow{margin-bottom:10px!important;font-size:8px!important}
+            #reviews.sv-reviews .sv-title{font-size:43px!important}
+            #reviews.sv-reviews .sv-reviews__intro{font-size:17px!important;margin-top:9px!important}
+            #reviews.sv-reviews .sv-reviews__track{gap:12px!important;padding-left:18px!important;padding-right:18px!important}
+            #reviews.sv-reviews .sv-review-card{flex:0 0 calc(100vw - 70px)!important;width:calc(100vw - 70px)!important;height:226px!important;padding:27px 23px 24px!important}
+            #reviews.sv-reviews .sv-review-card__quote{height:30px!important;margin-bottom:16px!important;font-size:39px!important}
+            #reviews.sv-reviews .sv-review-card__text{max-width:300px!important;font-size:22px!important;line-height:1.22!important}
+          }
+          @media(max-width:380px){
+            #reviews.sv-reviews .sv-title{font-size:39px!important}
+            #reviews.sv-reviews .sv-review-card{flex-basis:calc(100vw - 58px)!important;width:calc(100vw - 58px)!important;height:214px!important;padding:24px 20px 22px!important}
+            #reviews.sv-reviews .sv-review-card__text{font-size:20px!important}
+          }
+          @media(prefers-reduced-motion:reduce){#reviews.sv-reviews .sv-reviews__track{scroll-behavior:auto!important}}
+          </style>'''
+
+          html = re.sub(r'<style id="sv-review-ui-authority">.*?</style>\s*', '', html, flags=re.S)
+          html = html.replace('</head>', css + '\n</head>', 1)
+          html = html.replace('data-build="20261004-instagram-clean"', 'data-build="20261008-review-editorial"')
+
+          path.write_text(html, encoding="utf-8")
+          PY
+      - name: Commit review UI
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/apply-review-ui.yml
+          git commit -m "Refine customer reviews into editorial carousel"
+          git push
