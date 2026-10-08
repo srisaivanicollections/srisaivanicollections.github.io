@@ -7644,16 +7644,23 @@ HERO DEPLOYMENT SAFETY GUARD
   #client-chronicles-section.option3-reviews{padding:52px 16px 46px !important}
   #client-chronicles-section .lux3-heading-center{margin-bottom:24px !important}
   #client-chronicles-section .option3-review-grid{
-    width:calc(100% + 32px) !important;
-    margin-left:-16px !important;
-    padding:0 16px 4px !important;
-    gap:10px !important;
+    width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    padding:0 0 4px !important;
+    gap:12px !important;
+    scroll-padding-left:0 !important;
   }
-  #client-chronicles-section .option3-review-card{
-    flex:0 0 calc(100vw - 48px) !important;
+  #client-chronicles-section .option3-review-card,
+  #client-chronicles-section .option3-review-featured{
+    width:calc(100% - 52px) !important;
+    min-width:calc(100% - 52px) !important;
+    max-width:calc(100% - 52px) !important;
+    flex:0 0 calc(100% - 52px) !important;
     min-height:220px !important;
     padding:22px 18px 19px !important;
-    scroll-snap-align:center !important;
+    scroll-snap-align:start !important;
+    box-sizing:border-box !important;
   }
   #client-chronicles-section .option3-review-card p{font-size:18px !important;line-height:1.38 !important}
   #instagram-editorial .option3-instagram-image{height:275px !important;min-height:275px !important}
@@ -11230,6 +11237,7 @@ $("#search").oninput=render;$("#price").onchange=render;load();
   track.addEventListener('scroll',sync,{passive:true});
   dots.forEach((dot,i)=>dot.addEventListener('click',()=>cards[i]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})));
   window.addEventListener('resize',sync,{passive:true});
+  track.scrollLeft=0;
   sync();
 })();
 </script>
