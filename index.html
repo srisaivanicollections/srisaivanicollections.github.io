@@ -8459,7 +8459,38 @@ footer .footer-links{flex-wrap:wrap}
 .store-premium-inner{width:min(1040px,100%);margin:0 auto}.store-premium-intro{text-align:center;max-width:650px;margin:0 auto 44px}.store-premium-eyebrow,.store-premium-label{margin:0 0 12px;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:.24em;color:#81766a}.store-premium-intro h2{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(44px,6vw,68px);line-height:.98;font-weight:500;letter-spacing:-.025em;color:#29231e}.store-premium-intro>p:last-child{max-width:480px;margin:16px auto 0;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:13px;line-height:1.7;color:#756d65}.store-premium-grid{display:grid;grid-template-columns:1.25fr .75fr;border-top:1px solid #d9cec0;border-bottom:1px solid #d9cec0}.store-premium-location,.store-premium-hours{padding:34px 38px}.store-premium-location{border-right:1px solid #d9cec0}.store-premium-location h3{margin:0 0 12px;font-family:"Cormorant Garamond",Georgia,serif;font-size:25px;line-height:1.1;font-weight:600;color:#29231e}.store-premium-address{margin:0;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:12px;line-height:1.8;color:#756d65}.store-premium-hours-top{display:flex;align-items:center;justify-content:space-between;gap:16px}.store-premium-hours-top .store-premium-label{margin:0}.store-premium-status{display:inline-flex;align-items:center;white-space:nowrap;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:.06em;color:#68765e}.store-premium-time{margin:18px 0 4px;font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;line-height:1.1;color:#29231e}.store-premium-days{margin:0;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#91867a}.store-premium-action{text-align:center;margin-top:30px}.store-premium-action a{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-width:174px;height:42px;padding:0 20px;border:1px solid #332b24;background:#332b24;color:#fffaf3;text-decoration:none;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:8px;font-weight:600;letter-spacing:.18em;transition:all .2s ease}.store-premium-action a img{width:14px;height:14px;display:block}.store-premium-action a:hover,.store-premium-action a:focus-visible{background:#fffaf3;color:#332b24}
 @media(max-width:700px){#visit.store-premium-redesign{padding:62px 18px 68px}.store-premium-intro{margin-bottom:34px}.store-premium-intro h2{font-size:46px}.store-premium-grid{display:block}.store-premium-location,.store-premium-hours{padding:25px 20px}.store-premium-location{border-right:0;border-bottom:1px solid #d9cec0}.store-premium-hours-top{align-items:flex-start;flex-direction:column;gap:8px}.store-premium-time{margin-top:14px;font-size:25px}.store-premium-action{margin-top:24px}.store-premium-action a{width:100%;max-width:260px}}
 </style>
+<style id="store-hours-status-style">
+#visit .store-premium-status{transition:color .2s ease}
+#visit .store-premium-status.is-open{color:#637657}
+#visit .store-premium-status.is-closed{color:#8a6f61}
+</style>
 </head>
+<script id="store-hours-auto-status">
+(function(){
+  function updateStoreStatus(){
+    var el=document.getElementById('store-status-badge');
+    if(!el) return;
+    var now=new Date();
+    var parts=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(now);
+    var h=Number(parts.find(function(p){return p.type==='hour'}).value);
+    var m=Number(parts.find(function(p){return p.type==='minute'}).value);
+    var mins=h*60+m;
+    var open=mins>=600 && mins<1260;
+    if(open){
+      el.textContent='● Open now';
+      el.classList.add('is-open');
+      el.classList.remove('is-closed');
+    }else{
+      el.textContent='○ Closed';
+      el.classList.add('is-closed');
+      el.classList.remove('is-open');
+    }
+  }
+  updateStoreStatus();
+  setInterval(updateStoreStatus,60000);
+})();
+</script>
+
 <script>
 (function(){
   function purgeLegacyInstagramEmbeds(){
