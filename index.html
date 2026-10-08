@@ -10513,8 +10513,17 @@ $("#search").oninput=render;$("#price").onchange=render;load();
   track.addEventListener('scroll',sync,{passive:true});
   dots.forEach((dot,i)=>dot.addEventListener('click',()=>cards[i]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})));
   window.addEventListener('resize',sync,{passive:true});
+
+  // Always start the review carousel at the first card.
+  // Prevent browser/page restoration from leaving a partial card visible.
+  const resetToFirstReview=()=>{
+    track.scrollTo({left:0,behavior:'auto'});
+    sync();
+  };
   track.scrollLeft=0;
-  sync();
+  requestAnimationFrame(resetToFirstReview);
+  window.addEventListener('pageshow',resetToFirstReview);
+  window.addEventListener('load',resetToFirstReview,{once:true});
 })();
 </script>
 
