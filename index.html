@@ -11193,7 +11193,7 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
     apply();
     render();
     showView("products");
-    alert("Settings saved successfully.");
+    showAdminToast("Settings saved successfully.","success");
   }catch(err){
     alert(err?.message||"Settings could not be saved.");
   }finally{
