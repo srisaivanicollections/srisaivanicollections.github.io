@@ -8494,6 +8494,83 @@ footer .footer-links{flex-wrap:wrap}
 #visit .store-premium-status.is-open{color:#637657}
 #visit .store-premium-status.is-closed{color:#8a6f61}
 </style>
+<style id="global-storefront-typography-20261009">
+/* Global storefront typography system. Admin intentionally excluded. */
+body:not(:has(#admin)){}
+:root{
+  --type-display:"Cormorant Garamond",Georgia,serif;
+  --type-ui:"Inter",Arial,sans-serif;
+}
+/* Storefront text */
+body{font-family:var(--type-ui)}
+body h1,body h2,body h3,body h4,body h5,body h6,
+body .hero-title,body .shop-header h1{
+  font-family:var(--type-display);
+  color:#1C1917;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+body p,body li,body label,body input,body select,body textarea,
+body button,body a{font-family:var(--type-ui)}
+/* Editorial hierarchy */
+body h1{font-size:clamp(48px,5.4vw,72px);line-height:.96;font-weight:500;letter-spacing:-.025em}
+body h2{font-size:clamp(40px,4.4vw,56px);line-height:1.02;font-weight:500;letter-spacing:-.02em}
+body h3{font-size:20px;line-height:1.12;font-weight:500;letter-spacing:-.01em}
+/* Keep important supporting copy comfortably readable */
+body p{font-size:13px;line-height:1.65}
+body .section-kicker,
+body .eyebrow,
+body .lux3-eyebrow,
+body .store-premium-eyebrow,
+body .store-premium-label{
+  font-family:var(--type-ui);
+  font-size:9px;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.2em;
+}
+/* Product cards */
+body .product-card h3,
+body .product h3,
+body .card h3{
+  font-family:var(--type-display);
+  font-size:19px;
+  line-height:1.1;
+  font-weight:500;
+  letter-spacing:-.005em;
+}
+body .product-card .price,
+body .product .price,
+body .card .price{font-family:var(--type-ui);font-size:12px;line-height:1.3;font-weight:600}
+body .product-card .category,
+body .product-card .meta,
+body .product .category,
+body .product .meta{font-family:var(--type-ui);font-size:10.5px;line-height:1.4}
+/* Navigation and actions */
+body nav a,body header a,body .btn,body button{
+  font-family:var(--type-ui);
+}
+body .btn,body .button{
+  font-size:9px;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:.14em;
+}
+/* Avoid unreadably tiny storefront text */
+body:not(#admin) [style*="font-size:6px"],
+body:not(#admin) [style*="font-size:6.5px"],
+body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
+@media(max-width:700px){
+  body h1{font-size:clamp(42px,11vw,54px)}
+  body h2{font-size:clamp(34px,9vw,42px)}
+  body h3{font-size:18px}
+  body p{font-size:12px;line-height:1.65}
+  body .section-kicker,body .eyebrow,body .lux3-eyebrow,body .store-premium-eyebrow,body .store-premium-label{font-size:8px}
+  body .product-card h3,body .product h3,body .card h3{font-size:17px}
+  body .product-card .price,body .product .price,body .card .price{font-size:11.5px}
+  body .btn,body .button{font-size:8px;letter-spacing:.12em}
+}
+</style>
 </head>
 <script id="store-hours-auto-status">
 (function(){
