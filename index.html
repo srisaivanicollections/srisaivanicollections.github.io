@@ -309,37 +309,11 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
  #shop .search,#shop .tools select{height:36px}
  #shop .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 12px}
  #shop .product-image{aspect-ratio:3/4}
-}
-
-
-
-/* Women's World luxury marquee: fully isolated namespace */
-.womens-world-marquee-section{position:relative;width:100%;box-sizing:border-box;background:#FAF7F2;border-top:1px solid #E7E0D8;border-bottom:1px solid #E7E0D8;overflow:hidden}
-.womens-world-marquee-viewport{position:relative;width:100%;overflow:hidden}
-.womens-world-marquee-viewport::before,.womens-world-marquee-viewport::after{content:"";position:absolute;top:0;bottom:0;width:76px;z-index:2;pointer-events:none}
-.womens-world-marquee-viewport::before{left:0;background:linear-gradient(90deg,#FAF7F2 0%,rgba(250,247,242,.86) 38%,rgba(250,247,242,0) 100%)}
-.womens-world-marquee-viewport::after{right:0;background:linear-gradient(270deg,#FAF7F2 0%,rgba(250,247,242,.86) 38%,rgba(250,247,242,0) 100%)}
-.womens-world-marquee-track{display:flex;width:max-content;will-change:transform;animation:womens-world-marquee-scroll 44s linear infinite}
-.womens-world-marquee-group{display:flex;align-items:center;flex-shrink:0;white-space:nowrap}
-.womens-world-marquee-item{display:inline-flex;align-items:center;padding:17px 20px 16px;color:#1C1917;font-family:"Cormorant Garamond",Georgia,serif;font-size:15px;font-weight:500;line-height:1;text-transform:uppercase;letter-spacing:.12em}
-.womens-world-marquee-separator{display:inline-flex;align-items:center;color:#B38E5D;font-family:"Cormorant Garamond",Georgia,serif;font-size:10px;line-height:1}
-.womens-world-marquee-section:hover .womens-world-marquee-track{animation-play-state:paused}
 @keyframes womens-world-marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(max-width:600px){
  .womens-world-marquee-viewport::before,.womens-world-marquee-viewport::after{width:42px}
- .womens-world-marquee-track{animation-duration:34s}
- .womens-world-marquee-item{padding:14px 13px 13px;font-size:12px;letter-spacing:.1em}
- .womens-world-marquee-separator{font-size:9px}
 }
-@media(prefers-reduced-motion:reduce){.womens-world-marquee-track{animation:none}}
-
-/* Marquee layout correction: keep each duplicated rail on one uninterrupted line. */
-.womens-world-marquee-section{display:block!important;max-width:100%;height:auto!important;min-height:0!important;white-space:nowrap!important}
-.womens-world-marquee-viewport{display:block!important;max-width:100%;height:auto!important;min-height:0!important;white-space:nowrap!important}
-.womens-world-marquee-track{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;width:max-content!important;max-width:none!important;min-width:max-content!important;white-space:nowrap!important}
-.womens-world-marquee-group{display:flex!important;flex:0 0 max-content!important;width:max-content!important;max-width:none!important;min-width:max-content!important;align-items:center!important;flex-wrap:nowrap!important;white-space:nowrap!important}
-.womens-world-marquee-item{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:none!important;white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important}
-.womens-world-marquee-separator{display:inline-flex!important;flex:0 0 auto!important;white-space:nowrap!important}
+@media(prefers-reduced-motion:reduce){.womens-world-marquee-track{animation:none}
 
 
 
@@ -1418,13 +1392,6 @@ nav a,.shop-link,.admin-link{
 .womens-world-marquee-section{
   background:#FAF8F5 !important;
   border-bottom:1px solid #E4D8C5 !important;
-}
-.womens-world-marquee-item,
-.womens-world-marquee-separator{
-  color:#6F6A64 !important;
-}
-.womens-world-marquee-separator{
-  color:#C8B28A !important;
 }
 
 /* ---------- Hero: tighter editorial rhythm ---------- */
@@ -9212,14 +9179,7 @@ HERO DEPLOYMENT SAFETY GUARD
 </script>
 <body data-build="20261004-instagram-clean">
 <header class="header"><div class="header-inner"><button class="menu" id="menu" aria-label="Menu"><i></i><i></i><i></i></button><a class="brand" href="#home"><span><b>SRI SAI VANI</b><small>COLLECTIONS</small></span></a><div class="mobile-social-actions" aria-label="Quick contact"><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="3.5"></circle><circle cx="17.2" cy="6.8" r=".8" fill="currentColor" stroke="none"></circle></svg></a><a id="mobileHeaderWhatsApp" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.2 11.7a7.2 7.2 0 0 1-10.6 6.1L5 19l1.3-3.4a7.2 7.2 0 1 1 12.9-3.9Z"></path><path d="M9.3 8.8c.2-.35.4-.35.65-.35h.45c.2 0 .35.1.45.3l.7 1.45c.1.2.08.38-.08.55l-.45.5c.55 1 1.3 1.7 2.35 2.15l.48-.45c.16-.16.34-.18.54-.08l1.4.68c.24.12.32.3.25.55-.18.62-.7 1.05-1.3 1.08-2.45-.04-5.45-2.5-5.9-5.2-.06-.4.08-.75.46-1.18Z"></path></svg></a></div><nav id="nav"><a href="#shop" class="shop-link">SHOP NOW</a><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener">INSTAGRAM</a><button id="adminOpen" type="button" class="admin-link" aria-label="Open Admin Studio">ADMIN</button></nav></div></header>
-<section class="womens-world-marquee-section" aria-label="Saree and dress varieties">
-  <div class="womens-world-marquee-viewport">
-    <div class="womens-world-marquee-track">
-      <div class="womens-world-marquee-group"><span class="womens-world-marquee-item">Bridal Kanchipuram</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Banarasi Silk Styles</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Festive Anarkalis</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Organza Florals</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Reception Gowns</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Pochampally Styles</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Party Shararas</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Chanderi & Maheshwari</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Draped Indo-Western Sets</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Temple Border Pattu</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Daily Elegant Styles</span><span class="womens-world-marquee-separator">✦</span></div>
-      <div class="womens-world-marquee-group" aria-hidden="true"><span class="womens-world-marquee-item">Bridal Kanchipuram</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Pure Banarasi Silk</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Festive Anarkalis</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Organza Florals</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Reception Gowns</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Pochampally Styles</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Party Shararas</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Chanderi & Maheshwari</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Draped Indo-Western Sets</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Temple Border Pattu</span><span class="womens-world-marquee-separator">✦</span><span class="womens-world-marquee-item">Daily Elegant Styles</span><span class="womens-world-marquee-separator">✦</span></div>
-    </div>
-  </div>
-</section>
+
 <main id="home">
 
 
