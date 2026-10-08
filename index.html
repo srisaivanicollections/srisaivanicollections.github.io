@@ -10640,7 +10640,14 @@ function showView(v){
     const fileInput=$("#fFile"), imageInput=$("#fImage"), preview=$("#fImagePreview"), previewEmpty=$("#fImagePreviewEmpty");
     const syncPreview=(src)=>{const value=String(src||"").trim();if(value){preview.src=productImageSrc(value);preview.hidden=false;previewEmpty.hidden=true;}else{preview.removeAttribute("src");preview.hidden=true;previewEmpty.hidden=false;}};
     if(imageInput)imageInput.addEventListener("input",()=>syncPreview(imageInput.value));
-    if(fileInput)fileInput.addEventListener("change",()=>{const file=fileInput.files?.[0];if(file)syncPreview(URL.createObjectURL(file));else syncPreview(imageInput?.value||"");});
+    if(fileInput)fileInput.addEventListener("change",()=>{
+      const file=fileInput.files?.[0];
+      if(!file){syncPreview(imageInput?.value||"");return;}
+      const reader=new FileReader();
+      reader.onload=()=>syncPreview(String(reader.result||""));
+      reader.onerror=()=>syncPreview("");
+      reader.readAsDataURL(file);
+    });
     const saveBtn=$("#saveItem");
     if(saveBtn){
       saveBtn.type="button";
