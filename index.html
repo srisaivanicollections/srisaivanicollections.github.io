@@ -7895,6 +7895,19 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 
+
+/* SSV REVIEW SWIPE */
+.sv-reviews__viewport{overflow:hidden;width:100%}
+.sv-reviews__track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 1px 8px}
+.sv-reviews__track::-webkit-scrollbar{display:none}
+.sv-reviews__track .sv-review-card{flex:0 0 calc((100% - 36px)/3);scroll-snap-align:start}
+.sv-reviews__dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:20px}
+.sv-reviews__dots button{width:7px;height:7px;padding:0;border:1px solid #9f7944;border-radius:50%;background:transparent;cursor:pointer;transition:all .25s ease}
+.sv-reviews__dots button.is-active{width:22px;border-radius:10px;background:#9f7944}
+@media(max-width:700px){
+  .sv-reviews__track{gap:12px;padding-left:0;padding-right:0}
+  .sv-reviews__track .sv-review-card{flex:0 0 100%}
+}
 </style>
 
 
@@ -9460,42 +9473,38 @@ HERO DEPLOYMENT SAFETY GUARD
       <h2 id="sv-reviews-title" class="sv-title">The In-Store &amp; Enquiry Experience</h2>
     </header>
 
-    <div class="sv-reviews__grid">
-      <article class="sv-review-card">
-        <span class="sv-review-card__quote" aria-hidden="true">“</span>
-        <p class="sv-review-card__text">The saree looked beautiful when worn, and the fabric felt lovely.</p>
-        <footer class="sv-review-card__footer">
-          <div>
-            <p class="sv-review-card__author">Customer Review</p>
-            <span class="sv-review-card__source">Verified customer voice</span>
-          </div>
-          <span class="sv-review-card__badge">Boutique Visitor</span>
-        </footer>
-      </article>
-
-      <article class="sv-review-card">
-        <span class="sv-review-card__quote" aria-hidden="true">“</span>
-        <p class="sv-review-card__text">We came for wedding shopping in Kamareddy and found exactly what we wanted. The service was very helpful.</p>
-        <footer class="sv-review-card__footer">
-          <div>
-            <p class="sv-review-card__author">Customer Review</p>
-            <span class="sv-review-card__source">Verified customer voice</span>
-          </div>
-          <span class="sv-review-card__badge">Boutique Visitor</span>
-        </footer>
-      </article>
-
-      <article class="sv-review-card">
-        <span class="sv-review-card__quote" aria-hidden="true">“</span>
-        <p class="sv-review-card__text">A lovely collection and a very comfortable shopping experience. I would happily visit again.</p>
-        <footer class="sv-review-card__footer">
-          <div>
-            <p class="sv-review-card__author">Customer Review</p>
-            <span class="sv-review-card__source">Verified customer voice</span>
-          </div>
-          <span class="sv-review-card__badge">Boutique Visitor</span>
-        </footer>
-      </article>
+    <div class="sv-reviews__viewport">
+      <div class="sv-reviews__track" id="svReviewsTrack">
+        <article class="sv-review-card">
+          <span class="sv-review-card__quote" aria-hidden="true">“</span>
+          <p class="sv-review-card__text">The saree looked beautiful when worn, and the fabric felt lovely.</p>
+          <footer class="sv-review-card__footer">
+            <div><p class="sv-review-card__author">Customer Review</p><span class="sv-review-card__source">Verified customer voice</span></div>
+            <span class="sv-review-card__badge">Boutique Visitor</span>
+          </footer>
+        </article>
+        <article class="sv-review-card">
+          <span class="sv-review-card__quote" aria-hidden="true">“</span>
+          <p class="sv-review-card__text">We came for wedding shopping in Kamareddy and found exactly what we wanted. The service was very helpful.</p>
+          <footer class="sv-review-card__footer">
+            <div><p class="sv-review-card__author">Customer Review</p><span class="sv-review-card__source">Verified customer voice</span></div>
+            <span class="sv-review-card__badge">Boutique Visitor</span>
+          </footer>
+        </article>
+        <article class="sv-review-card">
+          <span class="sv-review-card__quote" aria-hidden="true">“</span>
+          <p class="sv-review-card__text">A lovely collection and a very comfortable shopping experience. I would happily visit again.</p>
+          <footer class="sv-review-card__footer">
+            <div><p class="sv-review-card__author">Customer Review</p><span class="sv-review-card__source">Verified customer voice</span></div>
+            <span class="sv-review-card__badge">Boutique Visitor</span>
+          </footer>
+        </article>
+      </div>
+    </div>
+    <div class="sv-reviews__dots" id="svReviewsDots" aria-label="Customer reviews">
+      <button type="button" class="is-active" data-review-index="0" aria-label="Review 1"></button>
+      <button type="button" data-review-index="1" aria-label="Review 2"></button>
+      <button type="button" data-review-index="2" aria-label="Review 3"></button>
     </div>
   </div>
 </section>
@@ -9509,34 +9518,13 @@ HERO DEPLOYMENT SAFETY GUARD
       <p class="sv-eyebrow">Visual Journal</p>
       <h2 id="sv-instagram-title" class="sv-title">Curated Moments &amp; New Drapes</h2>
     </header>
-
     <div class="sv-gallery">
-      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 1">
-        <img src="assets/products/1791112867208-IMG_0063.png" alt="Sri Sai Vani saree drape" loading="lazy">
-        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
-      </a>
-
-      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 2">
-        <img src="assets/products/1791101219183-4910S901_1.jpg" alt="Sri Sai Vani saree detail" loading="lazy">
-        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
-      </a>
-
-      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 3">
-        <img src="assets/products/1791059716979-1000242369.jpg" alt="Sri Sai Vani festive saree" loading="lazy">
-        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
-      </a>
-
-      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 4">
-        <img src="assets/products/1791054058359-SLUS0051574_PURPLE_1_800x800.jpg" alt="Sri Sai Vani saree collection" loading="lazy">
-        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
-      </a>
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 1"><img src="assets/products/1791112867208-IMG_0063.png" alt="Sri Sai Vani saree drape" loading="lazy"><span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span></a>
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 2"><img src="assets/products/1791101219183-4910S901_1.jpg" alt="Sri Sai Vani saree detail" loading="lazy"><span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span></a>
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 3"><img src="assets/products/1791059716979-1000242369.jpg" alt="Sri Sai Vani festive saree" loading="lazy"><span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span></a>
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 4"><img src="assets/products/1791054058359-SLUS0051574_PURPLE_1_800x800.jpg" alt="Sri Sai Vani saree collection" loading="lazy"><span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span></a>
     </div>
-
-    <div class="sv-instagram__cta">
-      <a class="sv-instagram__button" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer">
-        Follow on Instagram&nbsp; →
-      </a>
-    </div>
+    <div class="sv-instagram__cta"><a class="sv-instagram__button" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer">Follow on Instagram&nbsp; →</a></div>
   </div>
 </section>
 
@@ -11051,6 +11039,25 @@ $("#search").oninput=render;$("#price").onchange=render;load();
   }
   updateStoreStatus();
   setInterval(updateStoreStatus,60000);
+})();
+</script>
+
+<script>
+/* SSV REVIEW SWIPE */
+(function(){
+  const track=document.getElementById('svReviewsTrack');
+  const dots=[...document.querySelectorAll('#svReviewsDots [data-review-index]')];
+  if(!track||!dots.length)return;
+  const cards=[...track.querySelectorAll('.sv-review-card')];
+  const setActive=(i)=>dots.forEach((d,n)=>d.classList.toggle('is-active',n===i));
+  const sync=()=>{
+    const left=track.scrollLeft;
+    let best=0,bestDist=Infinity;
+    cards.forEach((card,i)=>{const dist=Math.abs(card.offsetLeft-left);if(dist<bestDist){bestDist=dist;best=i;}});
+    setActive(best);
+  };
+  track.addEventListener('scroll',sync,{passive:true});
+  dots.forEach((dot,i)=>dot.addEventListener('click',()=>cards[i].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'})));
 })();
 </script>
 </body>
