@@ -9027,6 +9027,362 @@ HERO DEPLOYMENT SAFETY GUARD
 }
 
 </style>
+<style id="sv-reviews-visual-journal">
+/* =========================================================
+   SRI SAI VANI | REVIEWS + VISUAL JOURNAL
+   Fully isolated with the .sv- namespace
+   ========================================================= */
+
+.sv-reviews,
+.sv-instagram{
+  --sv-alabaster:#fbf9f6;
+  --sv-gold:#9f7944;
+  --sv-gold-soft:#c8b08c;
+  --sv-charcoal:#1a1a1a;
+  --sv-border:#ebe4d8;
+  --sv-muted:#6f6a63;
+  color:var(--sv-charcoal);
+}
+
+.sv-reviews{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:88px 24px 92px;
+  background:var(--sv-alabaster);
+  border-top:1px solid var(--sv-border);
+  border-bottom:1px solid var(--sv-border);
+}
+
+.sv-reviews__inner,
+.sv-instagram__inner{
+  width:min(1180px,100%);
+  margin:0 auto;
+}
+
+.sv-section-head{
+  max-width:760px;
+  margin:0 auto 46px;
+  text-align:center;
+}
+
+.sv-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin:0 0 16px;
+  color:var(--sv-gold);
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  line-height:1;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.sv-eyebrow::before,
+.sv-eyebrow::after{
+  content:"";
+  width:22px;
+  height:1px;
+  background:var(--sv-gold-soft);
+}
+
+.sv-title{
+  margin:0;
+  color:var(--sv-charcoal);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(38px,4.3vw,58px);
+  font-weight:400;
+  line-height:1.02;
+  letter-spacing:-.025em;
+}
+
+.sv-reviews__grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.sv-review-card{
+  position:relative;
+  min-height:300px;
+  padding:34px 31px 27px;
+  background:#fffdfa;
+  border:1px solid var(--sv-border);
+  overflow:hidden;
+}
+
+.sv-review-card__quote{
+  position:absolute;
+  top:-2px;
+  left:20px;
+  color:rgba(159,121,68,.14);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:118px;
+  font-weight:400;
+  line-height:1;
+  pointer-events:none;
+}
+
+.sv-review-card__text{
+  position:relative;
+  z-index:1;
+  min-height:137px;
+  margin:48px 0 27px;
+  color:#37322e;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:20px;
+  font-weight:400;
+  line-height:1.48;
+}
+
+.sv-review-card__footer{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:15px;
+  margin:0;
+  padding-top:17px;
+  border-top:1px solid var(--sv-border);
+}
+
+.sv-review-card__author{
+  margin:0;
+  color:var(--sv-charcoal);
+  font-family:"Inter",Arial,sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.12em;
+  line-height:1.2;
+  text-transform:uppercase;
+}
+
+.sv-review-card__source{
+  display:block;
+  margin-top:5px;
+  color:var(--sv-muted);
+  font-family:"Inter",Arial,sans-serif;
+  font-size:9px;
+  line-height:1.3;
+}
+
+.sv-review-card__badge{
+  flex:0 0 auto;
+  padding:7px 9px;
+  border:1px solid var(--sv-gold-soft);
+  color:var(--sv-gold);
+  background:#fffdfa;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:.11em;
+  line-height:1;
+  text-transform:uppercase;
+}
+
+.sv-instagram{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:88px 24px 98px;
+  background:#fffdfa;
+  border-bottom:1px solid var(--sv-border);
+}
+
+.sv-instagram .sv-section-head{
+  margin-bottom:42px;
+}
+
+.sv-gallery{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+
+.sv-gallery__item{
+  position:relative;
+  display:block;
+  aspect-ratio:4 / 5;
+  overflow:hidden;
+  background:#eee8df;
+  text-decoration:none;
+}
+
+.sv-gallery__item img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .7s cubic-bezier(.2,.7,.2,1);
+}
+
+.sv-gallery__overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding:24px;
+  background:linear-gradient(to top,rgba(20,17,13,.54),transparent 58%);
+  opacity:0;
+  transition:opacity .35s ease;
+}
+
+.sv-gallery__label{
+  padding:9px 14px;
+  border:1px solid rgba(255,255,255,.72);
+  color:#fff;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1;
+  text-transform:uppercase;
+  backdrop-filter:blur(3px);
+}
+
+.sv-gallery__item:hover img,
+.sv-gallery__item:focus-visible img{
+  transform:scale(1.035);
+}
+
+.sv-gallery__item:hover .sv-gallery__overlay,
+.sv-gallery__item:focus-visible .sv-gallery__overlay{
+  opacity:1;
+}
+
+.sv-instagram__cta{
+  display:flex;
+  justify-content:center;
+  margin-top:38px;
+}
+
+.sv-instagram__button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 23px;
+  border:1px solid var(--sv-charcoal);
+  background:transparent;
+  color:var(--sv-charcoal);
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1;
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:background .25s ease,color .25s ease;
+}
+
+.sv-instagram__button:hover{
+  background:var(--sv-charcoal);
+  color:#fff;
+}
+
+@media(max-width:900px){
+  .sv-reviews,
+  .sv-instagram{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  .sv-reviews__grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .sv-review-card{
+    min-height:0;
+  }
+
+  .sv-review-card__text{
+    min-height:0;
+  }
+
+  .sv-gallery{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+}
+
+@media(max-width:600px){
+  .sv-reviews{
+    padding-top:68px;
+    padding-bottom:72px;
+  }
+
+  .sv-instagram{
+    padding-top:68px;
+    padding-bottom:76px;
+  }
+
+  .sv-section-head{
+    margin-bottom:34px;
+  }
+
+  .sv-eyebrow{
+    font-size:8px;
+    letter-spacing:.19em;
+  }
+
+  .sv-title{
+    font-size:35px;
+  }
+
+  .sv-review-card{
+    padding:29px 22px 23px;
+  }
+
+  .sv-review-card__text{
+    font-size:18px;
+    line-height:1.5;
+    margin-top:43px;
+    margin-bottom:25px;
+  }
+
+  .sv-review-card__footer{
+    align-items:flex-start;
+  }
+
+  .sv-review-card__badge{
+    font-size:7px;
+  }
+
+  .sv-gallery{
+    gap:8px;
+  }
+
+  .sv-gallery__overlay{
+    padding:13px;
+    opacity:1;
+    background:linear-gradient(to top,rgba(20,17,13,.38),transparent 62%);
+  }
+
+  .sv-gallery__label{
+    padding:7px 9px;
+    font-size:7px;
+  }
+
+  .sv-instagram__cta{
+    margin-top:30px;
+  }
+
+  .sv-instagram__button{
+    width:min(100%,300px);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .sv-gallery__item img,
+  .sv-gallery__overlay,
+  .sv-instagram__button{
+    transition:none;
+  }
+}
+</style>
 </head>
 <script>
 (function(){
@@ -9094,66 +9450,93 @@ HERO DEPLOYMENT SAFETY GUARD
 </section>
 </main>
 
-<section class="lux3-section lux3-reviews option3-reviews" id="client-chronicles-section" aria-labelledby="lux3-reviews-title">
-  <div class="lux3-inner">
-    <header class="lux3-heading lux3-heading-center">
-      <p class="lux3-eyebrow">CUSTOMER VOICES</p>
-      <h2 id="lux3-reviews-title">Customer Voices</h2>
-      <p class="lux3-intro">A few words from women who choose Sri Sai Vani Collections.</p>
+<!-- =========================================================
+     SRI SAI VANI | CUSTOMER REVIEWS
+     ========================================================= -->
+<section id="reviews" class="sv-reviews" aria-labelledby="sv-reviews-title">
+  <div class="sv-reviews__inner">
+    <header class="sv-section-head">
+      <p class="sv-eyebrow">Client Reflections</p>
+      <h2 id="sv-reviews-title" class="sv-title">The In-Store &amp; Enquiry Experience</h2>
     </header>
 
-    <div class="option3-review-grid" aria-label="Customer reviews">
-      <article class="option3-review-card">
-        <div class="option3-review-top">
-          <img src="assets/review-avatar-1.jpg" alt="" loading="lazy">
-          <div><strong>Beautiful experience</strong><span class="option3-stars">★★★★★</span></div>
-        </div>
-        <span class="option3-quote" aria-hidden="true">“</span>
-        <p>The saree looked beautiful when worn, and the fabric felt lovely.</p>
-              </article>
+    <div class="sv-reviews__grid">
+      <article class="sv-review-card">
+        <span class="sv-review-card__quote" aria-hidden="true">“</span>
+        <p class="sv-review-card__text">The saree looked beautiful when worn, and the fabric felt lovely.</p>
+        <footer class="sv-review-card__footer">
+          <div>
+            <p class="sv-review-card__author">Customer Review</p>
+            <span class="sv-review-card__source">Verified customer voice</span>
+          </div>
+          <span class="sv-review-card__badge">Boutique Visitor</span>
+        </footer>
+      </article>
 
-      <article class="option3-review-card option3-review-featured">
-        <div class="option3-review-top">
-          <img src="assets/review-avatar-2.jpg" alt="" loading="lazy">
-          <div><strong>Exactly what we wanted</strong><span class="option3-stars">★★★★★</span></div>
-        </div>
-        <span class="option3-quote" aria-hidden="true">“</span>
-        <p>We came for wedding shopping in Kamareddy and found exactly what we wanted. The service was very helpful.</p>
-              </article>
+      <article class="sv-review-card">
+        <span class="sv-review-card__quote" aria-hidden="true">“</span>
+        <p class="sv-review-card__text">We came for wedding shopping in Kamareddy and found exactly what we wanted. The service was very helpful.</p>
+        <footer class="sv-review-card__footer">
+          <div>
+            <p class="sv-review-card__author">Customer Review</p>
+            <span class="sv-review-card__source">Verified customer voice</span>
+          </div>
+          <span class="sv-review-card__badge">Boutique Visitor</span>
+        </footer>
+      </article>
 
-      <article class="option3-review-card">
-        <div class="option3-review-top">
-          <img src="assets/review-avatar-3.jpg" alt="" loading="lazy">
-          <div><strong>Lovely collection</strong><span class="option3-stars">★★★★★</span></div>
-        </div>
-        <span class="option3-quote" aria-hidden="true">“</span>
-        <p>A lovely collection and a very comfortable shopping experience. I would happily visit again.</p>
-              </article>
-    </div>
-
-
-    <div class="ssv-review-dots" id="reviewDots" aria-label="Review slides">
-      <button type="button" class="active" data-index="0" aria-label="Show review 1" aria-current="true"></button>
-      <button type="button" data-index="1" aria-label="Show review 2"></button>
-      <button type="button" data-index="2" aria-label="Show review 3"></button>
-    </div>
-
-    <div class="option3-review-footer">
-      
-      <a class="lux3-text-link" href="https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews" target="_blank" rel="noopener noreferrer">View all Google reviews ↗</a>
+      <article class="sv-review-card">
+        <span class="sv-review-card__quote" aria-hidden="true">“</span>
+        <p class="sv-review-card__text">A lovely collection and a very comfortable shopping experience. I would happily visit again.</p>
+        <footer class="sv-review-card__footer">
+          <div>
+            <p class="sv-review-card__author">Customer Review</p>
+            <span class="sv-review-card__source">Verified customer voice</span>
+          </div>
+          <span class="sv-review-card__badge">Boutique Visitor</span>
+        </footer>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="lux3-section option3-instagram instagram-light-saree" id="instagram-editorial" aria-labelledby="lux3-collection-title">
-  <div class="option3-instagram-copy">
-    <p class="lux3-eyebrow">WATCH ON INSTAGRAM</p>
-    <h2 id="lux3-collection-title">See the collection in motion.</h2>
-    <p class="option3-instagram-story">Every colour tells a story. Every saree has its moment.</p>
-        <a class="option3-instagram-button" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Watch Sri Sai Vani Collections on Instagram">
-      <img src="assets/instagram-icon.svg" alt="" loading="lazy">
-      <span>View on Instagram</span><span aria-hidden="true">↗</span>
-    </a>
+<!-- =========================================================
+     SRI SAI VANI | VISUAL JOURNAL
+     ========================================================= -->
+<section id="instagram" class="sv-instagram" aria-labelledby="sv-instagram-title">
+  <div class="sv-instagram__inner">
+    <header class="sv-section-head">
+      <p class="sv-eyebrow">Visual Journal</p>
+      <h2 id="sv-instagram-title" class="sv-title">Curated Moments &amp; New Drapes</h2>
+    </header>
+
+    <div class="sv-gallery">
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 1">
+        <img src="assets/products/1791112867208-IMG_0063.png" alt="Sri Sai Vani saree drape" loading="lazy">
+        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
+      </a>
+
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 2">
+        <img src="assets/products/1791101219183-4910S901_1.jpg" alt="Sri Sai Vani saree detail" loading="lazy">
+        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
+      </a>
+
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 3">
+        <img src="assets/products/1791059716979-1000242369.jpg" alt="Sri Sai Vani festive saree" loading="lazy">
+        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
+      </a>
+
+      <a class="sv-gallery__item" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer" aria-label="Explore Look 4">
+        <img src="assets/products/1791054058359-SLUS0051574_PURPLE_1_800x800.jpg" alt="Sri Sai Vani saree collection" loading="lazy">
+        <span class="sv-gallery__overlay"><span class="sv-gallery__label">Explore Look</span></span>
+      </a>
+    </div>
+
+    <div class="sv-instagram__cta">
+      <a class="sv-instagram__button" href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener noreferrer">
+        Follow on Instagram&nbsp; →
+      </a>
+    </div>
   </div>
 </section>
 
