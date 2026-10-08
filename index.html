@@ -10102,6 +10102,551 @@ HERO DEPLOYMENT SAFETY GUARD
   #visit.option3-store .option3-outline-button{width:100% !important}
 }
 </style>
+
+<style id="final-ssv-uiux-authority">
+/* =========================================================
+   FINAL SRI SAI VANI UI/UX AUTHORITY
+   Reviews + Latest Collection + Store Details
+   Visual-only layer. Existing content, links and JS preserved.
+   ========================================================= */
+
+:root{
+  --ssv-paper:#FAF8F5;
+  --ssv-card:#FFFDF9;
+  --ssv-ink:#1C1917;
+  --ssv-muted:#756B61;
+  --ssv-line:#E4D8C5;
+  --ssv-gold:#B38E5D;
+  --ssv-gold-soft:#C8B28A;
+}
+
+/* ---------- CUSTOMER REVIEWS ---------- */
+#client-chronicles-section.option3-reviews{
+  width:100%!important;
+  max-width:none!important;
+  padding:48px 20px 38px!important;
+  margin:0!important;
+  background:var(--ssv-paper)!important;
+  border-top:1px solid var(--ssv-line)!important;
+  border-bottom:1px solid var(--ssv-line)!important;
+  overflow:hidden!important;
+}
+
+#client-chronicles-section .lux3-inner{
+  width:min(1120px,100%)!important;
+  padding:0!important;
+  margin:0 auto!important;
+}
+
+#client-chronicles-section .lux3-heading-center{
+  max-width:760px!important;
+  margin:0 auto 24px!important;
+  text-align:center!important;
+}
+
+#client-chronicles-section .lux3-eyebrow{
+  margin:0 0 8px!important;
+  color:var(--ssv-gold)!important;
+  font-size:8px!important;
+  line-height:1.2!important;
+  letter-spacing:.24em!important;
+  font-weight:600!important;
+}
+
+#client-chronicles-section .lux3-heading h2{
+  margin:0!important;
+  color:var(--ssv-ink)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(38px,4.8vw,54px)!important;
+  line-height:.98!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+
+#client-chronicles-section .lux3-intro{
+  margin:8px auto 0!important;
+  color:var(--ssv-muted)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:16px!important;
+  line-height:1.25!important;
+  font-style:italic!important;
+}
+
+#client-chronicles-section .option3-review-grid{
+  width:100%!important;
+  max-width:920px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  display:flex!important;
+  gap:12px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;
+  scroll-behavior:smooth!important;
+  scrollbar-width:none!important;
+}
+
+#client-chronicles-section .option3-review-grid::-webkit-scrollbar{
+  display:none!important;
+}
+
+#client-chronicles-section .option3-review-card,
+#client-chronicles-section .option3-review-featured{
+  flex:0 0 calc((100% - 24px)/3)!important;
+  width:calc((100% - 24px)/3)!important;
+  min-width:calc((100% - 24px)/3)!important;
+  max-width:calc((100% - 24px)/3)!important;
+  min-height:166px!important;
+  padding:20px 20px 18px!important;
+  background:var(--ssv-card)!important;
+  border:1px solid var(--ssv-line)!important;
+  border-radius:2px!important;
+  box-shadow:0 5px 18px rgba(45,38,31,.035)!important;
+  transform:none!important;
+  scroll-snap-align:start!important;
+}
+
+#client-chronicles-section .option3-review-card:hover,
+#client-chronicles-section .option3-review-featured:hover{
+  box-shadow:0 8px 22px rgba(45,38,31,.06)!important;
+}
+
+#client-chronicles-section .option3-review-top{
+  display:none!important;
+}
+
+#client-chronicles-section .option3-quote{
+  margin:0 0 8px!important;
+  color:var(--ssv-gold)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:31px!important;
+  line-height:.55!important;
+  opacity:.78!important;
+}
+
+#client-chronicles-section .option3-review-card p{
+  margin:9px 0 0!important;
+  max-width:none!important;
+  color:#4F4841!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:18px!important;
+  line-height:1.28!important;
+  font-weight:400!important;
+  font-style:italic!important;
+}
+
+#client-chronicles-section .option3-review-footer{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:100%!important;
+  margin:13px 0 0!important;
+  padding:0!important;
+}
+
+#client-chronicles-section .ssv-review-dots{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:6px!important;
+  margin:0 0 12px!important;
+}
+
+#client-chronicles-section .ssv-review-dots button{
+  width:6px!important;
+  height:6px!important;
+  padding:0!important;
+  border:1px solid var(--ssv-gold-soft)!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  transition:all .2s ease!important;
+}
+
+#client-chronicles-section .ssv-review-dots button.active{
+  width:18px!important;
+  border-radius:8px!important;
+  background:var(--ssv-gold)!important;
+  border-color:var(--ssv-gold)!important;
+}
+
+#client-chronicles-section .lux3-text-link{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-height:38px!important;
+  padding:10px 18px!important;
+  margin:0!important;
+  background:var(--ssv-gold)!important;
+  border:1px solid var(--ssv-gold)!important;
+  border-radius:1px!important;
+  color:#201A16!important;
+  box-shadow:none!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:8px!important;
+  line-height:1!important;
+  font-weight:600!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+}
+
+#client-chronicles-section .lux3-text-link:hover{
+  background:#9D7C4E!important;
+  border-color:#9D7C4E!important;
+  color:#FFFDF9!important;
+}
+
+/* ---------- LATEST COLLECTION / INSTAGRAM ---------- */
+#instagram-editorial{
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  padding:46px 20px 44px!important;
+  background:var(--ssv-paper)!important;
+  background-image:none!important;
+  border-top:0!important;
+  border-bottom:1px solid var(--ssv-line)!important;
+  text-align:center!important;
+  overflow:hidden!important;
+}
+
+#instagram-editorial .option3-instagram-copy{
+  width:min(1180px,100%)!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0 auto!important;
+  background:transparent!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  text-align:center!important;
+}
+
+#instagram-editorial .lux3-eyebrow{
+  margin:0 0 8px!important;
+  color:var(--ssv-gold)!important;
+  font-size:8px!important;
+  letter-spacing:.23em!important;
+}
+
+#instagram-editorial h2{
+  margin:0!important;
+  color:var(--ssv-ink)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(38px,4.8vw,54px)!important;
+  line-height:1!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+
+#instagram-editorial .option3-instagram-story{
+  max-width:480px!important;
+  margin:8px auto 20px!important;
+  color:var(--ssv-muted)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:16px!important;
+  line-height:1.3!important;
+  font-style:italic!important;
+  text-align:center!important;
+}
+
+/* Keep the four visual collection tiles elegant and evenly weighted. */
+#instagram-editorial .option3-instagram-gallery,
+#instagram-editorial .instagram-grid,
+#instagram-editorial .collection-grid{
+  width:min(100%,1080px)!important;
+  margin:0 auto!important;
+}
+
+#instagram-editorial img{
+  border-color:var(--ssv-line)!important;
+}
+
+#instagram-editorial .option3-instagram-button{
+  width:auto!important;
+  min-width:205px!important;
+  max-width:260px!important;
+  min-height:42px!important;
+  height:42px!important;
+  margin:18px auto 0!important;
+  padding:0 17px!important;
+  background:transparent!important;
+  border:1px solid #CDBD9F!important;
+  color:var(--ssv-ink)!important;
+  box-shadow:none!important;
+  justify-content:center!important;
+}
+
+#instagram-editorial .option3-instagram-button:hover{
+  background:var(--ssv-gold)!important;
+  border-color:var(--ssv-gold)!important;
+  color:#201A16!important;
+}
+
+/* ---------- STORE DETAILS ---------- */
+#visit.option3-store{
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:48px 20px 46px!important;
+  display:block!important;
+  background:var(--ssv-paper)!important;
+  border-top:0!important;
+  border-bottom:1px solid var(--ssv-line)!important;
+  text-align:center!important;
+}
+
+#visit .option3-store-media{
+  display:none!important;
+}
+
+#visit .option3-store-content{
+  width:min(620px,100%)!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:0!important;
+  background:transparent!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  align-items:stretch!important;
+}
+
+#visit .option3-store-content .lux3-heading{
+  margin:0 0 18px!important;
+  text-align:center!important;
+}
+
+#visit .option3-store-content .lux3-eyebrow{
+  margin:0 0 8px!important;
+  color:var(--ssv-gold)!important;
+  font-size:8px!important;
+  letter-spacing:.23em!important;
+}
+
+#visit .option3-store-content .lux3-heading h2{
+  margin:0!important;
+  color:var(--ssv-ink)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(38px,5vw,54px)!important;
+  line-height:.98!important;
+  font-weight:400!important;
+  letter-spacing:-.025em!important;
+}
+
+#visit .option3-store-content .lux3-intro{
+  max-width:400px!important;
+  margin:8px auto 0!important;
+  color:var(--ssv-muted)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:16px!important;
+  line-height:1.3!important;
+  font-style:italic!important;
+}
+
+#visit .option3-store-details{
+  width:100%!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  border-top:1px solid var(--ssv-line)!important;
+  border-bottom:1px solid var(--ssv-line)!important;
+  background:rgba(255,253,249,.62)!important;
+}
+
+#visit .option3-store-block{
+  min-width:0!important;
+  padding:18px 16px!important;
+  display:flex!important;
+  gap:11px!important;
+  align-items:flex-start!important;
+  text-align:left!important;
+}
+
+#visit .option3-store-block + .option3-store-block{
+  border-left:1px solid var(--ssv-line)!important;
+}
+
+#visit .option3-store-icon{
+  width:34px!important;
+  height:34px!important;
+  min-width:34px!important;
+  flex:0 0 34px!important;
+  border:1px solid #D8C8B4!important;
+  background:#FFFDF9!important;
+}
+
+#visit .option3-store-block p{
+  margin:0!important;
+  color:#4E4740!important;
+  font-family:"Inter","Montserrat",Arial,sans-serif!important;
+  font-size:10.5px!important;
+  line-height:1.55!important;
+}
+
+#visit .option3-store-block .lux3-label{
+  margin-bottom:6px!important;
+  color:#9A7748!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:7.5px!important;
+  line-height:1.2!important;
+  font-weight:600!important;
+  letter-spacing:.19em!important;
+}
+
+#visit .option3-store-actions{
+  width:100%!important;
+  margin:14px 0 0!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:8px!important;
+}
+
+#visit .option3-outline-button,
+#visit .option3-dark-button{
+  width:100%!important;
+  min-height:42px!important;
+  padding:10px 14px!important;
+  border-radius:1px!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:7.5px!important;
+  letter-spacing:.14em!important;
+}
+
+#visit .option3-outline-button{
+  background:#FFFDF9!important;
+  border:1px solid #CDBD9F!important;
+  color:#302A25!important;
+}
+
+#visit .option3-dark-button{
+  background:var(--ssv-ink)!important;
+  border:1px solid var(--ssv-ink)!important;
+  color:var(--ssv-paper)!important;
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:760px){
+  #client-chronicles-section.option3-reviews{
+    padding:38px 16px 30px!important;
+  }
+
+  #client-chronicles-section .lux3-heading-center{
+    margin-bottom:20px!important;
+  }
+
+  #client-chronicles-section .lux3-heading h2,
+  #instagram-editorial h2,
+  #visit .option3-store-content .lux3-heading h2{
+    font-size:40px!important;
+  }
+
+  #client-chronicles-section .lux3-intro{
+    font-size:15px!important;
+  }
+
+  #client-chronicles-section .option3-review-grid{
+    width:calc(100% + 32px)!important;
+    margin-left:-16px!important;
+    margin-right:-16px!important;
+    padding:0 16px 3px!important;
+    gap:10px!important;
+  }
+
+  #client-chronicles-section .option3-review-card,
+  #client-chronicles-section .option3-review-featured{
+    flex:0 0 78vw!important;
+    width:78vw!important;
+    min-width:78vw!important;
+    max-width:78vw!important;
+    min-height:156px!important;
+    padding:19px 18px 17px!important;
+  }
+
+  #client-chronicles-section .option3-quote{
+    font-size:29px!important;
+  }
+
+  #client-chronicles-section .option3-review-card p{
+    font-size:17px!important;
+    line-height:1.28!important;
+  }
+
+  #client-chronicles-section .ssv-review-dots{
+    margin:9px 0 11px!important;
+  }
+
+  #client-chronicles-section .lux3-text-link{
+    min-height:36px!important;
+    padding:9px 15px!important;
+    font-size:7.5px!important;
+  }
+
+  #instagram-editorial{
+    padding:38px 14px 36px!important;
+  }
+
+  #instagram-editorial .option3-instagram-copy{
+    min-height:0!important;
+    height:auto!important;
+    padding:0!important;
+  }
+
+  #instagram-editorial .option3-instagram-story{
+    margin:7px auto 17px!important;
+    font-size:15px!important;
+  }
+
+  #instagram-editorial .option3-instagram-button{
+    min-width:190px!important;
+    min-height:40px!important;
+    height:40px!important;
+    margin-top:16px!important;
+    font-size:7.5px!important;
+  }
+
+  #visit.option3-store{
+    padding:40px 14px 38px!important;
+  }
+
+  #visit .option3-store-content{
+    width:100%!important;
+  }
+
+  #visit .option3-store-content .lux3-heading{
+    margin-bottom:17px!important;
+  }
+
+  #visit .option3-store-content .lux3-intro{
+    font-size:15px!important;
+  }
+
+  #visit .option3-store-details{
+    grid-template-columns:1fr!important;
+  }
+
+  #visit .option3-store-block{
+    padding:15px 10px!important;
+  }
+
+  #visit .option3-store-block + .option3-store-block{
+    border-left:0!important;
+    border-top:1px solid var(--ssv-line)!important;
+  }
+
+  #visit .option3-store-block p{
+    font-size:10.5px!important;
+  }
+
+  #visit .option3-store-actions{
+    margin-top:12px!important;
+  }
+}
+</style>
+
 </head>
 <script>
 (function(){
