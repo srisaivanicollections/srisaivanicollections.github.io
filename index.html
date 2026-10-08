@@ -9396,6 +9396,162 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 </style>
+<style id="sv-compact-reviews-final">
+/* Compact Client Reflections */
+#reviews.sv-reviews{
+  width:100%;
+  box-sizing:border-box;
+  padding:48px 24px 46px !important;
+  background:#fbf9f6 !important;
+  border-top:1px solid #ebe4d8 !important;
+  border-bottom:1px solid #ebe4d8 !important;
+}
+#reviews.sv-reviews .sv-reviews__inner{
+  width:min(1180px,100%);
+  margin:0 auto;
+}
+#reviews.sv-reviews .sv-section-head{
+  margin:0 0 24px !important;
+  text-align:center;
+}
+#reviews.sv-reviews .sv-eyebrow{
+  margin:0 0 7px !important;
+  color:#9f7944 !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:600 !important;
+  letter-spacing:.22em !important;
+  text-transform:uppercase !important;
+}
+#reviews.sv-reviews .sv-title{
+  margin:0 !important;
+  color:#1a1a1a !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:clamp(30px,4vw,42px) !important;
+  line-height:1.05 !important;
+  font-weight:500 !important;
+}
+#reviews.sv-reviews .sv-reviews__track{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+#reviews.sv-reviews .sv-review-card{
+  min-width:0 !important;
+  min-height:132px !important;
+  height:auto !important;
+  padding:20px 22px 17px !important;
+  background:#fff !important;
+  border:1px solid #ebe4d8 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  box-sizing:border-box !important;
+}
+#reviews.sv-reviews .sv-review-card__quote{
+  display:block !important;
+  height:22px !important;
+  margin:0 !important;
+  color:#c8b08c !important;
+  font-family:Georgia,serif !important;
+  font-size:38px !important;
+  line-height:.7 !important;
+  opacity:.65 !important;
+}
+#reviews.sv-reviews .sv-review-card__text{
+  margin:8px 0 15px !important;
+  color:#332e29 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:19px !important;
+  line-height:1.25 !important;
+  font-weight:500 !important;
+}
+#reviews.sv-reviews .sv-review-card__footer{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:6px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+}
+#reviews.sv-reviews .sv-review-card__badge{
+  display:inline-flex !important;
+  align-items:center !important;
+  color:#8a6a43 !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:8px !important;
+  font-weight:600 !important;
+  letter-spacing:.09em !important;
+  text-transform:uppercase !important;
+}
+#reviews.sv-reviews .sv-reviews__dots{
+  display:none !important;
+}
+
+@media(max-width:760px){
+  #reviews.sv-reviews{
+    padding:38px 16px 38px !important;
+    overflow:hidden !important;
+  }
+  #reviews.sv-reviews .sv-section-head{
+    margin-bottom:18px !important;
+  }
+  #reviews.sv-reviews .sv-title{
+    font-size:31px !important;
+  }
+  #reviews.sv-reviews .sv-reviews__viewport{
+    width:100% !important;
+    overflow:hidden !important;
+  }
+  #reviews.sv-reviews .sv-reviews__track{
+    display:flex !important;
+    width:100% !important;
+    gap:10px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory !important;
+    scrollbar-width:none !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+  #reviews.sv-reviews .sv-reviews__track::-webkit-scrollbar{
+    display:none !important;
+  }
+  #reviews.sv-reviews .sv-review-card{
+    flex:0 0 100% !important;
+    width:100% !important;
+    min-width:100% !important;
+    min-height:118px !important;
+    padding:18px 19px 15px !important;
+    scroll-snap-align:start !important;
+  }
+  #reviews.sv-reviews .sv-review-card__text{
+    font-size:18px !important;
+    margin:7px 0 13px !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:7px !important;
+    margin:12px 0 0 !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots button{
+    width:6px !important;
+    height:6px !important;
+    padding:0 !important;
+    border:1px solid #9f7944 !important;
+    border-radius:50% !important;
+    background:transparent !important;
+    cursor:pointer !important;
+  }
+  #reviews.sv-reviews .sv-reviews__dots button.is-active{
+    width:7px !important;
+    height:7px !important;
+    background:#9f7944 !important;
+  }
+}
+</style>
 </head>
 <script>
 (function(){
@@ -9479,7 +9635,7 @@ HERO DEPLOYMENT SAFETY GUARD
           <span class="sv-review-card__quote" aria-hidden="true">“</span>
           <p class="sv-review-card__text">Nice collection and best prices</p>
           <footer class="sv-review-card__footer">
-            <div><p class="sv-review-card__author">Customer Review</p><span class="sv-review-card__source">Verified customer voice</span></div>
+            
             <span class="sv-review-card__badge">Boutique Visitor</span>
           </footer>
         </article>
@@ -9487,7 +9643,7 @@ HERO DEPLOYMENT SAFETY GUARD
           <span class="sv-review-card__quote" aria-hidden="true">“</span>
           <p class="sv-review-card__text">Perfect place for ladies dresses and sarees</p>
           <footer class="sv-review-card__footer">
-            <div><p class="sv-review-card__author">Customer Review</p><span class="sv-review-card__source">Verified customer voice</span></div>
+            
             <span class="sv-review-card__badge">Boutique Visitor</span>
           </footer>
         </article>
@@ -9495,7 +9651,7 @@ HERO DEPLOYMENT SAFETY GUARD
           <span class="sv-review-card__quote" aria-hidden="true">“</span>
           <p class="sv-review-card__text">Nice collection for women in affordable prices</p>
           <footer class="sv-review-card__footer">
-            <div><p class="sv-review-card__author">Customer Review</p><span class="sv-review-card__source">Verified customer voice</span></div>
+            
             <span class="sv-review-card__badge">Boutique Visitor</span>
           </footer>
         </article>
