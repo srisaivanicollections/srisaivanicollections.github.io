@@ -7641,13 +7641,17 @@ HERO DEPLOYMENT SAFETY GUARD
 #visit .option3-outline-button{border-color:#CDBEAE !important;background:#FCFAF7 !important;color:#433A33 !important}
 #visit .option3-dark-button{background:#2D2925 !important;border-color:#2D2925 !important}
 @media(max-width:760px){
-  #client-chronicles-section.option3-reviews{padding:52px 16px 46px !important}
+  /* Reviews -> Instagram: one continuous mobile layout */
+  #client-chronicles-section.option3-reviews{
+    padding:52px 16px 8px !important;
+    margin:0 !important;
+    border-bottom:0 !important;
+  }
   #client-chronicles-section .lux3-heading-center{margin-bottom:24px !important}
   #client-chronicles-section .option3-review-grid{
     width:100% !important;
-    margin-left:0 !important;
-    margin-right:0 !important;
-    padding:0 0 4px !important;
+    margin:0 !important;
+    padding:0 0 2px !important;
     gap:12px !important;
     scroll-padding-left:0 !important;
   }
@@ -7662,14 +7666,52 @@ HERO DEPLOYMENT SAFETY GUARD
     scroll-snap-align:start !important;
     box-sizing:border-box !important;
   }
-  #client-chronicles-section .option3-review-card p{font-size:18px !important;line-height:1.38 !important}
-  #instagram-editorial .option3-instagram-image{height:275px !important;min-height:275px !important}
-  #instagram-editorial .option3-instagram-copy{padding:4px 20px 94px !important}
+  #client-chronicles-section .option3-review-card p{
+    font-size:18px !important;
+    line-height:1.38 !important;
+  }
+  #client-chronicles-section .ssv-review-dots{
+    margin:10px 0 8px !important;
+  }
+  #client-chronicles-section .option3-review-footer{
+    margin:0 !important;
+    padding:0 !important;
+  }
+  #client-chronicles-section .lux3-text-link,
+  #instagram-editorial .option3-instagram-button{
+    width:100% !important;
+    max-width:360px !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  /* Same 16px mobile gutter and no section seam */
+  #instagram-editorial.option3-instagram{
+    margin:0 !important;
+    border-top:0 !important;
+  }
+  #instagram-editorial .option3-instagram-image{
+    height:275px !important;
+    min-height:275px !important;
+  }
+  #instagram-editorial .option3-instagram-copy{
+    padding:4px 16px 60px !important;
+    margin:0 !important;
+    background:#FAF8F5 !important;
+  }
   #instagram-editorial h2{font-size:43px !important}
-  #instagram-editorial .option3-instagram-copy>p:not(.lux3-eyebrow){font-size:16px !important;line-height:1.5 !important}
-  #instagram-editorial .option3-instagram-button{width:100% !important;max-width:260px !important}
-  #instagram-editorial .option3-instagram-cards{right:16px !important;bottom:17px !important}
-  #instagram-editorial .option3-instagram-cards img{width:50px !important;height:66px !important}
+  #instagram-editorial .option3-instagram-copy>p:not(.lux3-eyebrow){
+    font-size:16px !important;
+    line-height:1.5 !important;
+  }
+  #instagram-editorial .option3-instagram-cards{
+    right:16px !important;
+    bottom:17px !important;
+  }
+  #instagram-editorial .option3-instagram-cards img{
+    width:50px !important;
+    height:66px !important;
+  }
   #visit .option3-store-media{height:255px !important;min-height:255px !important}
   #visit .option3-store-content{padding:42px 18px 46px !important}
   #visit .option3-store-content .lux3-heading{text-align:center !important}
