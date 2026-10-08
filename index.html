@@ -47,7 +47,7 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 }
 
 /* Shared */
-.catalog,footer{width:min(var(--container),100%);margin-inline:auto}
+.catalog,.reviews,footer{width:min(var(--container),100%);margin-inline:auto}
 .catalog{padding:80px 34px 76px;border-bottom:1px solid var(--line)}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;margin-bottom:34px}
 .eyebrow{margin:0;color:var(--muted);font-size:9px;line-height:1.2;letter-spacing:.21em;font-weight:700}
@@ -88,7 +88,15 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 .image-missing{display:grid;place-items:center}
 .image-missing:after{content:"Image unavailable";color:var(--muted);font-size:11px}
 
-
+/* WhatsApp */
+.wa-band{width:min(var(--container),100%);margin:0 auto;border-bottom:1px solid rgba(255,255,255,.12);background:var(--ink);color:var(--paper);padding:56px 8%;display:flex;align-items:center;justify-content:space-between;gap:48px}
+.wa-band .eyebrow{color:var(--gold)}
+.wa-band h2{margin:8px 0 7px;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(40px,4.2vw,58px);font-weight:500;line-height:1;letter-spacing:-.035em}
+.wa-band p:last-child{max-width:430px;margin:0;color:#d8d0c9;font-size:12px;line-height:1.7}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:18px;padding:15px 19px;border:1px solid var(--paper);color:var(--paper);text-decoration:none;font-size:9px;letter-spacing:.15em;white-space:nowrap;transition:background .2s ease,border-color .2s ease}
+.wa-btn:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.wa-btn svg{width:19px;height:19px;fill:currentColor}
+.wa-btn b{font-size:16px;font-weight:400}
 
 /* Footer */
 footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px}
@@ -173,7 +181,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 /* Tablet */
 @media(max-width:1100px){
   .header-inner{padding-inline:26px}
-  .catalog,footer{padding-left:26px;padding-right:26px}
+  .catalog,.reviews,footer{padding-left:26px;padding-right:26px}
   #shop .products{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
@@ -188,7 +196,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   .section-head{display:block}
   .section-head>p{margin-top:20px}
   #shop .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 14px}
-
+  .wa-band{padding:48px 7%}
 }
 
 /* Small mobile */
@@ -215,8 +223,14 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   #shop .price del{font-size:10px}
   .wa-mini{min-height:32px;padding:8px 10px}
   .wa-icon{width:15px;height:15px}
-
-
+  .wa-band{display:block;margin-top:0;padding:38px 18px 40px}
+  .wa-band h2{margin:8px 0 7px;font-size:38px;line-height:1.02}
+  .wa-band p:last-child{max-width:330px;font-size:11px;line-height:1.6}
+  .wa-btn{width:100%;min-height:60px;margin-top:21px;padding:14px 16px;justify-content:space-between}
+  .wa-btn svg{width:22px;height:22px}
+  .reviews{padding:52px 16px 50px}
+  .reviews .section-head{margin-bottom:27px}
+  .reviews .section-head h2{font-size:clamp(40px,12vw,56px)}
   .text-btn{width:100%;min-height:45px;margin-top:19px}
   .review-grid{grid-template-columns:1fr;gap:9px}
   .review-grid article{min-height:0;padding:20px 18px}
@@ -574,7 +588,65 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    No catalogue, state, storage, auth, or CRUD rules are changed.
    ========================================================= */
 
+.hero-section{
+  width:100%;
+  box-sizing:border-box;
+  background:#FAF7F2;
+  border-bottom:1px solid #E7E0D8;
+  overflow:hidden;
+}
+.hero-section .hero-container{
+  width:min(1240px,100%);
+  margin:0 auto;
+  padding:3rem 1.25rem 2rem;
+  box-sizing:border-box;
+}
+.hero-section .hero-text-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+  align-items:end;
+}
+.hero-section .hero-eyebrow{
+  display:block;
+  margin:0 0 .75rem;
+  color:#8C6D3F;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+.hero-section .hero-title{
+  margin:0;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2.35rem,8vw,3.4rem);
+  line-height:1.08;
+  font-weight:400;
+  letter-spacing:-.025em;
+}
+.hero-section .hero-desc{
+  max-width:620px;
+  margin:0;
+  color:#57534E;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.05rem;
+  line-height:1.7;
+  font-style:italic;
+}
 @media(min-width:992px){
+  .hero-section .hero-container{
+    padding:4.5rem 2rem 3.25rem;
+  }
+  .hero-section .hero-text-grid{
+    grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
+    gap:3.5rem;
+  }
+  .hero-section .hero-desc{
+    padding-bottom:.3rem;
+  }
 }
 
 #client-chronicles-section{
@@ -703,9 +775,136 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   #client-chronicles-section .cc-card{padding:2.5rem 2rem}
 }
 
+.atelier-visit-section{
+  width:100%;
+  box-sizing:border-box;
+  padding:3.5rem 1.25rem;
+  background:#FAF7F2;
+  border-top:1px solid #E7E0D8;
+  overflow:hidden;
+}
+.atelier-visit-section .atelier-container{
+  width:min(1240px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2.5rem;
+  align-items:center;
+}
+.atelier-visit-section .atelier-details{
+  min-width:0;
+}
+.atelier-visit-section .atelier-eyebrow{
+  display:block;
+  margin:0 0 .75rem;
+  color:#8C6D3F;
+  font-family:'Montserrat',sans-serif;
+  font-size:.68rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+.atelier-visit-section .atelier-title{
+  margin:0 0 1.25rem;
+  color:#1C1917;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2rem,3.5vw,2.75rem);
+  line-height:1.2;
+  font-weight:400;
+}
+.atelier-visit-section .atelier-title em{font-style:italic}
+.atelier-visit-section .atelier-desc{
+  max-width:440px;
+  margin:0 0 2rem;
+  color:#57534E;
+  font-family:'Montserrat',sans-serif;
+  font-size:.95rem;
+  line-height:1.7;
+}
+.atelier-visit-section .atelier-meta{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+  margin:0 0 2.25rem;
+  padding-top:1.5rem;
+  border-top:1px solid #E7E0D8;
+}
+.atelier-visit-section .meta-block{
+  min-width:0;
+}
+.atelier-visit-section .meta-label{
+  display:block;
+  margin:0 0 4px;
+  color:#B38E5D;
+  font-family:'Montserrat',sans-serif;
+  font-size:.65rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.atelier-visit-section .meta-text{
+  margin:0;
+  color:#1C1917;
+  font-family:'Montserrat',sans-serif;
+  font-size:.9rem;
+  line-height:1.5;
+}
+.atelier-visit-section .atelier-actions{
+  display:flex;
+  width:100%;
+}
+.atelier-visit-section .btn-maps-primary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:13px 24px;
+  background:#1C1917;
+  color:#FAF7F2;
+  border:1px solid #1C1917;
+  font-family:'Montserrat',sans-serif;
+  font-size:.72rem;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-decoration:none;
+  transition:background .3s ease,color .3s ease,border-color .3s ease;
+}
+.atelier-visit-section .btn-maps-primary:hover{
+  background:#B38E5D;
+  color:#181513;
+  border-color:#B38E5D;
+}
+.atelier-visit-section .atelier-map-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/10;
+  overflow:hidden;
+  background:#F4EFEA;
+  border:1px solid #E7E0D8;
+  box-shadow:0 10px 30px rgba(28,25,23,.04);
+}
+.atelier-visit-section .atelier-map-frame iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  filter:grayscale(20%) contrast(95%);
+}
 @media(min-width:992px){
+  .atelier-visit-section{padding:5rem 1.5rem}
+  .atelier-visit-section .atelier-container{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:4rem;
+  }
+  .atelier-visit-section .atelier-map-frame{aspect-ratio:4/3}
+  .atelier-visit-section .atelier-actions{width:auto}
 }
 @media(max-width:600px){
+  .atelier-visit-section .btn-maps-primary{width:100%}
+  #client-chronicles-section .cc-card{padding:2rem 1.2rem}
 }
 
 
@@ -713,31 +912,51 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    BOUTIQUE LUXURY TYPOGRAPHY ENGINE
    Typography-only presentation layer. No catalogue/state logic.
    =================================================== */
+.hero-section .hero-title,
 #client-chronicles-section .cc-title,
-#client-chronicles-section .cc-quote-text{
+.atelier-visit-section .atelier-title,
+#client-chronicles-section .cc-quote-text,
+.hero-section .hero-desc{
   font-family:'Cormorant Garamond','Didot','Bodoni MT',Georgia,serif !important;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
 
+.hero-section .hero-eyebrow,
 #client-chronicles-section .cc-eyebrow,
+.atelier-visit-section .atelier-eyebrow,
 #client-chronicles-section .cc-author,
 #client-chronicles-section .cc-trust-label,
+.atelier-visit-section .meta-label,
 #shop article .badge,
+.atelier-visit-section .btn-maps-primary,
 #client-chronicles-section .cc-google-link{
   font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
 
+.hero-section .hero-title{
+  font-weight:400 !important;
+  letter-spacing:-0.01em !important;
+  line-height:1.12 !important;
+}
+.hero-section .hero-desc{
+  font-weight:400 !important;
+  font-style:italic !important;
+  letter-spacing:0.01em !important;
+}
 #client-chronicles-section .cc-quote-text{
   font-weight:400 !important;
   font-style:italic !important;
   letter-spacing:0.015em !important;
 }
 #client-chronicles-section .cc-author,
-#client-chronicles-section .cc-eyebrow{
+.atelier-visit-section .meta-label,
+.hero-section .hero-eyebrow,
+#client-chronicles-section .cc-eyebrow,
+.atelier-visit-section .atelier-eyebrow{
   letter-spacing:0.22em !important;
   font-weight:500 !important;
 }
@@ -755,6 +974,8 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    MOBILE HERO TYPOGRAPHY + BOUTIQUE MICRO BADGES
    Presentation-only patch. Catalogue/state untouched.
    =================================================== */
+.hero-section h1,
+.hero-section .hero-title,
 #hero h1,
 #hero .hero-title,
 .shop-header h1{
@@ -767,6 +988,8 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
+.hero-section p,
+.hero-section .hero-desc,
 #hero p,
 .shop-header p{
   font-family:'Cormorant Garamond',Georgia,serif !important;
@@ -778,6 +1001,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
+.hero-section .hero-eyebrow,
 #hero .hero-eyebrow{
   font-family:'Montserrat',sans-serif !important;
   font-size:.65rem !important;
@@ -799,12 +1023,18 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 
 /* Remove duplicate divider lines between hero and catalogue.
    Presentation-only; product/catalogue state remains untouched. */
+.hero-section{
+  border-bottom:0 !important;
+}
 #shop .toolbar{
   border-top:0 !important;
 }
 
 /* Final hero-to-catalog divider cleanup.
    Remove all top/bottom boundary rules at this transition. */
+.hero-section{
+  border-bottom:0 !important;
+}
 #shop{
   border-top:0 !important;
 }
@@ -1325,10 +1555,29 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    over desktop/mobile rules above.
    =================================================== */
 
+#hero.hero-section .hero-container{
+  padding-top:1rem !important;
+  padding-bottom:.75rem !important;
+}
 
+#hero.hero-section .hero-text-grid{
+  gap:.75rem !important;
+}
 
+#hero.hero-section .hero-eyebrow{
+  margin:0 0 .35rem !important;
+}
 
+#hero.hero-section .hero-title{
+  margin:0 0 .5rem !important;
+  line-height:1.08 !important;
+}
 
+#hero.hero-section .hero-desc{
+  margin:0 !important;
+  padding-bottom:0 !important;
+  line-height:1.45 !important;
+}
 
 #shop.catalog{
   padding-top:1rem !important;
@@ -1428,6 +1677,36 @@ nav a,.shop-link,.admin-link{
 }
 
 /* ---------- Hero: tighter editorial rhythm ---------- */
+#hero.hero-section{
+  background:#FAF8F5 !important;
+  border-bottom:0 !important;
+}
+#hero.hero-section .hero-container{
+  padding:2.2rem 34px 1.6rem !important;
+}
+#hero.hero-section .hero-text-grid{
+  gap:1.25rem !important;
+}
+#hero.hero-section .hero-eyebrow{
+  color:#6F6A64 !important;
+  margin:0 0 .55rem !important;
+  font-size:9px !important;
+  letter-spacing:.24em !important;
+}
+#hero.hero-section .hero-title{
+  color:#1C1917 !important;
+  margin:0 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-weight:500 !important;
+  line-height:.98 !important;
+  letter-spacing:-.025em !important;
+}
+#hero.hero-section .hero-desc{
+  color:#6F6A64 !important;
+  margin:0 !important;
+  max-width:470px !important;
+  line-height:1.65 !important;
+}
 
 /* ---------- Catalog transition ---------- */
 #shop.catalog{
@@ -1586,6 +1865,11 @@ nav a,.shop-link,.admin-link{
 }
 
 /* ---------- Atelier / store section ---------- */
+.atelier-visit-section{
+  background:#FAF8F5 !important;
+  color:#1C1917 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
 .atelier-eyebrow,.atelier-desc,.meta-label{
   color:#6F6A64 !important;
 }
@@ -1655,6 +1939,9 @@ footer a{
   nav a,nav .admin-link{
     font-size:8px !important;
   }
+  #hero.hero-section .hero-container{
+    padding:1.7rem 20px 1.15rem !important;
+  }
   #shop.catalog{
     padding:0.8rem 20px 3.25rem !important;
   }
@@ -1702,6 +1989,25 @@ footer a{
   }
   nav{
     margin-left:auto !important;
+  }
+  #hero.hero-section .hero-container{
+    padding:1.35rem 16px .9rem !important;
+  }
+  #hero.hero-section .hero-text-grid{
+    gap:.7rem !important;
+  }
+  #hero.hero-section .hero-eyebrow{
+    font-size:8px !important;
+    letter-spacing:.20em !important;
+    margin-bottom:.35rem !important;
+  }
+  #hero.hero-section .hero-title{
+    font-size:clamp(39px,11vw,54px) !important;
+    line-height:.98 !important;
+  }
+  #hero.hero-section .hero-desc{
+    font-size:11px !important;
+    line-height:1.55 !important;
   }
   #shop.catalog{
     padding:.45rem 16px 2.7rem !important;
@@ -1958,6 +2264,22 @@ footer a{
   background-color: #FFFFFF;
 }
 
+
+
+
+/* ==========================================================================
+   CURATED DRAPE EDITORIAL
+   ========================================================================== */
+
+.drape-editorial-section{
+  width:100%;
+  box-sizing:border-box;
+  background:#FAF8F5;
+  border-top:1px solid rgba(28,25,23,.08);
+  border-bottom:1px solid rgba(28,25,23,.08);
+  padding:64px 24px;
+}
+
 .drape-editorial-content{
   width:100%;
   max-width:620px;
@@ -2042,6 +2364,22 @@ footer a{
     font-size:.8rem;
     line-height:1.7;
   }
+}
+
+
+/* ==========================================================================
+   FINAL INSTAGRAM EDITORIAL TYPOGRAPHY
+   Match the site's established luxury type system exactly.
+   ========================================================================== */
+.drape-editorial-section,
+.drape-editorial-section *{
+  box-sizing:border-box;
+}
+
+.drape-editorial-section{
+  font-family:"Montserrat",Arial,sans-serif !important;
+  color:#1C1917 !important;
+}
 
 .drape-editorial-content{
   max-width:620px !important;
@@ -2392,6 +2730,7 @@ textarea{
 .section-head h2,
 .shop-header h1,
 #shop .product-info h3,
+.wa-band h2,
 .cc-title,
 .drape-editorial-title,
 .atelier-title,
@@ -2465,6 +2804,7 @@ nav a,
 /* Consistent section support copy */
 .hero-description,
 .section-head>p,
+.wa-band p:last-child,
 .cc-subtitle,
 .drape-editorial-text,
 .atelier-desc,
@@ -3665,6 +4005,17 @@ nav a,
   .drape-reel-wrap{
     width:min(360px,100%);
   }
+}
+
+
+/* FINAL INSTAGRAM CTA GUARD: no embedded reel/player */
+.drape-editorial-section iframe,
+.drape-editorial-section .instagram-media,
+.drape-editorial-section .instagram-embed,
+.drape-editorial-section video,
+.drape-editorial-section embed,
+.drape-editorial-section object { display:none !important; }
+.drape-editorial-section .drape-editorial-content { position:relative; z-index:2; }
 
 
 /* ==========================================================================
@@ -3694,11 +4045,30 @@ nav a,
 }
 
 /* Keep only one hairline at each major transition. */
+.hero-section{
+  border-bottom:1px solid var(--champagne) !important;
+}
 #shop{
   border-top:0 !important;
 }
+#shop + .wa-band,
+#shop + .whatsapp-banner-section{
+  border-top:0 !important;
+}
+#shop + .wa-band{
+  border-bottom:0 !important;
+}
 #client-chronicles-section{
   border-top:0 !important;
+  border-bottom:0 !important;
+}
+#client-chronicles-section + .drape-editorial-section{
+  border-top:1px solid var(--champagne) !important;
+}
+.drape-editorial-section + .atelier-visit-section{
+  border-top:1px solid var(--champagne) !important;
+}
+.atelier-visit-section{
   border-bottom:0 !important;
 }
 
@@ -3817,6 +4187,9 @@ nav a,
   #shop .lux-catalog-toolbar{
     margin-bottom:22px !important;
   }
+  .drape-editorial-section{
+    padding:44px 20px !important;
+  }
   .drape-editorial-eyebrow{
     font-size:8px !important;
     letter-spacing:.24em !important;
@@ -3873,6 +4246,13 @@ nav a,
 #client-chronicles-section .cc-google-link{
   min-height:42px !important;
 }
+
+.drape-editorial-section{
+  padding:38px 20px !important;
+  background:#FAF8F5 !important;
+  border-top:1px solid #E4D8C5 !important;
+  border-bottom:1px solid #E4D8C5 !important;
+}
 .drape-editorial-content{
   max-width:520px !important;
   margin:0 auto !important;
@@ -3924,6 +4304,24 @@ nav a,
   color:#FAF8F5 !important;
 }
 
+.atelier-visit-section{
+  padding:42px 20px !important;
+  border-top:0 !important;
+}
+.atelier-visit-section .atelier-title{
+  margin:0 0 12px !important;
+  font-size:2.25rem !important;
+  line-height:1 !important;
+  font-weight:400 !important;
+}
+.atelier-visit-section .atelier-desc{
+  margin:0 0 24px !important;
+  font-family:"Inter","Montserrat",Arial,sans-serif !important;
+  font-style:normal !important;
+  font-size:11px !important;
+  line-height:1.55 !important;
+  color:#6F6A64 !important;
+}
 @media(max-width:767px){
   #client-chronicles-section{
     padding-top:40px !important;
@@ -3932,6 +4330,9 @@ nav a,
   #client-chronicles-section .cc-footer-cta{
     margin-top:20px !important;
   }
+  .drape-editorial-section{
+    padding:34px 18px !important;
+  }
   .drape-editorial-title{
     font-size:38px !important;
     margin-bottom:16px !important;
@@ -3939,6 +4340,9 @@ nav a,
   .drape-editorial-cta{
     min-width:198px !important;
     min-height:40px !important;
+  }
+  .atelier-visit-section{
+    padding:38px 20px !important;
   }
 }
 
@@ -3960,6 +4364,15 @@ nav a,
     padding-bottom:28px !important;
   }
 
+  .drape-editorial-section{
+    padding-top:32px !important;
+    padding-bottom:32px !important;
+  }
+
+  .atelier-visit-section{
+    padding-top:36px !important;
+    padding-bottom:44px !important;
+  }
 }
 
 @media (max-width: 767px){
@@ -3986,10 +4399,19 @@ nav a,
     margin-top:16px !important;
   }
 
+  .drape-editorial-section{
+    padding-top:28px !important;
+    padding-bottom:30px !important;
+  }
+
   .drape-editorial-title{
     margin-bottom:13px !important;
   }
 
+  .atelier-visit-section{
+    padding-top:30px !important;
+    padding-bottom:34px !important;
+  }
 }
 
 
@@ -5439,6 +5861,19 @@ footer .brand b{
 #client-chronicles-section .ssv-voices-track{
   padding:4px 16px 14px !important;
 }
+.drape-editorial-section a,
+.drape-editorial-section .instagram-btn{
+  background:transparent !important;
+  border:1px solid #1C1917 !important;
+  color:#1C1917 !important;
+  padding:9px 22px !important;
+  font-size:8.5px !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  font-weight:600 !important;
+  border-radius:2px !important;
+  display:inline-block !important;
+}
 #visit .ssv-map-frame{
   border-radius:4px !important;
   border:1px solid rgba(231,222,200,.85) !important;
@@ -5579,6 +6014,14 @@ footer .brand b{
   letter-spacing:.17em !important;
   text-transform:uppercase !important;
 }
+
+/* Our Collection: editorial invitation rather than a generic social CTA */
+#instagram-editorial.drape-editorial-section{
+  padding:70px 24px !important;
+  background:#FAF8F5 !important;
+  border-top:0 !important;
+  border-bottom:1px solid rgba(28,25,23,.08) !important;
+}
 #instagram-editorial .drape-editorial-content{
   max-width:620px !important;
 }
@@ -5612,6 +6055,75 @@ footer .brand b{
   border-color:#1C1917 !important;
 }
 
+/* Store Details: clean boutique information panel */
+#visit.ssv-store-section{
+  padding:68px 24px 62px !important;
+  background:#FAF8F5 !important;
+  border-top:0 !important;
+  border-bottom:1px solid rgba(28,25,23,.08) !important;
+}
+#visit .ssv-store-header{
+  margin-bottom:28px !important;
+}
+#visit .ssv-store-eyebrow{
+  margin-bottom:10px !important;
+  font-size:8.5px !important;
+  color:#B38E5D !important;
+}
+#visit .ssv-store-title{
+  font-size:clamp(2.25rem,5vw,3rem) !important;
+  font-weight:400 !important;
+  letter-spacing:-.02em !important;
+  line-height:1 !important;
+}
+#visit .ssv-store-subtitle{
+  margin-top:8px !important;
+  font-size:15px !important;
+  line-height:1.45 !important;
+}
+#visit .ssv-store-grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  gap:18px !important;
+  max-width:560px !important;
+  margin:0 auto 26px !important;
+}
+#visit .ssv-store-col{
+  padding:18px 12px !important;
+  border-top:1px solid rgba(28,25,23,.10) !important;
+}
+#visit .ssv-store-label{
+  margin-bottom:8px !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:8px !important;
+  letter-spacing:.18em !important;
+}
+#visit .ssv-store-val{
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:11px !important;
+  line-height:1.65 !important;
+}
+#visit .ssv-store-action{
+  margin:0 !important;
+}
+#visit .ssv-store-btn{
+  min-height:42px !important;
+  padding:0 22px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border:1px solid rgba(28,25,23,.75) !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:8.5px !important;
+  letter-spacing:.18em !important;
+  font-weight:600 !important;
+  transition:background .2s ease,color .2s ease,border-color .2s ease !important;
+}
+#visit .ssv-store-btn:hover{
+  background:#1C1917 !important;
+  color:#FAF8F5 !important;
+  border-color:#1C1917 !important;
+}
+
 @media (max-width:600px){
   #client-chronicles-section{
     padding:58px 14px 54px !important;
@@ -5624,9 +6136,27 @@ footer .brand b{
     min-height:174px !important;
     padding:28px 22px !important;
   }
+  #instagram-editorial.drape-editorial-section{
+    padding:56px 18px !important;
+  }
   #instagram-editorial .drape-editorial-title{
     font-size:clamp(2.15rem,11vw,2.7rem) !important;
   }
+  #visit.ssv-store-section{
+    padding:56px 14px 50px !important;
+  }
+  #visit .ssv-store-grid{
+    grid-template-columns:1fr !important;
+    gap:0 !important;
+    max-width:360px !important;
+  }
+  #visit .ssv-store-col{
+    padding:15px 8px !important;
+  }
+  #visit .ssv-store-col + .ssv-store-col{
+    border-top:1px solid rgba(28,25,23,.10) !important;
+  }
+}
 
 
 /* FINAL 3-SECTION LUXURY UX SYSTEM
@@ -5715,6 +6245,12 @@ footer .brand b{
   font-weight:600 !important;
   letter-spacing:.18em !important;
   text-transform:uppercase !important;
+}
+#instagram-editorial.drape-editorial-section{
+  padding:82px 24px !important;
+  border-top:1px solid rgba(28,25,23,.07) !important;
+  border-bottom:1px solid rgba(28,25,23,.07) !important;
+  text-align:center !important;
 }
 #instagram-editorial .drape-editorial-content{
   max-width:620px !important;
@@ -5810,6 +6346,9 @@ footer .brand b{
     flex-basis:calc(100vw - 42px) !important;
     min-height:176px !important;
     padding:28px 23px !important;
+  }
+  #instagram-editorial.drape-editorial-section{
+    padding:62px 18px !important;
   }
   #instagram-editorial .drape-editorial-title{
     font-size:clamp(2.2rem,11vw,2.8rem) !important;
