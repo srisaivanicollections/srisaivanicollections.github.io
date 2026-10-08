@@ -713,19 +713,18 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    BOUTIQUE LUXURY TYPOGRAPHY ENGINE
    Typography-only presentation layer. No catalogue/state logic.
    =================================================== */
-.hero-section .hero-title,
 #client-chronicles-section .cc-title,
-.atelier-visit-section .atelier-title,
-#client-chronicles-section .cc-quote-text,
+#client-chronicles-section .cc-quote-text{
+  font-family:'Cormorant Garamond','Didot','Bodoni MT',Georgia,serif !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
 
-.hero-section .hero-eyebrow,
 #client-chronicles-section .cc-eyebrow,
-.atelier-visit-section .atelier-eyebrow,
 #client-chronicles-section .cc-author,
 #client-chronicles-section .cc-trust-label,
-.atelier-visit-section .meta-label,
 #shop article .badge,
-.atelier-visit-section .btn-maps-primary,
 #client-chronicles-section .cc-google-link{
   font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important;
   -webkit-font-smoothing:antialiased;
@@ -738,9 +737,10 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   letter-spacing:0.015em !important;
 }
 #client-chronicles-section .cc-author,
-.atelier-visit-section .meta-label,
-.hero-section .hero-eyebrow,
-#client-chronicles-section .cc-eyebrow,
+#client-chronicles-section .cc-eyebrow{
+  letter-spacing:0.22em !important;
+  font-weight:500 !important;
+}
 
 /* Keep existing catalogue controls in the same editorial sans family. */
 #shop input,
@@ -3750,9 +3750,6 @@ nav a,
   border-bottom:0 !important;
 }
 #client-chronicles-section + .drape-editorial-section{
-  border-top:1px solid var(--champagne) !important;
-}
-.drape-editorial-section + .atelier-visit-section{
   border-top:1px solid var(--champagne) !important;
 }
 
