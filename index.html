@@ -8468,7 +8468,7 @@ footer .footer-links{flex-wrap:wrap}
 <script id="store-hours-auto-status">
 (function(){
   function updateStoreStatus(){
-    var el=document.getElementById('store-status-badge');
+    var el=document.querySelector('#visit .store-premium-status, #visit #store-status-badge');
     if(!el) return;
     var now=new Date();
     var parts=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(now);
