@@ -574,65 +574,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    No catalogue, state, storage, auth, or CRUD rules are changed.
    ========================================================= */
 
-.hero-section{
-  width:100%;
-  box-sizing:border-box;
-  background:#FAF7F2;
-  border-bottom:1px solid #E7E0D8;
-  overflow:hidden;
-}
-.hero-section .hero-container{
-  width:min(1240px,100%);
-  margin:0 auto;
-  padding:3rem 1.25rem 2rem;
-  box-sizing:border-box;
-}
-.hero-section .hero-text-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:1.5rem;
-  align-items:end;
-}
-.hero-section .hero-eyebrow{
-  display:block;
-  margin:0 0 .75rem;
-  color:#8C6D3F;
-  font-family:"Inter",Arial,sans-serif;
-  font-size:.68rem;
-  line-height:1.2;
-  font-weight:600;
-  letter-spacing:.24em;
-  text-transform:uppercase;
-}
-.hero-section .hero-title{
-  margin:0;
-  color:#1C1917;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:clamp(2.35rem,8vw,3.4rem);
-  line-height:1.08;
-  font-weight:400;
-  letter-spacing:-.025em;
-}
-.hero-section .hero-desc{
-  max-width:620px;
-  margin:0;
-  color:#57534E;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:1.05rem;
-  line-height:1.7;
-  font-style:italic;
-}
 @media(min-width:992px){
-  .hero-section .hero-container{
-    padding:4.5rem 2rem 3.25rem;
-  }
-  .hero-section .hero-text-grid{
-    grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
-    gap:3.5rem;
-  }
-  .hero-section .hero-desc{
-    padding-bottom:.3rem;
-  }
 }
 
 #client-chronicles-section{
@@ -761,136 +703,9 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   #client-chronicles-section .cc-card{padding:2.5rem 2rem}
 }
 
-.atelier-visit-section{
-  width:100%;
-  box-sizing:border-box;
-  padding:3.5rem 1.25rem;
-  background:#FAF7F2;
-  border-top:1px solid #E7E0D8;
-  overflow:hidden;
-}
-.atelier-visit-section .atelier-container{
-  width:min(1240px,100%);
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:2.5rem;
-  align-items:center;
-}
-.atelier-visit-section .atelier-details{
-  min-width:0;
-}
-.atelier-visit-section .atelier-eyebrow{
-  display:block;
-  margin:0 0 .75rem;
-  color:#8C6D3F;
-  font-family:'Montserrat',sans-serif;
-  font-size:.68rem;
-  line-height:1.2;
-  font-weight:600;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-}
-.atelier-visit-section .atelier-title{
-  margin:0 0 1.25rem;
-  color:#1C1917;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  font-size:clamp(2rem,3.5vw,2.75rem);
-  line-height:1.2;
-  font-weight:400;
-}
-.atelier-visit-section .atelier-title em{font-style:italic}
-.atelier-visit-section .atelier-desc{
-  max-width:440px;
-  margin:0 0 2rem;
-  color:#57534E;
-  font-family:'Montserrat',sans-serif;
-  font-size:.95rem;
-  line-height:1.7;
-}
-.atelier-visit-section .atelier-meta{
-  display:flex;
-  flex-direction:column;
-  gap:1.25rem;
-  margin:0 0 2.25rem;
-  padding-top:1.5rem;
-  border-top:1px solid #E7E0D8;
-}
-.atelier-visit-section .meta-block{
-  min-width:0;
-}
-.atelier-visit-section .meta-label{
-  display:block;
-  margin:0 0 4px;
-  color:#B38E5D;
-  font-family:'Montserrat',sans-serif;
-  font-size:.65rem;
-  line-height:1.2;
-  font-weight:600;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-}
-.atelier-visit-section .meta-text{
-  margin:0;
-  color:#1C1917;
-  font-family:'Montserrat',sans-serif;
-  font-size:.9rem;
-  line-height:1.5;
-}
-.atelier-visit-section .atelier-actions{
-  display:flex;
-  width:100%;
-}
-.atelier-visit-section .btn-maps-primary{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:46px;
-  padding:13px 24px;
-  background:#1C1917;
-  color:#FAF7F2;
-  border:1px solid #1C1917;
-  font-family:'Montserrat',sans-serif;
-  font-size:.72rem;
-  line-height:1;
-  font-weight:600;
-  letter-spacing:.18em;
-  text-decoration:none;
-  transition:background .3s ease,color .3s ease,border-color .3s ease;
-}
-.atelier-visit-section .btn-maps-primary:hover{
-  background:#B38E5D;
-  color:#181513;
-  border-color:#B38E5D;
-}
-.atelier-visit-section .atelier-map-frame{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/10;
-  overflow:hidden;
-  background:#F4EFEA;
-  border:1px solid #E7E0D8;
-  box-shadow:0 10px 30px rgba(28,25,23,.04);
-}
-.atelier-visit-section .atelier-map-frame iframe{
-  display:block;
-  width:100%;
-  height:100%;
-  border:0;
-  filter:grayscale(20%) contrast(95%);
-}
 @media(min-width:992px){
-  .atelier-visit-section{padding:5rem 1.5rem}
-  .atelier-visit-section .atelier-container{
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:4rem;
-  }
-  .atelier-visit-section .atelier-map-frame{aspect-ratio:4/3}
-  .atelier-visit-section .atelier-actions{width:auto}
 }
 @media(max-width:600px){
-  .atelier-visit-section .btn-maps-primary{width:100%}
-  #client-chronicles-section .cc-card{padding:2rem 1.2rem}
 }
 
 
@@ -898,51 +713,31 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    BOUTIQUE LUXURY TYPOGRAPHY ENGINE
    Typography-only presentation layer. No catalogue/state logic.
    =================================================== */
-.hero-section .hero-title,
 #client-chronicles-section .cc-title,
-.atelier-visit-section .atelier-title,
-#client-chronicles-section .cc-quote-text,
-.hero-section .hero-desc{
+#client-chronicles-section .cc-quote-text{
   font-family:'Cormorant Garamond','Didot','Bodoni MT',Georgia,serif !important;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
 
-.hero-section .hero-eyebrow,
 #client-chronicles-section .cc-eyebrow,
-.atelier-visit-section .atelier-eyebrow,
 #client-chronicles-section .cc-author,
 #client-chronicles-section .cc-trust-label,
-.atelier-visit-section .meta-label,
 #shop article .badge,
-.atelier-visit-section .btn-maps-primary,
 #client-chronicles-section .cc-google-link{
   font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
 
-.hero-section .hero-title{
-  font-weight:400 !important;
-  letter-spacing:-0.01em !important;
-  line-height:1.12 !important;
-}
-.hero-section .hero-desc{
-  font-weight:400 !important;
-  font-style:italic !important;
-  letter-spacing:0.01em !important;
-}
 #client-chronicles-section .cc-quote-text{
   font-weight:400 !important;
   font-style:italic !important;
   letter-spacing:0.015em !important;
 }
 #client-chronicles-section .cc-author,
-.atelier-visit-section .meta-label,
-.hero-section .hero-eyebrow,
-#client-chronicles-section .cc-eyebrow,
-.atelier-visit-section .atelier-eyebrow{
+#client-chronicles-section .cc-eyebrow{
   letter-spacing:0.22em !important;
   font-weight:500 !important;
 }
@@ -960,8 +755,6 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    MOBILE HERO TYPOGRAPHY + BOUTIQUE MICRO BADGES
    Presentation-only patch. Catalogue/state untouched.
    =================================================== */
-.hero-section h1,
-.hero-section .hero-title,
 #hero h1,
 #hero .hero-title,
 .shop-header h1{
@@ -974,8 +767,6 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
-.hero-section p,
-.hero-section .hero-desc,
 #hero p,
 .shop-header p{
   font-family:'Cormorant Garamond',Georgia,serif !important;
@@ -987,7 +778,6 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
-.hero-section .hero-eyebrow,
 #hero .hero-eyebrow{
   font-family:'Montserrat',sans-serif !important;
   font-size:.65rem !important;
@@ -1009,18 +799,12 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 
 /* Remove duplicate divider lines between hero and catalogue.
    Presentation-only; product/catalogue state remains untouched. */
-.hero-section{
-  border-bottom:0 !important;
-}
 #shop .toolbar{
   border-top:0 !important;
 }
 
 /* Final hero-to-catalog divider cleanup.
    Remove all top/bottom boundary rules at this transition. */
-.hero-section{
-  border-bottom:0 !important;
-}
 #shop{
   border-top:0 !important;
 }
@@ -1541,29 +1325,10 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
    over desktop/mobile rules above.
    =================================================== */
 
-#hero.hero-section .hero-container{
-  padding-top:1rem !important;
-  padding-bottom:.75rem !important;
-}
 
-#hero.hero-section .hero-text-grid{
-  gap:.75rem !important;
-}
 
-#hero.hero-section .hero-eyebrow{
-  margin:0 0 .35rem !important;
-}
 
-#hero.hero-section .hero-title{
-  margin:0 0 .5rem !important;
-  line-height:1.08 !important;
-}
 
-#hero.hero-section .hero-desc{
-  margin:0 !important;
-  padding-bottom:0 !important;
-  line-height:1.45 !important;
-}
 
 #shop.catalog{
   padding-top:1rem !important;
@@ -1663,36 +1428,6 @@ nav a,.shop-link,.admin-link{
 }
 
 /* ---------- Hero: tighter editorial rhythm ---------- */
-#hero.hero-section{
-  background:#FAF8F5 !important;
-  border-bottom:0 !important;
-}
-#hero.hero-section .hero-container{
-  padding:2.2rem 34px 1.6rem !important;
-}
-#hero.hero-section .hero-text-grid{
-  gap:1.25rem !important;
-}
-#hero.hero-section .hero-eyebrow{
-  color:#6F6A64 !important;
-  margin:0 0 .55rem !important;
-  font-size:9px !important;
-  letter-spacing:.24em !important;
-}
-#hero.hero-section .hero-title{
-  color:#1C1917 !important;
-  margin:0 !important;
-  font-family:"Cormorant Garamond",Georgia,serif !important;
-  font-weight:500 !important;
-  line-height:.98 !important;
-  letter-spacing:-.025em !important;
-}
-#hero.hero-section .hero-desc{
-  color:#6F6A64 !important;
-  margin:0 !important;
-  max-width:470px !important;
-  line-height:1.65 !important;
-}
 
 /* ---------- Catalog transition ---------- */
 #shop.catalog{
@@ -1851,11 +1586,6 @@ nav a,.shop-link,.admin-link{
 }
 
 /* ---------- Atelier / store section ---------- */
-.atelier-visit-section{
-  background:#FAF8F5 !important;
-  color:#1C1917 !important;
-  border-bottom:1px solid #E4D8C5 !important;
-}
 .atelier-eyebrow,.atelier-desc,.meta-label{
   color:#6F6A64 !important;
 }
@@ -1925,9 +1655,6 @@ footer a{
   nav a,nav .admin-link{
     font-size:8px !important;
   }
-  #hero.hero-section .hero-container{
-    padding:1.7rem 20px 1.15rem !important;
-  }
   #shop.catalog{
     padding:0.8rem 20px 3.25rem !important;
   }
@@ -1975,25 +1702,6 @@ footer a{
   }
   nav{
     margin-left:auto !important;
-  }
-  #hero.hero-section .hero-container{
-    padding:1.35rem 16px .9rem !important;
-  }
-  #hero.hero-section .hero-text-grid{
-    gap:.7rem !important;
-  }
-  #hero.hero-section .hero-eyebrow{
-    font-size:8px !important;
-    letter-spacing:.20em !important;
-    margin-bottom:.35rem !important;
-  }
-  #hero.hero-section .hero-title{
-    font-size:clamp(39px,11vw,54px) !important;
-    line-height:.98 !important;
-  }
-  #hero.hero-section .hero-desc{
-    font-size:11px !important;
-    line-height:1.55 !important;
   }
   #shop.catalog{
     padding:.45rem 16px 2.7rem !important;
@@ -4029,9 +3737,6 @@ nav a,
 }
 
 /* Keep only one hairline at each major transition. */
-.hero-section{
-  border-bottom:1px solid var(--champagne) !important;
-}
 #shop{
   border-top:0 !important;
 }
@@ -4041,12 +3746,6 @@ nav a,
 }
 #client-chronicles-section + .drape-editorial-section{
   border-top:1px solid var(--champagne) !important;
-}
-.drape-editorial-section + .atelier-visit-section{
-  border-top:1px solid var(--champagne) !important;
-}
-.atelier-visit-section{
-  border-bottom:0 !important;
 }
 
 /* Product rows */
@@ -4281,24 +3980,6 @@ nav a,
   color:#FAF8F5 !important;
 }
 
-.atelier-visit-section{
-  padding:42px 20px !important;
-  border-top:0 !important;
-}
-.atelier-visit-section .atelier-title{
-  margin:0 0 12px !important;
-  font-size:2.25rem !important;
-  line-height:1 !important;
-  font-weight:400 !important;
-}
-.atelier-visit-section .atelier-desc{
-  margin:0 0 24px !important;
-  font-family:"Inter","Montserrat",Arial,sans-serif !important;
-  font-style:normal !important;
-  font-size:11px !important;
-  line-height:1.55 !important;
-  color:#6F6A64 !important;
-}
 @media(max-width:767px){
   #client-chronicles-section{
     padding-top:40px !important;
@@ -4317,9 +3998,6 @@ nav a,
   .drape-editorial-cta{
     min-width:198px !important;
     min-height:40px !important;
-  }
-  .atelier-visit-section{
-    padding:38px 20px !important;
   }
 }
 
@@ -4346,10 +4024,6 @@ nav a,
     padding-bottom:32px !important;
   }
 
-  .atelier-visit-section{
-    padding-top:36px !important;
-    padding-bottom:44px !important;
-  }
 }
 
 @media (max-width: 767px){
@@ -4385,10 +4059,6 @@ nav a,
     margin-bottom:13px !important;
   }
 
-  .atelier-visit-section{
-    padding-top:30px !important;
-    padding-bottom:34px !important;
-  }
 }
 
 
