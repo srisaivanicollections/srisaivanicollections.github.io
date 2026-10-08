@@ -12307,5 +12307,147 @@ $("#search").oninput=render;$("#price").onchange=render;load();
   dots.forEach((dot,i)=>dot.addEventListener('click',()=>cards[i].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'})));
 })();
 </script>
+
+<style id="ssv-visible-final-fix">
+/* VISIBLE FINAL MOBILE UX FIX */
+#reviews.sv-reviews{
+  padding:42px 14px 38px!important;
+  background:#FAF8F5!important;
+}
+#reviews.sv-reviews .sv-section-head{
+  margin-bottom:20px!important;
+}
+#reviews.sv-reviews .sv-reviews__eyebrow{
+  margin-bottom:6px!important;
+  font-size:8px!important;
+  color:#A88A60!important;
+}
+#reviews.sv-reviews .sv-title{
+  font-size:38px!important;
+  line-height:1!important;
+}
+#reviews.sv-reviews .sv-reviews__intro{
+  display:none!important;
+}
+#reviews.sv-reviews .sv-reviews__track{
+  gap:10px!important;
+  padding:0 8px 2px!important;
+}
+#reviews.sv-reviews .sv-review-card{
+  flex:0 0 calc(100vw - 120px)!important;
+  width:calc(100vw - 120px)!important;
+  height:152px!important;
+  min-height:152px!important;
+  padding:18px 18px 16px!important;
+  background:#FFFDF9!important;
+  border:1px solid #DCC8A7!important;
+  box-shadow:0 3px 12px rgba(70,55,35,.035)!important;
+}
+#reviews.sv-reviews .sv-review-card__quote{
+  height:24px!important;
+  margin:0 0 10px!important;
+  font-size:32px!important;
+  color:#B38E5D!important;
+}
+#reviews.sv-reviews .sv-review-card__text{
+  max-width:100%!important;
+  margin:0!important;
+  font-size:18px!important;
+  line-height:1.25!important;
+  font-weight:500!important;
+  color:#403A35!important;
+}
+#reviews.sv-reviews .sv-reviews__dots{
+  margin:13px 0 0!important;
+  gap:6px!important;
+}
+#reviews.sv-reviews .sv-reviews__dots button{
+  width:6px!important;
+  height:6px!important;
+  border-color:#B38E5D!important;
+}
+#reviews.sv-reviews .sv-reviews__dots button.is-active{
+  width:7px!important;
+  height:7px!important;
+  background:#B38E5D!important;
+}
+#reviews.sv-reviews .sv-reviews__google{
+  margin:14px 0 0!important;
+}
+#reviews.sv-reviews .sv-reviews__google a{
+  min-height:38px!important;
+  padding:0 18px!important;
+  border:1px solid #B38E5D!important;
+  border-radius:0!important;
+  background:#FBF5EA!important;
+  color:#765B34!important;
+  text-decoration:none!important;
+  font-size:9px!important;
+  letter-spacing:.13em!important;
+  font-weight:600!important;
+}
+#reviews.sv-reviews .sv-reviews__google a span:last-child{
+  color:#B38E5D!important;
+}
+#instagram.sv-instagram{
+  padding:44px 14px 46px!important;
+  background:#FBF9F6!important;
+}
+#instagram.sv-instagram .sv-section-head{
+  margin-bottom:20px!important;
+}
+#instagram.sv-instagram .sv-eyebrow{
+  margin-bottom:6px!important;
+  color:#A88A60!important;
+  font-size:8px!important;
+}
+#instagram.sv-instagram .sv-title{
+  font-size:36px!important;
+}
+#instagram.sv-instagram .sv-gallery{
+  gap:6px!important;
+}
+#instagram.sv-instagram .sv-instagram__cta{
+  margin-top:18px!important;
+}
+#instagram.sv-instagram .sv-instagram__button{
+  min-height:38px!important;
+  border-color:#B38E5D!important;
+  padding:0 17px!important;
+}
+#visit.option3-store{
+  padding:44px 14px 42px!important;
+  background:#FAF8F5!important;
+}
+#visit.option3-store .store-section-heading{
+  margin-bottom:18px!important;
+}
+#visit.option3-store .store-section-heading .lux3-eyebrow{
+  margin-bottom:6px!important;
+  color:#A88A60!important;
+}
+#visit.option3-store .store-section-heading h2{
+  font-size:34px!important;
+}
+#visit.option3-store .store-section-heading .lux3-intro{
+  font-size:15px!important;
+}
+#visit.option3-store .store-luxury-card{
+  border-color:#DCC8A7!important;
+  border-radius:10px!important;
+  box-shadow:0 4px 16px rgba(70,55,35,.05)!important;
+  padding:16px!important;
+}
+@media(min-width:601px){
+  #reviews.sv-reviews{padding:52px 20px 44px!important}
+  #reviews.sv-reviews .sv-review-card{
+    flex-basis:300px!important;
+    width:300px!important;
+    height:145px!important;
+    min-height:145px!important;
+  }
+}
+</style>
+
 </body>
 </html>
