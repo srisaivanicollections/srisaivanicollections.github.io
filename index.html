@@ -12012,4 +12012,188 @@ $("#search").oninput=render;$("#price").onchange=render;load();
   border-bottom:0 !important;
 }
 
-</style></html>
+
+<style id="reviews-instagram-mobile-authoritative-fix">
+/* =========================================================
+   AUTHORITATIVE MOBILE FIX
+   Customer Voices -> Instagram
+   This block intentionally overrides the older review passes.
+   ========================================================= */
+#client-chronicles-section.option3-reviews,
+#instagram-editorial.option3-instagram{
+  margin:0 !important;
+  border:0 !important;
+  background-color:#FAF8F5 !important;
+  background-image:
+    linear-gradient(180deg,rgba(250,248,245,.62) 0%,rgba(250,248,245,.82) 55%,rgba(250,248,245,.96) 100%),
+    url("assets/reviews-bg.jpg") !important;
+  background-size:cover !important;
+  background-position:center top !important;
+  background-repeat:no-repeat !important;
+}
+
+@media(max-width:760px){
+  /* Reviews section has no hidden bottom padding. */
+  #client-chronicles-section.option3-reviews{
+    padding:44px 16px 0 !important;
+    overflow:hidden !important;
+  }
+
+  #client-chronicles-section.option3-reviews .lux3-inner{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  #client-chronicles-section.option3-reviews .lux3-heading-center{
+    margin:0 0 18px !important;
+  }
+
+  /*
+   * Critical fix:
+   * The carousel itself gets a compact, explicit height so the dots
+   * cannot be pushed down by an oversized flex/grid track.
+   */
+  #client-chronicles-section.option3-reviews .option3-review-grid{
+    display:flex !important;
+    width:100% !important;
+    height:250px !important;
+    min-height:250px !important;
+    max-height:250px !important;
+    margin:0 !important;
+    padding:0 !important;
+    gap:10px !important;
+    align-items:flex-start !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory !important;
+    scrollbar-width:none !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+
+  #client-chronicles-section.option3-reviews .option3-review-grid::-webkit-scrollbar{
+    display:none !important;
+  }
+
+  #client-chronicles-section.option3-reviews .option3-review-card,
+  #client-chronicles-section.option3-reviews .option3-review-featured{
+    flex:0 0 100% !important;
+    width:100% !important;
+    min-width:100% !important;
+    max-width:100% !important;
+    height:250px !important;
+    min-height:250px !important;
+    max-height:250px !important;
+    margin:0 !important;
+    padding:20px 18px !important;
+    box-sizing:border-box !important;
+    align-self:flex-start !important;
+    scroll-snap-align:start !important;
+    overflow:hidden !important;
+    transform:none !important;
+  }
+
+  #client-chronicles-section.option3-reviews .option3-review-top{
+    flex:0 0 auto !important;
+  }
+
+  #client-chronicles-section.option3-reviews .option3-quote{
+    margin-top:13px !important;
+    font-size:34px !important;
+    line-height:.5 !important;
+  }
+
+  #client-chronicles-section.option3-reviews .option3-review-card p{
+    margin:11px auto 0 !important;
+    max-width:100% !important;
+    font-size:17px !important;
+    line-height:1.3 !important;
+  }
+
+  /* Dots sit immediately below the card. */
+  #client-chronicles-section.option3-reviews .ssv-review-dots{
+    height:10px !important;
+    margin:7px 0 8px !important;
+    padding:0 !important;
+    line-height:0 !important;
+  }
+
+  /* Google CTA is directly below the dots. */
+  #client-chronicles-section.option3-reviews .option3-review-footer{
+    display:flex !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+
+  /* Both CTA buttons use exactly the same geometry. */
+  #client-chronicles-section.option3-reviews .lux3-text-link,
+  #instagram-editorial.option3-instagram .option3-instagram-button{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:320px !important;
+    max-width:100% !important;
+    height:48px !important;
+    min-height:48px !important;
+    max-height:48px !important;
+    margin:0 auto !important;
+    padding:0 18px !important;
+    box-sizing:border-box !important;
+    border:1px solid #D8C8B4 !important;
+    border-radius:2px !important;
+    background:rgba(255,255,255,.58) !important;
+    color:#1C1917 !important;
+    box-shadow:none !important;
+    line-height:1 !important;
+  }
+
+  /* Instagram starts immediately after the review CTA. */
+  #instagram-editorial.option3-instagram{
+    min-height:0 !important;
+    padding:0 !important;
+  }
+
+  #instagram-editorial.option3-instagram .option3-instagram-copy{
+    width:100% !important;
+    min-height:0 !important;
+    height:auto !important;
+    margin:0 !important;
+    padding:8px 16px 54px !important;
+    box-sizing:border-box !important;
+    background:transparent !important;
+    border:0 !important;
+    text-align:center !important;
+  }
+
+  #instagram-editorial.option3-instagram .lux3-eyebrow{
+    margin:0 0 9px !important;
+  }
+
+  #instagram-editorial.option3-instagram h2{
+    margin:0 auto !important;
+    max-width:330px !important;
+    font-size:40px !important;
+    line-height:1 !important;
+  }
+
+  #instagram-editorial.option3-instagram .option3-instagram-story{
+    margin:13px auto 0 !important;
+    max-width:330px !important;
+  }
+
+  #instagram-editorial.option3-instagram .option3-instagram-button{
+    margin:20px auto 0 !important;
+  }
+
+  #instagram-editorial.option3-instagram .option3-instagram-button img{
+    width:16px !important;
+    height:16px !important;
+    flex:0 0 16px !important;
+    object-fit:contain !important;
+  }
+}
+</style></style></html>
