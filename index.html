@@ -10207,8 +10207,7 @@ async function publicGitHubReadJson(path){
   return {value,sha:d.sha};
 }
 async function githubReadJson(path){
-  const url="/repos/"+GITHUB_REPO+"/contents/"+path+"?ref="+encodeURIComponent(GITHUB_BRANCH)+"&cb="+Date.now()+"-"+Math.random().toString(36).slice(2);
-  const d=await githubRequest(url,{headers:{"Cache-Control":"no-cache","Pragma":"no-cache"}});
+  const d=await githubRequest("/repos/"+GITHUB_REPO+"/contents/"+path+"?ref="+encodeURIComponent(GITHUB_BRANCH));
   const content=atob(String(d.content||"").replace(/\n/g,""));
   return {value:JSON.parse(content),sha:d.sha};
 }
@@ -10352,22 +10351,15 @@ async function localApi(body){
     validateSettingsInput({...existing,...incoming});
     const merged={...existing,...incoming};
     if(String(incoming.whatsapp??"").trim()===""&&String(existing.whatsapp??"").trim()!=="") merged.whatsapp=existing.whatsapp;
-    let saved=false;
-    let lastWriteError=null;
-    for(let attempt=0;attempt<4&&!saved;attempt++){
-      try{
-        const source=attempt===0?current:await githubReadJson("data/settings.json");
-        const sourceValue=(source.value&&typeof source.value==="object")?source.value:{};
-        const next={...sourceValue,...incoming};
-        if(String(incoming.whatsapp??"").trim()===""&&String(sourceValue.whatsapp??"").trim()!=="") next.whatsapp=sourceValue.whatsapp;
-        await githubWriteJson("data/settings.json",next,source.sha,attempt===0?"Update shop settings":"Retry shop settings update");
-        saved=true;
-      }catch(writeError){
-        lastWriteError=writeError;
-        if(attempt<3) await new Promise(resolve=>setTimeout(resolve,250*(attempt+1)));
-      }
+    try{
+      await githubWriteJson("data/settings.json",merged,current.sha,"Update shop settings");
+    }catch(writeError){
+      const latest=await githubReadJson("data/settings.json");
+      const latestExisting=(latest.value&&typeof latest.value==="object")?latest.value:{};
+      const retryMerged={...latestExisting,...incoming};
+      if(String(incoming.whatsapp??"").trim()===""&&String(latestExisting.whatsapp??"").trim()!=="") retryMerged.whatsapp=latestExisting.whatsapp;
+      await githubWriteJson("data/settings.json",retryMerged,latest.sha,"Retry shop settings update");
     }
-    if(!saved) throw lastWriteError||new Error("Shop settings could not be saved.");
     return {ok:true};
   }
   if(body.action==="uploadImage"){
