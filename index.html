@@ -2194,6 +2194,16 @@ footer a{
     border-bottom:1px solid #E4D8C5 !important;
   }
 }
+
+/* ---------- Google Reviews: single authoritative CTA ---------- */
+#client-chronicles-section .option3-review-footer{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  width:100%;
+  margin:18px 0 0 !important;
+  padding:0;
+}
 #client-chronicles-section .lux3-text-link{
   display:inline-flex !important;
   align-items:center;
@@ -2761,6 +2771,26 @@ textarea{
 #shop .lux-wa-action:hover,#shop .lux-wa-action:focus-visible{background:#1C1917;border-color:#1C1917;color:#FAF8F5;outline:none}
 #shop .lux-empty{grid-column:1/-1;padding:52px 16px 62px;text-align:center;color:#78716C;font-family:"Inter","Montserrat",Arial,sans-serif;font-size:.8rem;line-height:1.6}
 @media(max-width:1100px){#shop .lux-product-grid{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:22px;row-gap:40px}}
+
+#instagram-editorial .option3-instagram-story{
+  max-width:390px !important;
+  margin:22px 0 0 auto !important;
+  color:rgba(36,31,27,.76) !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:11px !important;
+  line-height:1.75 !important;
+  font-weight:400 !important;
+  letter-spacing:.015em !important;
+  text-align:right !important;
+}
+
+  #instagram-editorial .option3-instagram-story{
+    max-width:310px !important;
+    margin:17px auto 0 !important;
+    font-size:10px !important;
+    line-height:1.7 !important;
+    text-align:center !important;
+  }
 
 @media(max-width:760px){
 #shop{padding:28px 14px 56px}
@@ -5435,7 +5465,82 @@ html,body{overflow-x:hidden!important;}
     min-width:0 !important;
     box-sizing:border-box !important;
     overflow-x:hidden !important;
-  }}.option3-store{
+  }}
+OPTION 3 — EDITORIAL LUXURY
+   Scoped exclusively to Reviews, Instagram and Store Details.
+   ========================================================= */
+.option3-reviews{
+  background:#FAF8F5 url("assets/reviews-bg.jpg") center/cover no-repeat;
+}
+.option3-reviews .lux3-inner{padding-top:68px;padding-bottom:62px}
+.option3-reviews .lux3-heading-center{margin-bottom:34px}
+.option3-review-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+  max-width:1080px;
+  margin:0 auto;
+}
+.option3-review-card{
+  position:relative;
+  min-height:250px;
+  padding:23px 24px 21px;
+  background:rgba(255,253,249,.96);
+  border:1px solid #E4D8C5;
+  box-shadow:0 10px 26px rgba(63,45,28,.055);
+  display:flex;
+  flex-direction:column;
+  transition:box-shadow .2s ease,transform .2s ease;
+}
+.option3-review-card:hover{box-shadow:0 14px 30px rgba(63,45,28,.08)}
+.option3-review-featured{transform:none;background:#FFFDF9}
+.option3-review-top{display:flex;align-items:center;gap:11px}
+.option3-review-top img{
+  width:44px;height:44px;border-radius:50%;object-fit:cover;
+  border:1px solid #D9C7AE;flex:0 0 44px;
+}
+.option3-review-top strong{
+  display:block;color:#2A2521;font:600 10px/1.25 "Montserrat",Arial,sans-serif;
+  letter-spacing:.035em;
+}
+.option3-stars{display:block;margin-top:5px;color:#A9804C;font:600 9px/1 "Montserrat",Arial,sans-serif;letter-spacing:.11em}
+.option3-quote{margin-top:20px;color:#B38E5D;font:400 40px/.5 Georgia,serif}
+.option3-review-card p{
+  margin:15px 0 16px;max-width:330px;color:#403A35;
+  font:400 20px/1.28 "Cormorant Garamond",Georgia,serif;
+}.option3-review-footer{
+  display:flex;align-items:center;justify-content:center;gap:26px;
+  margin-top:25px;
+}.option3-instagram{
+  position:relative;
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(360px,.94fr);
+  min-height:500px;background:#2A211B;color:#FFF9F0;
+  border-bottom:1px solid #E4D8C5;
+}.option3-instagram-copy{
+  position:relative;padding:64px 58px 72px;display:flex;flex-direction:column;
+  justify-content:center;background:#30251E;overflow:hidden;
+}
+.option3-instagram-copy:before{
+  content:"";position:absolute;inset:0;background:url("assets/instagram-bg.jpg") center/cover no-repeat;
+  opacity:.1;mix-blend-mode:screen;
+}
+.option3-instagram-copy>*{position:relative;z-index:1}
+.option3-instagram .lux3-eyebrow{color:#D9B982}
+.option3-instagram h2{
+  margin:0;font:400 clamp(44px,4.8vw,64px)/.92 "Cormorant Garamond",Georgia,serif;
+  letter-spacing:-.035em;
+}
+.option3-instagram-copy>p:not(.lux3-eyebrow){
+  max-width:370px;margin:17px 0 25px;color:#EBDDCF;
+  font:400 17px/1.48 "Cormorant Garamond",Georgia,serif;
+}
+.option3-instagram-button{
+  display:flex;align-items:center;gap:11px;width:240px;min-height:50px;
+  padding:0 15px;background:#E4D0AF;color:#211A15;text-decoration:none;
+  font:600 8.5px/1 "Montserrat",Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase;
+}
+.option3-instagram-button img{width:17px;height:17px;object-fit:contain}
+.option3-instagram-button span:last-child{margin-left:auto;font-size:13px;letter-spacing:0}.option3-store{
   display:grid;grid-template-columns:minmax(350px,.92fr) minmax(0,1.08fr);
   min-height:480px;background:#F2E9DC;
 }
@@ -5657,6 +5762,48 @@ HERO DEPLOYMENT SAFETY GUARD
   min-width:0;
 }
 
+#instagram-editorial .option3-instagram-button,
+#visit .option3-outline-button,
+#visit .option3-dark-button{
+  width:100%;
+  max-width:285px;
+  min-width:0;
+  min-height:48px;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+}
+
+#instagram-editorial .option3-instagram-button img,
+#visit .option3-outline-button img,
+#visit .option3-dark-button img{
+  width:18px !important;
+  height:18px !important;
+  min-width:18px !important;
+  max-width:18px !important;
+  min-height:18px !important;
+  max-height:18px !important;
+  flex:0 0 18px !important;
+  object-fit:contain !important;
+}
+
+#instagram-editorial .option3-instagram-button span:nth-of-type(1),
+#visit .option3-outline-button span:nth-of-type(1),
+#visit .option3-dark-button span:nth-of-type(1){
+  min-width:0;
+  flex:1 1 auto;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#instagram-editorial .option3-instagram-button span:last-child,
+#visit .option3-outline-button span:last-child,
+#visit .option3-dark-button span:last-child{
+  flex:0 0 auto;
+  margin-left:auto;
+}
+
 #visit .option3-store-block{
   min-width:0;
 }
@@ -5833,6 +5980,53 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 
+/* FINAL ICON ALIGNMENT: Reviews / Instagram / Store */
+/* Reviews */
+#client-chronicles-section .option3-review-top{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+}
+#client-chronicles-section .option3-review-top > img{
+  display:block !important;
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  max-width:44px !important;
+  min-height:44px !important;
+  max-height:44px !important;
+  flex:0 0 44px !important;
+  object-fit:cover !important;
+  border-radius:50% !important;
+}/* Instagram CTA icon */
+#instagram-editorial .option3-instagram-button{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+}
+#instagram-editorial .option3-instagram-button > img{
+  display:block !important;
+  width:18px !important;
+  height:18px !important;
+  min-width:18px !important;
+  max-width:18px !important;
+  min-height:18px !important;
+  max-height:18px !important;
+  flex:0 0 18px !important;
+  object-fit:contain !important;
+}
+#instagram-editorial .option3-instagram-button > span:nth-of-type(1){
+  min-width:0 !important;
+  flex:1 1 auto !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+  text-overflow:ellipsis !important;
+}
+#instagram-editorial .option3-instagram-button > span:last-child{
+  flex:0 0 auto !important;
+  margin-left:auto !important;
+}
+
 /* Store information icons */
 #visit .option3-store-icon{
   display:grid !important;
@@ -5897,6 +6091,16 @@ HERO DEPLOYMENT SAFETY GUARD
   #visit .option3-outline-button > img,
   #visit .option3-dark-button > img{width:18px !important;height:18px !important}
 }
+
+
+/* =========================================================
+   CALM BOUTIQUE POLISH: Reviews / Instagram / Store only
+   Functional behavior remains unchanged.
+   ========================================================= */
+#client-chronicles-section.option3-reviews{
+  background:#FAF8F5 !important;
+  padding:64px 24px 58px !important;
+}
 #client-chronicles-section .lux3-heading-center{margin-bottom:28px !important}
 #client-chronicles-section .lux3-eyebrow{color:#8B7765 !important;letter-spacing:.18em !important}
 #client-chronicles-section .lux3-heading h2{
@@ -5908,9 +6112,70 @@ HERO DEPLOYMENT SAFETY GUARD
   max-width:520px;
   margin-inline:auto;
 }
+#client-chronicles-section .option3-review-grid{
+  display:flex !important;
+  gap:14px !important;
+  max-width:960px !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  scroll-snap-type:x mandatory !important;
+  scroll-behavior:smooth !important;
+  scrollbar-width:none !important;
+}
+#client-chronicles-section .option3-review-grid::-webkit-scrollbar{display:none}
+#client-chronicles-section .option3-review-card{
+  flex:1 0 calc((100% - 28px)/3) !important;
+  min-height:224px !important;
+  padding:24px 22px 20px !important;
+  box-sizing:border-box !important;
+  background:#FFFDFC !important;
+  border:1px solid #E8DED2 !important;
+  border-radius:2px !important;
+  box-shadow:0 5px 20px rgba(45,38,31,.035) !important;
+  transform:none !important;
+}
+#client-chronicles-section .option3-review-card:hover{box-shadow:0 7px 22px rgba(45,38,31,.05) !important}
+#client-chronicles-section .option3-review-top strong{color:#332D28 !important}
+#client-chronicles-section .option3-stars{color:#B39A78 !important}
+#client-chronicles-section .option3-quote{color:#C2A989 !important;opacity:.8}
+#client-chronicles-section .option3-review-card p{color:#4F4841 !important}.ssv-review-dots{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:18px 0 18px;
+}
+.ssv-review-dots button{
+  width:7px;height:7px;padding:0;border:0;border-radius:50%;
+  background:#D8CEC2;cursor:pointer;transition:all .25s ease;
+}
+.ssv-review-dots button.active{width:22px;border-radius:8px;background:#8C7761}
+#client-chronicles-section .option3-review-footer{margin-top:0 !important}
 #client-chronicles-section .lux3-text-link{color:#62584F !important}
+
+#instagram-editorial.option3-instagram{
+  min-height:440px !important;
+  background:#463A32 !important;
+}#instagram-editorial .option3-instagram-copy{
+  padding:52px 52px 76px !important;
+  background:#463A32 !important;
+}
+#instagram-editorial .option3-instagram-copy:before{opacity:.055 !important}
 #instagram-editorial .lux3-eyebrow{color:#D5C2A8 !important}
-#instagram-editorial h2{font-size:clamp(40px,4.2vw,56px) !important}#visit.option3-store{
+#instagram-editorial h2{font-size:clamp(40px,4.2vw,56px) !important}
+#instagram-editorial .option3-instagram-copy>p:not(.lux3-eyebrow){
+  color:#E5DDD5 !important;
+  margin:14px 0 19px !important;
+}
+#instagram-editorial .option3-instagram-button{
+  width:220px !important;
+  min-height:46px !important;
+  background:#E7DCCF !important;
+  color:#332B25 !important;
+  border:1px solid rgba(255,255,255,.15);
+}#visit.option3-store{
   min-height:440px !important;
   background:#F4EEE6 !important;
 }
@@ -5998,6 +6263,40 @@ HERO DEPLOYMENT SAFETY GUARD
   #visit .option3-store-actions{grid-template-columns:1fr !important;gap:9px !important}
 }
 
+
+/* =========================================================
+   SECTION BACKGROUNDS: uploaded calm-premium editorial set
+   ========================================================= */
+#client-chronicles-section.option3-reviews{
+  position:relative !important;
+  isolation:isolate !important;
+  background-color:#FAF8F5 !important;
+  background-image:linear-gradient(rgba(250,248,245,.62),rgba(250,248,245,.70)),url('assets/file_000000006eb482118bd2d6baebd10ffa.png') !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}
+#client-chronicles-section .lux3-heading-center,
+#client-chronicles-section .option3-review-grid,
+#client-chronicles-section .ssv-review-dots,
+#client-chronicles-section .option3-review-footer{
+  position:relative !important;
+  z-index:1 !important;
+}
+#client-chronicles-section .option3-review-card{
+  background:rgba(255,253,250,.94) !important;
+  backdrop-filter:blur(2px) !important;
+}
+
+#instagram-editorial.option3-instagram{
+  position:relative !important;
+  isolation:isolate !important;
+  background:#463A32 !important;
+}#instagram-editorial .option3-instagram-copy{
+  background:rgba(70,58,50,.72) !important;
+  backdrop-filter:blur(1px) !important;
+}
+
 #visit.option3-store{
   position:relative !important;
   isolation:isolate !important;
@@ -6021,12 +6320,45 @@ HERO DEPLOYMENT SAFETY GUARD
   }#visit .option3-store-media{
     background-position:center center !important;
   }
+}
+
+
+/* Final background-layer cleanup: keep exactly one intentional background per section */
+.option3-instagram-copy:before{display:none !important;background:none !important;content:none !important;}/* Explicit final background rules. These intentionally come last. */
+#client-chronicles-section.option3-reviews{
+  background-image:linear-gradient(rgba(250,248,245,.62),rgba(250,248,245,.70)),url('assets/file_000000006eb482118bd2d6baebd10ffa.png') !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
 }#visit .option3-store-media{
   background-image:linear-gradient(rgba(92,69,48,.02),rgba(92,69,48,.02)),url('assets/file_00000000234c8211a78f686ca707019f.png') !important;
   background-color:#E8DDD0 !important;
   background-size:cover !important;
   background-position:center !important;
   background-repeat:no-repeat !important;
+}
+
+
+/* =========================================================
+   TRUE FULL-BLEED BACKGROUNDS
+   Instagram + Store Details
+   The uploaded artwork belongs to the entire section,
+   not a left-side media panel.
+   ========================================================= */
+#instagram-editorial.option3-instagram{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1.06fr) minmax(360px,.94fr) !important;
+  min-height:500px !important;
+  background-image:linear-gradient(rgba(42,33,27,.18),rgba(42,33,27,.22)),url('assets/file_00000000aa7c8211ac409c2f449a68fb.png') !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}#instagram-editorial .option3-instagram-copy{
+  grid-column:2 !important;
+  background:rgba(48,37,30,.72) !important;
+  backdrop-filter:blur(2px) !important;
+  -webkit-backdrop-filter:blur(2px) !important;
 }#visit.option3-store{
   position:relative !important;
   display:grid !important;
@@ -6290,6 +6622,98 @@ HERO DEPLOYMENT SAFETY GUARD
   border-bottom:1px solid #E4D8C5 !important;
   overflow:hidden !important;
   text-align:right !important;
+}#instagram-editorial .option3-instagram-copy{
+  position:relative !important;
+  
+  min-height:560px !important;
+  box-sizing:border-box !important;
+  padding:72px clamp(34px,7vw,110px) !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:center !important;
+  background:rgba(250,248,245,.62) !important;
+  overflow:hidden !important;
+  text-align:right !important;
+}
+
+#instagram-editorial .option3-instagram-copy:before,
+#instagram-editorial .option3-instagram-copy:after{
+  display:none !important;
+}
+
+#instagram-editorial .option3-instagram .lux3-eyebrow,
+#instagram-editorial .lux3-eyebrow{
+  margin:0 0 18px !important;
+  color:#8A6A3E !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:9px !important;
+  line-height:1.2 !important;
+  font-weight:600 !important;
+  letter-spacing:.27em !important;
+  text-transform:uppercase !important;
+}
+
+#instagram-editorial .option3-instagram-copy h2{
+  max-width:430px !important;
+  margin:0 0 0 auto !important;
+  color:#1C1917 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:clamp(48px,5vw,70px) !important;
+  line-height:.94 !important;
+  font-weight:400 !important;
+  letter-spacing:-.035em !important;
+}
+
+#instagram-editorial .option3-instagram-button{
+  width:235px !important;
+  min-width:235px !important;
+  min-height:50px !important;
+  height:50px !important;
+  box-sizing:border-box !important;
+  margin:30px 0 0 auto !important;
+  padding:0 15px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:11px !important;
+  background:transparent !important;
+  border:1px solid #E4D8C5 !important;
+  color:#241F1B !important;
+  box-shadow:none !important;
+  text-decoration:none !important;
+  font-family:"Montserrat",Arial,sans-serif !important;
+  font-size:8px !important;
+  line-height:1 !important;
+  font-weight:600 !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  transition:background .2s ease,color .2s ease,border-color .2s ease !important;
+}
+
+#instagram-editorial .option3-instagram-button:hover{
+  background:#241F1B !important;
+  border-color:#241F1B !important;
+  color:#FAF8F5 !important;
+}
+
+#instagram-editorial .option3-instagram-button img{
+  width:17px !important;
+  height:17px !important;
+  min-width:17px !important;
+  min-height:17px !important;
+  object-fit:contain !important;
+}
+
+#instagram-editorial .option3-instagram-button span:nth-child(2){
+  font-size:8px !important;
+  letter-spacing:.18em !important;
+}
+
+#instagram-editorial .option3-instagram-button span:last-child{
+  margin-left:auto !important;
+  font-size:13px !important;
+  letter-spacing:0 !important;
 }@media(max-width:760px){
   #instagram-editorial{
     display:block !important;
@@ -6333,6 +6757,11 @@ HERO DEPLOYMENT SAFETY GUARD
     linear-gradient(rgba(250,248,245,.96),rgba(250,248,245,.96)),
     url("assets/section-bg-linen.jpg") center/cover no-repeat !important;
 }
+#instagram-editorial .option3-instagram-copy{
+  width:100% !important;
+  min-height:420px !important;
+  box-sizing:border-box !important;
+}
 /* FINAL INSTAGRAM + STORE DETAILS POLISH
    Visual-only overrides. Existing links, map, WhatsApp and catalog logic untouched. */
 #instagram-editorial{
@@ -6342,11 +6771,52 @@ HERO DEPLOYMENT SAFETY GUARD
   border-bottom:1px solid #E4D8C5 !important;
   text-align:center !important;
 }
+#instagram-editorial .option3-instagram-copy{
+  min-height:440px !important;
+  padding:68px 24px 62px !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:transparent !important;
+  text-align:center !important;
+}
 #instagram-editorial .lux3-eyebrow{
   margin:0 0 13px !important;
   color:#9A7748 !important;
   font-size:9px !important;
   letter-spacing:.27em !important;
+}
+#instagram-editorial .option3-instagram-copy h2{
+  max-width:620px !important;
+  margin:0 auto !important;
+  color:#1C1917 !important;
+  font-size:clamp(44px,5.2vw,68px) !important;
+  line-height:.94 !important;
+  letter-spacing:-.035em !important;
+}
+#instagram-editorial .option3-instagram-story{
+  max-width:430px !important;
+  margin:18px auto 0 !important;
+  color:#706963 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:18px !important;
+  line-height:1.35 !important;
+  font-style:italic !important;
+  text-align:center !important;
+}
+#instagram-editorial .option3-instagram-button{
+  width:220px !important;
+  min-width:220px !important;
+  height:46px !important;
+  min-height:46px !important;
+  margin:25px auto 0 !important;
+  background:#FAF8F5 !important;
+  border:1px solid #D8C8B4 !important;
+  color:#1C1917 !important;
+  box-shadow:none !important;
+}
+#instagram-editorial .option3-instagram-button:hover{
+  background:#1C1917 !important;
+  color:#FAF8F5 !important;
 }#visit.option3-store{
   grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr) !important;
   min-height:500px !important;
@@ -6497,6 +6967,19 @@ HERO DEPLOYMENT SAFETY GUARD
   background-size:cover !important;
   background-position:center !important;
   color:#1C1917 !important;
+}#instagram-editorial .option3-instagram-copy{
+  grid-column:1 / -1 !important;
+  min-height:430px !important;
+  padding:70px 24px 72px !important;
+  background:transparent !important;
+  color:#1C1917 !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+#instagram-editorial .option3-instagram-copy:before{
+  display:none !important;
+  content:none !important;
 }
 #instagram-editorial .lux3-eyebrow{
   color:#8B6B43 !important;
@@ -6516,6 +6999,32 @@ HERO DEPLOYMENT SAFETY GUARD
   line-height:.98 !important;
   letter-spacing:-.035em !important;
 }
+#instagram-editorial .option3-instagram-story{
+  max-width:440px !important;
+  margin:18px auto 28px !important;
+  color:#706963 !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:18px !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  line-height:1.35 !important;
+  letter-spacing:0 !important;
+  text-align:center !important;
+}
+#instagram-editorial .option3-instagram-button{
+  width:100% !important;
+  max-width:285px !important;
+  min-height:50px !important;
+  margin:0 auto !important;
+  background:#FFFDF9 !important;
+  border:1px solid #D8C9B6 !important;
+  color:#29231F !important;
+  font-family:"Montserrat","Inter",Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:600 !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+}
 @media(max-width:760px){
   #instagram-editorial .option3-instagram-copy{
     min-height:390px !important;
@@ -6530,6 +7039,11 @@ HERO DEPLOYMENT SAFETY GUARD
     margin-top:16px !important;
     font-size:17px !important;
   }
+}#instagram-editorial .option3-instagram-copy:before,
+#instagram-editorial .option3-instagram-copy:after{
+  display:none !important;
+  content:none !important;
+  background:none !important;
 }#instagram-editorial .lux3-eyebrow,
 #instagram-editorial .drape-editorial-eyebrow{
   display:block !important;
@@ -6550,6 +7064,10 @@ HERO DEPLOYMENT SAFETY GUARD
   background-size:cover !important;
   background-position:center !important;
   background-repeat:no-repeat !important;
+}
+#instagram-editorial.instagram-light-saree .option3-instagram-copy{
+  background:transparent !important;
+  background-image:none !important;
 }
 
 /* STORE DETAILS: CASE 2 - ARCHITECTURAL EDITORIAL */
@@ -7610,11 +8128,19 @@ HERO DEPLOYMENT SAFETY GUARD
 /* Store Details: single action after removing duplicate WhatsApp CTA */
 #visit.option3-store .option3-store-actions{display:block!important;width:100%!important;}
 #visit.option3-store .option3-store-actions .option3-outline-button{width:100%!important;box-sizing:border-box!important;}
+
+/* TIGHT SECTION JOIN: Customer Voices -> Instagram */
+#client-chronicles-section.option3-reviews{
+  margin-bottom:0 !important;
+}
 @media(max-width:760px){
   #client-chronicles-section.option3-reviews,
   #client-chronicles-section.option3-reviews .lux3-inner{
     padding-bottom:0 !important;
   }
+}
+#instagram-editorial.option3-instagram{
+  margin-top:0 !important;
 }
 
 /* FINAL MOBILE REVIEWS -> INSTAGRAM OVERRIDE */
@@ -7626,6 +8152,56 @@ HERO DEPLOYMENT SAFETY GUARD
   border-bottom:0!important;
   margin-top:0!important;
   margin-bottom:0!important;
+}
+
+#client-chronicles-section .lux3-review-footer,
+#client-chronicles-section .option3-review-footer{
+  margin:0!important;
+}
+
+#client-chronicles-section .ssv-review-dots{
+  margin:8px 0!important;
+  padding:0!important;
+  line-height:1!important;
+}
+
+#client-chronicles-section .option3-review-footer{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  padding:0!important;
+}
+
+#instagram-editorial .option3-instagram-copy{
+  margin:0!important;
+  text-align:center!important;
+}
+
+#client-chronicles-section .lux3-text-link,
+#instagram-editorial .option3-instagram-button{
+  width:100%!important;
+  max-width:320px!important;
+  height:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  margin:0 auto!important;
+  padding:0 18px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  border:1px solid #E4D8C5!important;
+  border-radius:2px!important;
+  background:rgba(255,255,255,.55)!important;
+  color:#1C1917!important;
+  font-family:"Montserrat","Inter",Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  letter-spacing:.12em!important;
+  line-height:1!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
 }
 
 @media(max-width:760px){
@@ -7700,6 +8276,74 @@ HERO DEPLOYMENT SAFETY GUARD
     flex:0 0 16px!important;
     object-fit:contain!important;
   }
+}
+
+
+/* =========================================================
+   FINAL UX ARCHITECT PASS
+   Reviews -> Instagram mobile transition
+   Visual/CSS only. No JS, admin, catalog or links changed.
+   ========================================================= */
+
+/* One shared editorial surface for both sections */
+#client-chronicles-section.option3-reviews,
+#instagram-editorial.option3-instagram{
+  background-color:#FAF8F5 !important;
+  background-image:
+    linear-gradient(180deg,rgba(250,248,245,.72) 0%,rgba(250,248,245,.84) 55%,rgba(250,248,245,.94) 100%),
+    url("assets/reviews-bg.jpg") !important;
+  background-size:cover !important;
+  background-position:center center !important;
+  background-repeat:no-repeat !important;
+  border-top:0 !important;
+  border-bottom:0 !important;
+  margin-top:0 !important;
+}
+
+/* Reviews: remove the artificial vertical stretch */
+#client-chronicles-section.option3-reviews .option3-review-grid{
+  align-items:flex-start !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-card,
+#client-chronicles-section.option3-reviews .option3-review-featured{
+  height:auto !important;
+  align-self:flex-start !important;
+}
+
+/* Dots and CTA belong directly to the carousel */
+#client-chronicles-section.option3-reviews .ssv-review-dots{
+  margin:8px 0 10px !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-footer{
+  margin:0 !important;
+  padding:0 !important;
+}
+
+/* Instagram begins as the same visual canvas, not a new white panel */
+#instagram-editorial.option3-instagram{
+  min-height:0 !important;
+}
+#instagram-editorial .option3-instagram-copy{
+  background:transparent !important;
+  border:0 !important;
+}
+
+/* Exact CTA geometry */
+#client-chronicles-section.option3-reviews .lux3-text-link,
+#instagram-editorial .option3-instagram-button{
+  width:320px !important;
+  max-width:calc(100vw - 32px) !important;
+  height:48px !important;
+  min-height:48px !important;
+  max-height:48px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  box-sizing:border-box !important;
+  border:1px solid #D8C8B4 !important;
+  background:rgba(250,248,245,.78) !important;
+  color:#1C1917 !important;
+  box-shadow:none !important;
+  border-radius:2px !important;
 }
 
 /* Mobile: one clean review per viewport, no awkward partial card */
@@ -7963,6 +8607,32 @@ HERO DEPLOYMENT SAFETY GUARD
   }
 }
 
+#client-chronicles-section.option3-reviews,
+#instagram-editorial.option3-instagram{
+  border-top:0 !important;
+  border-bottom:0 !important;
+}
+
+
+/* AUTHORITATIVE MOBILE FIX: Customer Voices -> Instagram */
+/* =========================================================
+   AUTHORITATIVE MOBILE FIX
+   Customer Voices -> Instagram
+   This block intentionally overrides the older review passes.
+   ========================================================= */
+#client-chronicles-section.option3-reviews,
+#instagram-editorial.option3-instagram{
+  margin:0 !important;
+  border:0 !important;
+  background-color:#FAF8F5 !important;
+  background-image:
+    linear-gradient(180deg,rgba(250,248,245,.62) 0%,rgba(250,248,245,.82) 55%,rgba(250,248,245,.96) 100%),
+    url("assets/reviews-bg.jpg") !important;
+  background-size:cover !important;
+  background-position:center top !important;
+  background-repeat:no-repeat !important;
+}
+
 @media(max-width:760px){
   /* Reviews section has no hidden bottom padding. */
   #client-chronicles-section.option3-reviews{
@@ -8129,6 +8799,176 @@ HERO DEPLOYMENT SAFETY GUARD
 }
 </style>
 <style id="reviews-instagram-final">
+/* =========================================================
+   FINAL MOBILE UX FIX
+   Customer Voices -> Instagram
+   Scoped to these two sections only.
+   ========================================================= */
+
+#client-chronicles-section.option3-reviews,
+#instagram-editorial.option3-instagram{
+  margin:0 !important;
+  border:0 !important;
+  background-color:#FAF8F5 !important;
+  background-image:
+    linear-gradient(180deg,rgba(250,248,245,.62) 0%,rgba(250,248,245,.84) 55%,rgba(250,248,245,.96) 100%),
+    url("assets/reviews-bg.jpg") !important;
+  background-size:cover !important;
+  background-position:center center !important;
+  background-repeat:no-repeat !important;
+  box-sizing:border-box !important;
+}
+
+/* Reviews: let the content determine the section height. */
+#client-chronicles-section.option3-reviews{
+  padding:48px 24px 0 !important;
+  overflow:hidden !important;
+}
+#client-chronicles-section.option3-reviews .lux3-inner{
+  width:min(1080px,100%) !important;
+  max-width:none !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+}
+#client-chronicles-section.option3-reviews .lux3-heading-center{
+  margin:0 0 22px !important;
+}
+
+/* Carousel: no artificial height or bottom whitespace. */
+#client-chronicles-section.option3-reviews .option3-review-grid{
+  display:flex !important;
+  width:100% !important;
+  max-width:none !important;
+  height:auto !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  gap:12px !important;
+  align-items:flex-start !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  scroll-snap-type:x mandatory !important;
+  scrollbar-width:none !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-grid::-webkit-scrollbar{
+  display:none !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-card,
+#client-chronicles-section.option3-reviews .option3-review-featured{
+  box-sizing:border-box !important;
+  align-self:flex-start !important;
+  transform:none !important;
+}
+
+/* Mobile review cards are compact and equal-height. */
+#client-chronicles-section.option3-reviews .option3-review-card{
+  flex:0 0 100% !important;
+  width:100% !important;
+  min-width:100% !important;
+  max-width:100% !important;
+  height:230px !important;
+  min-height:230px !important;
+  max-height:230px !important;
+  padding:20px 18px !important;
+  overflow:hidden !important;
+  scroll-snap-align:start !important;
+}
+#client-chronicles-section.option3-reviews .option3-review-card p{
+  margin:12px auto 0 !important;
+  max-width:100% !important;
+  font-size:18px !important;
+  line-height:1.32 !important;
+}
+#client-chronicles-section.option3-reviews .option3-quote{
+  margin-top:12px !important;
+  font-size:34px !important;
+  line-height:.5 !important;
+}
+
+/* Dots directly under the review card. */
+#client-chronicles-section.option3-reviews .ssv-review-dots{
+  height:10px !important;
+  margin:8px 0 8px !important;
+  padding:0 !important;
+  line-height:0 !important;
+}
+
+/* Google CTA directly under the dots. */
+#client-chronicles-section.option3-reviews .option3-review-footer{
+  display:flex !important;
+  width:100% !important;
+  margin:0 !important;
+  padding:0 0 0 !important;
+  justify-content:center !important;
+  align-items:center !important;
+}
+
+/* Exact same CTA geometry for both buttons. */
+#client-chronicles-section.option3-reviews .lux3-text-link,
+#instagram-editorial.option3-instagram .option3-instagram-button{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:320px !important;
+  max-width:calc(100vw - 32px) !important;
+  min-width:0 !important;
+  height:48px !important;
+  min-height:48px !important;
+  max-height:48px !important;
+  margin:0 auto !important;
+  padding:0 18px !important;
+  box-sizing:border-box !important;
+  border:1px solid #D8C8B4 !important;
+  border-radius:2px !important;
+  background:rgba(255,255,255,.58) !important;
+  color:#1C1917 !important;
+  box-shadow:none !important;
+  line-height:1 !important;
+}
+
+/* Instagram starts immediately after the Reviews CTA. */
+#instagram-editorial.option3-instagram{
+  min-height:0 !important;
+  padding:0 !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-copy{
+  width:100% !important;
+  min-height:0 !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:12px 16px 54px !important;
+  box-sizing:border-box !important;
+  background:transparent !important;
+  border:0 !important;
+  text-align:center !important;
+  justify-content:flex-start !important;
+}
+#instagram-editorial.option3-instagram .lux3-eyebrow{
+  margin:0 0 8px !important;
+}
+#instagram-editorial.option3-instagram h2{
+  margin:0 auto !important;
+  max-width:330px !important;
+  font-size:40px !important;
+  line-height:1 !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-story{
+  margin:13px auto 0 !important;
+  max-width:330px !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-button{
+  margin:20px auto 0 !important;
+}
+#instagram-editorial.option3-instagram .option3-instagram-button img{
+  width:16px !important;
+  height:16px !important;
+  min-width:16px !important;
+  min-height:16px !important;
+  flex:0 0 16px !important;
+  object-fit:contain !important;
+}
 
 @media(min-width:761px){
   #client-chronicles-section.option3-reviews{
@@ -8183,183 +9023,6 @@ HERO DEPLOYMENT SAFETY GUARD
 }
 
 </style>
-
-<style id="reviews-instagram-alignment-final">
-/* Reviews + Instagram: single alignment authority */
-#client-chronicles-section.option3-reviews,
-#instagram-editorial.option3-instagram{
-  width:100% !important;
-  margin:0 !important;
-  box-sizing:border-box !important;
-  overflow:hidden !important;
-}
-
-#client-chronicles-section.option3-reviews{
-  padding:0 !important;
-}
-
-#client-chronicles-section.option3-reviews .lux3-inner{
-  width:100% !important;
-  max-width:1180px !important;
-  margin:0 auto !important;
-  padding:0 24px !important;
-  box-sizing:border-box !important;
-}
-
-#client-chronicles-section.option3-reviews .option3-review-grid{
-  width:100% !important;
-  margin:0 auto !important;
-  padding:0 !important;
-  display:grid !important;
-  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-  gap:18px !important;
-  align-items:stretch !important;
-}
-
-#client-chronicles-section.option3-reviews .option3-review-card{
-  width:100% !important;
-  height:auto !important;
-  min-height:0 !important;
-  max-height:none !important;
-  margin:0 !important;
-  box-sizing:border-box !important;
-  align-self:stretch !important;
-}
-
-#client-chronicles-section.option3-reviews .ssv-review-dots{
-  display:flex !important;
-  justify-content:center !important;
-  align-items:center !important;
-  width:100% !important;
-  margin:16px auto 0 !important;
-}
-
-#client-chronicles-section.option3-reviews .option3-review-footer{
-  width:100% !important;
-  margin:18px auto 0 !important;
-  display:flex !important;
-  justify-content:center !important;
-}
-
-#client-chronicles-section.option3-reviews .lux3-text-link,
-#instagram-editorial.option3-instagram .option3-instagram-button{
-  width:320px !important;
-  max-width:calc(100vw - 32px) !important;
-  height:48px !important;
-  min-height:48px !important;
-  max-height:48px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  box-sizing:border-box !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-}
-
-#instagram-editorial.option3-instagram{
-  padding:0 !important;
-  text-align:center !important;
-}
-
-#instagram-editorial.option3-instagram .option3-instagram-copy{
-  width:100% !important;
-  max-width:100% !important;
-  min-height:0 !important;
-  height:auto !important;
-  margin:0 !important;
-  padding:12px 24px 54px !important;
-  box-sizing:border-box !important;
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:flex-start !important;
-  text-align:center !important;
-  background:transparent !important;
-  border:0 !important;
-}
-
-#instagram-editorial.option3-instagram .lux3-eyebrow{
-  margin:0 0 9px !important;
-  text-align:center !important;
-}
-
-#instagram-editorial.option3-instagram h2{
-  width:100% !important;
-  max-width:620px !important;
-  margin:0 auto !important;
-  text-align:center !important;
-}
-
-#instagram-editorial.option3-instagram .option3-instagram-story{
-  width:100% !important;
-  max-width:560px !important;
-  margin:16px auto 0 !important;
-  text-align:center !important;
-}
-
-#instagram-editorial.option3-instagram .option3-instagram-button{
-  margin-top:24px !important;
-}
-
-@media(max-width:760px){
-  #client-chronicles-section.option3-reviews .lux3-inner{
-    padding:0 16px !important;
-  }
-
-  #client-chronicles-section.option3-reviews .option3-review-grid{
-    grid-template-columns:1fr !important;
-    gap:0 !important;
-  }
-
-  #client-chronicles-section.option3-reviews .option3-review-card{
-    width:100% !important;
-    height:auto !important;
-    min-height:224px !important;
-    max-height:none !important;
-  }
-
-  #client-chronicles-section.option3-reviews .ssv-review-dots{
-    margin-top:16px !important;
-  }
-
-  #client-chronicles-section.option3-reviews .option3-review-footer{
-    margin-top:18px !important;
-  }
-
-  #instagram-editorial.option3-instagram .option3-instagram-copy{
-    padding:10px 16px 48px !important;
-  }
-
-  #instagram-editorial.option3-instagram h2{
-    max-width:330px !important;
-    font-size:42px !important;
-    line-height:.98 !important;
-  }
-
-  #instagram-editorial.option3-instagram .option3-instagram-story{
-    max-width:340px !important;
-    margin-top:16px !important;
-  }
-
-  #instagram-editorial.option3-instagram .option3-instagram-button{
-    width:100% !important;
-    max-width:320px !important;
-    margin-top:22px !important;
-  }
-}
-
-@media(max-width:380px){
-  #client-chronicles-section.option3-reviews .option3-review-card{
-    min-height:224px !important;
-  }
-
-  #instagram-editorial.option3-instagram h2{
-    max-width:310px !important;
-    font-size:40px !important;
-  }
-}
-</style>
-
 </head>
 <script>
 (function(){
