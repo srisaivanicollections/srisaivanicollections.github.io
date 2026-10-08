@@ -17,7 +17,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;padding-top:72px;background:var(--paper);color:var(--ink);font-family:"Inter",Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img{max-width:100%}
 a,button{font:inherit}
 #shop input,#shop select{font:inherit}
@@ -25,7 +25,7 @@ button{cursor:pointer}
 a:focus-visible,button:focus-visible,#shop input:focus-visible,#shop select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 /* Header */
-.header{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.header{position:fixed;top:0;left:0;right:0;width:100%;z-index:1000;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .header-inner{width:min(var(--container),100%);min-height:72px;margin:auto;padding:0 34px;display:flex;align-items:center;gap:32px}
 .brand{display:flex;align-items:center;min-width:0;flex:1;color:var(--ink);text-decoration:none}
 .brand b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;line-height:.85;letter-spacing:.12em;font-weight:500}
