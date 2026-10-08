@@ -47,7 +47,7 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 }
 
 /* Shared */
-.catalog,.reviews,footer{width:min(var(--container),100%);margin-inline:auto}
+.catalog,footer{width:min(var(--container),100%);margin-inline:auto}
 .catalog{padding:80px 34px 76px;border-bottom:1px solid var(--line)}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;margin-bottom:34px}
 .eyebrow{margin:0;color:var(--muted);font-size:9px;line-height:1.2;letter-spacing:.21em;font-weight:700}
@@ -88,15 +88,7 @@ nav a:not(.shop-link):hover{color:var(--accent)}
 .image-missing{display:grid;place-items:center}
 .image-missing:after{content:"Image unavailable";color:var(--muted);font-size:11px}
 
-/* WhatsApp */
-.wa-band{width:min(var(--container),100%);margin:0 auto;border-bottom:1px solid rgba(255,255,255,.12);background:var(--ink);color:var(--paper);padding:56px 8%;display:flex;align-items:center;justify-content:space-between;gap:48px}
-.wa-band .eyebrow{color:var(--gold)}
-.wa-band h2{margin:8px 0 7px;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(40px,4.2vw,58px);font-weight:500;line-height:1;letter-spacing:-.035em}
-.wa-band p:last-child{max-width:430px;margin:0;color:#d8d0c9;font-size:12px;line-height:1.7}
-.wa-btn{display:flex;align-items:center;justify-content:center;gap:18px;padding:15px 19px;border:1px solid var(--paper);color:var(--paper);text-decoration:none;font-size:9px;letter-spacing:.15em;white-space:nowrap;transition:background .2s ease,border-color .2s ease}
-.wa-btn:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.wa-btn svg{width:19px;height:19px;fill:currentColor}
-.wa-btn b{font-size:16px;font-weight:400}
+
 
 /* Footer */
 footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px}
@@ -181,7 +173,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
 /* Tablet */
 @media(max-width:1100px){
   .header-inner{padding-inline:26px}
-  .catalog,.reviews,footer{padding-left:26px;padding-right:26px}
+  .catalog,footer{padding-left:26px;padding-right:26px}
   #shop .products{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
@@ -196,7 +188,7 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   .section-head{display:block}
   .section-head>p{margin-top:20px}
   #shop .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 14px}
-  .wa-band{padding:48px 7%}
+
 }
 
 /* Small mobile */
@@ -223,14 +215,8 @@ footer{padding:40px 34px;border-top:1px solid var(--line);display:flex;justify-c
   #shop .price del{font-size:10px}
   .wa-mini{min-height:32px;padding:8px 10px}
   .wa-icon{width:15px;height:15px}
-  .wa-band{display:block;margin-top:0;padding:38px 18px 40px}
-  .wa-band h2{margin:8px 0 7px;font-size:38px;line-height:1.02}
-  .wa-band p:last-child{max-width:330px;font-size:11px;line-height:1.6}
-  .wa-btn{width:100%;min-height:60px;margin-top:21px;padding:14px 16px;justify-content:space-between}
-  .wa-btn svg{width:22px;height:22px}
-  .reviews{padding:52px 16px 50px}
-  .reviews .section-head{margin-bottom:27px}
-  .reviews .section-head h2{font-size:clamp(40px,12vw,56px)}
+
+
   .text-btn{width:100%;min-height:45px;margin-top:19px}
   .review-grid{grid-template-columns:1fr;gap:9px}
   .review-grid article{min-height:0;padding:20px 18px}
@@ -2730,7 +2716,6 @@ textarea{
 .section-head h2,
 .shop-header h1,
 #shop .product-info h3,
-.wa-band h2,
 .cc-title,
 .drape-editorial-title,
 .atelier-title,
@@ -2804,7 +2789,6 @@ nav a,
 /* Consistent section support copy */
 .hero-description,
 .section-head>p,
-.wa-band p:last-child,
 .cc-subtitle,
 .drape-editorial-text,
 .atelier-desc,
@@ -4050,13 +4034,6 @@ nav a,
 }
 #shop{
   border-top:0 !important;
-}
-#shop + .wa-band,
-#shop + .whatsapp-banner-section{
-  border-top:0 !important;
-}
-#shop + .wa-band{
-  border-bottom:0 !important;
 }
 #client-chronicles-section{
   border-top:0 !important;
