@@ -9849,7 +9849,8 @@ if(mobileHeaderWhatsApp){
   mobileHeaderWhatsApp.addEventListener("click",function(e){
     const n=typeof waNumber==="function"?waNumber():"";
     if(!n){e.preventDefault();return;}
-    this.href="https://wa.me/"+n;
+    const message="Hi Sri Sai Vani, I would like to know about your saree and dress collections.";
+    this.href="https://wa.me/"+n+"?text="+encodeURIComponent(message);
   });
 }
 let adminSessionActive=false;
