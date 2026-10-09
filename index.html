@@ -4557,6 +4557,17 @@ footer .brand b{
   .header nav:not(.open) .admin-link{display:none !important;}
   .header nav.open .admin-link{display:block !important;}
 }
+/* Mobile header: keep the brand and menu only; links remain in the expanded menu. */
+@media(max-width:600px){
+  .header nav:not(.open) .shop-link,
+  .header nav:not(.open) a[href*="instagram.com"]{
+    display:none !important;
+  }
+  .header nav.open .shop-link,
+  .header nav.open a[href*="instagram.com"]{
+    display:none !important;
+  }
+}
 /* Search and sort controls: matching height, border, radius and visual weight on every viewport. */
 #shop .tools{
   display:flex !important;
