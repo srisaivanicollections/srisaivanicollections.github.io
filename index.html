@@ -4557,6 +4557,64 @@ footer .brand b{
   .header nav:not(.open) .admin-link{display:none !important;}
   .header nav.open .admin-link{display:block !important;}
 }
+/* Search and sort controls: matching height, border, radius and visual weight on every viewport. */
+#shop .tools{
+  display:flex !important;
+  align-items:stretch !important;
+  gap:12px !important;
+  width:100% !important;
+}
+#shop .search,
+#shop .tools select{
+  box-sizing:border-box !important;
+  height:44px !important;
+  min-height:44px !important;
+  border:1px solid #DCCFBC !important;
+  border-radius:0 !important;
+  background:#FBF9F6 !important;
+  color:#292521 !important;
+  box-shadow:none !important;
+  font:400 14px/1.2 inherit !important;
+}
+#shop .search{
+  flex:1 1 0 !important;
+  width:auto !important;
+  min-width:0 !important;
+  padding:0 14px !important;
+}
+#shop .search input{
+  box-sizing:border-box !important;
+  min-width:0 !important;
+  height:100% !important;
+  font-size:14px !important;
+  line-height:1.2 !important;
+}
+#shop .tools select{
+  flex:0 0 34% !important;
+  width:34% !important;
+  min-width:0 !important;
+  padding:0 12px !important;
+  font-size:14px !important;
+  line-height:1.2 !important;
+}
+#shop .search:focus-within,
+#shop .tools select:focus{
+  outline:none !important;
+  border-color:#BDA57C !important;
+  box-shadow:0 0 0 2px rgba(189,165,124,.12) !important;
+}
+@media(max-width:900px){
+  #shop .tools{gap:12px !important;width:100% !important;}
+  #shop .search{flex:1 1 0 !important;width:auto !important;}
+  #shop .tools select{flex:0 0 34% !important;width:34% !important;}
+}
+@media(max-width:600px){
+  #shop .search,
+  #shop .tools select{height:44px !important;min-height:44px !important;font-size:13px !important;}
+  #shop .search input{font-size:13px !important;}
+  #shop .tools select{padding:0 9px !important;}
+}
+
 /* Consistent navigation: all three links use plain text styling, no mixed decorations. */
 .header nav{
   display:flex !important;
