@@ -8647,13 +8647,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 @media(prefers-reduced-motion:reduce){#ssv-page-loader .ssv-loader-track span{animation:none;width:70%}#ssv-page-loader{transition:none}}
 </style>
 
-<style id="ssv-connection-status-style">
-#ssv-connection-status{position:sticky;top:0;z-index:10000;display:flex;align-items:center;justify-content:center;gap:8px;min-height:27px;padding:4px 12px;box-sizing:border-box;font:600 12px/1.2 Inter,Arial,sans-serif;letter-spacing:.035em;color:#fff;background:#18794e;transition:background-color .2s ease}
-#ssv-connection-status::before{content:"";width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 2px rgba(255,255,255,.2)}
-#ssv-connection-status[data-state="offline"]{background:#b42318}
-#ssv-connection-status[data-state="checking"]{background:#8a5a00}
-@media(prefers-reduced-motion:reduce){#ssv-connection-status{transition:none}}
-</style>
+
 
 </head>
 <script id="store-hours-auto-status">
@@ -8692,8 +8686,6 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 })();
 </script>
 <body data-build="20261008-review-editorial">
-<div id="ssv-connection-status" role="status" aria-live="polite" data-state="online">Connected</div>
-
 <div id="ssv-page-loader" role="status" aria-live="polite" aria-label="Loading Sri Sai Vani Collections">
   <div class="ssv-loader-content">
     <p class="ssv-loader-brand">SRI SAI VANI</p>
@@ -10639,21 +10631,7 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script id="ssv-connection-status-script">
-(function(){
-  var bar=document.getElementById("ssv-connection-status");
-  if(!bar)return;
-  function updateConnectionStatus(){
-    var online=navigator.onLine;
-    bar.dataset.state=online?"online":"offline";
-    bar.textContent=online?"Connected":"Disconnected · Offline mode";
-    bar.setAttribute("aria-label",online?"Connection status: connected":"Connection status: disconnected");
-  }
-  window.addEventListener("online",updateConnectionStatus);
-  window.addEventListener("offline",updateConnectionStatus);
-  updateConnectionStatus();
-})();
-</script>
+
 
 </body>
 </html>
