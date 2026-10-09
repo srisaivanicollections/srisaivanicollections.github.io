@@ -8862,7 +8862,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
       </div>
     </div>
     <div class="store-premium-action">
-      <a href="https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac" target="_blank" rel="noopener noreferrer" aria-label="Open Sri Sai Vani Collections in Google Maps">
+      <a href="https://www.google.com/maps/search/?api=1&query=Sri%20Sai%20Vani%20Collections%2C%20Opp.%20Indian%20Oil%20Petrol%20Pump%2C%20Nizamsagar%20Rd%2C%20Kamareddy%2C%20Telangana%20503111" target="_blank" rel="noopener noreferrer" aria-label="Open Sri Sai Vani Collections in Google Maps">
         <img src="assets/google-maps-icon.svg" alt="" loading="lazy"><span>GET DIRECTIONS</span>
       </a>
     </div>
@@ -9519,7 +9519,7 @@ function apply(){
   if(journalSection)journalSection.hidden=settings.showJournal===false;
   if(storeSection)storeSection.hidden=settings.showStore===false;
   const reviewLink=$(".sv-reviews__google a");if(reviewLink)reviewLink.href=settings.googleReviewsUrl||"https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews";
-  const directions=$("#visit a[aria-label='Open Sri Sai Vani Collections in Google Maps']");if(directions){directions.href=settings.mapsUrl||"https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac";const label=directions.querySelector("span");if(label)label.textContent=String(settings.mapsButtonLabel||"GET DIRECTIONS");}
+  const directions=$("#visit a[aria-label='Open Sri Sai Vani Collections in Google Maps']");if(directions){directions.href=settings.mapsUrl||"https://www.google.com/maps/search/?api=1&query=Sri%20Sai%20Vani%20Collections%2C%20Opp.%20Indian%20Oil%20Petrol%20Pump%2C%20Nizamsagar%20Rd%2C%20Kamareddy%2C%20Telangana%20503111";const label=directions.querySelector("span");if(label)label.textContent=String(settings.mapsButtonLabel||"GET DIRECTIONS");}
   const accent=/^#[0-9a-f]{6}$/i.test(String(settings.themeAccent||""))?settings.themeAccent:"#755239";
   const softBg=/^#[0-9a-f]{6}$/i.test(String(settings.themeBackground||""))?settings.themeBackground:"#fffaf5";
   let themeStyle=$("#custom-theme-overrides");
@@ -9715,7 +9715,7 @@ function showView(v){
       '<label class="admin-setting-field"><span>WhatsApp number (country code included)</span><input id="setWa" inputmode="tel" maxlength="15" value="'+esc(settings.whatsapp||'')+'"></label>'+
       '<label class="admin-setting-field"><span>Instagram profile URL</span><input id="setIg" type="url" value="'+esc(settings.instagram||'https://www.instagram.com/sri_sai_vani_collections/')+'"></label>'+
       field('Google Reviews URL','googleReviewsUrl','https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews','url')+
-      field('Google Maps directions URL','mapsUrl','https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac','url')+'</div></details>'+
+      field('Google Maps directions URL','mapsUrl','https://www.google.com/maps/search/?api=1&query=Sri%20Sai%20Vani%20Collections%2C%20Opp.%20Indian%20Oil%20Petrol%20Pump%2C%20Nizamsagar%20Rd%2C%20Kamareddy%2C%20Telangana%20503111','url')+'</div></details>'+
       '<details open class="admin-settings-group"><summary>Hero Banner</summary><div class="admin-settings-grid">'+
       field('Small eyebrow text','heroEyebrow','HER STYLE. HER STORY.')+
       area('Main heading (new line creates a line break)','heroTitle','One Destination.\nEvery Celebration.')+
