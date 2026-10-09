@@ -4385,33 +4385,31 @@ footer .brand b{
   opacity:.9 !important;
 }
 
-/* Keep product badges out of the photography so faces and saree details stay visible.
-   Reserve the same slim row on every card to preserve grid alignment. */
-#shop .lux-item-card > .ssv-badge-row{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:flex-start !important;
-  width:100% !important;
-  height:18px !important;
-  min-height:18px !important;
-  margin:0 !important;
-  padding:0 2px !important;
-  box-sizing:border-box !important;
+/* Keep both status labels on-image, compact and edge-aligned.
+   NEW uses the quiet top-left corner; OUT OF STOCK uses the bottom-left edge. */
+#shop .lux-item-card > .ssv-badge-row{display:none!important;}
+#shop .lux-item-media .ssv-badge-dock{
+  position:absolute!important;
+  top:6px!important;
+  left:6px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:fit-content!important;
+  max-width:calc(100% - 12px)!important;
+  margin:0!important;
+  padding:0!important;
+  z-index:20!important;
+  pointer-events:none!important;
 }
-#shop .lux-item-card > .ssv-badge-row .ssv-badge-dock{
-  position:static !important;
-  inset:auto !important;
-  display:block !important;
-  width:fit-content !important;
-  max-width:100% !important;
-  margin:0 !important;
-  padding:0 !important;
+#shop .lux-item-media .ssv-badge-pill{font-size:6.5px!important;padding:2px 4px!important;line-height:1.1!important;letter-spacing:.045em!important;}
+#shop .lux-item-media .ssv-badge-pill.pill-out{
+  background:rgba(112,48,43,.86)!important;color:#fff!important;
 }
-#shop .lux-item-card > .ssv-badge-row .ssv-badge-pill{
-  font-size:6.5px !important;
-  padding:2px 4px !important;
-  line-height:1.1 !important;
-  letter-spacing:.045em !important;
+#shop .lux-item-media .ssv-badge-pill.pill-new{
+  background:rgba(250,248,245,.9)!important;color:#702040!important;
+}
+#shop .lux-item-media:has(.pill-out) .ssv-badge-dock{
+  top:auto!important;bottom:6px!important;left:6px!important;
 }
 
 /* Compact product information, flush to image. */
@@ -9505,8 +9503,8 @@ function render(){
     return '<article class="lux-item-card">'+
       '<div class="lux-item-media'+(outOfStock?' is-out-of-stock':'')+'">'+
         '<img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.closest(".lux-item-media").classList.add("image-missing");this.classList.add("image-failed");">'+
+        (badgeDock?badgeDock.replace('class="ssv-badge-dock"','class="ssv-badge-dock"'):"")+
       '</div>'+
-      '<div class="ssv-badge-row">'+badgeDock+'</div>'+
       '<div class="lux-item-body">'+
         (categoryTag?'<div class="lux-item-cat">'+esc(categoryTag)+'</div>':"")+
         '<h3 class="lux-item-title">'+esc(p.name)+'</h3>'+
