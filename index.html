@@ -8649,6 +8649,14 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 
 
 
+
+<style id="ssv-offline-pill-style">
+#ssv-offline-pill{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:2147483000;display:none;align-items:center;gap:7px;max-width:calc(100vw - 28px);padding:7px 13px;border:1px solid #f5c2c0;border-radius:999px;background:#fff0ef;color:#a61b1b;box-shadow:0 3px 14px rgba(60,20,20,.12);font:600 12px/1.2 Inter,Arial,sans-serif;white-space:nowrap}
+#ssv-offline-pill[data-visible="true"]{display:flex}
+#ssv-offline-pill .ssv-offline-dot{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#c62828}
+@media(prefers-reduced-motion:reduce){#ssv-offline-pill{transition:none}}
+</style>
+
 </head>
 <script id="store-hours-auto-status">
 (function(){
@@ -8686,6 +8694,8 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 })();
 </script>
 <body data-build="20261008-review-editorial">
+<div id="ssv-offline-pill" role="status" aria-live="polite" data-visible="false"><span class="ssv-offline-dot" aria-hidden="true"></span><span>Disconnected · Offline mode</span></div>
+
 <div id="ssv-page-loader" role="status" aria-live="polite" aria-label="Loading Sri Sai Vani Collections">
   <div class="ssv-loader-content">
     <p class="ssv-loader-brand">SRI SAI VANI</p>
@@ -10632,6 +10642,20 @@ if ("serviceWorker" in navigator) {
 </script>
 
 
+
+
+<script id="ssv-offline-pill-script">
+(function(){
+  var pill=document.getElementById("ssv-offline-pill");
+  if(!pill)return;
+  function update(){
+    pill.dataset.visible=navigator.onLine?"false":"true";
+  }
+  window.addEventListener("online",update);
+  window.addEventListener("offline",update);
+  update();
+})();
+</script>
 
 </body>
 </html>
