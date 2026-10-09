@@ -9026,6 +9026,8 @@ function getSavedGithubToken(){
    This also protects older cached page instances from a missing global binding. */
 window.getSavedGithubToken=getSavedGithubToken;
 let products=[],settings={},category="All",adminPassword="",githubOriginalIds=new Set();
+let catalogPage=0;
+const CATALOG_PAGE_SIZE=20;
 function $(s){return document.querySelector(s)} function all(s){return document.querySelectorAll(s)}
 async function localLoad(){
   // GitHub is the single source of truth for catalog/settings.
@@ -9445,13 +9447,16 @@ function render(){
     list.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
   }
   const countEl=$("#catalogCount"); if(countEl) countEl.textContent=list.length+" "+(list.length===1?"style":"styles");
+  const pageCount=Math.max(1,Math.ceil(list.length/CATALOG_PAGE_SIZE));
+  catalogPage=Math.min(Math.max(0,catalogPage),pageCount-1);
+  const pageItems=list.slice(catalogPage*CATALOG_PAGE_SIZE,(catalogPage+1)*CATALOG_PAGE_SIZE);
   if(!list.length){
     grid.innerHTML='<div class="lux-empty"><strong>No styles found</strong><span>Try another search or browse the full collection.</span><br><button type="button" class="btn dark" id="clearCatalogFilters">VIEW ALL STYLES</button></div>';
     const clear=$("#clearCatalogFilters");
     if(clear)clear.onclick=()=>{category="All";$("#search").value="";$("#price").value="";render()};
     return;
   }
-  grid.innerHTML=list.map(p=>{
+  grid.innerHTML=pageItems.map(p=>{
     const original=Number(p.originalPrice||0);
     const price=Number(p.price||0);
     const discount=original>price?Math.round((1-price/original)*100):0;
@@ -9487,6 +9492,52 @@ function render(){
       '</div>'+
     '</article>';
   }).join("");
+  let pager=$("#catalog-pagination");
+  if(!pager){
+    pager=document.createElement("nav");
+    pager.id="catalog-pagination";
+    pager.className="catalog-pagination";
+    pager.setAttribute("aria-label","Product pages");
+    grid.insertAdjacentElement("afterend",pager);
+  }
+  if(pageCount>1){
+    pager.innerHTML='<button type="button" class="catalog-page-arrow" data-page="'+Math.max(0,catalogPage-1)+'" aria-label="Previous page" '+(catalogPage===0?'disabled':'')+'>‹</button>'+
+      '<div class="catalog-page-dots">'+Array.from({length:pageCount},(_,i)=>'<button type="button" class="catalog-page-dot'+(i===catalogPage?' active':'')+'" data-page="'+i+'" aria-label="Page '+(i+1)+'" aria-current="'+(i===catalogPage?'page':'false')+'"></button>').join("")+'</div>'+
+      '<span class="catalog-page-label">'+(catalogPage+1)+' / '+pageCount+'</span>'+
+      '<button type="button" class="catalog-page-arrow" data-page="'+Math.min(pageCount-1,catalogPage+1)+'" aria-label="Next page" '+(catalogPage===pageCount-1?'disabled':'')+'>›</button>';
+    pager.hidden=false;
+    if(!pager.dataset.bound){
+      pager.addEventListener("click",e=>{
+        const btn=e.target.closest("[data-page]");
+        if(!btn||btn.disabled)return;
+        const next=Number(btn.dataset.page);
+        if(Number.isInteger(next)&&next>=0){catalogPage=next;render();$("#shop")?.scrollIntoView({behavior:"smooth",block:"start"});}
+      });
+      pager.dataset.bound="true";
+    }
+  }else{
+    pager.innerHTML="";
+    pager.hidden=true;
+  }
+  if(!grid.dataset.swipeBound){
+    let touchStartX=0,touchStartY=0;
+    grid.addEventListener("touchstart",e=>{
+      if(e.touches.length!==1)return;
+      touchStartX=e.touches[0].clientX;
+      touchStartY=e.touches[0].clientY;
+    },{passive:true});
+    grid.addEventListener("touchend",e=>{
+      if(!e.changedTouches.length)return;
+      const dx=e.changedTouches[0].clientX-touchStartX;
+      const dy=e.changedTouches[0].clientY-touchStartY;
+      const currentPager=$("#catalog-pagination");
+      if(Math.abs(dx)<65||Math.abs(dx)<Math.abs(dy)||!currentPager||currentPager.hidden)return;
+      const next=catalogPage+(dx<0?1:-1);
+      const dots=currentPager.querySelectorAll(".catalog-page-dot");
+      if(next>=0&&next<dots.length){catalogPage=next;render();}
+    },{passive:true});
+    grid.dataset.swipeBound="true";
+  }
 }
 function form(p={}){
   const name=esc(p.name||"");
@@ -10356,6 +10407,19 @@ $("#search").oninput=render;$("#price").onchange=render;load();
 
 
 
+
+
+<style id="catalog-pagination-style-20261009">
+#catalog-pagination.catalog-pagination{display:flex;align-items:center;justify-content:center;gap:14px;margin:28px auto 8px;padding:8px 0;color:#332b24}
+#catalog-pagination[hidden]{display:none!important}
+#catalog-pagination .catalog-page-dots{display:flex;align-items:center;justify-content:center;gap:9px}
+#catalog-pagination .catalog-page-dot{display:block;width:7px;height:7px;min-width:7px;padding:0;border:1px solid #B38E5D;border-radius:50%;background:transparent;cursor:pointer}
+#catalog-pagination .catalog-page-dot.active{background:#B38E5D;transform:scale(1.2)}
+#catalog-pagination .catalog-page-arrow{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid #D8C9B2;border-radius:50%;background:transparent;color:#332b24;font-size:20px;line-height:1;cursor:pointer}
+#catalog-pagination .catalog-page-arrow:disabled{opacity:.3;cursor:default}
+#catalog-pagination .catalog-page-label{font:600 10px/1 "Inter",Arial,sans-serif;letter-spacing:.08em;color:#78716C}
+@media(max-width:600px){#catalog-pagination.catalog-pagination{margin-top:22px;gap:12px}#catalog-pagination .catalog-page-arrow{width:28px;height:28px}}
+</style>
 
 </body>
 </html>
