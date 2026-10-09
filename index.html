@@ -10491,5 +10491,11 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 @media(max-width:600px){#catalog-pagination.catalog-pagination{margin-top:22px;gap:12px}#catalog-pagination .catalog-page-arrow{width:28px;height:28px}}
 </style>
 
+<style id="desktop-header-gap-fix-20261009">
+/* Match the document offset to the final fixed-header heights. */
+@media (min-width:901px){body{padding-top:64px!important}}
+@media (min-width:601px) and (max-width:900px){body{padding-top:58px!important}}
+@media (max-width:600px){body{padding-top:54px!important}}
+</style>
 </body>
 </html>
