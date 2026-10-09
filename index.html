@@ -10102,7 +10102,7 @@ if(document.readyState==="loading"){
 }
 
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
-document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){
+document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;catalogPage=0;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;catalogPage=0;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){
   e.preventDefault();
   const nextSettings={
     name:$("#setName").value.trim()||"SRI SAI VANI",
@@ -10134,7 +10134,7 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
     btn.textContent=oldText;
   }
 }});
-$("#search").oninput=render;$("#price").onchange=render;load();
+$("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{catalogPage=0;render()};load();
 
 </script>
 
