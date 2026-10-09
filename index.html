@@ -10660,7 +10660,7 @@ if ("serviceWorker" in navigator) {
     if(navigator.onLine){
       show("connected","Connected");
       clearTimeout(reconnectTimer);
-      reconnectTimer=setTimeout(function(){pill.dataset.visible="false";},1800);
+      reconnectTimer=setTimeout(function(){pill.dataset.visible="false";},1000);
     }else{
       clearTimeout(reconnectTimer);
       show("disconnected","Disconnected · Offline mode");
