@@ -9520,8 +9520,7 @@ function apply(){
     heroWa.setAttribute("aria-disabled",n?"false":"true");
     heroWa.title=n?"Chat with us on WhatsApp":"Add the WhatsApp number in Admin Settings to enable chat";
   }
-  const instagram=$("#instagram");
-  if(instagram)instagram.href=settings.instagram||"#";
+  all("a[href*=\"instagram.com\"]").forEach(a=>a.href=settings.instagram||"https://www.instagram.com/sri_sai_vani_collections/");
 }
 function renderTabs(){$("#tabs").innerHTML=["All","Sarees","Dresses","Best Seller"].map(c=>'<button class="'+(category===c?"active":"")+'" data-tab="'+c+'">'+c.toUpperCase()+"</button>").join("")}
 function render(){
@@ -10289,8 +10288,8 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
     settings=verified.value;
     apply();
     render();
-    showView("products");
-    showAdminToast("Settings saved successfully.","success");
+    showView("settings");
+    showAdminToast("Website settings saved successfully.","success");
   }catch(err){
     alert(err?.message||"Settings could not be saved.");
   }finally{
@@ -10590,6 +10589,25 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 @media (min-width:901px){body{padding-top:64px!important}}
 @media (min-width:601px) and (max-width:900px){body{padding-top:58px!important}}
 @media (max-width:600px){body{padding-top:54px!important}}
+</style>
+<style id="admin-customization-panel">
+.admin-customize{display:grid;gap:14px;padding:4px 0 20px}
+.admin-settings-intro{margin:0;color:#6f655c;line-height:1.5;font-size:14px}
+.admin-settings-group{border:1px solid #e6ded5;border-radius:12px;background:#fffaf5;overflow:hidden}
+.admin-settings-group>summary{cursor:pointer;list-style:none;padding:15px 16px;font-weight:700;color:#3c3028;display:flex;align-items:center;justify-content:space-between}
+.admin-settings-group>summary::-webkit-details-marker{display:none}
+.admin-settings-group>summary:after{content:"+";font-size:20px;color:#896747}
+.admin-settings-group[open]>summary:after{content:"−"}
+.admin-settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 14px 16px}
+.admin-setting-field{display:flex;flex-direction:column;gap:6px;min-width:0;color:#51463d;font-size:13px;font-weight:600}
+.admin-setting-field input,.admin-setting-field textarea{box-sizing:border-box;width:100%;min-width:0;border:1px solid #d9cec2;border-radius:8px;padding:10px 11px;background:#fff;color:#2f2924;font:inherit;font-weight:400}
+.admin-setting-field textarea{resize:vertical;line-height:1.45}
+.admin-setting-field input:focus,.admin-setting-field textarea:focus{outline:2px solid #b9956b;outline-offset:1px}
+.admin-settings-toggles{display:grid;gap:12px;padding:0 16px 16px}
+.admin-setting-toggle{display:flex;align-items:center;gap:10px;font-size:14px;color:#51463d}
+.admin-setting-toggle input{width:18px;height:18px;accent-color:#755239}
+#saveSettings{position:sticky;bottom:10px;z-index:2;width:100%;box-shadow:0 5px 20px #00000016}
+@media(max-width:560px){.admin-settings-grid{grid-template-columns:minmax(0,1fr)}.admin-settings-group>summary{padding:13px}.admin-settings-grid{padding:0 12px 14px}}
 </style>
 </body>
 </html>
