@@ -4331,7 +4331,7 @@ footer .brand b{
 }
 
 /* Discreet product labels: edge-aligned, low visual weight.
-   Priority: OUT OF STOCK > BEST SELLER > NEW. */
+   Priority: SOLD OUT > BEST SELLER > NEW. */
 #shop .lux-item-media .ssv-badge-dock{
   position:absolute !important;
   top:6px !important;
@@ -4386,7 +4386,7 @@ footer .brand b{
 }
 
 /* Keep both status labels on-image, compact and edge-aligned.
-   NEW uses the quiet top-left corner; OUT OF STOCK uses the bottom-left edge. */
+   NEW uses the quiet top-left corner; SOLD OUT uses the bottom-left edge. */
 #shop .lux-item-card > .ssv-badge-row{display:none!important;}
 #shop .lux-item-media .ssv-badge-dock{
   position:absolute!important;
@@ -9496,7 +9496,7 @@ function render(){
     const outOfStock=(p.inStock===false||p.availability===false||p.outOfStock===true);
     let badgeDock="";
     if(outOfStock){
-      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-out">OUT OF STOCK</span></div>';
+      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-out">SOLD OUT</span></div>';
     }else if(p.newArrival===true){
       badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-new">NEW</span></div>';
     }
