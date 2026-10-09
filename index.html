@@ -4542,10 +4542,27 @@ footer .brand b{
   padding:8px 0 10px !important;
 }
 
-/* The temporary ADMIN bar is hidden, while its underlying admin logic remains intact. */
-.admin-link{
-  display:none !important;
-}@media(max-width:600px){}
+/* Header navigation: keep Admin available on desktop and inside the mobile menu. */
+.header nav .admin-link{
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  font-size:9px !important;
+  line-height:1 !important;
+  letter-spacing:.14em !important;
+  padding:9px 12px !important;
+  white-space:nowrap;
+}
+@media(max-width:900px){
+  .header nav:not(.open) .admin-link{display:none !important;}
+  .header nav.open .admin-link{display:block !important;}
+}
+@media(min-width:901px){
+  .header-inner{justify-content:space-between !important;gap:24px !important;}
+  .header .brand{flex:1 1 auto !important;}
+  .header nav{flex:0 0 auto !important;display:flex !important;align-items:center !important;gap:24px !important;margin-left:auto !important;}
+  .header nav a,.header nav .admin-link{font-size:9px !important;line-height:1 !important;}
+}
 
 
 /* =========================================================
