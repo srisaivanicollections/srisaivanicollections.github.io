@@ -9480,7 +9480,7 @@ function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
   const setText=(selector,key,fallback)=>{const el=$(selector);if(el&&settings[key]!==undefined)el.textContent=String(settings[key]);else if(el&&fallback!==undefined)el.textContent=fallback;};
   setText(".hero-eyebrow","heroEyebrow","HER STYLE. HER STORY.");
-  const heroTitle=$(".hero-title");if(heroTitle){const title=String(settings.heroTitle??"One Destination.\\nEvery Celebration.");heroTitle.replaceChildren();title.split(/\n/).forEach((part,i)=>{if(i)heroTitle.appendChild(document.createElement("br"));heroTitle.appendChild(document.createTextNode(part));});}
+  const heroTitle=$(".hero-title");if(heroTitle){const title=String(settings.heroTitle??"One Destination.\nEvery Celebration.");heroTitle.replaceChildren();title.split(/\n/).forEach((part,i)=>{if(i)heroTitle.appendChild(document.createElement("br"));heroTitle.appendChild(document.createTextNode(part));});}
   setText(".hero-description","heroDescription","From wedding sarees to modern festive styles, find something special for every celebration.");
   setText(".hero-primary-btn","heroButtonText","Explore Collection");
   const heroImage=$(".hero-banner-img");if(heroImage&&settings.heroImage)heroImage.src=productImageSrc(settings.heroImage);
