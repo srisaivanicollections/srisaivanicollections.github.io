@@ -8571,6 +8571,20 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
   body .btn,body .button{font-size:8px;letter-spacing:.12em}
 }
 </style>
+<style id="store-hours-typography-refinement">
+#visit .store-premium-time{
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(24px,3vw,28px)!important;
+  font-weight:500!important;
+  line-height:1.15!important;
+  letter-spacing:.005em!important;
+  font-variant-numeric:lining-nums;
+  color:#29231e!important;
+}
+@media(max-width:700px){
+  #visit .store-premium-time{font-size:25px!important;line-height:1.15!important}
+}
+</style>
 </head>
 <script id="store-hours-auto-status">
 (function(){
