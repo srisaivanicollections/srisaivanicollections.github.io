@@ -9531,8 +9531,8 @@ function render(){
   }
   if(pageCount>1){
     pager.innerHTML='<button type="button" class="catalog-page-arrow" data-page="'+Math.max(0,catalogPage-1)+'" aria-label="Previous page" '+(catalogPage===0?'disabled':'')+'>‹</button>'+
-      '<div class="catalog-page-dots">'+Array.from({length:pageCount},(_,i)=>'<button type="button" class="catalog-page-dot'+(i===catalogPage?' active':'')+'" data-page="'+i+'" aria-label="Page '+(i+1)+'" aria-current="'+(i===catalogPage?'page':'false')+'"></button>').join("")+'</div>'+
-      '<span class="catalog-page-label">'+(catalogPage+1)+' of '+pageCount+'</span>'+
+      '<span class="catalog-page-label">'+String(catalogPage+1).padStart(2,"0")+' / '+String(pageCount).padStart(2,"0")+'</span>'+
+      '<div class="catalog-page-progress" role="progressbar" aria-label="Product browsing progress" aria-valuemin="1" aria-valuemax="'+pageCount+'" aria-valuenow="'+(catalogPage+1)+'"><span style="width:'+(((catalogPage+1)/pageCount)*100)+'%"></span></div>'+
       '<button type="button" class="catalog-page-arrow" data-page="'+Math.min(pageCount-1,catalogPage+1)+'" aria-label="Next page" '+(catalogPage===pageCount-1?'disabled':'')+'>›</button>';
     pager.hidden=false;
     if(!pager.dataset.bound){
@@ -10441,12 +10441,12 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 <style id="catalog-pagination-style-20261009">
 #catalog-pagination.catalog-pagination{display:flex;align-items:center;justify-content:center;gap:14px;margin:28px auto 8px;padding:8px 0;color:#332b24}
 #catalog-pagination[hidden]{display:none!important}
-#catalog-pagination .catalog-page-dots{display:flex;align-items:center;justify-content:center;gap:9px}
-#catalog-pagination .catalog-page-dot{display:block;width:7px;height:7px;min-width:7px;padding:0;border:1px solid #B38E5D;border-radius:50%;background:transparent;cursor:pointer}
-#catalog-pagination .catalog-page-dot.active{background:#B38E5D;transform:scale(1.2)}
+#catalog-pagination .catalog-page-progress{width:84px;height:3px;overflow:hidden;border-radius:999px;background:#E8DED1}
+#catalog-pagination .catalog-page-progress span{display:block;height:100%;border-radius:inherit;background:#A77B45;transition:width .25s ease}
 #catalog-pagination .catalog-page-arrow{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid #D8C9B2;border-radius:50%;background:transparent;color:#332b24;font-size:20px;line-height:1;cursor:pointer}
 #catalog-pagination .catalog-page-arrow:disabled{opacity:.3;cursor:default}
-#catalog-pagination .catalog-page-label{font:600 10px/1 "Inter",Arial,sans-serif;letter-spacing:.08em;color:#78716C}
+#catalog-pagination .catalog-page-label{font:600 10px/1 "Inter",Arial,sans-serif;letter-spacing:.08em;color:#78716C;white-space:nowrap}
+@media(max-width:600px){#catalog-pagination .catalog-page-progress{width:64px}}
 @media(max-width:600px){#catalog-pagination.catalog-pagination{margin-top:22px;gap:12px}#catalog-pagination .catalog-page-arrow{width:28px;height:28px}}
 </style>
 
