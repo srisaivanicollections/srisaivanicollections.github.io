@@ -9478,6 +9478,33 @@ function productImageSrc(value){
 }
 function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
+  const setText=(selector,key,fallback)=>{const el=$(selector);if(el&&settings[key]!==undefined)el.textContent=String(settings[key]);else if(el&&fallback!==undefined)el.textContent=fallback;};
+  setText(".hero-eyebrow","heroEyebrow","HER STYLE. HER STORY.");
+  const heroTitle=$(".hero-title");if(heroTitle){const title=String(settings.heroTitle??"One Destination.\\nEvery Celebration.");heroTitle.replaceChildren();title.split(/\\n/).forEach((part,i)=>{if(i)heroTitle.appendChild(document.createElement("br"));heroTitle.appendChild(document.createTextNode(part));});}
+  setText(".hero-description","heroDescription","From wedding sarees to modern festive styles, find something special for every celebration.");
+  setText(".hero-primary-btn","heroButtonText","Explore Collection");
+  const heroImage=$(".hero-banner-img");if(heroImage&&settings.heroImage)heroImage.src=productImageSrc(settings.heroImage);
+  const search=$("#search");if(search)search.placeholder=String(settings.searchPlaceholder||"Search collection");
+  setText(".sv-reviews__eyebrow","reviewsEyebrow","Customer Voices");
+  setText("#sv-reviews-title","reviewsTitle","Client Chronicles");
+  setText(".sv-reviews__intro","reviewsIntro","From those who shop with us");
+  all(".sv-review-card__text").forEach((el,i)=>{const key="review"+(i+1);if(settings[key]!==undefined)el.textContent=String(settings[key]);});
+  setText("#instagram .sv-eyebrow","journalEyebrow","Visual Journal");
+  setText("#sv-instagram-title","journalTitle","Latest Collection");
+  all(".sv-gallery__item").forEach((el,i)=>{const img=el.querySelector("img");const key="journalImage"+(i+1);if(img&&settings[key])img.src=productImageSrc(settings[key]);const label=el.querySelector(".sv-gallery__label");if(label)label.textContent=String(settings.journalLinkLabel||"Explore Look");});
+  const journalButton=$(".sv-instagram__button");if(journalButton)journalButton.textContent=String(settings.journalButtonLabel||"Follow on Instagram")+" →";
+  const storeAddress=$(".store-premium-address");if(storeAddress&&settings.storeAddress!==undefined){storeAddress.replaceChildren();String(settings.storeAddress).split(/\\n/).forEach((part,i)=>{if(i)storeAddress.appendChild(document.createElement("br"));storeAddress.appendChild(document.createTextNode(part));});}
+  setText(".store-premium-eyebrow","storeEyebrow","COME DISCOVER US.");
+  setText("#store-redesign-title","storeTitle","SRI SAI VANI COLLECTIONS");
+  setText(".store-premium-label","storeHoursLabel","STORE HOURS");
+  setText(".store-premium-time","storeHours","10:00 AM – 9:00 PM");
+  setText(".store-premium-days","storeDays","EVERY DAY");
+  const reviewsSection=$("#reviews"),journalSection=$("#instagram"),storeSection=$("#visit");
+  if(reviewsSection)reviewsSection.hidden=settings.showReviews===false;
+  if(journalSection)journalSection.hidden=settings.showJournal===false;
+  if(storeSection)storeSection.hidden=settings.showStore===false;
+  const reviewLink=$(".sv-reviews__google a");if(reviewLink)reviewLink.href=settings.googleReviewsUrl||"https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews";
+  const directions=$("#visit a[aria-label='Open Sri Sai Vani Collections in Google Maps']");if(directions){directions.href=settings.mapsUrl||"https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac";const label=directions.querySelector("span");if(label)label.textContent=String(settings.mapsButtonLabel||"GET DIRECTIONS");}
   const n=waNumber();
   const collectionMessage="Hi Sri Sai Vani Collections, I would like to know about your collection.";
   const heroMessage="Hi Sri Sai Vani Collections, I'd like to inquire about your latest festive arrivals";
@@ -9659,7 +9686,55 @@ function showView(v){
       };
     }
   }else{
-    b.innerHTML='<p>Shop name</p><input id="setName" maxlength="100" value="'+esc(settings.name||"")+'"><p>WhatsApp number</p><input id="setWa" inputmode="tel" maxlength="15" value="'+esc(settings.whatsapp||"")+'"><p>Instagram URL</p><input id="setIg" type="url" value="'+esc(settings.instagram||"")+'"><button type="button" class="btn dark" id="saveSettings">SAVE SETTINGS</button>';
+    const val=(key,fallback="")=>esc(settings[key]??fallback);
+    const field=(label,key,fallback="",type="text")=>'<label class="admin-setting-field"><span>'+label+'</span><input '+(key==="name"?'id="setName" ':'')+'type="'+type+'" data-setting-key="'+key+'" value="'+val(key,fallback)+'"></label>';
+    const area=(label,key,fallback="")=>'<label class="admin-setting-field"><span>'+label+'</span><textarea rows="2" data-setting-key="'+key+'">'+val(key,fallback)+'</textarea></label>';
+    const toggle=(label,key,defaultOn=true)=>'<label class="admin-setting-toggle"><input type="checkbox" data-setting-key="'+key+'" '+((settings[key]===undefined?defaultOn:settings[key]!==false)?'checked':'')+'><span>'+label+'</span></label>';
+    b.innerHTML='<div class="admin-customize"><p class="admin-settings-intro">Customize your storefront content and links. Save changes to publish them to the website.</p>'+
+      '<details open class="admin-settings-group"><summary>Brand & Contact</summary><div class="admin-settings-grid">'+
+      field('Boutique name','name','SRI SAI VANI')+
+      '<label class="admin-setting-field"><span>WhatsApp number (country code included)</span><input id="setWa" inputmode="tel" maxlength="15" value="'+esc(settings.whatsapp||'')+'"></label>'+
+      '<label class="admin-setting-field"><span>Instagram profile URL</span><input id="setIg" type="url" value="'+esc(settings.instagram||'https://www.instagram.com/sri_sai_vani_collections/')+'"></label>'+
+      field('Google Reviews URL','googleReviewsUrl','https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews','url')+
+      field('Google Maps directions URL','mapsUrl','https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac','url')+'</div></details>'+
+      '<details open class="admin-settings-group"><summary>Hero Banner</summary><div class="admin-settings-grid">'+
+      field('Small eyebrow text','heroEyebrow','HER STYLE. HER STORY.')+
+      area('Main heading (new line creates a line break)','heroTitle','One Destination.\nEvery Celebration.')+
+      area('Description','heroDescription','From wedding sarees to modern festive styles, find something special for every celebration.')+
+      field('Primary button label','heroButtonText','Explore Collection')+
+      field('Hero image URL or site path','heroImage','assets/hero-banner.webp?v=20261006')+'</div></details>'+
+      '<details class="admin-settings-group"><summary>Catalogue</summary><div class="admin-settings-grid">'+
+      field('Search placeholder','searchPlaceholder','Search collection')+
+      area('Empty catalogue message','emptyCatalogText','Try another search or browse the full collection.')+
+      field('View-all button label','viewAllLabel','VIEW ALL STYLES')+'</div></details>'+
+      '<details class="admin-settings-group"><summary>Customer Reviews</summary><div class="admin-settings-grid">'+
+      field('Section eyebrow','reviewsEyebrow','Customer Voices')+
+      field('Section heading','reviewsTitle','Client Chronicles')+
+      field('Intro text','reviewsIntro','From those who shop with us')+
+      area('Review 1','review1','Nice collection and best prices')+
+      area('Review 2','review2','Perfect place for ladies dresses and sarees')+
+      area('Review 3','review3','Nice collection for women in affordable prices')+'</div></details>'+
+      '<details class="admin-settings-group"><summary>Visual Journal</summary><div class="admin-settings-grid">'+
+      field('Section eyebrow','journalEyebrow','Visual Journal')+
+      field('Section heading','journalTitle','Latest Collection')+
+      field('Gallery link label','journalLinkLabel','Explore Look')+
+      field('Follow button label','journalButtonLabel','Follow on Instagram')+
+      field('Gallery image 1 URL or site path','journalImage1','assets/products/1791112867208-IMG_0063.png')+
+      field('Gallery image 2 URL or site path','journalImage2','assets/products/1791101219183-4910S901_1.jpg')+
+      field('Gallery image 3 URL or site path','journalImage3','assets/products/1791059716979-1000242369.jpg')+
+      field('Gallery image 4 URL or site path','journalImage4','assets/products/1791054058359-SLUS0051574_PURPLE_1_800x800.jpg')+
+      '</div></details>'+
+      '<details class="admin-settings-group"><summary>Store Details</summary><div class="admin-settings-grid">'+
+      field('Top label','storeEyebrow','COME DISCOVER US.')+
+      field('Store name heading','storeTitle','SRI SAI VANI COLLECTIONS')+
+      area('Store address (each line on a new line)','storeAddress','Opp. Indian Oil Petrol Pump,\nNizamsagar Rd, Kamareddy,\nTelangana 503111')+
+      field('Hours heading','storeHoursLabel','STORE HOURS')+
+      field('Opening hours','storeHours','10:00 AM – 9:00 PM')+
+      field('Open days','storeDays','EVERY DAY')+
+      field('Directions button label','mapsButtonLabel','GET DIRECTIONS')+'</div></details>'+
+      '<details class="admin-settings-group"><summary>Section Visibility</summary><div class="admin-settings-toggles">'+
+      toggle('Show customer reviews section','showReviews')+toggle('Show Visual Journal section','showJournal')+toggle('Show store details section','showStore')+
+      '</div></details><button type="button" class="btn dark" id="saveSettings">SAVE ALL WEBSITE SETTINGS</button></div>';
   }
 }
 function edit(id){
@@ -10192,6 +10267,12 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
     whatsapp:$("#setWa").value.replace(/\D/g,""),
     instagram:$("#setIg").value.trim()
   };
+  all("#studioBody [data-setting-key]").forEach(input=>{
+    const key=input.dataset.settingKey;
+    if(key==="name")nextSettings.name=input.value.trim()||"SRI SAI VANI";
+    else if(input.type==="checkbox")nextSettings[key]=input.checked;
+    else nextSettings[key]=input.value.trim();
+  });
   delete nextSettings.githubToken;
   const btn=e.target;
   const oldText=btn.textContent;
@@ -10202,7 +10283,7 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
     settingsWriteQueue=settingsWriteQueue.then(saveSettingsOperation,saveSettingsOperation);
     await settingsWriteQueue;
     const verified=await githubReadJson("data/settings.json");
-    if(!verified.value||String(verified.value.name||"")!==String(nextSettings.name||"")||String(verified.value.whatsapp||"")!==String(nextSettings.whatsapp||"")||String(verified.value.instagram||"")!==String(nextSettings.instagram||"")){
+    if(!verified.value||String(verified.value.name||"")!==String(nextSettings.name||"")||String(verified.value.whatsapp||"")!==String(nextSettings.whatsapp||"")||String(verified.value.instagram||"")!==String(nextSettings.instagram||"")||Object.keys(nextSettings).some(key=>String(verified.value[key]??"")!==String(nextSettings[key]??""))){
       throw new Error("Settings could not be verified after saving.");
     }
     settings=verified.value;
