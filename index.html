@@ -9482,11 +9482,16 @@ function apply(){
   const collectionMessage="Hi Sri Sai Vani, I would like to know about your collection.";
   const heroMessage="Hi Sri Sai Vani, I'd like to inquire about your latest festive arrivals";
   const waMain=$("#waMain");
-  if(waMain)waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent(collectionMessage):"#";
+  if(waMain){
+    waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent(collectionMessage):"#";
+    waMain.setAttribute("aria-disabled",n?"false":"true");
+    waMain.title=n?"Chat with us on WhatsApp":"Add the WhatsApp number in Admin Settings to enable chat";
+  }
   const heroWa=$("#heroWhatsAppBtn");
   if(heroWa){
     heroWa.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent(heroMessage):"#";
     heroWa.setAttribute("aria-disabled",n?"false":"true");
+    heroWa.title=n?"Chat with us on WhatsApp":"Add the WhatsApp number in Admin Settings to enable chat";
   }
   const instagram=$("#instagram");
   if(instagram)instagram.href=settings.instagram||"#";
@@ -9832,6 +9837,13 @@ async function saveProduct(id){
   }
 }
 $("#menu").onclick=()=>$("#nav").classList.toggle("open");
+$("#nav").querySelectorAll("a[href^=\"#\"]").forEach(link=>link.addEventListener("click",()=>$("#nav").classList.remove("open")));
+["waMain","heroWhatsAppBtn"].forEach(id=>{
+  const link=document.getElementById(id);
+  if(link)link.addEventListener("click",function(e){
+    if(typeof waNumber==="function"&&!waNumber()){e.preventDefault();e.stopPropagation();}
+  });
+});
 const mobileHeaderWhatsApp=document.getElementById("mobileHeaderWhatsApp");
 if(mobileHeaderWhatsApp){
   mobileHeaderWhatsApp.addEventListener("click",function(e){
