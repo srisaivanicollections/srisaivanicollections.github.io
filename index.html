@@ -9465,7 +9465,7 @@ function waNumber(){return String(settings.whatsapp||"").replace(/\D/g,"")}
 function wa(p){
   const n=waNumber();
   if(!n)return "#";
-  return "https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani, I am interested in "+p.name+" ("+money(p.price)+"). Is it available?");
+  return "https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani Collections, I am interested in "+p.name+" ("+money(p.price)+"). Is it available?");
 }
 function productImageSrc(value){
   const src=String(value||"").trim();
@@ -9479,8 +9479,8 @@ function productImageSrc(value){
 function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
   const n=waNumber();
-  const collectionMessage="Hi Sri Sai Vani, I would like to know about your collection.";
-  const heroMessage="Hi Sri Sai Vani, I'd like to inquire about your latest festive arrivals";
+  const collectionMessage="Hi Sri Sai Vani Collections, I would like to know about your collection.";
+  const heroMessage="Hi Sri Sai Vani Collections, I'd like to inquire about your latest festive arrivals";
   const waMain=$("#waMain");
   if(waMain){
     waMain.href=n?"https://wa.me/"+n+"?text="+encodeURIComponent(collectionMessage):"#";
