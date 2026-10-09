@@ -9465,7 +9465,7 @@ function waNumber(){return String(settings.whatsapp||"").replace(/\D/g,"")}
 function wa(p){
   const n=waNumber();
   if(!n)return "#";
-  return "https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani Collections, I am interested in "+p.name+" ("+money(p.price)+"). Is it available?");
+  return "https://wa.me/"+n+"?text="+encodeURIComponent("Hi Sri Sai Vani Collections, I'd like to know more about "+p.name+" ("+money(p.price)+"). Is it available?");
 }
 function productImageSrc(value){
   const src=String(value||"").trim();
