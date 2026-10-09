@@ -4330,7 +4330,7 @@ footer .brand b{
   }
 }
 
-/* One compact badge in the top-left corner, kept away from the model's central face area.
+/* Discreet product labels: edge-aligned, low visual weight.
    Priority: OUT OF STOCK > BEST SELLER > NEW. */
 #shop .lux-item-media .ssv-badge-dock{
   position:absolute !important;
@@ -4353,32 +4353,36 @@ footer .brand b{
   max-width:100% !important;
   min-height:0 !important;
   margin:0 !important;
-  padding:2px 5px !important;
+  padding:2px 4px !important;
   border:0 !important;
-  border-radius:1px !important;
+  border-radius:0 !important;
   box-shadow:none !important;
   font-family:"Inter",Arial,sans-serif !important;
   font-size:6.5px !important;
-  font-weight:700 !important;
-  letter-spacing:.08em !important;
-  line-height:1 !important;
+  font-weight:600 !important;
+  letter-spacing:.045em !important;
+  line-height:1.1 !important;
   text-transform:uppercase !important;
   white-space:nowrap !important;
 }
 
-#shop .lux-item-media .ssv-badge-pill.pill-out,
+#shop .lux-item-media .ssv-badge-pill.pill-out{
+  background:rgba(112,48,43,.82) !important;
+  color:#FFFFFF !important;
+}
+
 #shop .lux-item-media .ssv-badge-pill.pill-best{
-  background:rgba(28,25,23,.88) !important;
+  background:rgba(28,25,23,.76) !important;
   color:#FAF8F5 !important;
 }
 
 #shop .lux-item-media .ssv-badge-pill.pill-new{
-  background:rgba(255,255,255,.92) !important;
+  background:rgba(250,248,245,.88) !important;
   color:#702040 !important;
 }
 
 #shop .lux-item-media.is-out-of-stock img{
-  opacity:.75 !important;
+  opacity:.9 !important;
 }
 
 /* Compact product information, flush to image. */
@@ -9466,11 +9470,10 @@ function render(){
     let badgeDock="";
     if(outOfStock){
       badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-out">OUT OF STOCK</span></div>';
-    }else{
-      const badges=[];
-      if(p.bestSeller===true) badges.push('<span class="ssv-badge-pill pill-best">BEST SELLER</span>');
-      if(p.newArrival===true) badges.push('<span class="ssv-badge-pill pill-new">NEW</span>');
-      if(badges.length) badgeDock='<div class="ssv-badge-dock">'+badges.join("")+'</div>';
+    }else if(p.bestSeller===true){
+      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-best">BEST SELLER</span></div>';
+    }else if(p.newArrival===true){
+      badgeDock='<div class="ssv-badge-dock"><span class="ssv-badge-pill pill-new">NEW</span></div>';
     }
     return '<article class="lux-item-card">'+
       '<div class="lux-item-media'+(outOfStock?' is-out-of-stock':'')+'">'+
