@@ -4557,11 +4557,43 @@ footer .brand b{
   .header nav:not(.open) .admin-link{display:none !important;}
   .header nav.open .admin-link{display:block !important;}
 }
+/* One consistent desktop navigation system for Shop Now, Instagram and Admin. */
+.header nav{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:clamp(18px,2vw,28px) !important;
+  flex:0 0 auto !important;
+  margin-left:auto !important;
+}
+.header nav a,
+.header nav .admin-link{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box !important;
+  min-height:34px !important;
+  padding:0 0 7px !important;
+  margin:0 !important;
+  font-family:inherit !important;
+  font-size:9px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+}
+.header nav .admin-link{
+  padding:9px 12px !important;
+  border:1px solid #E4D8C5 !important;
+  background:transparent !important;
+}
+.header nav .shop-link{
+  border-bottom:1px solid #C8B28A !important;
+}
 @media(min-width:901px){
   .header-inner{justify-content:space-between !important;gap:24px !important;}
   .header .brand{flex:1 1 auto !important;}
-  .header nav{flex:0 0 auto !important;display:flex !important;align-items:center !important;gap:24px !important;margin-left:auto !important;}
-  .header nav a,.header nav .admin-link{font-size:9px !important;line-height:1 !important;}
 }
 
 
