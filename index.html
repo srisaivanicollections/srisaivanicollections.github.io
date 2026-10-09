@@ -9480,7 +9480,7 @@ function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
   const setText=(selector,key,fallback)=>{const el=$(selector);if(el&&settings[key]!==undefined)el.textContent=String(settings[key]);else if(el&&fallback!==undefined)el.textContent=fallback;};
   setText(".hero-eyebrow","heroEyebrow","HER STYLE. HER STORY.");
-  const heroTitle=$(".hero-title");if(heroTitle){const title=String(settings.heroTitle??"One Destination.\\nEvery Celebration.");heroTitle.replaceChildren();title.split(/\\n/).forEach((part,i)=>{if(i)heroTitle.appendChild(document.createElement("br"));heroTitle.appendChild(document.createTextNode(part));});}
+  const heroTitle=$(".hero-title");if(heroTitle){const title=String(settings.heroTitle??"One Destination.\\nEvery Celebration.");heroTitle.replaceChildren();title.split(/\n/).forEach((part,i)=>{if(i)heroTitle.appendChild(document.createElement("br"));heroTitle.appendChild(document.createTextNode(part));});}
   setText(".hero-description","heroDescription","From wedding sarees to modern festive styles, find something special for every celebration.");
   setText(".hero-primary-btn","heroButtonText","Explore Collection");
   const heroImage=$(".hero-banner-img");if(heroImage&&settings.heroImage)heroImage.src=productImageSrc(settings.heroImage);
@@ -9493,7 +9493,7 @@ function apply(){
   setText("#sv-instagram-title","journalTitle","Latest Collection");
   all(".sv-gallery__item").forEach((el,i)=>{const img=el.querySelector("img");const key="journalImage"+(i+1);if(img&&settings[key])img.src=productImageSrc(settings[key]);const label=el.querySelector(".sv-gallery__label");if(label)label.textContent=String(settings.journalLinkLabel||"Explore Look");});
   const journalButton=$(".sv-instagram__button");if(journalButton)journalButton.textContent=String(settings.journalButtonLabel||"Follow on Instagram")+" →";
-  const storeAddress=$(".store-premium-address");if(storeAddress&&settings.storeAddress!==undefined){storeAddress.replaceChildren();String(settings.storeAddress).split(/\\n/).forEach((part,i)=>{if(i)storeAddress.appendChild(document.createElement("br"));storeAddress.appendChild(document.createTextNode(part));});}
+  const storeAddress=$(".store-premium-address");if(storeAddress&&settings.storeAddress!==undefined){storeAddress.replaceChildren();String(settings.storeAddress).split(/\n/).forEach((part,i)=>{if(i)storeAddress.appendChild(document.createElement("br"));storeAddress.appendChild(document.createTextNode(part));});}
   setText(".store-premium-eyebrow","storeEyebrow","COME DISCOVER US.");
   setText("#store-redesign-title","storeTitle","SRI SAI VANI COLLECTIONS");
   setText(".store-premium-label","storeHoursLabel","STORE HOURS");
@@ -9528,7 +9528,7 @@ function render(){
   const grid=$("#products");
   if(!grid)return;
   if(!Array.isArray(products)||products.length===0){
-    $("#products").innerHTML='<div class="lux-empty"><strong>No styles found</strong><span>Try another search or browse the full collection.</span><br><button type="button" class="btn dark" id="clearCatalogFilters">VIEW ALL STYLES</button></div>'; const clear=$("#clearCatalogFilters"); if(clear)clear.onclick=()=>{category="All";$("#search").value="";$("#price").value="";render()};
+    $("#products").innerHTML='<div class="lux-empty"><strong>No styles found</strong><span>'+esc(settings.emptyCatalogText||"Try another search or browse the full collection.")+'</span><br><button type="button" class="btn dark" id="clearCatalogFilters">'+esc(settings.viewAllLabel||"VIEW ALL STYLES")+'</button></div>'; const clear=$("#clearCatalogFilters"); if(clear)clear.onclick=()=>{category="All";$("#search").value="";$("#price").value="";render()};
     return;
   }
   const q=$("#search").value.trim().toLowerCase(),pf=$("#price").value;
@@ -9555,7 +9555,7 @@ function render(){
   catalogPage=Math.min(Math.max(0,catalogPage),pageCount-1);
   const pageItems=list.slice(catalogPage*CATALOG_PAGE_SIZE,(catalogPage+1)*CATALOG_PAGE_SIZE);
   if(!list.length){
-    grid.innerHTML='<div class="lux-empty"><strong>No styles found</strong><span>Try another search or browse the full collection.</span><br><button type="button" class="btn dark" id="clearCatalogFilters">VIEW ALL STYLES</button></div>';
+    grid.innerHTML='<div class="lux-empty"><strong>No styles found</strong><span>'+esc(settings.emptyCatalogText||"Try another search or browse the full collection.")+'</span><br><button type="button" class="btn dark" id="clearCatalogFilters">'+esc(settings.viewAllLabel||"VIEW ALL STYLES")+'</button></div>';
     const clear=$("#clearCatalogFilters");
     if(clear)clear.onclick=()=>{category="All";$("#search").value="";$("#price").value="";render()};
     return;
