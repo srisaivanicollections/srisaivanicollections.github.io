@@ -4385,6 +4385,35 @@ footer .brand b{
   opacity:.9 !important;
 }
 
+/* Keep product badges out of the photography so faces and saree details stay visible.
+   Reserve the same slim row on every card to preserve grid alignment. */
+#shop .lux-item-card > .ssv-badge-row{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  width:100% !important;
+  height:18px !important;
+  min-height:18px !important;
+  margin:0 !important;
+  padding:0 2px !important;
+  box-sizing:border-box !important;
+}
+#shop .lux-item-card > .ssv-badge-row .ssv-badge-dock{
+  position:static !important;
+  inset:auto !important;
+  display:block !important;
+  width:fit-content !important;
+  max-width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+#shop .lux-item-card > .ssv-badge-row .ssv-badge-pill{
+  font-size:6.5px !important;
+  padding:2px 4px !important;
+  line-height:1.1 !important;
+  letter-spacing:.045em !important;
+}
+
 /* Compact product information, flush to image. */
 #shop .lux-item-body{
   min-width:0 !important;
@@ -9478,8 +9507,8 @@ function render(){
     return '<article class="lux-item-card">'+
       '<div class="lux-item-media'+(outOfStock?' is-out-of-stock':'')+'">'+
         '<img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.closest(".lux-item-media").classList.add("image-missing");this.classList.add("image-failed");">'+
-        badgeDock+
       '</div>'+
+      '<div class="ssv-badge-row">'+badgeDock+'</div>'+
       '<div class="lux-item-body">'+
         (categoryTag?'<div class="lux-item-cat">'+esc(categoryTag)+'</div>':"")+
         '<h3 class="lux-item-title">'+esc(p.name)+'</h3>'+
