@@ -8633,6 +8633,19 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
   }
 }
 </style>
+
+<style id="ssv-page-loader-style">
+#ssv-page-loader{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#FAF8F5;color:#332D28;opacity:1;visibility:visible;transition:opacity .3s ease,visibility .3s ease}
+#ssv-page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+#ssv-page-loader .ssv-loader-content{width:min(280px,78vw);text-align:center}
+#ssv-page-loader .ssv-loader-brand{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(25px,6vw,31px);font-weight:500;letter-spacing:.015em;line-height:1.1;color:#332D28}
+#ssv-page-loader .ssv-loader-subtitle{margin:7px 0 30px;font-family:"Inter",Arial,sans-serif;font-size:9px;letter-spacing:.24em;color:#A1845A}
+#ssv-page-loader .ssv-loader-track{width:100%;height:3px;margin:0 auto 16px;overflow:hidden;border-radius:99px;background:#E7DED2}
+#ssv-page-loader .ssv-loader-track span{display:block;width:38%;height:100%;border-radius:99px;background:#A1845A;animation:ssv-loader-progress 1.1s ease-in-out infinite alternate}
+#ssv-page-loader .ssv-loader-message{margin:0;font-family:"Inter",Arial,sans-serif;font-size:11px;letter-spacing:.015em;color:#82776B}
+@keyframes ssv-loader-progress{from{transform:translateX(0)}to{transform:translateX(165%)}}
+@media(prefers-reduced-motion:reduce){#ssv-page-loader .ssv-loader-track span{animation:none;width:70%}#ssv-page-loader{transition:none}}
+</style>
 </head>
 <script id="store-hours-auto-status">
 (function(){
@@ -8670,6 +8683,34 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 })();
 </script>
 <body data-build="20261008-review-editorial">
+<div id="ssv-page-loader" role="status" aria-live="polite" aria-label="Loading Sri Sai Vani Collections">
+  <div class="ssv-loader-content">
+    <p class="ssv-loader-brand">SRI SAI VANI</p>
+    <p class="ssv-loader-subtitle">C O L L E C T I O N S</p>
+    <div class="ssv-loader-track" aria-hidden="true"><span></span></div>
+    <p class="ssv-loader-message">Preparing your collection…</p>
+  </div>
+</div>
+<script>
+(function(){
+  var loader=document.getElementById("ssv-page-loader");
+  if(!loader)return;
+  var started=Date.now(),hidden=false;
+  function hideLoader(){
+    if(hidden)return;
+    hidden=true;
+    var wait=Math.max(0,450-(Date.now()-started));
+    setTimeout(function(){
+      loader.classList.add("is-hidden");
+      setTimeout(function(){if(loader.parentNode)loader.parentNode.removeChild(loader);},350);
+    },wait);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hideLoader,{once:true});
+  else hideLoader();
+  window.addEventListener("pageshow",function(e){if(e.persisted)hideLoader();});
+  setTimeout(hideLoader,4000);
+})();
+</script>
 <header class="header"><div class="header-inner"><button class="menu" id="menu" aria-label="Menu"><i></i><i></i><i></i></button><a class="brand" href="#home"><span><b>SRI SAI VANI</b><small>COLLECTIONS</small></span></a><div class="mobile-social-actions" aria-label="Quick contact"><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="3.5"></circle><circle cx="17.2" cy="6.8" r=".8" fill="currentColor" stroke="none"></circle></svg></a><a id="mobileHeaderWhatsApp" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.2 11.7a7.2 7.2 0 0 1-10.6 6.1L5 19l1.3-3.4a7.2 7.2 0 1 1 12.9-3.9Z"></path><path d="M9.3 8.8c.2-.35.4-.35.65-.35h.45c.2 0 .35.1.45.3l.7 1.45c.1.2.08.38-.08.55l-.45.5c.55 1 1.3 1.7 2.35 2.15l.48-.45c.16-.16.34-.18.54-.08l1.4.68c.24.12.32.3.25.55-.18.62-.7 1.05-1.3 1.08-2.45-.04-5.45-2.5-5.9-5.2-.06-.4.08-.75.46-1.18Z"></path></svg></a></div><nav id="nav"><a href="#shop" class="shop-link">SHOP NOW</a><a href="https://www.instagram.com/sri_sai_vani_collections/" target="_blank" rel="noopener">INSTAGRAM</a><button id="adminOpen" type="button" class="admin-link" aria-label="Open Admin Studio">ADMIN</button></nav></div></header>
 <section class="womens-world-marquee-section" aria-label="Saree and dress varieties">
   <div class="womens-world-marquee-viewport">
