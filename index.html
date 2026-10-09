@@ -9505,6 +9505,11 @@ function apply(){
   if(storeSection)storeSection.hidden=settings.showStore===false;
   const reviewLink=$(".sv-reviews__google a");if(reviewLink)reviewLink.href=settings.googleReviewsUrl||"https://www.google.com/search?q=Sri+Sai+Vani+Collections+Kamareddy+Google+reviews";
   const directions=$("#visit a[aria-label='Open Sri Sai Vani Collections in Google Maps']");if(directions){directions.href=settings.mapsUrl||"https://maps.app.goo.gl/7brWtDqk6T1gTV7K9?g_st=ac";const label=directions.querySelector("span");if(label)label.textContent=String(settings.mapsButtonLabel||"GET DIRECTIONS");}
+  const accent=/^#[0-9a-f]{6}$/i.test(String(settings.themeAccent||""))?settings.themeAccent:"#755239";
+  const softBg=/^#[0-9a-f]{6}$/i.test(String(settings.themeBackground||""))?settings.themeBackground:"#fffaf5";
+  let themeStyle=$("#custom-theme-overrides");
+  if(!themeStyle){themeStyle=document.createElement("style");themeStyle.id="custom-theme-overrides";document.head.appendChild(themeStyle);}
+  themeStyle.textContent="#hero .hero-primary-btn,.sv-instagram__button,.sv-reviews__google a{background:"+accent+"!important;border-color:"+accent+"!important;color:#fff!important}#reviews.sv-reviews,#instagram.sv-instagram,#visit.store-premium-redesign{background-color:"+softBg+"}";
   const n=waNumber();
   const collectionMessage="Hi Sri Sai Vani Collections, I would like to know about your collection.";
   const heroMessage="Hi Sri Sai Vani Collections, I'd like to inquire about your latest festive arrivals";
@@ -9731,6 +9736,10 @@ function showView(v){
       field('Opening hours','storeHours','10:00 AM – 9:00 PM')+
       field('Open days','storeDays','EVERY DAY')+
       field('Directions button label','mapsButtonLabel','GET DIRECTIONS')+'</div></details>'+
+      '<details class="admin-settings-group"><summary>Appearance</summary><div class="admin-settings-grid">'+
+      field('Accent colour','themeAccent','#755239','color')+
+      field('Soft section background colour','themeBackground','#fffaf5','color')+
+      '</div></details>'+
       '<details class="admin-settings-group"><summary>Section Visibility</summary><div class="admin-settings-toggles">'+
       toggle('Show customer reviews section','showReviews')+toggle('Show Visual Journal section','showJournal')+toggle('Show store details section','showStore')+
       '</div></details><button type="button" class="btn dark" id="saveSettings">SAVE ALL WEBSITE SETTINGS</button></div>';
