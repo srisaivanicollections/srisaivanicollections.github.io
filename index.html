@@ -10618,5 +10618,14 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 #saveSettings{position:sticky;bottom:10px;z-index:2;width:100%;box-shadow:0 5px 20px #00000016}
 @media(max-width:560px){.admin-settings-grid{grid-template-columns:minmax(0,1fr)}.admin-settings-group>summary{padding:13px}.admin-settings-grid{padding:0 12px 14px}}
 </style>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(error => {
+      console.warn("Offline support could not be enabled:", error);
+    });
+  });
+}
+</script>
 </body>
 </html>
