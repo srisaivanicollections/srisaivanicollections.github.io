@@ -10284,5 +10284,75 @@ $("#search").oninput=render;$("#price").onchange=render;load();
 
 
 
+
+<style id="cta-button-consistency-20261009">
+/* Align the three storefront CTAs. Scoped to these links only; Admin is untouched. */
+#reviews.sv-reviews .sv-reviews__google a,
+#instagram.sv-instagram .sv-instagram__button,
+#visit.store-premium-redesign .store-premium-action a{
+  box-sizing:border-box!important;
+  min-height:42px!important;
+  height:42px!important;
+  padding:0 20px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  font-family:"Inter",Arial,sans-serif!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:600!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease!important;
+}
+#reviews.sv-reviews .sv-reviews__google a{
+  border:1px solid #B38E5D!important;
+  background:#B38E5D!important;
+  color:#211B15!important;
+}
+#reviews.sv-reviews .sv-reviews__google a:hover,
+#reviews.sv-reviews .sv-reviews__google a:focus-visible{
+  border-color:#332B24!important;
+  background:#332B24!important;
+  color:#FFFAF3!important;
+}
+#instagram.sv-instagram .sv-instagram__button{
+  border:1px solid #332B24!important;
+  background:transparent!important;
+  color:#332B24!important;
+}
+#instagram.sv-instagram .sv-instagram__button:hover,
+#instagram.sv-instagram .sv-instagram__button:focus-visible{
+  border-color:#332B24!important;
+  background:#332B24!important;
+  color:#FFFAF3!important;
+}
+#visit.store-premium-redesign .store-premium-action a{
+  min-width:165px!important;
+  border:1px solid #332B24!important;
+  background:#332B24!important;
+  color:#FFFAF3!important;
+}
+#visit.store-premium-redesign .store-premium-action a:hover,
+#visit.store-premium-redesign .store-premium-action a:focus-visible{
+  border-color:#B38E5D!important;
+  background:#B38E5D!important;
+  color:#211B15!important;
+}
+@media(max-width:600px){
+  #reviews.sv-reviews .sv-reviews__google a,
+  #instagram.sv-instagram .sv-instagram__button,
+  #visit.store-premium-redesign .store-premium-action a{
+    min-height:42px!important;
+    height:42px!important;
+    padding:0 16px!important;
+    font-size:8.5px!important;
+    letter-spacing:.1em!important;
+  }
+}
+</style>
+
 </body>
 </html>
