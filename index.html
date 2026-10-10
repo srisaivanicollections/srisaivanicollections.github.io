@@ -8990,6 +8990,26 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 @media(max-width:600px){#admin .admin-feedback{margin:8px 0 11px;padding:9px 10px;font-size:12px}#admin .admin-product-status{gap:4px}#admin .admin-status{font-size:9px;min-height:21px;padding:3px 6px}#admin .admin-product-copy strong{-webkit-line-clamp:2}}
 @media(prefers-reduced-motion:reduce){#admin .admin-feedback{transition:none}}
 </style>
+<style id="ssv-admin-product-pagination-20261010">
+#admin .admin-product-pagination{
+  display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;
+  gap:6px!important;margin:10px 0 12px!important;padding:8px 0!important;
+  border-top:1px solid #E7E0D8!important;border-bottom:1px solid #E7E0D8!important;
+}
+#admin .admin-page-button{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-width:36px!important;height:36px!important;padding:0 10px!important;
+  border:1px solid #E2D9CC!important;border-radius:4px!important;background:#fff!important;
+  color:#493A2B!important;font:600 12px Inter,Arial,sans-serif!important;cursor:pointer!important;
+}
+#admin .admin-page-button.is-active{border-color:#9D7A49!important;background:#9D7A49!important;color:#fff!important;}
+#admin .admin-page-button:disabled{opacity:.35!important;cursor:not-allowed!important;}
+#admin .admin-product-pagination[hidden]{display:none!important;}
+@media(max-width:600px){
+  #admin .admin-product-pagination{gap:5px!important;margin:8px 0 10px!important;padding:8px 0!important;}
+  #admin .admin-page-button{min-width:34px!important;height:34px!important;padding:0 8px!important;}
+}
+</style>
 </head>
 <script id="store-hours-auto-status">
 (function(){
@@ -9992,8 +10012,10 @@ function showView(v){
     const knownColors=["Black","Blue","Brown","Gold","Green","Grey","Ivory","Maroon","Multi-colour","Orange","Pink","Purple","Red","Silver","White","Yellow"];
     const colorOptions=[...new Set([...knownColors,...products.map(p=>String(p.color||"").trim()).filter(Boolean)])].sort((a,b)=>a.localeCompare(b));
     const categoryOptions=[...new Set(products.map(p=>String(p.category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-    b.innerHTML='<div class="admin-products-heading"><div><h3>Product Catalogue</h3><p>Manage your collection and product availability.</p></div><button type="button" id="adminAddProduct" class="admin-add-product"><span aria-hidden="true">+</span> Add Product</button></div><div class="admin-product-counts" aria-label="Product summary"><div><strong>'+productCounts.total+'</strong><span>PRODUCTS</span></div><div><strong>'+productCounts.newArrival+'</strong><span>NEW</span></div><div><strong>'+productCounts.bestSeller+'</strong><span>BEST SELLER</span></div><div><strong>'+productCounts.available+'</strong><span>AVAILABLE</span></div></div><div class="admin-product-filters"><label class="admin-product-search"><span class="admin-filter-label">Search products</span><input id="adminProductSearch" type="search" placeholder="Name, description or product ID" autocomplete="off"><span class="admin-search-icon" aria-hidden="true">⌕</span></label><label><span class="admin-filter-label">Category</span><select id="adminProductCategory"><option value="">All</option>'+categoryOptions.map(category=>'<option value="'+esc(category)+'">'+esc(category)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Colour</span><select id="adminProductColor"><option value="">All</option><option value="__none">Colour not set</option>'+colorOptions.map(color=>'<option value="'+esc(color)+'">'+esc(color)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Status</span><select id="adminProductStatus"><option value="">All</option><option value="available">Available</option><option value="unavailable">Unavailable</option><option value="new">New arrival</option><option value="best">Best seller</option></select></label><label><span class="admin-filter-label">Sort by</span><select id="adminProductSort"><option value="recommended">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name-asc">Name: A to Z</option><option value="name-desc">Name: Z to A</option></select></label><button type="button" id="clearAdminProductFilters" class="admin-filter-clear">Reset</button></div><div id="adminProductResults" class="admin-product-results" aria-live="polite"></div><div id="adminProductsScroll" class="admin-products-scroll" aria-label="Product list"></div>';
+    b.innerHTML='<div class="admin-products-heading"><div><h3>Product Catalogue</h3><p>Manage your collection and product availability.</p></div><button type="button" id="adminAddProduct" class="admin-add-product"><span aria-hidden="true">+</span> Add Product</button></div><div class="admin-product-counts" aria-label="Product summary"><div><strong>'+productCounts.total+'</strong><span>PRODUCTS</span></div><div><strong>'+productCounts.newArrival+'</strong><span>NEW</span></div><div><strong>'+productCounts.bestSeller+'</strong><span>BEST SELLER</span></div><div><strong>'+productCounts.available+'</strong><span>AVAILABLE</span></div></div><div class="admin-product-filters"><label class="admin-product-search"><span class="admin-filter-label">Search products</span><input id="adminProductSearch" type="search" placeholder="Name, description or product ID" autocomplete="off"><span class="admin-search-icon" aria-hidden="true">⌕</span></label><label><span class="admin-filter-label">Category</span><select id="adminProductCategory"><option value="">All</option>'+categoryOptions.map(category=>'<option value="'+esc(category)+'">'+esc(category)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Colour</span><select id="adminProductColor"><option value="">All</option><option value="__none">Colour not set</option>'+colorOptions.map(color=>'<option value="'+esc(color)+'">'+esc(color)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Status</span><select id="adminProductStatus"><option value="">All</option><option value="available">Available</option><option value="unavailable">Unavailable</option><option value="new">New arrival</option><option value="best">Best seller</option></select></label><label><span class="admin-filter-label">Sort by</span><select id="adminProductSort"><option value="recommended">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name-asc">Name: A to Z</option><option value="name-desc">Name: Z to A</option></select></label><button type="button" id="clearAdminProductFilters" class="admin-filter-clear">Reset</button></div><div id="adminProductResults" class="admin-product-results" aria-live="polite"></div><nav id="adminProductPagination" class="admin-product-pagination" aria-label="Product pages"></nav><div id="adminProductsScroll" class="admin-products-scroll" aria-label="Product list"></div>';
     const searchInput=$("#adminProductSearch"), categoryFilter=$("#adminProductCategory"), colorFilter=$("#adminProductColor"), statusFilter=$("#adminProductStatus"), sortFilter=$("#adminProductSort"), results=$("#adminProductResults"), list=$("#adminProductsScroll");
+    let adminProductPage=1;
+    const adminProductsPerPage=5;
     const renderAdminProductList=()=>{
       const q=String(searchInput.value||"").trim().toLowerCase(), cat=categoryFilter.value, color=colorFilter.value, status=statusFilter.value;
       const filtered=products.filter(p=>{
@@ -10005,11 +10027,39 @@ function showView(v){
       else if(sort==="price-desc")filtered.sort((a,b)=>(Number(b.price)||0)-(Number(a.price)||0));
       else if(sort==="name-asc")filtered.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||""),undefined,{sensitivity:"base"}));
       else if(sort==="name-desc")filtered.sort((a,b)=>String(b.name||"").localeCompare(String(a.name||""),undefined,{sensitivity:"base"}));
-      results.textContent="Showing "+filtered.length+" of "+products.length+" products";
-      list.innerHTML=filtered.length?filtered.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\');this.onerror=null;this.src=\'assets/dress-4.svg\'"><div class="admin-product-copy"><strong>'+esc(cleanProductName(p.name))+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+(p.color?' · '+esc(p.color):' · Colour not set')+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status is-new">NEW</span>':"")+(p.bestSeller?'<span class="admin-status is-best">BEST SELLER</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">UNAVAILABLE</span>':'<span class="admin-status is-available">AVAILABLE</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join(""):'<div class="admin-products-empty">No products match these filters.<button type="button" id="clearAdminProductFiltersEmpty">Clear filters</button></div>';
+      const pageCount=Math.max(1,Math.ceil(filtered.length/adminProductsPerPage));
+      adminProductPage=Math.min(Math.max(1,adminProductPage),pageCount);
+      const start=(adminProductPage-1)*adminProductsPerPage;
+      const pageItems=filtered.slice(start,start+adminProductsPerPage);
+      results.textContent=filtered.length
+        ? "Showing "+(start+1)+"–"+Math.min(start+adminProductsPerPage,filtered.length)+" of "+filtered.length+" products"
+        : "Showing 0 of 0 products";
+      list.innerHTML=pageItems.length?pageItems.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\');this.onerror=null;this.src=\'assets/dress-4.svg\'"><div class="admin-product-copy"><strong>'+esc(cleanProductName(p.name))+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+(p.color?' · '+esc(p.color):' · Colour not set')+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status is-new">NEW</span>':"")+(p.bestSeller?'<span class="admin-status is-best">BEST SELLER</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">UNAVAILABLE</span>':'<span class="admin-status is-available">AVAILABLE</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join(""):'<div class="admin-products-empty">No products match these filters.<button type="button" id="clearAdminProductFiltersEmpty">Clear filters</button></div>';
+      const pagination=$("#adminProductPagination");
+      if(!filtered.length){pagination.innerHTML="";pagination.hidden=true;return;}
+      pagination.hidden=false;
+      const button=(label,page,disabled,active=false)=>'<button type="button" class="admin-page-button'+(active?' is-active':'')+'" data-page="'+page+'"'+(disabled?' disabled':'')+(active?' aria-current="page"':'')+'>'+label+'</button>';
+      let pages="";
+      const pageWindow=5;
+      let first=Math.max(1,adminProductPage-Math.floor(pageWindow/2));
+      let last=Math.min(pageCount,first+pageWindow-1);
+      first=Math.max(1,last-pageWindow+1);
+      pages+=button("‹",adminProductPage-1,adminProductPage===1);
+      for(let page=first;page<=last;page++)pages+=button(String(page),page,false,page===adminProductPage);
+      pages+=button("›",adminProductPage+1,adminProductPage===pageCount);
+      pagination.innerHTML=pages;
+      pagination.querySelectorAll("button[data-page]").forEach(btn=>btn.addEventListener("click",()=>{
+        const nextPage=Number(btn.dataset.page);
+        if(!Number.isFinite(nextPage)||nextPage<1||nextPage>pageCount||nextPage===adminProductPage)return;
+        adminProductPage=nextPage;
+        renderAdminProductList();
+        list.scrollTop=0;
+      }));
     };
-    [searchInput,categoryFilter,colorFilter,statusFilter,sortFilter].forEach(control=>control.addEventListener(control===searchInput?"input":"change",renderAdminProductList));
-    $("#clearAdminProductFilters").onclick=()=>{searchInput.value="";categoryFilter.value="";colorFilter.value="";statusFilter.value="";sortFilter.value="recommended";renderAdminProductList();};
+    const resetAdminProductPage=()=>{adminProductPage=1;renderAdminProductList();};
+    searchInput.addEventListener("input",resetAdminProductPage);
+    [categoryFilter,colorFilter,statusFilter,sortFilter].forEach(control=>control.addEventListener("change",resetAdminProductPage));
+    $("#clearAdminProductFilters").onclick=()=>{searchInput.value="";categoryFilter.value="";colorFilter.value="";statusFilter.value="";sortFilter.value="recommended";adminProductPage=1;renderAdminProductList();};
     $("#adminAddProduct").onclick=()=>showView("add");
     renderAdminProductList();
   }else if(v==="add"){
