@@ -10177,22 +10177,33 @@ function showAdminConfirm(title,message,confirmLabel="CONFIRM"){
 
 function showAdminToast(message,type="success"){
   let el=$("#adminToast");
+  const admin=$("#admin");
+  const body=$("#studioBody");
+  if(!admin||!body)return;
   if(!el){
     el=document.createElement("div");
     el.id="adminToast";
-    const admin=$("#admin");
-    if(admin)admin.appendChild(el);
+    el.className="admin-toast";
+    el.hidden=true;
   }
+  // Place feedback at the top of the active admin content, not outside the
+  // modal where it can cover the storefront or float beside the panel.
+  if(el.parentElement!==body)body.insertBefore(el,body.firstChild);
   const isError=type==="error";
   el.setAttribute("role",isError?"alert":"status");
   el.setAttribute("aria-live",isError?"assertive":"polite");
   el.setAttribute("aria-atomic","true");
   el.textContent=String(message||"");
   el.className="admin-toast "+(isError?"error":"success");
+  el.hidden=false;
   clearTimeout(window.__adminToastTimer);
   el.classList.remove("show");
   requestAnimationFrame(()=>el.classList.add("show"));
-  window.__adminToastTimer=setTimeout(()=>el.classList.remove("show"),isError?6000:4000);
+  window.__adminToastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+    el.hidden=true;
+    el.textContent="";
+  },isError?5000:3000);
 }
 
 let catalogWriteQueue=Promise.resolve();
@@ -11224,67 +11235,38 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 #admin .admin-confirm-accept{border:1px solid #1C1917 !important; background:#1C1917 !important; color:#FAF8F5 !important;}
 #admin .admin-toast{max-width:calc(100% - 24px) !important; white-space:normal !important; overflow-wrap:anywhere !important;}
 
-/* Non-overlapping Admin feedback: reserve space inside the modal for messages. */
-#admin .admin-toast{
-  position:sticky !important;
-  left:auto !important;
-  bottom:auto !important;
-  z-index:30 !important;
+/* In-flow transient messages: never float outside or overlap the admin panel. */
+#admin #studioBody > #adminToast{
+  position:relative !important;
+  inset:auto !important;
+  z-index:1 !important;
   display:block !important;
   width:auto !important;
   max-width:100% !important;
-  margin:12px 0 0 !important;
+  box-sizing:border-box !important;
+  margin:0 0 14px !important;
   padding:10px 12px !important;
   border:1px solid #DED8CF !important;
   border-left:2px solid #8A9B80 !important;
   border-radius:3px !important;
   background:#FAF8F5 !important;
   color:#302B26 !important;
-  box-shadow:0 2px 8px rgba(28,25,23,.06) !important;
+  box-shadow:none !important;
   font:500 12px/1.45 Arial,Helvetica,sans-serif !important;
   letter-spacing:0 !important;
   white-space:normal !important;
   overflow-wrap:anywhere !important;
   opacity:0 !important;
-  transform:translateY(5px) !important;
+  transform:translateY(4px) !important;
   pointer-events:none !important;
   transition:opacity .16s ease,transform .16s ease !important;
 }
-#admin .admin-toast::before{content:none !important;display:none !important;}
-#admin .admin-toast.error{border-color:#E5D5CF !important;border-left-color:#A65A4F !important;}
-#admin .admin-toast.show{opacity:1 !important;transform:translateY(0) !important;}
-#admin .admin-confirm-overlay{
-  position:absolute !important;
-  inset:0 !important;
-  z-index:10020 !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  overflow-y:auto !important;
-  padding:20px !important;
-  box-sizing:border-box !important;
-  background:rgba(28,25,23,.38) !important;
-  backdrop-filter:blur(1px) !important;
-  -webkit-backdrop-filter:blur(1px) !important;
-}
-#admin .admin-confirm-dialog{
-  width:min(100%,340px) !important;
-  max-height:100% !important;
-  overflow-y:auto !important;
-  box-sizing:border-box !important;
-  padding:20px !important;
-  border:1px solid #E4D8C5 !important;
-  border-radius:5px !important;
-  background:#FAF8F5 !important;
-  box-shadow:0 8px 24px rgba(28,25,23,.14) !important;
-}
-#admin .admin-confirm-dialog h3{margin:0 0 8px !important;font-family:"Cormorant Garamond",Georgia,serif !important;font-size:24px !important;line-height:1.15 !important;}
-#admin .admin-confirm-dialog p{margin:0 0 18px !important;font-size:13px !important;line-height:1.5 !important;}
-#admin .admin-confirm-actions{display:flex !important;justify-content:flex-end !important;gap:8px !important;}
+#admin #studioBody > #adminToast[hidden]{display:none !important;}
+#admin #studioBody > #adminToast::before{content:none !important;display:none !important;}
+#admin #studioBody > #adminToast.error{border-color:#E5D5CF !important;border-left-color:#A65A4F !important;}
+#admin #studioBody > #adminToast.show{opacity:1 !important;transform:translateY(0) !important;}
 @media(max-width:600px){
-  #admin .admin-toast{margin-top:10px !important;padding:9px 11px !important;font-size:12px !important;}
-  #admin .admin-confirm-overlay{padding:16px !important;}
-  #admin .admin-confirm-dialog{padding:18px !important;}
+  #admin #studioBody > #adminToast{margin-bottom:12px !important;padding:9px 11px !important;font-size:12px !important;}
 }
 </style>
 
