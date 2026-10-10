@@ -10516,7 +10516,7 @@ function updateAdminView(){
   }
   if(studioSection){
     studioSection.classList.toggle("hidden",!active);
-    studioSection.style.setProperty("display",active?"block":"none","important");
+    studioSection.style.setProperty("display",active?"flex":"none","important");
   }
 }
 
@@ -13631,6 +13631,62 @@ if ("serviceWorker" in navigator) {
   #admin.modal:has(#studio:not(.hidden)) > .panel {
     max-height: calc(100dvh - 16px) !important;
     height: calc(100dvh - 16px) !important;
+  }
+  #admin #studio:not(.hidden) #studioBody {
+    padding-bottom: 110px !important;
+  }
+}
+</style>
+
+<style id="admin-studio-scroll-final-implementation">
+/* Admin Studio only. Activated only while #studio is visible; login and storefront are untouched. */
+#admin.modal:has(#studio:not(.hidden)) > .panel {
+  display: flex !important;
+  flex-direction: column !important;
+  height: min(850px, calc(100dvh - 32px)) !important;
+  max-height: calc(100dvh - 32px) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+#admin.modal:has(#studio:not(.hidden)) > .panel > .panel-top {
+  flex: 0 0 auto !important;
+  position: relative !important;
+}
+#admin #studio:not(.hidden) {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: hidden !important;
+}
+#admin #studio:not(.hidden) .studio-nav {
+  flex: 0 0 auto !important;
+  position: relative !important;
+  top: auto !important;
+}
+#admin #studio:not(.hidden) #studioBody {
+  display: block !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  padding-bottom: 100px !important;
+  scrollbar-gutter: stable;
+}
+#admin #studio:not(.hidden) #adminProductsScroll {
+  display: block !important;
+  overflow-y: visible !important;
+  padding-bottom: 20px !important;
+}
+@media (max-width: 600px) {
+  #admin.modal:has(#studio:not(.hidden)) > .panel {
+    height: calc(100dvh - 20px) !important;
+    max-height: calc(100dvh - 20px) !important;
   }
   #admin #studio:not(.hidden) #studioBody {
     padding-bottom: 110px !important;
