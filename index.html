@@ -10799,6 +10799,93 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 .admin-setting-toggle input{width:18px;height:18px;accent-color:#755239}
 #saveSettings{position:sticky;bottom:10px;z-index:2;width:100%;box-shadow:0 5px 20px #00000016}
 @media(max-width:560px){.admin-settings-grid{grid-template-columns:minmax(0,1fr)}.admin-settings-group>summary{padding:13px}.admin-settings-grid{padding:0 12px 14px}}
+
+/* ---------- ADMIN SIGN-IN ONLY: compact, consistent states ---------- */
+#admin #login{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:24px 28px 26px;
+}
+#admin #login .admin-auth-copy{
+  margin:0 0 22px;
+}
+#admin #login .admin-auth-field{
+  width:100%;
+  margin:0 0 14px;
+}
+#admin #login .admin-auth-field label{
+  font-size:10px;
+  letter-spacing:.12em;
+}
+#admin #login .admin-auth-field input{
+  min-height:46px;
+  height:46px;
+  font-size:15px;
+  border-radius:4px;
+}
+#admin #login #sendOtpBtn,
+#admin #login #verifyOtpBtn{
+  min-height:44px;
+  height:44px;
+  margin:0 0 10px;
+  border-radius:4px;
+  font-size:10px;
+  letter-spacing:.14em;
+}
+#admin #login #otpField{
+  margin:2px 0 14px !important;
+}
+#admin #login #otpField input{
+  letter-spacing:.22em;
+}
+#admin #login #resendOtpBtn{
+  align-self:flex-start;
+  min-height:36px;
+  margin:0 0 8px;
+  padding:6px 0;
+  border:0;
+  background:transparent;
+  color:#725a32;
+  font:600 11px/1.4 Arial,Helvetica,sans-serif;
+  letter-spacing:.08em;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  cursor:pointer;
+}
+#admin #login #resendOtpBtn:disabled{
+  opacity:.55;
+  cursor:wait;
+}
+#admin #login #loginMsg{
+  min-height:0;
+  margin:4px 0 0;
+  overflow-wrap:anywhere;
+}
+#admin #login #adminEmail:focus-visible,
+#admin #login #adminOtp:focus-visible,
+#admin #login button:focus-visible{
+  outline:2px solid #B89758;
+  outline-offset:3px;
+}
+@media(max-width:600px){
+  #admin .panel{
+    width:calc(100vw - 28px) !important;
+    max-width:460px !important;
+    max-height:calc(100dvh - 28px) !important;
+    overflow-y:auto !important;
+    overscroll-behavior:contain;
+  }
+  #admin #login{
+    padding:22px 20px 24px !important;
+  }
+  #admin #login .admin-auth-copy{
+    margin-bottom:20px;
+  }
+  #admin #login .admin-auth-field input{
+    font-size:16px;
+  }
+}
 </style>
 <script>
 if ("serviceWorker" in navigator) {
