@@ -9586,14 +9586,14 @@ async function localApi(body){
   if(body.action==="deleteProduct"){
     const id=Number(body.id);
     if(!id)throw new Error("Invalid product.");
-    await mutateGithubJson("data/products.json",value=>{
+    const saved=await mutateGithubJson("data/products.json",value=>{
       const list=Array.isArray(value)?value:[];
       if(!list.some(p=>Number(p.id)===id))return null;
       const next=list.filter(p=>Number(p.id)!==id);
       if(!next.length)throw new Error("Cannot delete the last remaining catalog item.");
       return next;
     },"Delete product");
-    return {ok:true};
+    return {ok:true,products:saved.value};
   }
   if(body.action==="saveSettings"){
     const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
@@ -10078,7 +10078,7 @@ function edit(id){
     try{
       products=oldProducts.filter(x=>Number(x.id)!==Number(id));
       await deleteProductFromGithub(id);
-      await load();
+      render();
       showView("products");
       showAdminToast("Product deleted successfully.","success");
     }catch(e){
@@ -10094,18 +10094,13 @@ async function persistProduct(product){
 }
 async function deleteProductFromGithub(id){
   const deleteOperation=async()=>{
-    await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
-    // Use an uncached Contents API read for post-write verification.
-    const latest=await githubReadJsonFresh("data/products.json");
-    const list=Array.isArray(latest.value)?latest.value:[];
-    if(list.some(p=>Number(p.id)===Number(id))){
-      throw new Error("Deletion was saved but could not yet be verified. Refresh the catalogue before retrying.");
-    }
-    return list;
+    const result=await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
+    if(!Array.isArray(result?.products))throw new Error("Delete completed without a confirmed catalogue response. Refresh before retrying.");
+    if(result.products.some(p=>Number(p.id)===Number(id)))throw new Error("Product deletion could not be confirmed.");
+    return result.products;
   };
   catalogWriteQueue=catalogWriteQueue.then(deleteOperation,deleteOperation);
-  const verified=await catalogWriteQueue;
-  products=verified;
+  products=await catalogWriteQueue;
   githubOriginalIds=new Set(products.map(p=>Number(p.id)));
 }
 function showAdminConfirm(title,message,confirmLabel="CONFIRM"){
