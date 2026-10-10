@@ -3,7 +3,8 @@
  *
  * Required Cloudflare Worker bindings/secrets:
  *   KV namespace binding: OTP_STORE
- *   Secret: RESEND_API_KEY
+ *   Secret: RESEND_API_KEY (Vinith)
+ *   Secret: RESEND_API_KEY_SRISAI (Sri Sai Vani)
  *
  * Deploy this file to the Worker separately. Committing it to GitHub provides
  * version control only; it does not automatically deploy the Cloudflare Worker.
@@ -63,6 +64,15 @@ function randomOtp() {
 }
 
 async function sendOtpEmail(env, email, otp) {
+  // Select the Resend account associated with the requested Admin email.
+  const apiKey = email === "srisaivanicollections@gmail.com"
+    ? env.RESEND_API_KEY_SRISAI
+    : env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    console.error("Missing Resend API key for authorized Admin email.");
+    throw new Error("Email provider is not configured for this address.");
+  }
   const subject = `Your Sri Sai Vani Admin verification code: ${otp}`;
   const text = [
     "Sri Sai Vani Collections Admin verification",
@@ -91,7 +101,7 @@ async function sendOtpEmail(env, email, otp) {
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+      "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
