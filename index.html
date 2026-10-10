@@ -13068,7 +13068,9 @@ if ("serviceWorker" in navigator) {
 </style>
 
 <style id="ssv-admin-mobile-scroll-and-filters-fix-20261010">
-/* Admin mobile fix: preserve the existing open/hidden display state; only correct scroll ownership. */
+/* Admin mobile fix: explicitly preserve hidden state against older #admin.modal display rules. */
+#admin.modal.hidden{display:none!important;}
+/* Correct scroll ownership without forcing the modal's display mode. */
 #admin.modal{
   position:fixed!important;
   inset:0!important;
