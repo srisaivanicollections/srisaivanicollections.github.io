@@ -11711,6 +11711,53 @@ if ("serviceWorker" in navigator) {
   #admin .studio-nav{gap:3px!important;}
   #admin .studio-nav button[data-view],#admin .studio-nav #logoutBtn{font-size:9px!important;letter-spacing:.015em!important;padding-left:1px!important;padding-right:1px!important;}
 }
+
+/* Admin Studio navigation consistency: remove the oversized logout box */
+#admin .studio-nav #logoutBtn,
+#admin .studio-nav .admin-logout,
+#admin .studio-nav .logout-btn {
+  flex: 1 1 0 !important;
+  align-self: stretch !important;
+  min-width: 0 !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 9px 6px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: var(--muted) !important;
+  font-family: "Montserrat", "Inter", Arial, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+#admin .studio-nav #logoutBtn:hover,
+#admin .studio-nav .admin-logout:hover,
+#admin .studio-nav .logout-btn:hover {
+  color: var(--ink) !important;
+  background: rgba(179, 142, 93, .08) !important;
+}
+#admin .studio-nav #logoutBtn:focus-visible,
+#admin .studio-nav .admin-logout:focus-visible,
+#admin .studio-nav .logout-btn:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: -2px !important;
+}
+@media (max-width: 380px) {
+  #admin .studio-nav #logoutBtn,
+  #admin .studio-nav .admin-logout,
+  #admin .studio-nav .logout-btn {
+    font-size: 8px !important;
+    letter-spacing: .06em !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+}
+
 </style>
 </body>
 </html>
