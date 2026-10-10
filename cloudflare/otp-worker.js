@@ -81,7 +81,9 @@ async function sendOtpEmail(env, email, otp) {
       <p style="margin:0 0 12px;color:#7b6848;font-size:12px;letter-spacing:1.5px;text-transform:uppercase">Sri Sai Vani Collections</p>
       <h1 style="font-size:22px;line-height:1.3;margin:0 0 12px">Admin verification code</h1>
       <p style="font-size:15px;line-height:1.6;margin:0 0 18px">Use this six-digit code to sign in to Admin Studio:</p>
-      <p style="font-family:Arial,Helvetica,sans-serif;font-size:32px;font-weight:700;letter-spacing:8px;margin:0 0 20px;padding:16px 12px;text-align:center;background:#f4f0e9;border-radius:8px;color:#1c1917">${otp}</p>
+      <p style="font-family:Arial,Helvetica,sans-serif;font-size:32px;font-weight:700;letter-spacing:8px;margin:0 0 16px;padding:16px 12px;text-align:center;background:#f4f0e9;border-radius:8px;color:#1c1917">${otp}</p>
+      <p style="font-size:13px;line-height:1.6;text-align:center;color:#625d55;margin:0 0 18px">Select the code above to copy it, then paste it into Admin Studio.</p>
+      <p style="margin:0 0 20px;text-align:center"><a href="https://srisaivanicollections.github.io/" style="display:inline-block;background:#a7834d;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;padding:13px 24px;border-radius:6px">Open Admin Login</a></p>
       <p style="font-size:14px;line-height:1.6;margin:0 0 8px">This code expires in <strong>5 minutes</strong> and can be used only once.</p>
       <p style="font-size:13px;line-height:1.6;color:#625d55;margin:0">If you did not request this code, ignore this email.</p>
     </main>
