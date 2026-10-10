@@ -9220,7 +9220,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
   <button type="button" id="resendOtpBtn" class="text-link" style="display:none;">RESEND OTP</button>
   <button type="button" id="forgotPassword" class="text-link" style="display:none;">Forgot password?</button>
   <small id="loginMsg" class="storage-status-msg" aria-live="polite"></small>
-</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="adminFeedback" class="admin-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
+</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="settings">SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="adminFeedback" class="admin-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
 <script>
 
 /* Embedded catalog fallback: keeps the storefront functional if GitHub catalog is unavailable. */
@@ -9989,7 +9989,7 @@ function showView(v){
     const productCounts={total:products.length,newArrival:products.filter(p=>p.newArrival).length,bestSeller:products.filter(p=>p.bestSeller).length,available:products.filter(p=>p.availability!==false).length};
     const knownColors=["Black","Blue","Brown","Gold","Green","Grey","Ivory","Maroon","Multi-colour","Orange","Pink","Purple","Red","Silver","White","Yellow"];
     const colorOptions=[...new Set([...knownColors,...products.map(p=>String(p.color||"").trim()).filter(Boolean)])].sort((a,b)=>a.localeCompare(b));
-    b.innerHTML='<div class="admin-product-counts" aria-label="Product summary"><div><strong>'+productCounts.total+'</strong><span>PRODUCTS</span></div><div><strong>'+productCounts.newArrival+'</strong><span>NEW</span></div><div><strong>'+productCounts.bestSeller+'</strong><span>BEST SELLER</span></div><div><strong>'+productCounts.available+'</strong><span>AVAILABLE</span></div></div><div class="admin-product-filters"><label class="admin-product-search"><span class="admin-filter-label">Search products</span><input id="adminProductSearch" type="search" placeholder="Name, description or product ID" autocomplete="off"><span class="admin-search-icon" aria-hidden="true">⌕</span></label><label><span class="admin-filter-label">Category</span><select id="adminProductCategory"><option value="">All categories</option><option value="Sarees">Sarees</option><option value="Dresses">Dresses</option></select></label><label><span class="admin-filter-label">Colour</span><select id="adminProductColor"><option value="">All colours</option><option value="__none">Colour not set</option>'+colorOptions.map(color=>'<option value="'+esc(color)+'">'+esc(color)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Status</span><select id="adminProductStatus"><option value="">All statuses</option><option value="available">Available</option><option value="unavailable">Unavailable</option><option value="new">New arrival</option><option value="best">Best seller</option></select></label><button type="button" id="clearAdminProductFilters" class="admin-filter-clear">Clear filters</button></div><div id="adminProductResults" class="admin-product-results" aria-live="polite"></div><div id="adminProductsScroll" class="admin-products-scroll" aria-label="Product list"></div>';
+    b.innerHTML='<div class="admin-products-heading"><div><h3>Product Catalogue</h3><p>Manage your collection and product availability.</p></div><button type="button" id="adminAddProduct" class="admin-add-product"><span aria-hidden="true">+</span> Add Product</button></div><div class="admin-product-counts" aria-label="Product summary"><div><strong>'+productCounts.total+'</strong><span>PRODUCTS</span></div><div><strong>'+productCounts.newArrival+'</strong><span>NEW</span></div><div><strong>'+productCounts.bestSeller+'</strong><span>BEST SELLER</span></div><div><strong>'+productCounts.available+'</strong><span>AVAILABLE</span></div></div><div class="admin-product-filters"><label class="admin-product-search"><span class="admin-filter-label">Search products</span><input id="adminProductSearch" type="search" placeholder="Name, description or product ID" autocomplete="off"><span class="admin-search-icon" aria-hidden="true">⌕</span></label><label><span class="admin-filter-label">Category</span><select id="adminProductCategory"><option value="">All categories</option><option value="Sarees">Sarees</option><option value="Dresses">Dresses</option></select></label><label><span class="admin-filter-label">Colour</span><select id="adminProductColor"><option value="">All colours</option><option value="__none">Colour not set</option>'+colorOptions.map(color=>'<option value="'+esc(color)+'">'+esc(color)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Status</span><select id="adminProductStatus"><option value="">All statuses</option><option value="available">Available</option><option value="unavailable">Unavailable</option><option value="new">New arrival</option><option value="best">Best seller</option></select></label><button type="button" id="clearAdminProductFilters" class="admin-filter-clear">Clear filters</button></div><div id="adminProductResults" class="admin-product-results" aria-live="polite"></div><div id="adminProductsScroll" class="admin-products-scroll" aria-label="Product list"></div>';
     const searchInput=$("#adminProductSearch"), categoryFilter=$("#adminProductCategory"), colorFilter=$("#adminProductColor"), statusFilter=$("#adminProductStatus"), results=$("#adminProductResults"), list=$("#adminProductsScroll");
     const renderAdminProductList=()=>{
       const q=String(searchInput.value||"").trim().toLowerCase(), cat=categoryFilter.value, color=colorFilter.value, status=statusFilter.value;
@@ -10002,6 +10002,7 @@ function showView(v){
     };
     [searchInput,categoryFilter,colorFilter,statusFilter].forEach(control=>control.addEventListener(control===searchInput?"input":"change",renderAdminProductList));
     $("#clearAdminProductFilters").onclick=()=>{searchInput.value="";categoryFilter.value="";colorFilter.value="";statusFilter.value="";renderAdminProductList();};
+    $("#adminAddProduct").onclick=()=>showView("add");
     renderAdminProductList();
   }else if(v==="add"){
     b.innerHTML=form();
@@ -12126,6 +12127,32 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-counts span{font-size:6px!important;}
   #admin .admin-product-filters{gap:8px!important;padding:9px!important;}
   #admin .admin-product-filters input,#admin .admin-product-filters select{font-size:12px!important;padding-inline:7px!important;}
+}
+</style>
+
+<style id="ssv-admin-product-add-and-panel-consistency-20261010">
+/* One clear add-product action lives in the catalogue, not in the main navigation. */
+#admin .admin-products-heading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;margin:0 0 14px!important;min-width:0!important;}
+#admin .admin-products-heading h3{margin:0!important;color:#1C1917!important;font:600 25px/1.1 "Cormorant Garamond",Georgia,serif!important;letter-spacing:-.01em!important;}
+#admin .admin-products-heading p{margin:4px 0 0!important;color:#75695d!important;font:12px/1.45 Inter,Arial,sans-serif!important;}
+#admin .admin-add-product{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:42px!important;padding:0 18px!important;flex:0 0 auto!important;border:1px solid #9D7A49!important;border-radius:5px!important;background:#9D7A49!important;color:#fff!important;font:600 12px Inter,Arial,sans-serif!important;cursor:pointer!important;white-space:nowrap!important;box-shadow:none!important;}
+#admin .admin-add-product span{font-size:20px!important;font-weight:400!important;line-height:1!important;}
+#admin .admin-add-product:hover{background:#80613A!important;border-color:#80613A!important;}
+@media(min-width:901px){
+  /* Same outer panel dimensions for Products, Add Item and Settings. */
+  #admin > .panel{width:min(1160px,calc(100vw - 56px))!important;max-width:1160px!important;}
+  #admin #studioBody{width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+  #admin .admin-customize{width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;}
+}
+@media(max-width:600px){
+  #admin .admin-products-heading{align-items:flex-start!important;gap:10px!important;margin-bottom:10px!important;}
+  #admin .admin-products-heading h3{font-size:22px!important;}
+  #admin .admin-products-heading p{font-size:11px!important;max-width:220px!important;}
+  #admin .admin-add-product{min-height:40px!important;padding:0 11px!important;font-size:11px!important;}
+}
+@media(max-width:360px){
+  #admin .admin-products-heading{flex-wrap:wrap!important;}
+  #admin .admin-add-product{width:100%!important;}
 }
 </style>
 </body>
