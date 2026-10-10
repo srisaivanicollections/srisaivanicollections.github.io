@@ -10121,10 +10121,11 @@ async function persistProduct(product){
 async function deleteProductFromGithub(id){
   const deleteOperation=async()=>{
     await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
-    const latest=await githubReadJson("data/products.json");
+    // Use an uncached Contents API read for post-write verification.
+    const latest=await githubReadJsonFresh("data/products.json");
     const list=Array.isArray(latest.value)?latest.value:[];
     if(list.some(p=>Number(p.id)===Number(id))){
-      throw new Error("Product deletion could not be verified.");
+      throw new Error("Deletion was saved but could not yet be verified. Refresh the catalogue before retrying.");
     }
     return list;
   };
