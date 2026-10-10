@@ -9609,20 +9609,27 @@ async function localApi(body){
   if(body.action==="deleteProduct"){
     const id=Number(body.id);
     if(!id) throw new Error("Invalid product.");
-    const current=await githubReadJson("data/products.json");
-    const list=Array.isArray(current.value)?current.value:[];
-    const merged=list.filter(p=>Number(p.id)!==id);
-    if(!merged.length) throw new Error("Catalog safety check failed.");
-    try{
-      await githubWriteJson("data/products.json",merged,current.sha,"Delete product");
-    }catch(_){
-      const latest=await githubReadJson("data/products.json");
-      const latestList=Array.isArray(latest.value)?latest.value:[];
-      const latestMerged=latestList.filter(p=>Number(p.id)!==id);
-      if(!latestMerged.length) throw new Error("Catalog safety check failed.");
-      await githubWriteJson("data/products.json",latestMerged,latest.sha,"Retry product deletion");
+    let lastError=null;
+    for(let attempt=0;attempt<4;attempt++){
+      // Always fetch the latest Contents API SHA before each write. GitHub
+      // rejects stale SHAs when another save changes products.json.
+      const current=await githubReadJsonFresh("data/products.json");
+      const list=Array.isArray(current.value)?current.value:[];
+      if(!list.some(p=>Number(p.id)===id)){
+        // Treat an already-removed item as success, not as a second deletion.
+        return {ok:true};
+      }
+      const merged=list.filter(p=>Number(p.id)!==id);
+      if(!merged.length) throw new Error("Cannot delete the last remaining catalog item.");
+      try{
+        await githubWriteJson("data/products.json",merged,current.sha,attempt===0?"Delete product":"Retry product deletion");
+        return {ok:true};
+      }catch(writeError){
+        lastError=writeError;
+        if(attempt<3) await new Promise(resolve=>setTimeout(resolve,250*(attempt+1)));
+      }
     }
-    return {ok:true};
+    throw new Error("The catalogue changed while deleting. Please try again. "+(lastError?.message||""));
   }
   if(body.action==="saveSettings"){
     const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
