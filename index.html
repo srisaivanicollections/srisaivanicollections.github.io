@@ -9199,7 +9199,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
   <button type="button" id="resendOtpBtn" class="text-link" style="display:none;">RESEND OTP</button>
   <button type="button" id="forgotPassword" class="text-link" style="display:none;">Forgot password?</button>
   <small id="loginMsg" class="storage-status-msg" aria-live="polite"></small>
-</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
+</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="adminFeedback" class="admin-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
 <script>
 
 /* Embedded catalog fallback: keeps the storefront functional if GitHub catalog is unavailable. */
@@ -10129,34 +10129,21 @@ function showAdminConfirm(title,message,confirmLabel="CONFIRM"){
 }
 
 function showAdminToast(message,type="success"){
-  let el=$("#adminToast");
+  const el=$("#adminFeedback");
   const admin=$("#admin");
-  const body=$("#studioBody");
-  if(!admin||!body)return;
-  if(!el){
-    el=document.createElement("div");
-    el.id="adminToast";
-    el.className="admin-toast";
-    el.hidden=true;
-  }
-  // Place feedback at the top of the active admin content, not outside the
-  // modal where it can cover the storefront or float beside the panel.
-  if(el.parentElement!==body)body.insertBefore(el,body.firstChild);
+  if(!admin||!el)return;
   const isError=type==="error";
-  el.setAttribute("role",isError?"alert":"status");
-  el.setAttribute("aria-live",isError?"assertive":"polite");
-  el.setAttribute("aria-atomic","true");
   el.textContent=String(message||"");
-  el.className="admin-toast "+(isError?"error":"success");
+  el.className="admin-feedback "+(isError?"error":"success");
   el.hidden=false;
-  clearTimeout(window.__adminToastTimer);
   el.classList.remove("show");
+  clearTimeout(window.__adminToastTimer);
   requestAnimationFrame(()=>el.classList.add("show"));
   window.__adminToastTimer=setTimeout(()=>{
     el.classList.remove("show");
     el.hidden=true;
     el.textContent="";
-  },isError?5000:3000);
+  },isError?6500:4000);
 }
 
 let catalogWriteQueue=Promise.resolve();
@@ -11653,3 +11640,17 @@ if ("serviceWorker" in navigator) {
 </style>
 </body>
 </html>
+
+/* Admin feedback lives outside the view that gets re-rendered. */
+#admin .admin-feedback{
+  position:relative!important;display:block!important;box-sizing:border-box!important;width:auto!important;max-width:100%!important;
+  margin:12px 0!important;padding:11px 13px!important;border:1px solid #DED8CF!important;border-left:3px solid #8A9B80!important;
+  border-radius:3px!important;background:#FAF8F5!important;color:#302B26!important;box-shadow:none!important;
+  font:500 12px/1.5 Arial,Helvetica,sans-serif!important;letter-spacing:0!important;text-transform:none!important;
+  white-space:normal!important;overflow-wrap:anywhere!important;opacity:0!important;transform:translateY(4px)!important;
+  transition:opacity .16s ease,transform .16s ease!important;pointer-events:none!important;
+}
+#admin .admin-feedback.error{border-color:#E5D5CF!important;border-left-color:#A65A4F!important;}
+#admin .admin-feedback.show{opacity:1!important;transform:translateY(0)!important;}
+#admin .admin-feedback[hidden]{display:none!important;}
+@media(max-width:600px){#admin .admin-feedback{margin:9px 0!important;padding:9px 10px!important;font-size:12px!important;}}
