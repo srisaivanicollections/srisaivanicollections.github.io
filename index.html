@@ -11898,9 +11898,11 @@ if ("serviceWorker" in navigator) {
 
 /* Desktop catalog: tighten excessive spacing between product cards. */
 @media(min-width:1101px){
+  #shop #products.products.lux-product-grid,
   #shop .lux-product-grid{
     column-gap:18px!important;
     row-gap:16px!important;
+    grid-row-gap:16px!important;
   }
   #shop .lux-catalog-toolbar{margin-bottom:22px!important;}
 }
