@@ -1,5 +1,16 @@
 [
   {
+    "id": 1791626458507,
+    "name": "Brown dress",
+    "category": "Dresses",
+    "price": 1400,
+    "originalPrice": 2000,
+    "image": "assets/products/1791626456229-fa2149a7bd6f-alba-embroidered-viscose-nylon-midi-dress-with-belt-8056451-1.jpg",
+    "newArrival": true,
+    "bestSeller": false,
+    "availability": true
+  },
+  {
     "id": 1791112871954,
     "name": "Colour Saree",
     "category": "Sarees",
