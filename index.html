@@ -12637,5 +12637,32 @@ if ("serviceWorker" in navigator) {
 }
 </style>
 
+
+<style id="ssv-admin-compact-mobile-products-20261010">
+/* Final mobile UX: reduce controls above the product list while retaining useful filters. */
+@media(max-width:600px){
+  #admin .admin-product-counts{display:none!important;}
+  #admin .admin-products-heading{
+    display:flex!important;flex-direction:row!important;align-items:center!important;
+    justify-content:space-between!important;gap:10px!important;margin:0 0 12px!important;
+    padding:0 0 12px!important;
+  }
+  #admin .admin-products-heading>div{min-width:0!important;flex:1 1 auto!important;}
+  #admin .admin-products-heading h3{font-size:24px!important;line-height:1.1!important;}
+  #admin .admin-products-heading p{display:none!important;}
+  #admin .admin-add-product{
+    display:inline-flex!important;flex:0 0 auto!important;width:auto!important;
+    min-width:0!important;min-height:40px!important;padding:0 12px!important;
+    font-size:9px!important;white-space:nowrap!important;
+  }
+  #admin .admin-product-search .admin-filter-label{display:none!important;}
+  #admin .admin-product-filters{margin-top:0!important;}
+  #admin .admin-product-results{font-size:12px!important;margin:6px 2px 8px!important;}
+  #admin .admin-product-pagination{gap:6px!important;margin:8px 0 10px!important;padding:8px 0!important;}
+  #admin .admin-product-pagination button{min-width:36px!important;height:38px!important;padding:0 8px!important;}
+  #admin .admin-products-scroll{max-height:40vh!important;}
+}
+</style>
+
 </body>
 </html>
