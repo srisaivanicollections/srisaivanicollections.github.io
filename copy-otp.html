@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Copy Admin verification code | Sri Sai Vani</title>
+  <style>
+    :root{color-scheme:light}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#faf7f2;color:#1c1917;font-family:Arial,Helvetica,sans-serif}
+    main{width:min(100%,440px);padding:30px;background:#fff;border:1px solid #e4d8c5;border-radius:16px;text-align:center;box-shadow:0 12px 36px rgba(28,25,23,.07)}
+    .brand{margin:0 0 12px;color:#7b6848;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+    h1{margin:0 0 10px;font-size:24px}
+    p{color:#625d55;line-height:1.6}
+    .code{margin:22px 0;padding:18px 10px;border-radius:10px;background:#f4f0e9;font-size:34px;font-weight:700;letter-spacing:8px}
+    button{width:100%;padding:13px 18px;border:0;border-radius:8px;background:#1c1917;color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+    button:focus-visible{outline:3px solid #c8b28a;outline-offset:3px}
+    #status{min-height:24px;margin-bottom:0;font-size:13px}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <main>
+    <p class="brand">Sri Sai Vani Collections</p>
+    <h1>Admin verification code</h1>
+    <p>Copy this code and return to the Admin sign-in window.</p>
+    <div id="code" class="code" aria-label="Verification code">••••••</div>
+    <button id="copy" type="button" disabled>Copy code</button>
+    <p id="status" role="status" aria-live="polite">Loading code…</p>
+    <p style="font-size:12px">For your security, this page does not store the code. It expires in 5 minutes.</p>
+  </main>
+  <script>
+    (() => {
+      const code = decodeURIComponent(location.hash.slice(1));
+      // The code is passed in the URL fragment, which is not sent to the web server.
+      // Remove it from the visible URL/history as soon as it has been read.
+      history.replaceState(null, "", location.pathname + location.search);
+      const codeEl = document.getElementById("code");
+      const button = document.getElementById("copy");
+      const status = document.getElementById("status");
+      if (!/^\d{6}$/.test(code)) {
+        codeEl.textContent = "------";
+        status.textContent = "No valid code found. Open the Copy code link from your OTP email again.";
+        return;
+      }
+      codeEl.textContent = code;
+      button.disabled = false;
+      status.textContent = "Ready to copy.";
+      button.addEventListener("click", async () => {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(code);
+          } else {
+            const field = document.createElement("textarea");
+            field.value = code;
+            field.setAttribute("readonly", "");
+            field.style.position = "fixed";
+            field.style.opacity = "0";
+            document.body.appendChild(field);
+            field.select();
+            const copied = document.execCommand("copy");
+            field.remove();
+            if (!copied) throw new Error("Clipboard unavailable");
+          }
+          button.textContent = "Copied!";
+          status.textContent = "Code copied. Return to Admin sign-in and paste it.";
+        } catch {
+          status.textContent = "Copy was blocked by your browser. Select the code above and copy it manually.";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
