@@ -9201,7 +9201,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 </section>
 
 <footer><div class="footer-brand"><a class="brand" href="#home"><span><b>SRI SAI VANI</b><small>COLLECTIONS</small></span></a></div><div class="footer-links"><a href="#shop">Shop</a><a href="#reviews">Reviews</a><a href="#instagram">Latest Collection</a><a href="#visit">Visit Us</a></div></footer>
-<div id="admin" class="modal hidden"><div class="panel"><div class="panel-top"><div><h2 id="adminTitle" tabindex="-1">Admin Studio</h2></div><button id="adminClose" type="button" aria-label="Close Admin Studio">×</button></div><div id="login" class="admin-auth-screen">
+<div id="admin" class="modal hidden"><div class="panel"><div class="panel-top"><div><h2 id="adminTitle" tabindex="-1">Admin Studio</h2></div><div class="admin-header-actions"><button type="button" id="logoutBtn" class="admin-logout" aria-label="Log out of Admin Studio">LOG OUT</button><button id="adminClose" type="button" aria-label="Close Admin Studio">×</button></div></div><div id="login" class="admin-auth-screen">
   <div class="admin-auth-copy">
     <p class="admin-login-title" id="adminAuthEyebrow" aria-hidden="true">PRIVATE ACCESS</p>
     <h3 id="adminAuthHeading">Admin sign in</h3>
@@ -9220,7 +9220,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
   <button type="button" id="resendOtpBtn" class="text-link" style="display:none;">RESEND OTP</button>
   <button type="button" id="forgotPassword" class="text-link" style="display:none;">Forgot password?</button>
   <small id="loginMsg" class="storage-status-msg" aria-live="polite"></small>
-</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="settings">SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="adminFeedback" class="admin-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
+</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="settings">SETTINGS</button></div><div id="adminFeedback" class="admin-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
 <script>
 
 /* Embedded catalog fallback: keeps the storefront functional if GitHub catalog is unavailable. */
@@ -12314,6 +12314,72 @@ if ("serviceWorker" in navigator) {
 #admin #studio.admin-view-add #studioBody .upload-row{margin-bottom:12px!important;}
 #admin #studio.admin-view-add #studioBody #saveItem{min-width:130px!important;min-height:42px!important;}
 #admin #studio.admin-view-add #studioBody #deleteItem{min-height:42px!important;}
+</style>
+
+<style id="ssv-admin-layout-final-20261010">
+/* Consistent Admin Studio shell and utility placement. */
+#admin .panel-top{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;}
+#admin .admin-header-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;flex:0 0 auto!important;}
+#admin .admin-header-actions #logoutBtn{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  width:auto!important;min-width:78px!important;height:34px!important;min-height:34px!important;
+  margin:0!important;padding:0 12px!important;border:1px solid #D9CDBB!important;border-radius:4px!important;
+  background:transparent!important;color:#79564D!important;box-shadow:none!important;
+  font:600 9px/1 Montserrat,Inter,Arial,sans-serif!important;letter-spacing:.08em!important;
+}
+#admin .admin-header-actions #logoutBtn:hover{background:#F7F0E7!important;color:#5F3D34!important;}
+#admin .admin-header-actions #adminClose{flex:0 0 36px!important;}
+#admin .studio-nav{display:flex!important;align-items:stretch!important;justify-content:flex-start!important;gap:8px!important;margin:0 0 18px!important;padding:0!important;}
+#admin .studio-nav button[data-view]{flex:0 0 auto!important;min-width:112px!important;padding:12px 16px!important;}
+#admin #studio.admin-view-add .admin-header-actions #logoutBtn{display:none!important;}
+#admin .admin-product-filters{
+  display:grid!important;
+  grid-template-columns:minmax(170px,1.25fr) repeat(3,minmax(115px,.9fr)) auto!important;
+  align-items:end!important;gap:10px!important;padding:14px!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
+}
+#admin .admin-product-search{min-width:0!important;}
+#admin .admin-product-search input{width:100%!important;min-width:0!important;}
+#admin .admin-product-filters>label{min-width:0!important;}
+#admin .admin-product-filters>label .admin-filter-label{display:block!important;margin-bottom:6px!important;}
+#admin .admin-product-filters select{width:100%!important;min-width:0!important;}
+#admin .admin-filter-clear{min-width:88px!important;padding-inline:10px!important;}
+#admin .admin-products-heading{align-items:center!important;}
+#admin .admin-product-counts{grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+#admin .admin-customize{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+#admin .admin-settings-group{width:100%!important;box-sizing:border-box!important;}
+#admin .admin-settings-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important;gap:14px!important;box-sizing:border-box!important;}
+#admin .admin-settings-grid>*{min-width:0!important;max-width:100%!important;box-sizing:border-box!important;}
+#admin #studioBody .admin-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important;gap:12px!important;width:100%!important;box-sizing:border-box!important;}
+#admin #studioBody .admin-row>*{min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;}
+#admin #studioBody .upload-row{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:center!important;gap:12px!important;width:100%!important;box-sizing:border-box!important;}
+#admin #studioBody .upload-row>*{min-width:0!important;max-width:100%!important;box-sizing:border-box!important;}
+@media(max-width:900px){
+ #admin .admin-product-filters{grid-template-columns:minmax(0,1.2fr) repeat(2,minmax(0,1fr))!important;}
+ #admin .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-filter-clear{width:100%!important;}
+}
+@media(max-width:600px){
+ #admin .panel-top{gap:8px!important;}
+ #admin .admin-header-actions{gap:5px!important;}
+ #admin .admin-header-actions #logoutBtn{min-width:62px!important;height:34px!important;min-height:34px!important;padding:0 7px!important;font-size:8px!important;letter-spacing:.04em!important;}
+ #admin .admin-header-actions #adminClose{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;}
+ #admin .studio-nav{gap:6px!important;margin-bottom:14px!important;}
+ #admin .studio-nav button[data-view]{flex:1 1 0!important;min-width:0!important;min-height:44px!important;padding:10px 8px!important;}
+ #admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:12px!important;}
+ #admin .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-product-search input{height:40px!important;}
+ #admin .admin-product-filters select{height:42px!important;}
+ #admin .admin-settings-grid{grid-template-columns:minmax(0,1fr)!important;}
+ #admin #studioBody .admin-row,#admin #studioBody .upload-row{grid-template-columns:minmax(0,1fr)!important;gap:10px!important;}
+ #admin .admin-product-counts{gap:6px!important;}
+ #admin .admin-product-counts>div{min-width:0!important;}
+}
+@media(max-width:360px){
+ #admin .admin-header-actions #logoutBtn{min-width:56px!important;padding-inline:5px!important;font-size:7.5px!important;}
+ #admin .admin-product-filters{padding:9px!important;gap:8px!important;}
+ #admin .admin-filter-label{font-size:8px!important;}
+}
 </style>
 </body>
 </html>
