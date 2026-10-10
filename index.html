@@ -11416,7 +11416,7 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js?v=20261010-product-discount-rowgap16-cache10", { updateViaCache: "none" }).catch(error => {
+    navigator.serviceWorker.register("./sw.js?v=20261010-admin-modal-contained-cache11", { updateViaCache: "none" }).catch(error => {
       console.warn("Offline support could not be enabled:", error);
     });
   });
@@ -12880,6 +12880,101 @@ if ("serviceWorker" in navigator) {
     white-space: nowrap !important;
     overflow: visible !important;
   }
+}
+</style>
+
+
+<style id="ssv-admin-modal-contained-fix-20261010">
+/* Prevent Admin Studio panels and product rows from escaping the modal on desktop/tablet. */
+#admin.modal:not(.hidden) {
+  position:fixed!important;
+  inset:0!important;
+  z-index:99999!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  padding:18px 16px!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  box-sizing:border-box!important;
+  background:rgba(20,18,16,.58)!important;
+  overscroll-behavior:contain!important;
+}
+#admin.modal:not(.hidden) > .panel {
+  position:relative!important;
+  flex:0 1 1180px!important;
+  width:min(1180px,calc(100vw - 32px))!important;
+  max-width:1180px!important;
+  min-width:0!important;
+  height:auto!important;
+  max-height:calc(100dvh - 36px)!important;
+  margin:0 auto!important;
+  padding:22px 24px!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  box-sizing:border-box!important;
+  background:#fff!important;
+  border-radius:8px!important;
+}
+#admin #studio,
+#admin #studioBody,
+#admin #studioBody > *,
+#admin .admin-products-heading,
+#admin .admin-product-counts,
+#admin .admin-product-filters,
+#admin .admin-product-results,
+#admin #adminProductPagination,
+#admin #adminProductsScroll {
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+#admin #adminProductsScroll,
+#admin .admin-products-scroll {
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:min(38vh,340px)!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  contain:layout paint!important;
+  overscroll-behavior:contain!important;
+  padding:3px 8px 8px 3px!important;
+}
+#admin #adminProductsScroll > .admin-item,
+#admin .admin-products-scroll > .admin-item {
+  position:relative!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+#admin #adminProductPagination { margin:10px 0 12px!important; }
+@media(min-width:901px) {
+  #admin.modal:not(.hidden) { padding:18px 24px!important; }
+  #admin.modal:not(.hidden) > .panel { padding:24px 28px!important; }
+}
+@media(max-width:900px) {
+  #admin.modal:not(.hidden) { padding:10px 10px!important; }
+  #admin.modal:not(.hidden) > .panel {
+    flex-basis:760px!important;width:calc(100vw - 20px)!important;
+    max-width:760px!important;max-height:calc(100dvh - 20px)!important;
+    padding:16px 14px!important;
+  }
+  #admin #adminProductsScroll,#admin .admin-products-scroll { max-height:34vh!important; }
+}
+@media(max-width:600px) {
+  #admin.modal:not(.hidden) > .panel {
+    flex-basis:520px!important;width:calc(100vw - 16px)!important;
+    max-width:520px!important;max-height:calc(100dvh - 16px)!important;
+    padding:14px 12px!important;
+  }
+  #admin #adminProductsScroll,#admin .admin-products-scroll { max-height:32vh!important; }
 }
 </style>
 
