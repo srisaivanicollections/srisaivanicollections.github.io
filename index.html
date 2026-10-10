@@ -13120,6 +13120,63 @@ if ("serviceWorker" in navigator) {
   #admin .admin-item{align-items:center!important;}
   #admin .admin-product-copy{min-width:0!important;}
 }
+
+<style id="ssv-admin-mobile-filter-layout-authoritative-20261010">
+/* One final, explicit layout contract for Admin Products mobile. */
+@media(max-width:600px){
+  #admin .admin-product-filters{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    align-items:end!important;
+    gap:8px 10px!important;
+    padding:10px!important;
+    margin:0 0 10px!important;
+  }
+  #admin .admin-product-filters>label{
+    display:flex!important;
+    flex-direction:column!important;
+    grid-column:auto!important;
+    width:auto!important;
+    min-width:0!important;
+    margin:0!important;
+    gap:5px!important;
+  }
+  #admin .admin-product-filters>label:has(#adminProductSearch){grid-column:1/-1!important;}
+  #admin .admin-product-filters>label:has(#adminProductCategory){grid-column:1!important;}
+  #admin .admin-product-filters>label:has(#adminProductColor){grid-column:2!important;}
+  #admin .admin-product-filters>label:has(#adminProductStatus){grid-column:1!important;}
+  #admin .admin-product-filters>label:has(#adminProductSort){grid-column:2!important;}
+  #admin .admin-product-filters input,
+  #admin .admin-product-filters select{
+    width:100%!important;
+    min-width:0!important;
+    height:40px!important;
+    min-height:40px!important;
+    padding:0 9px!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+    font-size:12px!important;
+  }
+  #admin .admin-filter-label{font-size:10px!important;line-height:1.2!important;}
+  #admin .admin-product-filters .admin-filter-clear{
+    display:block!important;
+    grid-column:1/-1!important;
+    width:100%!important;
+    min-width:0!important;
+    height:38px!important;
+    min-height:38px!important;
+    margin:0!important;
+    align-self:stretch!important;
+  }
+  #admin .admin-product-counts{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;}
+  #admin .admin-product-counts strong{font-size:20px!important;}
+}
+@media(max-width:360px){
+  #admin .admin-product-filters{gap:7px!important;padding:8px!important;}
+  #admin .admin-product-filters input,
+  #admin .admin-product-filters select{font-size:11px!important;padding-inline:6px!important;}
+}
+</style>
 </style>
 </body>
 </html>
