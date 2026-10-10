@@ -6968,6 +6968,162 @@ HERO DEPLOYMENT SAFETY GUARD
   .sv-reviews__track{gap:12px;padding-left:0;padding-right:0}
   .sv-reviews__track .sv-review-card{flex:0 0 100%}
 }
+
+/* Admin Studio mobile UX refinement. Scoped to #admin only. */
+@media (max-width: 600px) {
+  #admin.modal {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom)) !important;
+    overflow: hidden !important;
+  }
+  #admin > .panel {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    height: auto !important;
+    max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+    padding: 18px 16px 16px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    border: 1px solid #E4D8C5 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 18px 54px rgba(0,0,0,.24) !important;
+  }
+  #admin .panel-top {
+    position: sticky !important;
+    top: -18px !important;
+    z-index: 5 !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    min-height: 48px !important;
+    margin: -18px -16px 14px !important;
+    padding: 16px 16px 13px !important;
+    background: var(--paper, #FAF7F2) !important;
+    border-bottom: 1px solid #E4D8C5 !important;
+  }
+  #admin #adminTitle {
+    font-size: 27px !important;
+    line-height: 1.05 !important;
+    margin: 0 !important;
+  }
+  #admin #adminTitle::after { font-size: 27px !important; }
+  #admin #adminClose {
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    font-size: 25px !important;
+  }
+  #admin #studio { min-width: 0 !important; }
+  #admin .studio-nav {
+    position: sticky !important;
+    top: 58px !important;
+    z-index: 4 !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: var(--paper, #FAF7F2) !important;
+    border-bottom: 1px solid #E4D8C5 !important;
+  }
+  #admin .studio-nav button[data-view] {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    height: auto !important;
+    padding: 10px 3px !important;
+    font-size: 9px !important;
+    line-height: 1.25 !important;
+    letter-spacing: .055em !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+  #admin .studio-nav button[data-view].active::after { height: 2px !important; }
+  #admin .studio-nav #logoutBtn {
+    grid-column: 1 / -1 !important;
+    justify-self: end !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    margin: 7px 0 9px !important;
+    padding: 6px 10px !important;
+    border: 1px solid #E4D8C5 !important;
+    background: transparent !important;
+    font-size: 9px !important;
+    letter-spacing: .08em !important;
+  }
+  #admin #studioBody { min-width: 0 !important; }
+  #admin .admin-item {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 9px !important;
+    padding: 11px !important;
+    border: 1px solid #E4D8C5 !important;
+    border-radius: 3px !important;
+    background: #fff !important;
+  }
+  #admin .admin-product-main {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+  }
+  #admin .admin-product-thumb {
+    width: 54px !important;
+    height: 72px !important;
+    flex: 0 0 54px !important;
+    object-fit: cover !important;
+    background: #F3EEE6 !important;
+  }
+  #admin .admin-product-copy { min-width: 0 !important; overflow-wrap: anywhere !important; }
+  #admin .admin-product-copy strong {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+    font-size: 15px !important;
+    line-height: 1.15 !important;
+    font-weight: 500 !important;
+  }
+  #admin .admin-product-copy small {
+    display: block !important;
+    margin-top: 5px !important;
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+    overflow-wrap: anywhere !important;
+  }
+  #admin .admin-item > button.edit {
+    min-width: 58px !important;
+    min-height: 38px !important;
+    height: 38px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    border: 1px solid #E4D8C5 !important;
+    background: #fff !important;
+    font-size: 9px !important;
+    letter-spacing: .09em !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #admin .admin-item, #admin #adminClose { transition: none !important; }
+}
+
 </style>
 
 
@@ -10133,6 +10289,9 @@ function trapAdminFocus(e){
 function openAdminModal(){
   const modal=$("#admin");
   if(!modal)return;
+  /* Prevent the storefront hamburger menu from remaining layered above Admin Studio. */
+  const nav=$("#nav");
+  if(nav)nav.classList.remove("open");
   modal.classList.remove("hidden");
   modal.style.setProperty("display","flex","important");
   updateAdminView();
