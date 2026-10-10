@@ -9554,20 +9554,18 @@ async function localApi(body){
 
   const storedToken=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
   if(!storedToken) throw new Error("GitHub storage is not connected.");
-  const configured=await githubReadJson("data/settings.json");
-  const configuredSettings=configured.value&&typeof configured.value==="object"?configured.value:{};
   if(!otpAdminSession) throw new Error("Unauthorized. Sign in with email OTP before changing store data.");
   if(body.action==="saveProduct"){
     const incoming=body.product;
     validateProductInput(incoming);
     const id=Number(incoming.id);
     if(!id)throw new Error("Invalid product ID.");
-    await mutateGithubJson("data/products.json",value=>{
+    const saved=await mutateGithubJson("data/products.json",value=>{
       const list=Array.isArray(value)?value:[];
       const exists=list.some(p=>Number(p.id)===id);
       return exists?list.map(p=>Number(p.id)===id?incoming:p):[incoming,...list];
     }, "Save product");
-    return {ok:true};
+    return {ok:true,products:saved.value};
   }
   if(body.action==="deleteProduct"){
     const id=Number(body.id);
@@ -10071,7 +10069,7 @@ function edit(id){
   };
 }
 async function persistProduct(product){
-  await api({action:"saveProduct",password:adminPassword,product});
+  return api({action:"saveProduct",password:adminPassword,product});
 }
 async function deleteProductFromGithub(id){
   const deleteOperation=async()=>{
@@ -10239,18 +10237,14 @@ async function saveProduct(id){
     // Serialize catalog writes. Two rapid Admin operations must never race
     // against each other with stale GitHub file SHAs.
     const write=async()=>{
-      await persistProduct(p);
-      const verified=await verifyProductPersistence(p);
-      products=verified;
+      const result=await persistProduct(p);
+      if(!Array.isArray(result?.products)) throw new Error("GitHub saved the product but did not return the updated catalogue. Refresh before retrying.");
+      products=result.products;
       githubOriginalIds=new Set(products.map(x=>Number(x.id)));
       render();
     };
     catalogWriteQueue=catalogWriteQueue.then(write,write);
     await catalogWriteQueue;
-
-    // Re-read the authoritative catalog after the write. No localStorage merge
-    // and no static-file fallback can resurrect or remove products.
-    await load();
     showView("products");
     showAdminToast(id?"Product updated successfully.":"Product added successfully.","success");
   }catch(e){
