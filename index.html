@@ -9782,10 +9782,14 @@ function productImageSrc(value){
   const src=String(value||"").trim();
   if(!src)return "";
   if(/^(https?:|data:|blob:)/i.test(src))return src;
-  // Keep repository-owned product images same-origin on GitHub Pages.
-  // This avoids an unnecessary raw.githubusercontent.com dependency and
-  // makes the catalog more reliable on mobile/slow networks.
-  return src.replace(/^\.\//,"").replace(/^\/+/, "");
+  const path=src.replace(/^\.\//,"").replace(/^\/+/, "");
+  // Newly uploaded product images must not wait for the GitHub Pages build
+  // to publish the asset. Serve repository product files directly from GitHub.
+  if(path.startsWith("assets/products/")){
+    return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path;
+  }
+  // Keep non-product site assets same-origin on GitHub Pages.
+  return path;
 }
 function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
