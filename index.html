@@ -6969,6 +6969,31 @@ HERO DEPLOYMENT SAFETY GUARD
   .sv-reviews__track .sv-review-card{flex:0 0 100%}
 }
 
+
+/* Final mobile overlay correction: Admin Studio must sit above the storefront masthead. */
+#admin.modal {
+  z-index: 10000 !important;
+}
+@media (max-width: 600px) {
+  #admin.modal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 10000 !important;
+    padding-top: max(14px, env(safe-area-inset-top)) !important;
+    padding-bottom: max(14px, env(safe-area-inset-bottom)) !important;
+    align-items: flex-start !important;
+  }
+  #admin > .panel {
+    margin-top: 0 !important;
+    max-height: calc(100dvh - 28px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+  }
+  #admin .panel-top {
+    position: relative !important;
+    top: auto !important;
+    margin-top: 0 !important;
+  }
+}
+
 /* Admin Studio mobile UX refinement. Scoped to #admin only. */
 @media (max-width: 600px) {
   #admin.modal {
