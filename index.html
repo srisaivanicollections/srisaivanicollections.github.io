@@ -11857,21 +11857,21 @@ if ("serviceWorker" in navigator) {
   white-space:nowrap !important;
   overflow-wrap:normal !important;
 }
-#admin .admin-product-status .admin-status::before{
-  content:"•" !important;
+/* Option 6: inline labels separated by subtle vertical rules, no dots or boxes */
+#admin .admin-product-status .admin-status::before{content:none !important;display:none !important}
+#admin .admin-product-status .admin-status + .admin-status::before{
+  content:"" !important;
   display:inline-block !important;
-  margin-right:4px !important;
-  font-size:12px !important;
-  line-height:1 !important;
+  width:1px !important;
+  height:12px !important;
+  margin:0 10px 0 0 !important;
+  background:#D8D0C4 !important;
+  vertical-align:-2px !important;
 }
-#admin .admin-product-status .admin-status.is-new{color:#766343 !important}
-#admin .admin-product-status .admin-status.is-new::before{color:#B38E5D !important}
+#admin .admin-product-status .admin-status.is-new{color:#9A6A2D !important}
 #admin .admin-product-status .admin-status.is-best{color:#6E2735 !important}
-#admin .admin-product-status .admin-status.is-best::before{color:#6E2735 !important}
-#admin .admin-product-status .admin-status.is-available{color:#45613D !important}
-#admin .admin-product-status .admin-status.is-available::before{color:#45613D !important}
-#admin .admin-product-status .admin-status.is-unavailable{color:#8A4338 !important}
-#admin .admin-product-status .admin-status.is-unavailable::before{color:#8A4338 !important}
+#admin .admin-product-status .admin-status.is-available{color:#2F7138 !important}
+#admin .admin-product-status .admin-status.is-unavailable{color:#C0392B !important}
 @media(max-width:600px){
   #admin .panel-top{padding:12px 16px 10px !important;margin-bottom:6px !important}
   #admin .studio-nav{margin:0 16px 12px !important}
