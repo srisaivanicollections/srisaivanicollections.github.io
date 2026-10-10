@@ -11416,7 +11416,7 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js?v=20261010-admin-opaque-workspace-cache13", { updateViaCache: "none" }).catch(error => {
+    navigator.serviceWorker.register("./sw.js?v=20261011-admin-scrollable-views-cache15", { updateViaCache: "none" }).catch(error => {
       console.warn("Offline support could not be enabled:", error);
     });
   });
@@ -13173,6 +13173,49 @@ if ("serviceWorker" in navigator) {
     max-height:calc(100dvh - 24px)!important;
     padding:20px 16px!important;
   }
+}
+</style>
+
+
+<style id="ssv-admin-scrollable-products-settings-20261011">
+/* Keep Admin navigation fixed; give the active Products or Settings view its own usable scroll area. */
+#admin.modal:not(.hidden) > .panel > #studio {
+  flex:1 1 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:100%!important;
+  overflow:hidden!important;
+}
+#admin.modal:not(.hidden) #studio .studio-nav {
+  flex:0 0 auto!important;
+}
+#admin.modal:not(.hidden) #studioBody {
+  display:block!important;
+  flex:1 1 0!important;
+  min-height:0!important;
+  height:0!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-y:contain!important;
+  scrollbar-gutter:stable!important;
+  touch-action:pan-y!important;
+  padding-bottom:24px!important;
+}
+#admin.modal:not(.hidden) #studioBody > * {
+  min-height:min-content!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {
+  width:10px!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {
+  background:#c8b28a!important;
+  border:2px solid #fff!important;
+  border-radius:10px!important;
+}
+@media(max-width:900px) {
+  #admin.modal:not(.hidden) #studioBody {padding-bottom:30px!important;}
 }
 </style>
 
