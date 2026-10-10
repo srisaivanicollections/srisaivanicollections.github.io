@@ -11895,6 +11895,16 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-status .admin-status + .admin-status::before{margin-left:6px!important;margin-right:6px!important;}
 }
 
+
+/* Desktop catalog: tighten excessive spacing between product cards. */
+@media(min-width:1101px){
+  #shop .lux-product-grid{
+    column-gap:18px!important;
+    row-gap:28px!important;
+  }
+  #shop .lux-catalog-toolbar{margin-bottom:22px!important;}
+}
+
 </style>
 </body>
 </html>
