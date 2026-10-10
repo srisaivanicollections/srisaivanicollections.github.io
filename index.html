@@ -11416,7 +11416,7 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js?v=20261010-admin-modal-contained-cache11", { updateViaCache: "none" }).catch(error => {
+    navigator.serviceWorker.register("./sw.js?v=20261010-admin-fixed-panels-cache12", { updateViaCache: "none" }).catch(error => {
       console.warn("Offline support could not be enabled:", error);
     });
   });
@@ -12975,6 +12975,109 @@ if ("serviceWorker" in navigator) {
     padding:14px 12px!important;
   }
   #admin #adminProductsScroll,#admin .admin-products-scroll { max-height:32vh!important; }
+}
+</style>
+
+
+<style id="ssv-admin-fixed-panels-no-overflow-20261010">
+/* One fixed Admin shell. Header and Products/Settings tabs stay put; only the active view scrolls. */
+#admin.modal:not(.hidden) {
+  position:fixed!important;inset:0!important;z-index:99999!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:18px!important;overflow:hidden!important;box-sizing:border-box!important;
+  background:rgba(20,18,16,.62)!important;overscroll-behavior:none!important;
+}
+#admin.modal:not(.hidden) > .panel {
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  flex:0 1 1180px!important;width: min(1180px, calc(100vw - 36px))!important;
+  max-width:1180px!important;min-width:0!important;
+  height:calc(100dvh - 36px)!important;max-height:calc(100dvh - 36px)!important;
+  min-height:0!important;margin:0!important;padding:20px 24px!important;
+  overflow:hidden!important;box-sizing:border-box!important;
+  background:#fff!important;border-radius:8px!important;
+}
+#admin.modal:not(.hidden) > .panel > * {min-width:0!important;max-width:100%!important;box-sizing:border-box!important;}
+#admin #studio {
+  display:flex!important;flex:1 1 auto!important;flex-direction:column!important;
+  width:100%!important;min-width:0!important;min-height:0!important;
+  max-width:100%!important;overflow:hidden!important;box-sizing:border-box!important;
+}
+#admin .studio-nav {
+  flex:0 0 auto!important;width:100%!important;min-width:0!important;
+  margin:0 0 12px!important;
+}
+#admin #studioBody {
+  display:block!important;flex:1 1 auto!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  min-height:0!important;height:auto!important;max-height:none!important;
+  margin:0!important;padding:0 4px 12px 0!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;scrollbar-gutter:stable!important;
+  box-sizing:border-box!important;
+}
+#admin #studioBody > * {width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+#admin .admin-products-heading,
+#admin .admin-product-counts,
+#admin .admin-product-filters,
+#admin .admin-product-results,
+#admin #adminProductPagination {width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+#admin #adminProductsScroll,
+#admin .admin-products-scroll {
+  display:flex!important;flex-direction:column!important;gap:8px!important;
+  width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;
+  overflow:visible!important;contain:none!important;position:static!important;
+  padding:2px 0 8px!important;box-sizing:border-box!important;
+}
+#admin #adminProductsScroll > .admin-item,
+#admin .admin-products-scroll > .admin-item {
+  display:flex!important;position:static!important;flex:0 0 auto!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  overflow-wrap:anywhere!important;box-sizing:border-box!important;
+}
+#admin .admin-customize {
+  display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;
+  height:auto!important;max-height:none!important;overflow:visible!important;
+  padding:0 2px 14px 0!important;box-sizing:border-box!important;
+}
+#admin .admin-settings-group {width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+#admin .admin-settings-grid {
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;box-sizing:border-box!important;
+}
+#admin .admin-settings-grid > *,
+#admin .admin-settings-grid input:not([type=checkbox]),
+#admin .admin-settings-grid textarea,
+#admin .admin-settings-grid select {
+  min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+}
+@media(max-width:900px) {
+  #admin.modal:not(.hidden) {padding:10px!important;}
+  #admin.modal:not(.hidden) > .panel {
+    width:calc(100vw - 20px)!important;max-width:760px!important;
+    height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important;
+    padding:16px 14px!important;
+  }
+  #admin .admin-product-filters {grid-template-columns:repeat(3,minmax(0,1fr)) 34px!important;}
+  #admin .admin-product-filters>label:has(#adminProductSearch) {grid-column:1/-1!important;}
+  #admin .admin-product-filters>label:has(#adminProductSort) {display:none!important;}
+  #admin .admin-product-filters>label:has(#adminProductCategory) {grid-column:1!important;}
+  #admin .admin-product-filters>label:has(#adminProductColor) {grid-column:2!important;}
+  #admin .admin-product-filters>label:has(#adminProductStatus) {grid-column:3!important;}
+  #admin .admin-filter-clear {grid-column:4!important;width:34px!important;min-width:34px!important;padding:0!important;}
+}
+@media(max-width:600px) {
+  #admin.modal:not(.hidden) {padding:8px!important;}
+  #admin.modal:not(.hidden) > .panel {
+    width:calc(100vw - 16px)!important;max-width:520px!important;
+    height:calc(100dvh - 16px)!important;max-height:calc(100dvh - 16px)!important;
+    padding:13px 11px!important;
+  }
+  #admin .studio-nav {margin-bottom:8px!important;}
+  #admin .studio-nav button[data-view] {min-height:40px!important;padding:8px 5px!important;}
+  #admin .admin-settings-grid {grid-template-columns:minmax(0,1fr)!important;gap:10px!important;padding:10px!important;}
+  #admin .admin-products-heading {margin-bottom:8px!important;}
+  #admin .admin-product-counts {margin-bottom:8px!important;}
+  #admin .admin-product-filters {gap:6px!important;margin-bottom:6px!important;}
 }
 </style>
 
