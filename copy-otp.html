@@ -40,7 +40,7 @@
       const codeEl = document.getElementById("code");
       const button = document.getElementById("copy");
       const status = document.getElementById("status");
-      if (!/^\\d{6}$/.test(code)) {
+      if (!/^\d{6}$/.test(code)) {
         codeEl.textContent = "------";
         status.textContent = "No valid code found. Open the Copy code link from your OTP email again.";
         return;
