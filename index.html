@@ -11630,6 +11630,8 @@ if ("serviceWorker" in navigator) {
 /* Admin product status chips: restrained, readable, theme-aligned. */
 #admin .admin-product-meta{display:block !important;margin-top:4px !important;}
 #admin .admin-product-status{display:flex !important;flex-wrap:wrap !important;align-items:center !important;gap:4px !important;margin-top:6px !important;min-width:0 !important;}
+#admin .admin-product-status{row-gap:4px!important;}
+#admin .admin-status{min-height:22px!important;white-space:nowrap!important;line-height:1.2!important;}
 #admin .admin-status{display:inline-flex !important;align-items:center !important;max-width:100% !important;padding:3px 5px !important;border:1px solid #E4D8C5 !important;background:#FAF7F2 !important;color:#6F6A64 !important;font:600 8px/1.25 Arial,Helvetica,sans-serif !important;letter-spacing:.035em !important;overflow-wrap:anywhere !important;}
 #admin .admin-status.is-available{border-color:#D5DFD0 !important;background:#F3F7F0 !important;color:#45613D !important;}
 #admin .admin-status.is-unavailable{border-color:#E6CFC9 !important;background:#FBF1EE !important;color:#8A4338 !important;}
@@ -11637,6 +11639,12 @@ if ("serviceWorker" in navigator) {
  #admin .admin-product-status{gap:3px !important;margin-top:5px !important;}
  #admin .admin-status{font-size:7.5px !important;padding:3px 4px !important;}
 }
+
+/* Admin feedback: persistent, styled message area outside the re-rendered view. */
+#admin .admin-feedback{position:relative!important;box-sizing:border-box!important;width:100%!important;margin:12px 0!important;padding:11px 13px!important;border:1px solid #DED8CF!important;border-left:3px solid #6E8B62!important;border-radius:3px!important;background:#F1F7ED!important;color:#294A26!important;font:500 12px/1.5 Arial,Helvetica,sans-serif!important;letter-spacing:0!important;text-transform:none!important;white-space:normal!important;overflow-wrap:anywhere!important;opacity:1!important;transform:none!important;}
+#admin .admin-feedback.error{border-color:#E5D5CF!important;border-left-color:#A65A4F!important;background:#FBF1EE!important;color:#783C34!important;}
+#admin .admin-feedback[hidden]{display:none!important;}
+@media(max-width:600px){#admin .admin-feedback{margin:9px 0!important;padding:9px 10px!important;font-size:12px!important;}}
 </style>
 </body>
 </html>
