@@ -9992,13 +9992,15 @@ function showView(v){
     const knownColors=["Black","Blue","Brown","Gold","Green","Grey","Ivory","Maroon","Multi-colour","Orange","Pink","Purple","Red","Silver","White","Yellow"];
     const colorOptions=[...new Set([...knownColors,...products.map(p=>String(p.color||"").trim()).filter(Boolean)])].sort((a,b)=>a.localeCompare(b));
     const categoryOptions=[...new Set(products.map(p=>String(p.category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-    b.innerHTML='<div class="admin-products-heading"><div><h3>Product Catalogue</h3><p>Manage your collection and product availability.</p></div><button type="button" id="adminAddProduct" class="admin-add-product"><span aria-hidden="true">+</span> Add Product</button></div><div class="admin-product-counts" aria-label="Product summary"><div><strong>'+productCounts.total+'</strong><span>PRODUCTS</span></div><div><strong>'+productCounts.newArrival+'</strong><span>NEW</span></div><div><strong>'+productCounts.bestSeller+'</strong><span>BEST SELLER</span></div><div><strong>'+productCounts.available+'</strong><span>AVAILABLE</span></div></div><div class="admin-product-filters"><label class="admin-product-search"><span class="admin-filter-label">Search products</span><input id="adminProductSearch" type="search" placeholder="Name, description or product ID" autocomplete="off"><span class="admin-search-icon" aria-hidden="true">⌕</span></label><label><span class="admin-filter-label">Category</span><select id="adminProductCategory"><option value="">All categories</option>'+categoryOptions.map(category=>'<option value="'+esc(category)+'">'+esc(category)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Colour</span><select id="adminProductColor"><option value="">All colours</option><option value="__none">Colour not set</option>'+colorOptions.map(color=>'<option value="'+esc(color)+'">'+esc(color)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Status</span><select id="adminProductStatus"><option value="">All statuses</option><option value="available">Available</option><option value="unavailable">Unavailable</option><option value="new">New arrival</option><option value="best">Best seller</option></select></label><label><span class="admin-filter-label">Sort by</span><select id="adminProductSort"><option value="recommended">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name-asc">Name: A to Z</option><option value="name-desc">Name: Z to A</option></select></label><button type="button" id="clearAdminProductFilters" class="admin-filter-clear">Reset</button></div><div id="adminProductResults" class="admin-product-results" aria-live="polite"></div><div id="adminProductsScroll" class="admin-products-scroll" aria-label="Product list"></div>';
-    const searchInput=$("#adminProductSearch"), categoryFilter=$("#adminProductCategory"), colorFilter=$("#adminProductColor"), statusFilter=$("#adminProductStatus"), sortFilter=$("#adminProductSort"), results=$("#adminProductResults"), list=$("#adminProductsScroll");
+    b.innerHTML='<div class="admin-products-heading"><div><h3>Product Catalogue</h3><p>Manage your collection and product availability.</p></div><button type="button" id="adminAddProduct" class="admin-add-product"><span aria-hidden="true">+</span> Add Product</button></div><div class="admin-product-counts" aria-label="Product summary"><div><strong>'+productCounts.total+'</strong><span>PRODUCTS</span></div><div><strong>'+productCounts.newArrival+'</strong><span>NEW</span></div><div><strong>'+productCounts.bestSeller+'</strong><span>BEST SELLER</span></div><div><strong>'+productCounts.available+'</strong><span>AVAILABLE</span></div></div><div class="admin-product-filters"><label class="admin-product-search"><span class="admin-filter-label">Search products</span><input id="adminProductSearch" type="search" placeholder="Name, description or product ID" autocomplete="off"><span class="admin-search-icon" aria-hidden="true">⌕</span></label><label><span class="admin-filter-label">Category</span><select id="adminProductCategory"><option value="">All categories</option>'+categoryOptions.map(category=>'<option value="'+esc(category)+'">'+esc(category)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Colour</span><select id="adminProductColor"><option value="">All colours</option><option value="__none">Colour not set</option>'+colorOptions.map(color=>'<option value="'+esc(color)+'">'+esc(color)+'</option>').join("")+'</select></label><label><span class="admin-filter-label">Status</span><select id="adminProductStatus"><option value="">All statuses</option><option value="available">Available</option><option value="unavailable">Unavailable</option><option value="new">New arrival</option><option value="best">Best seller</option></select></label><label><span class="admin-filter-label">Price</span><select id="adminProductPrice"><option value="">All prices</option><option value="under1000">Under ₹1,000</option><option value="1000to2500">₹1,000–₹2,499</option><option value="2500to5000">₹2,500–₹4,999</option><option value="5000plus">₹5,000 and above</option></select></label><label><span class="admin-filter-label">Sort by</span><select id="adminProductSort"><option value="recommended">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name-asc">Name: A to Z</option><option value="name-desc">Name: Z to A</option></select></label><button type="button" id="clearAdminProductFilters" class="admin-filter-clear">Reset</button></div><div id="adminProductResults" class="admin-product-results" aria-live="polite"></div><div id="adminProductsScroll" class="admin-products-scroll" aria-label="Product list"></div>';
+    const searchInput=$("#adminProductSearch"), categoryFilter=$("#adminProductCategory"), colorFilter=$("#adminProductColor"), statusFilter=$("#adminProductStatus"), priceFilter=$("#adminProductPrice"), sortFilter=$("#adminProductSort"), results=$("#adminProductResults"), list=$("#adminProductsScroll");
     const renderAdminProductList=()=>{
-      const q=String(searchInput.value||"").trim().toLowerCase(), cat=categoryFilter.value, color=colorFilter.value, status=statusFilter.value;
+      const q=String(searchInput.value||"").trim().toLowerCase(), cat=categoryFilter.value, color=colorFilter.value, status=statusFilter.value, price=priceFilter.value;
       const filtered=products.filter(p=>{
         const haystack=[p.name,p.description,p.category,p.color,p.id].map(v=>String(v??"")).join(" ").toLowerCase();
-        return (!q||haystack.includes(q))&&(!cat||String(p.category||"").trim()===cat)&&(!color||(color==="__none"?!String(p.color||"").trim():String(p.color||"").trim().toLowerCase()===color.toLowerCase()))&&(!status||(status==="available"?p.availability!==false:status==="unavailable"?p.availability===false:status==="new"?!!p.newArrival:!!p.bestSeller));
+        const amount=Number(p.price)||0;
+        const priceMatches=!price||(price==="under1000"?amount<1000:price==="1000to2500"?amount>=1000&&amount<2500:price==="2500to5000"?amount>=2500&&amount<5000:amount>=5000);
+        return (!q||haystack.includes(q))&&(!cat||String(p.category||"").trim()===cat)&&(!color||(color==="__none"?!String(p.color||"").trim():String(p.color||"").trim().toLowerCase()===color.toLowerCase()))&&(!status||(status==="available"?p.availability!==false:status==="unavailable"?p.availability===false:status==="new"?!!p.newArrival:!!p.bestSeller))&&priceMatches;
       });
       const sort=sortFilter.value;
       if(sort==="price-asc")filtered.sort((a,b)=>(Number(a.price)||0)-(Number(b.price)||0));
@@ -10008,8 +10010,8 @@ function showView(v){
       results.textContent="Showing "+filtered.length+" of "+products.length+" products";
       list.innerHTML=filtered.length?filtered.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\');this.onerror=null;this.src=\'assets/dress-4.svg\'"><div class="admin-product-copy"><strong>'+esc(cleanProductName(p.name))+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+(p.color?' · '+esc(p.color):' · Colour not set')+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status is-new">NEW</span>':"")+(p.bestSeller?'<span class="admin-status is-best">BEST SELLER</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">UNAVAILABLE</span>':'<span class="admin-status is-available">AVAILABLE</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join(""):'<div class="admin-products-empty">No products match these filters.<button type="button" id="clearAdminProductFiltersEmpty">Clear filters</button></div>';
     };
-    [searchInput,categoryFilter,colorFilter,statusFilter,sortFilter].forEach(control=>control.addEventListener(control===searchInput?"input":"change",renderAdminProductList));
-    $("#clearAdminProductFilters").onclick=()=>{searchInput.value="";categoryFilter.value="";colorFilter.value="";statusFilter.value="";sortFilter.value="recommended";renderAdminProductList();};
+    [searchInput,categoryFilter,colorFilter,statusFilter,priceFilter,sortFilter].forEach(control=>control.addEventListener(control===searchInput?"input":"change",renderAdminProductList));
+    $("#clearAdminProductFilters").onclick=()=>{searchInput.value="";categoryFilter.value="";colorFilter.value="";statusFilter.value="";priceFilter.value="";sortFilter.value="recommended";renderAdminProductList();};
     $("#adminAddProduct").onclick=()=>showView("add");
     renderAdminProductList();
   }else if(v==="add"){
@@ -12874,6 +12876,65 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-filters{gap:8px!important;padding:9px!important;}
   #admin .admin-product-filters input,
   #admin .admin-product-filters select{font-size:11px!important;padding-inline:7px!important;}
+}
+</style>
+
+<style id="ssv-admin-filter-layout-authoritative">
+/* Consolidated Admin Products layout: no duplicate divider and no hidden filter fields. */
+#admin .admin-products-heading{border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 14px!important;}
+#admin .admin-product-counts{border:0!important;border-top:0!important;border-bottom:0!important;box-shadow:none!important;padding:0!important;margin:0 0 16px!important;}
+#admin .admin-product-filters{
+ display:grid!important;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr))!important;
+ gap:12px!important;align-items:end!important;width:100%!important;min-width:0!important;
+ margin:0 0 10px!important;padding:14px!important;border:1px solid #E4D8C5!important;
+ border-radius:5px!important;background:#FAF7F2!important;box-sizing:border-box!important;
+}
+#admin .admin-product-filters>label{display:flex!important;flex-direction:column!important;gap:6px!important;min-width:0!important;margin:0!important;}
+#admin .admin-product-filters .admin-filter-label{display:block!important;margin:0!important;color:#75695d!important;font:600 9px/1.25 Montserrat,Inter,Arial,sans-serif!important;letter-spacing:.07em!important;white-space:nowrap!important;}
+#admin .admin-product-search{grid-column:1/-1!important;}
+#admin .admin-product-search input,#admin .admin-product-filters select{
+ display:block!important;width:100%!important;min-width:0!important;height:40px!important;min-height:40px!important;
+ margin:0!important;padding:0 10px!important;border:1px solid #DED5CA!important;border-radius:4px!important;
+ background:#fff!important;color:#29231e!important;font:12px Inter,Arial,sans-serif!important;box-sizing:border-box!important;
+}
+#admin .admin-search-icon{display:none!important;}
+#admin .admin-filter-clear{grid-column:1/-1!important;width:100%!important;min-width:0!important;height:40px!important;min-height:40px!important;align-self:end!important;margin:0!important;padding:0 10px!important;border:1px solid #C8B28A!important;border-radius:4px!important;background:transparent!important;color:#493A2B!important;font:600 10px Montserrat,Arial,sans-serif!important;white-space:nowrap!important;}
+#admin .admin-filter-clear:hover{background:#EEE5D8!important;}
+#admin .admin-product-results{margin:10px 2px 12px!important;line-height:1.45!important;}
+@media(min-width:601px){
+ #admin .admin-product-filters>label:nth-of-type(2){grid-column:span 1!important;}
+ #admin .admin-product-filters>label:nth-of-type(3){grid-column:span 1!important;}
+ #admin .admin-product-filters>label:nth-of-type(4){grid-column:span 1!important;}
+ #admin .admin-product-filters>label:nth-of-type(5){grid-column:span 1!important;}
+ #admin .admin-product-filters>label:nth-of-type(6){grid-column:span 1!important;}
+ #admin .admin-filter-clear{grid-column:span 1!important;}
+}
+@media(min-width:901px){
+ #admin .admin-product-filters{grid-template-columns:minmax(190px,1.5fr) repeat(3,minmax(110px,1fr)) minmax(125px,1fr) 78px!important;}
+ #admin .admin-product-search{grid-column:auto!important;}
+}
+@media(min-width:601px) and (max-width:900px){
+ #admin .admin-product-filters{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+ #admin .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-filter-clear{grid-column:auto!important;}
+}
+@media(max-width:600px){
+ #admin .admin-products-heading{margin:0 0 12px!important;}
+ #admin .admin-product-counts{margin:0 0 14px!important;}
+ #admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:11px!important;}
+ #admin .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-product-filters>label:nth-of-type(2){grid-column:1!important;}
+ #admin .admin-product-filters>label:nth-of-type(3){grid-column:2!important;}
+ #admin .admin-product-filters>label:nth-of-type(4){grid-column:1!important;}
+ #admin .admin-product-filters>label:nth-of-type(5){grid-column:2!important;}
+ #admin .admin-product-filters>label:nth-of-type(6){grid-column:1/-1!important;}
+ #admin .admin-filter-clear{grid-column:1/-1!important;}
+ #admin .admin-product-filters input,#admin .admin-product-filters select{height:42px!important;min-height:42px!important;font-size:12px!important;padding-inline:9px!important;}
+}
+@media(max-width:360px){
+ #admin .admin-product-filters{gap:8px!important;padding:9px!important;}
+ #admin .admin-product-filters input,#admin .admin-product-filters select{font-size:11px!important;padding-inline:7px!important;}
+ #admin .admin-filter-clear{grid-column:1/-1!important;}
 }
 </style>
 
