@@ -11832,17 +11832,20 @@ if ("serviceWorker" in navigator) {
 /* Text-like status labels: no badge boxes, only compact colored dots */
 #admin .admin-product-status{
   display:flex !important;
-  flex-wrap:wrap !important;
+  flex-wrap:nowrap !important;
   align-items:center !important;
-  gap:5px 12px !important;
+  gap:0 !important;
   margin-top:7px !important;
   min-width:0 !important;
+  max-width:100% !important;
+  white-space:nowrap !important;
 }
 #admin .admin-product-status .admin-status{
   display:inline-flex !important;
+  flex:0 0 auto !important;
   align-items:center !important;
   min-height:18px !important;
-  max-width:100% !important;
+  max-width:none !important;
   margin:0 !important;
   padding:0 !important;
   border:0 !important;
@@ -11883,6 +11886,13 @@ if ("serviceWorker" in navigator) {
     letter-spacing:0 !important;
   }
   #admin .admin-product-status{gap:4px 9px !important}
+}
+
+/* Keep the full status set on one line on narrow product cards. */
+@media(max-width:600px){
+  #admin .admin-product-status{flex-wrap:nowrap!important;gap:0!important;white-space:nowrap!important;}
+  #admin .admin-product-status .admin-status{flex:0 0 auto!important;font-size:8px!important;letter-spacing:0!important;}
+  #admin .admin-product-status .admin-status + .admin-status::before{margin-left:6px!important;margin-right:6px!important;}
 }
 
 </style>
