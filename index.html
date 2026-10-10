@@ -11816,12 +11816,17 @@ if ("serviceWorker" in navigator) {
   height:2px !important;
   background:var(--gold) !important;
 }
+/* Logout remains borderless but visually distinct from tabs. */
+#admin .studio-nav #logoutBtn{
+  color:#8A4338 !important;
+  font-weight:700 !important;
+}
 #admin .studio-nav #logoutBtn:hover{
-  color:var(--ink) !important;
-  background:rgba(179,142,93,.07) !important;
+  color:#6E2735 !important;
+  background:rgba(138,67,56,.07) !important;
 }
 #admin .studio-nav #logoutBtn:focus-visible{
-  outline:2px solid var(--gold) !important;
+  outline:2px solid #B9857B !important;
   outline-offset:-2px !important;
 }
 /* Text-like status labels: no badge boxes, only compact colored dots */
