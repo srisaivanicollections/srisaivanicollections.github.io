@@ -8975,9 +8975,14 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 #admin .admin-feedback.show{opacity:1;transform:translateY(0)}
 #admin .admin-feedback[hidden]{display:none}
 #admin .admin-product-status{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:6px;min-width:0}
-#admin .admin-status{display:inline-flex;align-items:center;justify-content:center;min-height:22px;max-width:100%;box-sizing:border-box;padding:3px 7px;border:1px solid #E4D8C5;background:#FAF7F2;color:#6F6252;font:600 10px/1.2 Arial,Helvetica,sans-serif;letter-spacing:0;white-space:normal;overflow-wrap:anywhere}
-#admin .admin-status.is-available{border-color:#D5DFD0;background:#F3F7F0;color:#45613D}
-#admin .admin-status.is-unavailable{border-color:#E6CFC9;background:#FBF1EE;color:#8A4338}
+#admin .admin-status{display:inline-flex;align-items:center;justify-content:center;min-height:18px;max-width:100%;box-sizing:border-box;padding:2px 0;border:0;background:transparent;color:#6F6252;font:600 9px/1.2 "Montserrat","Inter",Arial,sans-serif;letter-spacing:.055em;white-space:nowrap;overflow-wrap:normal}
+#admin .admin-status::before{content:"•";display:inline-block;margin-right:4px;font-size:12px;line-height:1}
+#admin .admin-status.is-new::before{color:#B38E5D}
+#admin .admin-status.is-best::before{color:#6E2735}
+#admin .admin-status.is-available::before{color:#45613D}
+#admin .admin-status.is-unavailable::before{color:#8A4338}
+#admin .admin-status.is-available{color:#45613D}
+#admin .admin-status.is-unavailable{color:#8A4338}
 #admin .admin-product-copy{min-width:0;flex:1 1 0}
 #admin .admin-product-copy strong{max-width:100%;white-space:normal;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 #admin .admin-product-thumb{flex-shrink:0;object-fit:cover}
@@ -9981,7 +9986,7 @@ function showView(v){
   updateStudioNav(v);
   const b=$("#studioBody");
   if(v==="products"){
-    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(cleanProductName(p.name))+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status">New arrival</span>':"")+(p.bestSeller?'<span class="admin-status">Best seller</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">Unavailable</span>':'<span class="admin-status is-available">Available</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
+    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(cleanProductName(p.name))+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status is-new">NEW</span>':"")+(p.bestSeller?'<span class="admin-status is-best">BEST SELLER</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">UNAVAILABLE</span>':'<span class="admin-status is-available">AVAILABLE</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
   }else if(v==="add"){
     b.innerHTML=form();
     const fileInput=$("#fFile"), imageInput=$("#fImage"), preview=$("#fImagePreview"), previewEmpty=$("#fImagePreviewEmpty");
@@ -11711,6 +11716,31 @@ if ("serviceWorker" in navigator) {
   #admin .studio-nav{gap:3px!important;}
   #admin .studio-nav button[data-view],#admin .studio-nav #logoutBtn{font-size:9px!important;letter-spacing:.015em!important;padding-left:1px!important;padding-right:1px!important;}
 }
+
+/* Admin Studio navigation consistency: remove the oversized logout box */
+#admin .studio-nav #logoutBtn,
+#admin .studio-nav .admin-logout,
+#admin .studio-nav .logout-btn {
+  flex: 1 1 0 !important; align-self: stretch !important; min-width: 0 !important;
+  min-height: 46px !important; margin: 0 !important; padding: 9px 6px !important;
+  border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  background: transparent !important; color: var(--muted) !important;
+  font-family: "Montserrat", "Inter", Arial, sans-serif !important; font-size: 9px !important;
+  font-weight: 500 !important; line-height: 1.2 !important; letter-spacing: .12em !important;
+  text-transform: uppercase !important; white-space: nowrap !important;
+}
+#admin .studio-nav #logoutBtn:hover, #admin .studio-nav .admin-logout:hover, #admin .studio-nav .logout-btn:hover {
+  color: var(--ink) !important; background: rgba(179, 142, 93, .08) !important;
+}
+#admin .studio-nav #logoutBtn:focus-visible, #admin .studio-nav .admin-logout:focus-visible, #admin .studio-nav .logout-btn:focus-visible {
+  outline: 2px solid var(--gold) !important; outline-offset: -2px !important;
+}
+@media (max-width: 380px) {
+  #admin .studio-nav #logoutBtn, #admin .studio-nav .admin-logout, #admin .studio-nav .logout-btn {
+    font-size: 8px !important; letter-spacing: .06em !important; padding-left: 2px !important; padding-right: 2px !important;
+  }
+}
+
 </style>
 </body>
 </html>
