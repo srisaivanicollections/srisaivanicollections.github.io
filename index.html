@@ -9076,6 +9076,62 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
   #admin .admin-page-button{min-width:34px!important;height:34px!important;padding:0 8px!important;}
 }
 </style>
+<style id="admin-studio-scroll-isolated-fix">
+/* Scoped strictly to Admin Studio when open: allows smooth inner scrolling */
+#admin.modal:has(#studio:not(.hidden)) {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#admin.modal:has(#studio:not(.hidden)) > .panel {
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: calc(100dvh - 32px) !important;
+  height: calc(100dvh - 32px) !important;
+  overflow: hidden !important;
+}
+
+#admin #studio:not(.hidden) {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+#admin #studio:not(.hidden) .studio-nav {
+  flex: 0 0 auto !important;
+  position: static !important;
+}
+
+#admin #studio:not(.hidden) #studioBody {
+  display: block !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  padding-bottom: 90px !important;
+}
+
+#admin #studio:not(.hidden) #adminProductsScroll {
+  display: block !important;
+  overflow-y: visible !important;
+  padding-bottom: 20px !important;
+}
+
+@media (max-width: 600px) {
+  #admin.modal:has(#studio:not(.hidden)) > .panel {
+    max-height: calc(100dvh - 16px) !important;
+    height: calc(100dvh - 16px) !important;
+  }
+  #admin #studio:not(.hidden) #studioBody {
+    padding-bottom: 110px !important;
+  }
+}
+</style>
 </head>
 <script id="store-hours-auto-status">
 (function(){
