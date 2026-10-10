@@ -13050,5 +13050,21 @@ if ("serviceWorker" in navigator) {
 }
 </style>
 
+<style id="ssv-admin-filter-fix">
+#admin .admin-products-heading,#admin .admin-product-counts{border:0!important;box-shadow:none!important}
+#admin .admin-products-heading{padding:0!important;margin:0 0 14px!important}
+#admin .admin-product-counts{padding:0!important;margin:0 0 14px!important}
+#admin .admin-product-filters{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:12px!important;box-sizing:border-box!important}
+#admin .admin-product-filters>label{display:flex!important;flex-direction:column!important;gap:6px!important;min-width:0!important;grid-column:auto!important;margin:0!important}
+#admin .admin-product-filters>label:has(#adminProductSearch){grid-column:1/-1!important}
+#admin .admin-product-filters>label:has(#adminProductCategory){grid-column:1!important}
+#admin .admin-product-filters>label:has(#adminProductColor){grid-column:2!important}
+#admin .admin-product-filters>label:has(#adminProductStatus){grid-column:1!important}
+#admin .admin-product-filters>label:has(#adminProductPrice){grid-column:2!important}
+#admin .admin-product-filters>label:has(#adminProductSort){grid-column:1!important}
+#admin .admin-product-filters input,#admin .admin-product-filters select{width:100%!important;min-width:0!important;height:42px!important;box-sizing:border-box!important;margin:0!important}
+#admin .admin-product-filters .admin-filter-clear{grid-column:2!important;width:100%!important;min-width:0!important;height:42px!important;margin:0!important;align-self:end!important}
+@media(min-width:901px){#admin .admin-product-filters{grid-template-columns:repeat(6,minmax(0,1fr))!important}#admin .admin-product-filters>label:has(#adminProductSearch){grid-column:span 2!important}}
+</style>
 </body>
 </html>
