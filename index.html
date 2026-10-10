@@ -11895,6 +11895,41 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-status .admin-status + .admin-status::before{margin-left:6px!important;margin-right:6px!important;}
 }
 
+
+/* Desktop product-card pricing: add breathing room and prevent a cramped left edge. */
+@media(min-width:900px){
+  #shop .lux-item-body{
+    box-sizing:border-box!important;
+    padding:12px 8px 4px!important;
+  }
+  #shop .lux-item-cat{
+    margin-bottom:5px!important;
+  }
+  #shop .lux-item-title{
+    margin:0 0 10px!important;
+    line-height:1.25!important;
+  }
+  #shop .lux-item-footer{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:12px!important;
+    margin-top:0!important;
+    padding-top:2px!important;
+  }
+  #shop .lux-pricing-block{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    align-items:baseline!important;
+    column-gap:9px!important;
+    row-gap:5px!important;
+    min-width:0!important;
+  }
+  #shop .lux-price-current{font-size:1.2rem!important;line-height:1.1!important;}
+  #shop .lux-price-original{font-size:.82rem!important;}
+  #shop .lux-price-discount{font-size:.72rem!important;white-space:nowrap!important;}
+}
+
 </style>
 </body>
 </html>
