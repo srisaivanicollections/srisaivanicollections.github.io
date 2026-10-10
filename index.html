@@ -11268,6 +11268,39 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 @media(max-width:600px){
   #admin #studioBody > #adminToast{margin-bottom:12px !important;padding:9px 11px !important;font-size:12px !important;}
 }
+
+/* Branded fallback for missing or dummy product images. */
+#shop .lux-item-media.image-missing{
+  display:grid !important;
+  place-items:center !important;
+  background:#F3EEE6 !important;
+  border:1px solid #E4D8C5 !important;
+}
+#shop .lux-item-media.image-missing::after{
+  content:"SRI SAI VANI\\A COLLECTIONS" !important;
+  white-space:pre !important;
+  text-align:center !important;
+  color:#8A755A !important;
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:clamp(13px,2vw,20px) !important;
+  line-height:1.45 !important;
+  letter-spacing:.12em !important;
+  padding:12px !important;
+  border:1px solid #D9C9AD !important;
+  outline:1px solid rgba(217,201,173,.55) !important;
+  outline-offset:4px !important;
+}
+#shop .lux-item-media.image-missing img,
+#shop .lux-item-media .image-failed{display:none !important;}
+#admin .admin-product-main{position:relative !important;}
+#admin .admin-product-thumb.image-missing{
+  object-fit:contain !important;
+  opacity:1 !important;
+  padding:4px !important;
+  background:#F3EEE6 !important;
+  border:1px solid #E4D8C5 !important;
+}
+#admin .admin-product-thumb.image-missing::after{content:"SSV";color:#8A755A;font:600 10px/1 Arial,sans-serif;letter-spacing:.08em;}
 </style>
 
 <script>
