@@ -12581,5 +12581,61 @@ if ("serviceWorker" in navigator) {
   height:2px!important;
 }
 </style>
+
+<style id="ssv-admin-panel-containment-settings-20261010">
+/* Keep product cards inside the white Admin Studio panel on every viewport. */
+#admin.modal>.panel{
+  position:relative!important;
+  width:min(1160px,calc(100vw - 32px))!important;
+  max-width:1160px!important;
+  max-height:calc(100dvh - 28px)!important;
+  height:auto!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  box-sizing:border-box!important;
+  background:#fff!important;
+}
+#admin #studio,
+#admin #studioBody{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;}
+#admin #adminProductsScroll,
+#admin .admin-products-scroll{
+  display:flex!important;
+  flex-direction:column!important;
+  width:100%!important;
+  max-height:min(42vh,420px)!important;
+  height:auto!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  box-sizing:border-box!important;
+  padding:2px 6px 8px 2px!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+#admin .admin-products-scroll .admin-item{flex:0 0 auto!important;max-width:100%!important;}
+/* Settings content remains visible and scrolls inside the same panel on desktop and mobile. */
+#admin .admin-customize{
+  display:grid!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  max-height:none!important;
+  height:auto!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+}
+#admin .admin-settings-group,
+#admin .admin-settings-grid,
+#admin .admin-setting-field{min-width:0!important;max-width:100%!important;box-sizing:border-box!important;}
+@media(min-width:901px){
+  #admin .studio-nav{display:flex!important;visibility:visible!important;width:100%!important;}
+  #admin .studio-nav button[data-view]{display:inline-flex!important;visibility:visible!important;}
+}
+@media(max-width:900px){
+  #admin.modal>.panel{width:calc(100vw - 20px)!important;max-width:760px!important;max-height:calc(100dvh - 20px)!important;}
+  #admin #adminProductsScroll,#admin .admin-products-scroll{max-height:38vh!important;}
+}
+</style>
+
 </body>
 </html>
