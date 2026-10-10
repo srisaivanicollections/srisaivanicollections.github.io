@@ -9015,6 +9015,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
     <input id="adminOtp" name="admin-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="\d{6}" placeholder="6-digit OTP" disabled style="display:none;">
   </div>
   <button type="button" id="verifyOtpBtn" class="btn dark" disabled style="display:none;">VERIFY OTP</button>
+  <button type="button" id="resendOtpBtn" class="text-link" style="display:none;">RESEND OTP</button>
   <button type="button" id="forgotPassword" class="text-link" style="display:none;">Forgot password?</button>
   <small id="loginMsg" class="storage-status-msg" aria-live="polite"></small>
 </div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SHOP SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
@@ -10243,10 +10244,12 @@ function resetOtpScreen(){
   const otp=$("#adminOtp");
   const send=$("#sendOtpBtn");
   const verify=$("#verifyOtpBtn");
+  const resend=$("#resendOtpBtn");
   if(email){email.value="";email.disabled=false;}
   if(otp){otp.value="";otp.disabled=true;otp.style.display="none";}
   if(send){send.disabled=false;send.style.display="";}
   if(verify){verify.disabled=true;verify.style.display="none";}
+  if(resend){resend.disabled=false;resend.style.display="none";}
   setStorageStatus("");
 }
 function showAdminLogin(){
@@ -10259,10 +10262,12 @@ function showAdminLogin(){
   const otp=$("#adminOtp");
   const send=$("#sendOtpBtn");
   const verify=$("#verifyOtpBtn");
+  const resend=$("#resendOtpBtn");
   if(email){email.value="";email.disabled=false;email.focus();}
   if(otp){otp.value="";otp.disabled=true;otp.style.display="none";}
   if(send){send.disabled=false;send.style.display="";}
   if(verify){verify.disabled=true;verify.style.display="none";}
+  if(resend){resend.disabled=false;resend.style.display="none";}
   if($("#adminAuthHeading"))$("#adminAuthHeading").textContent="Admin sign in";
   if($("#adminAuthDescription"))$("#adminAuthDescription").textContent="Enter your trusted email address to receive a one-time verification code.";
   if($("#forgotPassword"))$("#forgotPassword").style.display="none";
@@ -10301,16 +10306,40 @@ async function requestAdminOtp(){
     otpAdminEmail=email;
     const otp=$("#adminOtp");
     const verify=$("#verifyOtpBtn");
+    const resend=$("#resendOtpBtn");
     if($("#adminEmail"))$("#adminEmail").disabled=true;
     if(otp){otp.value="";otp.disabled=false;otp.style.display="";otp.maxLength=6;otp.inputMode="numeric";otp.autocomplete="one-time-code";otp.focus();}
     if(btn)btn.style.display="none";
     if(verify){verify.disabled=false;verify.style.display="";verify.textContent="VERIFY OTP";}
-    setStorageStatus("OTP sent. Check your email.",true);
+    if(resend){resend.disabled=false;resend.style.display="";resend.textContent="RESEND OTP";}
+    setStorageStatus("OTP sent. Check your email. Use RESEND OTP if needed.",true);
   }catch(e){
     setStorageStatus(e?.message||"Could not send OTP.");
     if(btn){btn.disabled=false;btn.textContent="SEND OTP";}
   }finally{
     otpRequestInProgress=false;
+  }
+}
+async function resendAdminOtp(){
+  if(otpRequestInProgress)return;
+  const email=normalizeAdminEmail(otpAdminEmail||$("#adminEmail")?.value);
+  if(!isTrustedAdminEmail(email)){
+    setStorageStatus("This email is not authorized for Admin access.");
+    return;
+  }
+  otpRequestInProgress=true;
+  const resend=$("#resendOtpBtn");
+  if(resend){resend.disabled=true;resend.textContent="SENDING...";}
+  try{
+    await callOtpWorker("send",email);
+    const otp=$("#adminOtp");
+    if(otp){otp.value="";otp.focus();}
+    setStorageStatus("A new OTP was sent. Check your email.",true);
+  }catch(e){
+    setStorageStatus(e?.message||"Could not resend OTP.");
+  }finally{
+    otpRequestInProgress=false;
+    if(resend){resend.disabled=false;resend.textContent="RESEND OTP";}
   }
 }
 async function verifyAdminOtp(){
@@ -10391,6 +10420,8 @@ if(!window.__LIBAS_ADMIN_OTP_BOUND){
     if(send){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await requestAdminOtp();return;}
     const verify=e.target.closest("#verifyOtpBtn");
     if(verify){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await verifyAdminOtp();return;}
+    const resend=e.target.closest("#resendOtpBtn");
+    if(resend){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await resendAdminOtp();return;}
 
     const connect=e.target.closest("#connectGithubStorageBtn");
     if(connect){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();await connectGithubStorage();return;}
