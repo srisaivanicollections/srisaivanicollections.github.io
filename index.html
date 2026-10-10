@@ -9551,9 +9551,9 @@ async function localApi(body){
     localStorage.setItem(GITHUB_TOKEN_KEY,supplied);
     try{
       await githubReadJson("data/products.json");
-      const site=await githubReadJson("data/settings.json");
-      const configured=site.value&&typeof site.value==="object"?site.value:{};
-      if(!configured.adminPasswordHash) throw new Error("Admin password is not configured yet.");
+      // Token recovery verifies repository access only. Admin authentication
+      // is handled exclusively by the OTP worker, never by public settings data.
+      await githubReadJson("data/settings.json");
       return {ok:true,storage:"github",recoveryVerified:true};
     }catch(e){
       if(previousLocal)localStorage.setItem(GITHUB_TOKEN_KEY,previousLocal);
@@ -9563,47 +9563,8 @@ async function localApi(body){
       throw e;
     }
   }
-  if(body.action==="authenticate"){
-    const supplied=String(body.password||"").trim();
-    const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
-    if(!token) throw new Error("GitHub storage is not connected.");
-    const site=await githubReadJson("data/settings.json");
-    const configured=site.value&&typeof site.value==="object"?site.value:{};
-    if(!configured.adminPasswordHash) return {ok:true,storage:"github",setupRequired:true};
-    if(!await verifyAdminPassword(supplied,configured)) throw new Error("Invalid Admin password.");
-    await githubReadJson("data/products.json");
-    return {ok:true,storage:"github"};
-  }
-
-  if(body.action==="setupAdminPassword"||body.action==="resetAdminPassword"){
-    const token=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
-    if(!token) throw new Error("GitHub access is required to reset the Admin password.");
-    const next=String(body.newPassword||"");
-    if(next.length<8) throw new Error("Admin password must be at least 8 characters.");
-    await githubReadJson("data/products.json");
-    const current=await githubReadJson("data/settings.json");
-    const existing=current.value&&typeof current.value==="object"?current.value:{};
-    if(body.action==="resetAdminPassword" && !existing.adminPasswordHash) throw new Error("Admin password is not configured yet.");
-    const salt=createPasswordSalt();
-    const hash=await hashAdminPassword(next,salt);
-    const message=body.action==="resetAdminPassword"?"Reset Admin password":"Create Admin password";
-    let updated={...existing,adminPasswordHash:hash,adminPasswordSalt:salt};
-    delete updated.githubToken;
-    try{
-      await githubWriteJson("data/settings.json",updated,current.sha,message);
-    }catch(writeError){
-      if(writeError?.status!==409) throw writeError;
-      // Another Admin/settings write won the race. Re-read the latest file and
-      // merge only the password fields so unrelated settings are preserved.
-      const latest=await githubReadJson("data/settings.json");
-      const latestValue=latest.value&&typeof latest.value==="object"?latest.value:{};
-      updated={...latestValue,adminPasswordHash:hash,adminPasswordSalt:salt};
-      delete updated.githubToken;
-      await githubWriteJson("data/settings.json",updated,latest.sha,message);
-    }
-    const verified=await githubReadJson("data/settings.json");
-    if(String(verified.value?.adminPasswordHash||"")!==hash) throw new Error("Password reset could not be verified.");
-    return {ok:true,storage:"github"};
+  if(body.action==="authenticate"||body.action==="setupAdminPassword"||body.action==="resetAdminPassword"){
+    throw new Error("Password-based Admin access has been retired. Sign in using the email OTP verification flow.");
   }
 
   const storedToken=localStorage.getItem(GITHUB_TOKEN_KEY)||sessionStorage.getItem(GITHUB_TOKEN_KEY)||"";
