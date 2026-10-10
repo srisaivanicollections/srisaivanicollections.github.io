@@ -9199,7 +9199,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
   <button type="button" id="resendOtpBtn" class="text-link" style="display:none;">RESEND OTP</button>
   <button type="button" id="forgotPassword" class="text-link" style="display:none;">Forgot password?</button>
   <small id="loginMsg" class="storage-status-msg" aria-live="polite"></small>
-</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SHOP SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
+</div><div id="studio" class="hidden"><div class="studio-nav"><button data-view="products">PRODUCTS</button><button data-view="add">ADD ITEM</button><button data-view="settings">SETTINGS</button><button type="button" id="logoutBtn" class="admin-logout">LOG OUT</button></div><div id="studioBody"></div></div></div></div><!-- pages-deploy-sync-20261008-store-final -->
 <script>
 
 /* Embedded catalog fallback: keeps the storefront functional if GitHub catalog is unavailable. */
@@ -11474,6 +11474,57 @@ if ("serviceWorker" in navigator) {
 }
 @media(prefers-reduced-motion:reduce){
   #admin *,#admin *::before,#admin *::after{scroll-behavior:auto !important; transition:none !important; animation:none !important;}
+}
+
+/* Compact, aligned Admin Studio navigation: three views plus logout in one row. */
+#admin .studio-nav{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  align-items:stretch !important;
+  gap:6px !important;
+  margin:0 0 12px !important;
+  padding:0 0 8px !important;
+}
+#admin .studio-nav button[data-view]{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-width:0 !important;
+  min-height:42px !important;
+  height:42px !important;
+  margin:0 !important;
+  padding:6px 2px !important;
+  font-size:clamp(8px,2.2vw,10px) !important;
+  line-height:1.15 !important;
+  letter-spacing:.025em !important;
+  text-align:center !important;
+  white-space:normal !important;
+  overflow-wrap:normal !important;
+}
+#admin .studio-nav button[data-view].active::after{
+  left:3px !important; right:3px !important; bottom:-8px !important;
+}
+#admin .studio-nav #logoutBtn{
+  grid-column:auto !important;
+  justify-self:stretch !important;
+  align-self:stretch !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  min-width:0 !important;
+  min-height:42px !important;
+  height:42px !important;
+  margin:0 !important;
+  padding:5px 2px !important;
+  font-size:clamp(8px,2.1vw,9px) !important;
+  line-height:1.1 !important;
+  letter-spacing:.025em !important;
+  white-space:normal !important;
+}
+@media(max-width:600px){
+  #admin .studio-nav{grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:4px !important; margin-bottom:10px !important;}
+  #admin .studio-nav button[data-view],#admin .studio-nav #logoutBtn{height:40px !important; min-height:40px !important;}
 }
 </style>
 
