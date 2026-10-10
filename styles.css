@@ -6043,3 +6043,55 @@ footer .brand b{
   margin: 0 !important;
   padding: 0 !important;
 }
+
+
+/* Admin scrolling fix: keep the shell stable and scroll only the active
+   Products/Settings content. Scoped to Admin Studio; no storefront rules. */
+#admin.modal{
+  overflow:hidden !important;
+  align-items:center !important;
+  justify-items:center !important;
+}
+#admin .panel{
+  display:flex !important;
+  flex-direction:column !important;
+  min-height:0 !important;
+  max-height:calc(100vh - 32px) !important;
+  max-height:calc(100dvh - 32px) !important;
+  overflow:hidden !important;
+  overscroll-behavior:contain;
+}
+#admin .panel-top{
+  flex:0 0 auto !important;
+}
+#admin #studio{
+  display:flex;
+  flex:1 1 auto !important;
+  flex-direction:column !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+}
+#admin .studio-nav{
+  flex:0 0 auto !important;
+}
+#admin #adminFeedback{
+  flex:0 0 auto !important;
+}
+#admin #studioBody{
+  flex:1 1 auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  scrollbar-gutter:stable;
+}
+@media(max-width:600px){
+  #admin .panel{
+    width:100% !important;
+    max-height:calc(100vh - 16px) !important;
+    max-height:calc(100dvh - 16px) !important;
+    padding:18px 14px !important;
+  }
+}
