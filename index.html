@@ -13381,5 +13381,35 @@ if ("serviceWorker" in navigator) {
 }
 </style>
 
+
+<style id="ssv-admin-single-scroll-region-fix-20261011">
+/* Products and Settings: use one full-height scrollbar, not nested short scroll areas. */
+#admin.modal:not(.hidden) #studioBody {
+  flex:1 1 0!important;
+  min-height:0!important;
+  height:0!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  scrollbar-width:thin!important;
+  scrollbar-color:#C8B28A #FAF7F2!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+#admin.modal:not(.hidden) #studioBody .admin-products-scroll {
+  flex:0 0 auto!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+#admin.modal:not(.hidden) #studioBody .admin-customize {
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {display:block!important;width:10px!important;}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {background:#FAF7F2!important;}
+</style>
+
 </body>
 </html>
