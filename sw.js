@@ -1,4 +1,4 @@
-const CACHE_NAME = "ssv-offline-v4";
+const CACHE_NAME = "ssv-offline-v5";
 const SCOPE_URL = self.registration.scope;
 const HOME_URL = new URL("./", SCOPE_URL).href;
 const INDEX_URL = new URL("index.html", SCOPE_URL).href;
@@ -63,15 +63,23 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // Cache same-origin assets after successful requests for better repeat/offline loads.
+  // Network-first for assets: use current CSS/JS whenever online, retain cache for offline.
   if (["image", "style", "script", "font"].includes(request.destination)) {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
-      const cached = await cache.match(request);
-      if (cached) return cached;
-      const response = await fetch(request);
-      if (response && response.ok) await cache.put(request, response.clone());
-      return response;
+      try {
+        const response = await fetch(request, { cache: "no-cache" });
+        if (response && response.ok) {
+          await cache.put(request, response.clone());
+          return response;
+        }
+        const cached = await cache.match(request);
+        return cached || response;
+      } catch (_) {
+        const cached = await cache.match(request);
+        if (cached) return cached;
+        throw new Error("Asset unavailable online and not cached: " + request.url);
+      }
     })());
   }
 });
