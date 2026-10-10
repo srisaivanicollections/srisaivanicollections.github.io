@@ -9992,7 +9992,7 @@ function showView(v){
   updateStudioNav(v);
   const b=$("#studioBody");
   if(v==="products"){
-    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(p.name)+'</strong><br><small>'+esc(p.category)+" · "+money(p.price)+(p.newArrival?" · NEW":"")+(p.bestSeller?" · BEST":"")+(p.availability===false?" · UNAVAILABLE":"")+'</small></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
+    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(p.name)+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status">New arrival</span>':"")+(p.bestSeller?'<span class="admin-status">Best seller</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">Unavailable</span>':'<span class="admin-status is-available">Available</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
   }else if(v==="add"){
     b.innerHTML=form();
     const fileInput=$("#fFile"), imageInput=$("#fImage"), preview=$("#fImagePreview"), previewEmpty=$("#fImagePreviewEmpty");
@@ -11416,5 +11416,17 @@ if ("serviceWorker" in navigator) {
 }
 </style>
 
+<style id="ssv-admin-product-status-final">
+/* Admin product status chips: restrained, readable, theme-aligned. */
+#admin .admin-product-meta{display:block !important;margin-top:4px !important;}
+#admin .admin-product-status{display:flex !important;flex-wrap:wrap !important;align-items:center !important;gap:4px !important;margin-top:6px !important;min-width:0 !important;}
+#admin .admin-status{display:inline-flex !important;align-items:center !important;max-width:100% !important;padding:3px 5px !important;border:1px solid #E4D8C5 !important;background:#FAF7F2 !important;color:#6F6A64 !important;font:600 8px/1.25 Arial,Helvetica,sans-serif !important;letter-spacing:.035em !important;overflow-wrap:anywhere !important;}
+#admin .admin-status.is-available{border-color:#D5DFD0 !important;background:#F3F7F0 !important;color:#45613D !important;}
+#admin .admin-status.is-unavailable{border-color:#E6CFC9 !important;background:#FBF1EE !important;color:#8A4338 !important;}
+@media(max-width:600px){
+ #admin .admin-product-status{gap:3px !important;margin-top:5px !important;}
+ #admin .admin-status{font-size:7.5px !important;padding:3px 4px !important;}
+}
+</style>
 </body>
 </html>
