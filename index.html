@@ -11300,7 +11300,7 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(error => {
+    navigator.serviceWorker.register("./sw.js?v=20261010-compact-admin", { updateViaCache: "none" }).catch(error => {
       console.warn("Offline support could not be enabled:", error);
     });
   });
