@@ -12938,5 +12938,56 @@ if ("serviceWorker" in navigator) {
 }
 </style>
 
+
+<style id="ssv-admin-filters-final-20261010">
+/* Single final source of truth for Admin Studio catalogue controls. */
+#admin .admin-products-heading{border-bottom:0!important;padding-bottom:0!important;margin-bottom:14px!important;}
+#admin .admin-product-counts{margin-top:0!important;}
+#admin .admin-product-filters{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(105px,1fr))!important;
+  align-items:end!important;gap:12px!important;
+  padding:14px!important;margin:0 0 10px!important;
+  border:1px solid #E4D8C5!important;border-radius:5px!important;
+  background:#FAF7F2!important;width:100%!important;min-width:0!important;
+  box-sizing:border-box!important;
+}
+#admin .admin-product-filters>label{display:flex!important;flex-direction:column!important;gap:6px!important;min-width:0!important;}
+#admin .admin-product-filters .admin-product-search{grid-column:1/-1!important;}
+#admin .admin-filter-label{display:block!important;font:600 9px/1.25 Montserrat,Inter,Arial,sans-serif!important;letter-spacing:.07em!important;color:#75695d!important;}
+#admin .admin-product-filters input,#admin .admin-product-filters select{
+  display:block!important;width:100%!important;min-width:0!important;height:42px!important;
+  box-sizing:border-box!important;padding:0 10px!important;border:1px solid #DED5CA!important;
+  border-radius:4px!important;background:#fff!important;color:#29231e!important;
+  font:12px Inter,Arial,sans-serif!important;box-shadow:none!important;
+}
+#admin .admin-product-filters input:focus,#admin .admin-product-filters select:focus{
+  outline:2px solid rgba(179,142,93,.35)!important;outline-offset:1px!important;border-color:#B38E5D!important;
+}
+#admin .admin-search-icon{display:none!important;}
+#admin .admin-filter-clear{
+  grid-column:auto!important;align-self:end!important;width:100%!important;min-width:0!important;height:42px!important;
+  padding:0 10px!important;border:1px solid #C8B28A!important;border-radius:4px!important;
+  background:transparent!important;color:#493A2B!important;
+  font:600 9px Montserrat,Inter,Arial,sans-serif!important;white-space:nowrap!important;
+}
+@media(min-width:901px){
+ #admin .admin-product-filters{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(110px,1fr))!important;}
+ #admin .admin-product-filters .admin-product-search{grid-column:1/-1!important;}
+}
+@media(max-width:900px){
+ #admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;padding:12px!important;}
+ #admin .admin-product-filters .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-product-filters .admin-filter-clear{grid-column:auto!important;}
+}
+@media(max-width:600px){
+ #admin .admin-products-heading{border-bottom:0!important;padding-bottom:0!important;margin-bottom:14px!important;}
+ #admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px 10px!important;padding:12px!important;}
+ #admin .admin-product-filters .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-product-filters input,#admin .admin-product-filters select{height:42px!important;font-size:12px!important;}
+ #admin .admin-product-filters .admin-filter-clear{grid-column:1/-1!important;height:42px!important;}
+}
+</style>
+
 </body>
 </html>
