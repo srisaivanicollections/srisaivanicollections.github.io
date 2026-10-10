@@ -11895,6 +11895,38 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-status .admin-status + .admin-status::before{margin-left:6px!important;margin-right:6px!important;}
 }
 
+
+/* Desktop Admin Studio: keep scrolling inside the modal, not the storefront page. */
+@media(min-width:601px){
+  html:has(#admin.modal[style*="display: block"]),
+  body:has(#admin.modal[style*="display: block"]){
+    overflow:hidden !important;
+  }
+  #admin.modal{
+    position:fixed !important;
+    inset:0 !important;
+    display:flex !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    overflow-y:auto !important;
+    overscroll-behavior:contain !important;
+    padding:24px 16px !important;
+    box-sizing:border-box !important;
+  }
+  #admin.modal > .panel{
+    flex:0 0 auto !important;
+    width:min(960px,100%) !important;
+    max-height:none !important;
+    height:auto !important;
+    overflow:visible !important;
+    margin:auto 0 !important;
+  }
+  #admin #studioBody{
+    min-height:0 !important;
+    overflow:visible !important;
+  }
+}
+
 </style>
 </body>
 </html>
