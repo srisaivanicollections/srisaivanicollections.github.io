@@ -8969,7 +8969,25 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
 @media(prefers-reduced-motion:reduce){#ssv-offline-pill{transition:none}}
 </style>
 
-</head>
+<style>
+/* Admin feedback styles belong in the document head. */
+/* Admin feedback lives outside the view that gets re-rendered. */
+#admin .admin-feedback{
+  position:relative!important;display:block!important;box-sizing:border-box!important;width:auto!important;max-width:100%!important;
+  margin:12px 0!important;padding:11px 13px!important;border:1px solid #DED8CF!important;border-left:3px solid #8A9B80!important;
+  border-radius:3px!important;background:#FAF8F5!important;color:#302B26!important;box-shadow:none!important;
+  font:500 12px/1.5 Arial,Helvetica,sans-serif!important;letter-spacing:0!important;text-transform:none!important;
+  white-space:normal!important;overflow-wrap:anywhere!important;opacity:0!important;transform:translateY(4px)!important;
+  transition:opacity .16s ease,transform .16s ease!important;pointer-events:none!important;
+}
+#admin .admin-feedback.error{border-color:#E5D5CF!important;border-left-color:#A65A4F!important;}
+#admin .admin-feedback.show{opacity:1!important;transform:translateY(0)!important;}
+#admin .admin-feedback[hidden]{display:none!important;}
+@media(max-width:600px){#admin .admin-feedback{margin:9px 0!important;padding:9px 10px!important;font-size:12px!important;}}
+#admin .admin-product-status{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:5px!important;min-width:0!important;margin-top:7px!important}
+#admin .admin-status{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:24px!important;line-height:1.2!important;white-space:nowrap!important;max-width:100%!important}
+#admin .admin-product-thumb.image-missing{object-fit:contain!important;background:#F4EFEA!important}
+</style></head>
 <script id="store-hours-auto-status">
 (function(){
   function updateStoreStatus(){
@@ -9956,7 +9974,7 @@ function showView(v){
   updateStudioNav(v);
   const b=$("#studioBody");
   if(v==="products"){
-    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(p.name)+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status">New arrival</span>':"")+(p.bestSeller?'<span class="admin-status">Best seller</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">Unavailable</span>':'<span class="admin-status is-available">Available</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
+    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\');this.onerror=null;this.src=\'assets/dress-4.svg\'"><div class="admin-product-copy"><strong>'+esc(p.name)+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status">New arrival</span>':"")+(p.bestSeller?'<span class="admin-status">Best seller</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">Unavailable</span>':'<span class="admin-status is-available">Available</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
   }else if(v==="add"){
     b.innerHTML=form();
     const fileInput=$("#fFile"), imageInput=$("#fImage"), preview=$("#fImagePreview"), previewEmpty=$("#fImagePreviewEmpty");
@@ -11640,17 +11658,3 @@ if ("serviceWorker" in navigator) {
 </style>
 </body>
 </html>
-
-/* Admin feedback lives outside the view that gets re-rendered. */
-#admin .admin-feedback{
-  position:relative!important;display:block!important;box-sizing:border-box!important;width:auto!important;max-width:100%!important;
-  margin:12px 0!important;padding:11px 13px!important;border:1px solid #DED8CF!important;border-left:3px solid #8A9B80!important;
-  border-radius:3px!important;background:#FAF8F5!important;color:#302B26!important;box-shadow:none!important;
-  font:500 12px/1.5 Arial,Helvetica,sans-serif!important;letter-spacing:0!important;text-transform:none!important;
-  white-space:normal!important;overflow-wrap:anywhere!important;opacity:0!important;transform:translateY(4px)!important;
-  transition:opacity .16s ease,transform .16s ease!important;pointer-events:none!important;
-}
-#admin .admin-feedback.error{border-color:#E5D5CF!important;border-left-color:#A65A4F!important;}
-#admin .admin-feedback.show{opacity:1!important;transform:translateY(0)!important;}
-#admin .admin-feedback[hidden]{display:none!important;}
-@media(max-width:600px){#admin .admin-feedback{margin:9px 0!important;padding:9px 10px!important;font-size:12px!important;}}
