@@ -6095,3 +6095,30 @@ footer .brand b{
     padding:18px 14px !important;
   }
 }
+
+
+/* Admin scroll regression follow-up: later legacy state rules force #studio
+   back to display:block. Reassert the flex sizing AFTER every legacy rule. */
+#admin #studio:not(.admin-screen-hidden):not(.hidden){
+  display:flex !important;
+  flex:1 1 auto !important;
+  flex-direction:column !important;
+  min-height:0 !important;
+  height:auto !important;
+  overflow:hidden !important;
+}
+#admin #studioBody{
+  display:block !important;
+  flex:1 1 0% !important;
+  min-height:0 !important;
+  height:auto !important;
+  max-height:none !important;
+  overflow-y:scroll !important;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior-y:contain !important;
+  scrollbar-width:auto !important;
+}
+#admin #studioBody > *{
+  min-height:0;
+}
