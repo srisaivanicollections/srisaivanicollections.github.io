@@ -11888,6 +11888,13 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-status{gap:4px 9px !important}
 }
 
+/* Keep the full status set on one line on narrow product cards. */
+@media(max-width:600px){
+  #admin .admin-product-status{flex-wrap:nowrap!important;gap:0!important;white-space:nowrap!important;}
+  #admin .admin-product-status .admin-status{flex:0 0 auto!important;font-size:8px!important;letter-spacing:0!important;}
+  #admin .admin-product-status .admin-status + .admin-status::before{margin-left:6px!important;margin-right:6px!important;}
+}
+
 </style>
 </body>
 </html>
