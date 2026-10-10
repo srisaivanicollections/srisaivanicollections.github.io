@@ -9586,14 +9586,14 @@ async function localApi(body){
   if(body.action==="deleteProduct"){
     const id=Number(body.id);
     if(!id)throw new Error("Invalid product.");
-    await mutateGithubJson("data/products.json",value=>{
+    const saved=await mutateGithubJson("data/products.json",value=>{
       const list=Array.isArray(value)?value:[];
       if(!list.some(p=>Number(p.id)===id))return null;
       const next=list.filter(p=>Number(p.id)!==id);
       if(!next.length)throw new Error("Cannot delete the last remaining catalog item.");
       return next;
     },"Delete product");
-    return {ok:true};
+    return {ok:true,products:saved.value};
   }
   if(body.action==="saveSettings"){
     const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
@@ -9735,6 +9735,11 @@ return true;
   }
 }
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function cleanProductName(value){
+  let text=String(value??"").normalize("NFC").replace(/[\uFFFD\u0000-\u0008\u000B\u000C\u000E-\u001F]/g," ").replace(/\s+/g," ").trim();
+  if(/[ÃÂâ€ž€™“”œž]/.test(text)){try{const repaired=decodeURIComponent(escape(text));if(repaired&&!/[ÃÂâ€ž€™“”œž]/.test(repaired))text=repaired;}catch(_){}}
+  return text.replace(/\s+(?=(?:Ã|Â|â€|ï¿½)[\s\S]*$).*/,"").trim()||"Untitled product";
+}
 function validateProductInput(product){
   if(!product||!Number.isSafeInteger(Number(product.id))||Number(product.id)<=0) throw new Error("Invalid product ID.");
   const name=String(product.name||"").trim();
@@ -9777,10 +9782,14 @@ function productImageSrc(value){
   const src=String(value||"").trim();
   if(!src)return "";
   if(/^(https?:|data:|blob:)/i.test(src))return src;
-  // Keep repository-owned product images same-origin on GitHub Pages.
-  // This avoids an unnecessary raw.githubusercontent.com dependency and
-  // makes the catalog more reliable on mobile/slow networks.
-  return src.replace(/^\.\//,"").replace(/^\/+/, "");
+  const path=src.replace(/^\.\//,"").replace(/^\/+/, "");
+  // Newly uploaded product images must not wait for the GitHub Pages build
+  // to publish the asset. Serve repository product files directly from GitHub.
+  if(path.startsWith("assets/products/")){
+    return "https://raw.githubusercontent.com/"+GITHUB_REPO+"/"+GITHUB_BRANCH+"/"+path;
+  }
+  // Keep non-product site assets same-origin on GitHub Pages.
+  return path;
 }
 function apply(){
   all(".brand b").forEach(x=>x.textContent=settings.name||"SRI SAI VANI");
@@ -9885,19 +9894,19 @@ function render(){
     }
     return '<article class="lux-item-card">'+
       '<div class="lux-item-media'+(outOfStock?' is-out-of-stock':'')+'">'+
-        '<img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.closest(".lux-item-media").classList.add("image-missing");this.classList.add("image-failed");">'+
+        '<img src="'+esc(productImageSrc(p.image))+'" alt="'+esc(cleanProductName(p.name))+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.closest(".lux-item-media").classList.add("image-missing");this.classList.add("image-failed");">'+
         (badgeDock?badgeDock.replace('class="ssv-badge-dock"','class="ssv-badge-dock"'):"")+
       '</div>'+
       '<div class="lux-item-body">'+
         (categoryTag?'<div class="lux-item-cat">'+esc(categoryTag)+'</div>':"")+
-        '<h3 class="lux-item-title">'+esc(p.name)+'</h3>'+
+        '<h3 class="lux-item-title">'+esc(cleanProductName(p.name))+'</h3>'+
         '<div class="lux-item-footer">'+
           '<div class="lux-pricing-block">'+
             '<span class="lux-price-current">'+money(p.price)+'</span>'+
             (original>price?'<span class="lux-price-original">'+money(p.originalPrice)+'</span>':"")+
             (discount?'<span class="lux-price-discount">'+discount+'% off</span>':"")+
           '</div>'+
-          '<a class="lux-wa-action" href="'+wa(p)+'" target="_blank" rel="noopener" aria-label="WhatsApp about '+esc(p.name)+'" title="Ask on WhatsApp">'+
+          '<a class="lux-wa-action" href="'+wa(p)+'" target="_blank" rel="noopener" aria-label="WhatsApp about '+esc(cleanProductName(p.name))+'" title="Ask on WhatsApp">'+
             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.51 0 .18 5.33 .18 11.88c0 2.09 .55 4.13 1.59 5.93L.08 24l6.33-1.66a11.9 11.9 0 0 0 5.65 1.44h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.18-1.24-6.17-3.43-8.42ZM12.07 21.8h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.76.99 1-3.67-.23-.38a9.89 9.89 0 0 1-1.52-5.27C2.14 6.42 6.59 1.97 12.07 1.97c2.65 0 5.14 1.03 7.01 2.9a9.85 9.85 0 0 1 2.9 7.02c0 5.48-4.45 9.91-9.91 9.91Zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.35Z"/></svg>'+
           '</a>'+
         '</div>'+
@@ -9972,7 +9981,7 @@ function showView(v){
   updateStudioNav(v);
   const b=$("#studioBody");
   if(v==="products"){
-    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(p.name)+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status">New arrival</span>':"")+(p.bestSeller?'<span class="admin-status">Best seller</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">Unavailable</span>':'<span class="admin-status is-available">Available</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
+    b.innerHTML=products.map(p=>'<div class="admin-item"><div class="admin-product-main"><img class="admin-product-thumb" src="'+esc(productImageSrc(p.image))+'" alt="" loading="lazy" onerror="this.classList.add(\'image-missing\')"><div class="admin-product-copy"><strong>'+esc(cleanProductName(p.name))+'</strong><small class="admin-product-meta">'+esc(p.category)+" · "+money(p.price)+'</small><div class="admin-product-status">'+(p.newArrival?'<span class="admin-status">New arrival</span>':"")+(p.bestSeller?'<span class="admin-status">Best seller</span>':"")+(p.availability===false?'<span class="admin-status is-unavailable">Unavailable</span>':'<span class="admin-status is-available">Available</span>')+'</div></div></div><button class="danger edit" data-id="'+Number(p.id)+'">EDIT</button></div>').join("");
   }else if(v==="add"){
     b.innerHTML=form();
     const fileInput=$("#fFile"), imageInput=$("#fImage"), preview=$("#fImagePreview"), previewEmpty=$("#fImagePreviewEmpty");
@@ -10073,7 +10082,7 @@ function edit(id){
     try{
       products=oldProducts.filter(x=>Number(x.id)!==Number(id));
       await deleteProductFromGithub(id);
-      await load();
+      render();
       showView("products");
       showAdminToast("Product deleted successfully.","success");
     }catch(e){
@@ -10089,18 +10098,13 @@ async function persistProduct(product){
 }
 async function deleteProductFromGithub(id){
   const deleteOperation=async()=>{
-    await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
-    // Use an uncached Contents API read for post-write verification.
-    const latest=await githubReadJsonFresh("data/products.json");
-    const list=Array.isArray(latest.value)?latest.value:[];
-    if(list.some(p=>Number(p.id)===Number(id))){
-      throw new Error("Deletion was saved but could not yet be verified. Refresh the catalogue before retrying.");
-    }
-    return list;
+    const result=await api({action:"deleteProduct",password:adminPassword,id:Number(id)});
+    if(!Array.isArray(result?.products))throw new Error("Delete completed without a confirmed catalogue response. Refresh before retrying.");
+    if(result.products.some(p=>Number(p.id)===Number(id)))throw new Error("Product deletion could not be confirmed.");
+    return result.products;
   };
   catalogWriteQueue=catalogWriteQueue.then(deleteOperation,deleteOperation);
-  const verified=await catalogWriteQueue;
-  products=verified;
+  products=await catalogWriteQueue;
   githubOriginalIds=new Set(products.map(p=>Number(p.id)));
 }
 function showAdminConfirm(title,message,confirmLabel="CONFIRM"){
@@ -11661,6 +11665,52 @@ if ("serviceWorker" in navigator) {
 #admin .admin-feedback.error{border-color:#E5D5CF!important;border-left-color:#A65A4F!important;background:#FBF1EE!important;color:#783C34!important;}
 #admin .admin-feedback[hidden]{display:none!important;}
 @media(max-width:600px){#admin .admin-feedback{margin:9px 0!important;padding:9px 10px!important;font-size:12px!important;}}
+</style>
+
+<style id="ssv-admin-crud-polish-20261010">
+#admin .admin-product-copy{min-width:0!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important;}
+#admin .admin-product-copy strong{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;overflow-wrap:anywhere!important;line-height:1.25!important;}
+#admin .admin-product-meta{margin:0!important;line-height:1.35!important;}
+#admin .admin-product-status{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:5px!important;}
+#admin .admin-status{box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:24px!important;padding:4px 7px!important;white-space:nowrap!important;line-height:1!important;font-size:10px!important;letter-spacing:0!important;}
+#admin #studioBody label:has(input[type="checkbox"]){display:inline-flex!important;align-items:center!important;gap:7px!important;margin:0 10px 10px 0!important;white-space:nowrap!important;}
+#admin #studioBody label input[type="checkbox"]{margin:0!important;flex:0 0 18px!important;}
+@media(max-width:600px){#admin .admin-product-status{gap:4px!important;}#admin .admin-status{min-height:23px!important;padding:4px 6px!important;font-size:9px!important;}}
+</style>
+
+<style id="ssv-admin-feedback-toast-20261010">
+/* True non-layout-shifting toast, scoped to the Admin modal. */
+#admin .admin-feedback{position:fixed!important;top:max(14px,env(safe-area-inset-top))!important;left:50%!important;z-index:100000!important;box-sizing:border-box!important;width:min(440px,calc(100vw - 28px))!important;max-width:calc(100vw - 28px)!important;margin:0!important;padding:13px 16px!important;border:1px solid #D5DFD0!important;border-left:4px solid #64845A!important;border-radius:8px!important;background:#F5FAF1!important;color:#294A26!important;box-shadow:0 12px 36px rgba(28,25,23,.2)!important;font:500 13px/1.45 Inter,Arial,sans-serif!important;white-space:normal!important;overflow-wrap:anywhere!important;opacity:0!important;transform:translate(-50%,-8px)!important;pointer-events:none!important;transition:opacity .18s ease,transform .18s ease!important;}
+#admin .admin-feedback.show{opacity:1!important;transform:translate(-50%,0)!important;}
+#admin .admin-feedback.error{border-color:#E5C9C2!important;border-left-color:#A65A4F!important;background:#FFF5F2!important;color:#783C34!important;}
+#admin .admin-feedback[hidden]{display:none!important;}
+@media(prefers-reduced-motion:reduce){#admin .admin-feedback{transition:none!important;}}
+</style>
+
+<style id="ssv-admin-nav-typography-final-20261010">
+/* One typography system for PRODUCTS, ADD ITEM, SETTINGS and LOG OUT. */
+#admin .studio-nav button[data-view],
+#admin .studio-nav #logoutBtn{
+  box-sizing:border-box!important;
+  font-family:Montserrat,Inter,Arial,sans-serif!important;
+  font-size:clamp(10px,2.65vw,12px)!important;
+  font-weight:600!important;
+  line-height:1.2!important;
+  letter-spacing:.045em!important;
+  text-transform:uppercase!important;
+  font-kerning:normal!important;
+  font-variant-ligatures:none!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+#admin .studio-nav button[data-view].active{font-weight:700!important;}
+#admin .studio-nav #logoutBtn{font-size:clamp(10px,2.65vw,12px)!important;font-weight:600!important;letter-spacing:.045em!important;}
+@media(max-width:360px){
+  #admin .studio-nav{gap:3px!important;}
+  #admin .studio-nav button[data-view],#admin .studio-nav #logoutBtn{font-size:9px!important;letter-spacing:.015em!important;padding-left:1px!important;padding-right:1px!important;}
+}
 </style>
 </body>
 </html>
