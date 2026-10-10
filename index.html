@@ -11097,6 +11097,19 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
   #admin .panel-top{position:sticky !important; top:0 !important; z-index:5 !important;}
   #admin #studioBody{padding-bottom:24px !important;}
 }
+/* Reduce wasted vertical space around Admin Studio logout. */
+#admin .studio-nav #logoutBtn{
+  grid-column:1 / -1 !important;
+  justify-self:end !important;
+  min-height:32px !important;
+  height:32px !important;
+  margin:3px 0 5px !important;
+  padding:5px 10px !important;
+}
+@media(max-width:600px){
+  #admin .studio-nav{margin-bottom:8px !important;}
+  #admin .studio-nav #logoutBtn{margin:2px 0 4px !important;}
+}
 /* Additional mobile polish: compact controls and ensure the last form field is reachable. */
 #admin #studioBody .admin-image-preview-wrap{min-height:110px !important; margin:10px 0 14px !important; padding:10px !important;}
 #admin #studioBody .admin-image-preview{width:78px !important; height:104px !important; object-fit:contain !important;}
