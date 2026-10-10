@@ -9525,22 +9525,7 @@ async function mutateGithubJson(path,mutator,commitMessage,maxAttempts=5){
   }
   throw lastError||new Error("GitHub save failed. Please try again.");
 }
-async function hashAdminPassword(password,salt){
-  const enc=new TextEncoder();
-  const key=await crypto.subtle.importKey("raw",enc.encode(String(password)),{name:"PBKDF2"},false,["deriveBits"]);
-  const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(String(salt)),iterations:120000,hash:"SHA-256"},key,256);
-  return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-function createPasswordSalt(){
-  const bytes=crypto.getRandomValues(new Uint8Array(16));
-  return Array.from(bytes).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-async function verifyAdminPassword(password,settingsValue){
-  const salt=String(settingsValue?.adminPasswordSalt||"");
-  const hash=String(settingsValue?.adminPasswordHash||"");
-  if(!salt||!hash)return false;
-  return (await hashAdminPassword(password,salt))===hash;
-}
+/* Admin authentication is handled by the OTP worker. Do not authenticate against public settings. */
 
 async function localApi(body){
   if(body.action==="recoverWithGithubToken"){
@@ -9571,7 +9556,7 @@ async function localApi(body){
   if(!storedToken) throw new Error("GitHub storage is not connected.");
   const configured=await githubReadJson("data/settings.json");
   const configuredSettings=configured.value&&typeof configured.value==="object"?configured.value:{};
-  if(!otpAdminSession && !await verifyAdminPassword(String(body.password||""),configuredSettings)) throw new Error("Unauthorized");
+  if(!otpAdminSession) throw new Error("Unauthorized. Sign in with email OTP before changing store data.");
   if(body.action==="saveProduct"){
     const incoming=body.product;
     validateProductInput(incoming);
