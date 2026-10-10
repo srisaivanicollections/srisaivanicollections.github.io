@@ -12531,6 +12531,48 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-search{grid-column:1/-1!important;}
   #admin .admin-filter-clear{grid-column:1/-1!important;width:100%!important;}
 }
+
+/* Admin Studio final cleanup: one section boundary and balanced mobile controls. */
+#admin .admin-products-heading{
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0 0 14px!important;
+}
+#admin .admin-product-counts{
+  border:0!important;
+  box-shadow:none!important;
+  margin:0 0 14px!important;
+  padding:0!important;
+}
+#admin .admin-product-filters{
+  border:1px solid #E4D8C5!important;
+  box-shadow:none!important;
+  margin-top:0!important;
+}
+#admin .admin-product-filters>label{min-width:0!important;}
+#admin .admin-product-filters input,
+#admin .admin-product-filters select{min-width:0!important;width:100%!important;}
+#admin .admin-filter-clear{align-self:end!important;}
+@media(max-width:600px){
+  #admin .admin-product-filters{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    padding:11px!important;
+  }
+  #admin .admin-product-search{grid-column:1/-1!important;}
+  #admin .admin-product-filters>label:nth-of-type(2){grid-column:1!important;}
+  #admin .admin-product-filters>label:nth-of-type(3){grid-column:2!important;}
+  #admin .admin-product-filters>label:nth-of-type(4){grid-column:1!important;}
+  #admin .admin-product-filters>label:nth-of-type(5){grid-column:2!important;}
+  #admin .admin-filter-clear{
+    grid-column:1/-1!important;
+    width:100%!important;
+    height:40px!important;
+    min-height:40px!important;
+  }
+}
+
 </style>
 
 </body>
