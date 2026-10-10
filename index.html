@@ -9984,6 +9984,8 @@ function updateStudioNav(activeView){
 
 function showView(v){
   updateStudioNav(v);
+  const studio=$("#studio");
+  if(studio)studio.classList.toggle("admin-view-add",v==="add");
   const b=$("#studioBody");
   if(v==="products"){
     const productCounts={total:products.length,newArrival:products.filter(p=>p.newArrival).length,bestSeller:products.filter(p=>p.bestSeller).length,available:products.filter(p=>p.availability!==false).length};
@@ -10651,7 +10653,7 @@ if(!window.__LIBAS_ADMIN_OTP_BOUND){
       return;
     }
     const close=e.target.closest("#adminClose");
-    if(close){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();closeAdminModal();return;}
+    if(close){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const addView=$("#studioBody")?.querySelector("#fName");if(addView&&$("#studio")&&!$("#studio").classList.contains("hidden")){showView("products");return;}closeAdminModal();return;}
     const logout=e.target.closest("#logoutBtn");
     if(logout){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();logoutAdmin();return;}
     const send=e.target.closest("#sendOtpBtn");
@@ -12302,6 +12304,16 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-counts>div{padding-inline:4px!important;}
   #admin .admin-product-counts span{font-size:6px!important;}
 }
+</style>
+
+<style id="ssv-admin-add-view-focus-20261010">
+/* Add Product is a focused task: no duplicate navigation or logout distractions. */
+#admin #studio.admin-view-add .studio-nav{display:none!important;}
+#admin #studio.admin-view-add #studioBody{margin-top:0!important;}
+#admin #studio.admin-view-add #studioBody .admin-row,
+#admin #studio.admin-view-add #studioBody .upload-row{margin-bottom:12px!important;}
+#admin #studio.admin-view-add #studioBody #saveItem{min-width:130px!important;min-height:42px!important;}
+#admin #studio.admin-view-add #studioBody #deleteItem{min-height:42px!important;}
 </style>
 </body>
 </html>
