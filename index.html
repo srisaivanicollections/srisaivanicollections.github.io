@@ -9499,6 +9499,32 @@ async function githubWriteJson(path,value,sha,message){
     body:JSON.stringify({message,content,sha,branch:GITHUB_BRANCH})
   });
 }
+
+/* Shared optimistic-concurrency writer for GitHub-backed JSON files.
+   Only SHA/version conflicts are retried. Auth, validation and permission
+   failures surface immediately instead of being disguised as retry failures. */
+function isGithubShaConflict(error){
+  const message=String(error?.message||"").toLowerCase();
+  return error?.status===409 ||
+    (error?.status===422 && (message.includes("sha") || message.includes("does not match") || message.includes("conflict")));
+}
+async function mutateGithubJson(path,mutator,commitMessage,maxAttempts=5){
+  let lastError=null;
+  for(let attempt=0;attempt<maxAttempts;attempt++){
+    const current=await githubReadJsonFresh(path);
+    const next=await mutator(current.value);
+    if(next===null)return {value:current.value,unchanged:true};
+    try{
+      await githubWriteJson(path,next,current.sha,attempt===0?commitMessage:commitMessage+" (retry "+attempt+")");
+      return {value:next,unchanged:false};
+    }catch(error){
+      lastError=error;
+      if(!isGithubShaConflict(error)||attempt===maxAttempts-1)throw error;
+      await new Promise(resolve=>setTimeout(resolve,150*(attempt+1)+Math.floor(Math.random()*120)));
+    }
+  }
+  throw lastError||new Error("GitHub save failed. Please try again.");
+}
 async function hashAdminPassword(password,salt){
   const enc=new TextEncoder();
   const key=await crypto.subtle.importKey("raw",enc.encode(String(password)),{name:"PBKDF2"},false,["deriveBits"]);
@@ -9588,48 +9614,26 @@ async function localApi(body){
   if(body.action==="saveProduct"){
     const incoming=body.product;
     validateProductInput(incoming);
-    const current=await githubReadJson("data/products.json");
-    const list=Array.isArray(current.value)?current.value:[];
     const id=Number(incoming.id);
-    const exists=list.some(p=>Number(p.id)===id);
-    const merged=exists?list.map(p=>Number(p.id)===id?incoming:p):[incoming,...list];
-    if(!merged.length) throw new Error("Catalog safety check failed.");
-    try{
-      await githubWriteJson("data/products.json",merged,current.sha,"Update product");
-    }catch(_){
-      const latest=await githubReadJson("data/products.json");
-      const latestList=Array.isArray(latest.value)?latest.value:[];
-      const latestMerged=latestList.some(p=>Number(p.id)===id)
-        ?latestList.map(p=>Number(p.id)===id?incoming:p)
-        :[incoming,...latestList];
-      await githubWriteJson("data/products.json",latestMerged,latest.sha,"Retry product update");
-    }
+    if(!id)throw new Error("Invalid product ID.");
+    await mutateGithubJson("data/products.json",value=>{
+      const list=Array.isArray(value)?value:[];
+      const exists=list.some(p=>Number(p.id)===id);
+      return exists?list.map(p=>Number(p.id)===id?incoming:p):[incoming,...list];
+    }, "Save product");
     return {ok:true};
   }
   if(body.action==="deleteProduct"){
     const id=Number(body.id);
-    if(!id) throw new Error("Invalid product.");
-    let lastError=null;
-    for(let attempt=0;attempt<4;attempt++){
-      // Always fetch the latest Contents API SHA before each write. GitHub
-      // rejects stale SHAs when another save changes products.json.
-      const current=await githubReadJsonFresh("data/products.json");
-      const list=Array.isArray(current.value)?current.value:[];
-      if(!list.some(p=>Number(p.id)===id)){
-        // Treat an already-removed item as success, not as a second deletion.
-        return {ok:true};
-      }
-      const merged=list.filter(p=>Number(p.id)!==id);
-      if(!merged.length) throw new Error("Cannot delete the last remaining catalog item.");
-      try{
-        await githubWriteJson("data/products.json",merged,current.sha,attempt===0?"Delete product":"Retry product deletion");
-        return {ok:true};
-      }catch(writeError){
-        lastError=writeError;
-        if(attempt<3) await new Promise(resolve=>setTimeout(resolve,250*(attempt+1)));
-      }
-    }
-    throw new Error("The catalogue changed while deleting. Please try again. "+(lastError?.message||""));
+    if(!id)throw new Error("Invalid product.");
+    await mutateGithubJson("data/products.json",value=>{
+      const list=Array.isArray(value)?value:[];
+      if(!list.some(p=>Number(p.id)===id))return null;
+      const next=list.filter(p=>Number(p.id)!==id);
+      if(!next.length)throw new Error("Cannot delete the last remaining catalog item.");
+      return next;
+    },"Delete product");
+    return {ok:true};
   }
   if(body.action==="saveSettings"){
     const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
