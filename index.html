@@ -13454,5 +13454,78 @@ if ("serviceWorker" in navigator) {
 #admin.modal:not(.hidden) #studioBody .admin-products-scroll,#admin.modal:not(.hidden) #studioBody .admin-customize{height:auto!important;max-height:none!important;overflow:visible!important;}
 </style>
 
+
+<style id="ssv-admin-scroll-root-cause-fix-20261011">
+/* Root cause fix: remove zero-height flex sizing that collapses the admin content area.
+   Keep header/tabs fixed; only Products/Settings content scrolls. */
+#admin.modal:not(.hidden) > .panel {
+  display:flex!important;
+  flex-direction:column!important;
+  height:calc(100vh - 36px)!important;
+  height:calc(100dvh - 36px)!important;
+  min-height:0!important;
+  max-height:calc(100dvh - 36px)!important;
+  overflow:hidden!important;
+}
+#admin.modal:not(.hidden) > .panel > .panel-top {
+  flex:0 0 auto!important;
+}
+#admin.modal:not(.hidden) > .panel > #studio:not(.hidden) {
+  display:flex!important;
+  flex:1 1 0!important;
+  flex-direction:column!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:hidden!important;
+}
+#admin.modal:not(.hidden) #studio .studio-nav {
+  flex:0 0 auto!important;
+}
+#admin.modal:not(.hidden) #studioBody {
+  display:block!important;
+  flex:1 1 0!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-y:contain!important;
+  touch-action:pan-y!important;
+  scrollbar-width:auto!important;
+  scrollbar-color:#C8B28A #FAF7F2!important;
+  box-sizing:border-box!important;
+  padding-bottom:28px!important;
+}
+#admin.modal:not(.hidden) #studioBody .admin-products-scroll,
+#admin.modal:not(.hidden) #studioBody .admin-customize {
+  flex:0 0 auto!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {
+  display:block!important;
+  width:10px!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {
+  background:#C8B28A!important;
+  border:2px solid #FAF7F2!important;
+  border-radius:10px!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {
+  background:#FAF7F2!important;
+}
+@media(max-width:900px) {
+  #admin.modal:not(.hidden) > .panel {
+    height:calc(100dvh - 20px)!important;
+    max-height:calc(100dvh - 20px)!important;
+  }
+}
+</style>
+
 </body>
 </html>
