@@ -10662,6 +10662,16 @@ if(document.readyState==="loading"){
   updateAdminView();
 }
 
+// Never restore Admin Studio as an open panel after a reload or browser
+// page restoration. Admin must be opened deliberately with the Admin button.
+window.addEventListener("pageshow",()=>{
+  const adminModal=$("#admin");
+  if(adminModal){
+    adminModal.classList.add("hidden");
+    adminModal.style.setProperty("display","none","important");
+  }
+});
+
 all("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
 document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]");if(t){category=t.dataset.tab;catalogPage=0;render()}const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;catalogPage=0;$("#nav").classList.remove("open");render()}const eb=e.target.closest(".edit");if(eb)edit(Number(eb.dataset.id));if(e.target.id==="saveSettings"){
   e.preventDefault();
