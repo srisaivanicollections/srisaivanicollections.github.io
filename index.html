@@ -13068,9 +13068,8 @@ if ("serviceWorker" in navigator) {
 </style>
 
 <style id="ssv-admin-mobile-scroll-and-filters-fix-20261010">
-/* Admin mobile fix: let the modal itself scroll so every product and control remains reachable. */
+/* Admin mobile fix: preserve the existing open/hidden display state; only correct scroll ownership. */
 #admin.modal{
-  display:block!important;
   position:fixed!important;
   inset:0!important;
   width:100%!important;
