@@ -11686,5 +11686,31 @@ if ("serviceWorker" in navigator) {
 #admin .admin-feedback[hidden]{display:none!important;}
 @media(prefers-reduced-motion:reduce){#admin .admin-feedback{transition:none!important;}}
 </style>
+
+<style id="ssv-admin-nav-typography-final-20261010">
+/* One typography system for PRODUCTS, ADD ITEM, SETTINGS and LOG OUT. */
+#admin .studio-nav button[data-view],
+#admin .studio-nav #logoutBtn{
+  box-sizing:border-box!important;
+  font-family:Montserrat,Inter,Arial,sans-serif!important;
+  font-size:clamp(10px,2.65vw,12px)!important;
+  font-weight:600!important;
+  line-height:1.2!important;
+  letter-spacing:.045em!important;
+  text-transform:uppercase!important;
+  font-kerning:normal!important;
+  font-variant-ligatures:none!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+#admin .studio-nav button[data-view].active{font-weight:700!important;}
+#admin .studio-nav #logoutBtn{font-size:clamp(10px,2.65vw,12px)!important;font-weight:600!important;letter-spacing:.045em!important;}
+@media(max-width:360px){
+  #admin .studio-nav{gap:3px!important;}
+  #admin .studio-nav button[data-view],#admin .studio-nav #logoutBtn{font-size:9px!important;letter-spacing:.015em!important;padding-left:1px!important;padding-right:1px!important;}
+}
+</style>
 </body>
 </html>
