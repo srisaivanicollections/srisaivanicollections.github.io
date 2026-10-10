@@ -10002,7 +10002,6 @@ function showView(v){
     };
     [searchInput,categoryFilter,colorFilter,statusFilter].forEach(control=>control.addEventListener(control===searchInput?"input":"change",renderAdminProductList));
     $("#clearAdminProductFilters").onclick=()=>{searchInput.value="";categoryFilter.value="";colorFilter.value="";statusFilter.value="";renderAdminProductList();};
-    list.addEventListener("click",e=>{const editButton=e.target.closest(".edit");if(editButton)edit(Number(editButton.dataset.id));});
     renderAdminProductList();
   }else if(v==="add"){
     b.innerHTML=form();
