@@ -12490,6 +12490,47 @@ if ("serviceWorker" in navigator) {
 @media(max-width:900px){#admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}#admin .admin-product-search{grid-column:1/-1!important;}#admin .admin-filter-clear{grid-column:1/-1!important;}}
 @media(max-width:600px){#admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:11px!important;gap:10px!important;}#admin .admin-product-search{grid-column:1/-1!important;}#admin .admin-product-filters>label{min-width:0!important;}#admin .admin-filter-clear{grid-column:1/-1!important;width:100%!important;}}
 
+
+/* Admin filters final layout: no duplicated heading/count dividers; compact, balanced controls. */
+#admin .admin-products-heading{
+  border:0!important;
+  padding:0!important;
+  margin:0 0 14px!important;
+}
+#admin .admin-product-counts{
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0 0 14px!important;
+}
+#admin .admin-product-filters{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.35fr) repeat(3,minmax(100px,1fr)) auto!important;
+  align-items:end!important;
+  gap:10px!important;
+  border:1px solid #E4D8C5!important;
+  border-radius:5px!important;
+  box-shadow:none!important;
+}
+#admin .admin-product-search{grid-column:1/-1!important;}
+#admin .admin-product-filters>label{min-width:0!important;}
+#admin .admin-product-filters input,
+#admin .admin-product-filters select{width:100%!important;min-width:0!important;}
+#admin .admin-filter-clear{min-width:82px!important;}
+@media(max-width:900px){
+  #admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
+  #admin .admin-product-search{grid-column:1/-1!important;}
+}
+@media(max-width:600px){
+  #admin .admin-product-filters{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;padding:11px!important;
+  }
+  #admin .admin-product-search{grid-column:1/-1!important;}
+  #admin .admin-product-filters>label:nth-of-type(n){grid-column:auto!important;}
+  #admin .admin-product-search{grid-column:1/-1!important;}
+  #admin .admin-filter-clear{grid-column:1/-1!important;width:100%!important;}
+}
 </style>
 
 </body>
