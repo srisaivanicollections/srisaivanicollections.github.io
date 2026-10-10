@@ -9637,8 +9637,10 @@ async function localApi(body){
   }
   if(body.action==="saveSettings"){
     const incoming=(body.settings&&typeof body.settings==="object")?body.settings:{};
+    // Re-read and merge on every attempt so concurrent product/admin activity
+    // cannot silently overwrite unrelated settings or password metadata.
     let lastError=null;
-    for(let attempt=0;attempt<3;attempt++){
+    for(let attempt=0;attempt<5;attempt++){
       const current=await githubReadJsonFresh("data/settings.json");
       const existing=(current.value&&typeof current.value==="object")?current.value:{};
       validateSettingsInput({...existing,...incoming});
@@ -9646,10 +9648,17 @@ async function localApi(body){
       if(String(incoming.whatsapp??"").trim()===""&&String(existing.whatsapp??"").trim()!=="") merged.whatsapp=existing.whatsapp;
       try{
         await githubWriteJson("data/settings.json",merged,current.sha,attempt===0?"Update shop settings":"Retry shop settings update");
+        const verified=await githubReadJsonFresh("data/settings.json");
+        for(const [key,value] of Object.entries(incoming)){
+          if(JSON.stringify(verified.value?.[key])!==JSON.stringify(value)){
+            throw new Error("Settings were saved but could not be verified. Refresh the page before trying again.");
+          }
+        }
         return {ok:true};
       }catch(writeError){
         lastError=writeError;
-        if(attempt<2) await new Promise(resolve=>setTimeout(resolve,300*(attempt+1)));
+        if(!isGithubShaConflict(writeError)||attempt===4)throw writeError;
+        await new Promise(resolve=>setTimeout(resolve,150*(attempt+1)+Math.floor(Math.random()*120)));
       }
     }
     throw lastError||new Error("Shop settings could not be saved.");
