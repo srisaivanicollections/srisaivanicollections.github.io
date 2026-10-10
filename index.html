@@ -11416,7 +11416,7 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js?v=20261010-admin-fixed-panels-cache12", { updateViaCache: "none" }).catch(error => {
+    navigator.serviceWorker.register("./sw.js?v=20261010-admin-opaque-workspace-cache13", { updateViaCache: "none" }).catch(error => {
       console.warn("Offline support could not be enabled:", error);
     });
   });
@@ -13078,6 +13078,46 @@ if ("serviceWorker" in navigator) {
   #admin .admin-products-heading {margin-bottom:8px!important;}
   #admin .admin-product-counts {margin-bottom:8px!important;}
   #admin .admin-product-filters {gap:6px!important;margin-bottom:6px!important;}
+}
+</style>
+
+
+<style id="ssv-admin-opaque-backdrop-20261010">
+/* Admin Studio is a separate opaque workspace, never a translucent layer over the shop. */
+#admin.modal:not(.hidden) {
+  position:fixed!important;inset:0!important;
+  width:100vw!important;height:100vh!important;height:100dvh!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  margin:0!important;padding:12px!important;box-sizing:border-box!important;
+  overflow:hidden!important;z-index:2147483000!important;
+  background:#FAF7F2!important;
+  opacity:1!important;visibility:visible!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  isolation:isolate!important;
+}
+#admin.modal:not(.hidden)::before,
+#admin.modal:not(.hidden)::after {display:none!important;content:none!important;}
+#admin.modal:not(.hidden) > .panel {
+  position:relative!important;z-index:1!important;
+  display:flex!important;flex-direction:column!important;
+  flex:0 1 1440px!important;
+  width:100%!important;max-width:1440px!important;
+  height:calc(100dvh - 24px)!important;max-height:calc(100dvh - 24px)!important;
+  min-width:0!important;min-height:0!important;
+  margin:0!important;padding:20px 24px!important;
+  overflow:hidden!important;box-sizing:border-box!important;
+  background:#fff!important;opacity:1!important;
+}
+#admin.modal:not(.hidden) > .panel > .panel-top,
+#admin.modal:not(.hidden) > .panel > #studio {flex:0 0 auto!important;min-width:0!important;max-width:100%!important;}
+#admin.modal:not(.hidden) #studio {display:flex!important;flex-direction:column!important;min-height:0!important;overflow:hidden!important;}
+#admin.modal:not(.hidden) #studioBody {
+  flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;
+  overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain!important;
+}
+@media(max-width:900px) {
+  #admin.modal:not(.hidden) {padding:8px!important;}
+  #admin.modal:not(.hidden) > .panel {height:calc(100dvh - 16px)!important;max-height:calc(100dvh - 16px)!important;padding:14px 12px!important;}
 }
 </style>
 
