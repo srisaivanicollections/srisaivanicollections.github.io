@@ -1,16 +1,5 @@
 [
   {
-    "id": 1791654990031,
-    "name": "Pink saree",
-    "category": "Sarees",
-    "color": "",
-    "price": 8000,
-    "image": "assets/products/1791654988040-0afea2882716-SLUS0051574_PURPLE_1_800x800.jpg",
-    "newArrival": true,
-    "bestSeller": true,
-    "availability": true
-  },
-  {
     "id": 1791640980017,
     "name": "Colour Saree",
     "category": "Sarees",
