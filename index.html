@@ -11125,6 +11125,17 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
   #admin #studioBody .admin-image-preview{width:70px !important; height:92px !important;}
   #admin #studioBody button{max-width:100% !important; white-space:normal !important;}
 }
+
+/* Keep the settings save action in normal flow so it never covers form fields. */
+#admin #saveSettings{
+  position:static !important;
+  inset:auto !important;
+  display:block !important;
+  width:100% !important;
+  margin:16px 0 8px !important;
+  box-shadow:none !important;
+}
+#admin .admin-customize{padding-bottom:24px !important;}
 </style>
 
 <script>
