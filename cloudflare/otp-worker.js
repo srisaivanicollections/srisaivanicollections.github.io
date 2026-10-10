@@ -91,7 +91,7 @@ async function sendOtpEmail(env, email, otp) {
       <p style="margin:0 0 12px;color:#7b6848;font-size:12px;letter-spacing:1.5px;text-transform:uppercase">Sri Sai Vani Collections</p>
       <h1 style="font-size:22px;line-height:1.3;margin:0 0 12px">Admin verification code</h1>
       <p style="font-size:15px;line-height:1.6;margin:0 0 18px">Use this six-digit code to sign in to Admin Studio:</p>
-      <p style="font-family:Arial,Helvetica,sans-serif;font-size:32px;font-weight:700;letter-spacing:8px;margin:0 0 20px;padding:16px 12px;text-align:center;background:#f4f0e9;border-radius:8px;color:#1c1917">${otp}</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 20px;padding:16px 12px;background:#f4f0e9;border-radius:8px;text-align:center"><span style="font-family:Arial,Helvetica,sans-serif;font-size:32px;font-weight:700;letter-spacing:8px;color:#1c1917">${otp}</span><a href="https://srisaivanicollections.github.io/copy-otp.html#${otp}" style="display:inline-block;padding:10px 12px;border:1px solid #c8b28a;border-radius:7px;background:#fff;color:#1c1917;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap">Copy code</a></div>
       <p style="font-size:14px;line-height:1.6;margin:0 0 8px">This code expires in <strong>5 minutes</strong> and can be used only once.</p>
       <p style="font-size:13px;line-height:1.6;color:#625d55;margin:0">If you did not request this code, ignore this email.</p>
     </main>
