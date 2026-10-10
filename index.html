@@ -13287,5 +13287,47 @@ if ("serviceWorker" in navigator) {
 }
 </style>
 
+
+<style id="ssv-admin-scroll-layout-parent-fix-20261011">
+/* Ensure the panel, Studio view, and content area share a definite flex height. */
+#admin.modal:not(.hidden) > .panel {
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+}
+#admin.modal:not(.hidden) > .panel > .panel-top {flex:0 0 auto!important;}
+#admin.modal:not(.hidden) > .panel > #studio:not(.hidden) {
+  display:flex!important;
+  flex:1 1 0%!important;
+  flex-direction:column!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:hidden!important;
+}
+#admin.modal:not(.hidden) #studio .studio-nav {flex:0 0 auto!important;}
+#admin.modal:not(.hidden) #studioBody {
+  display:block!important;
+  flex:1 1 auto!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-y:contain!important;
+  scrollbar-width:auto!important;
+  scrollbar-color:#C8B28A #FAF7F2!important;
+  box-sizing:border-box!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {width:10px!important;}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {
+  background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;
+}
+#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {background:#FAF7F2!important;}
+</style>
+
 </body>
 </html>
