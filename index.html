@@ -10085,7 +10085,7 @@ function edit(id){
     };
   }
   $("#deleteItem").onclick=async()=>{
-    if(!confirm("Delete this product?\n\nThis action cannot be undone."))return;
+    if(!(await showAdminConfirm("Delete this product?","This action cannot be undone.","DELETE ITEM")))return;
     const oldProducts=products.slice();
     const btn=$("#deleteItem");
     const originalDeleteText=btn?.textContent||"DELETE ITEM";
@@ -10122,6 +10122,38 @@ async function deleteProductFromGithub(id){
   products=verified;
   githubOriginalIds=new Set(products.map(p=>Number(p.id)));
 }
+function showAdminConfirm(title,message,confirmLabel="CONFIRM"){
+  return new Promise(resolve=>{
+    const admin=$("#admin");
+    if(!admin){resolve(false);return;}
+    const overlay=document.createElement("div");
+    overlay.className="admin-confirm-overlay";
+    overlay.setAttribute("role","presentation");
+    overlay.innerHTML='<section class="admin-confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="adminConfirmTitle" aria-describedby="adminConfirmMessage">'+
+      '<h3 id="adminConfirmTitle"></h3><p id="adminConfirmMessage"></p>'+
+      '<div class="admin-confirm-actions"><button type="button" class="admin-confirm-cancel">CANCEL</button><button type="button" class="admin-confirm-accept"></button></div></section>';
+    overlay.querySelector("#adminConfirmTitle").textContent=title;
+    overlay.querySelector("#adminConfirmMessage").textContent=message;
+    overlay.querySelector(".admin-confirm-accept").textContent=confirmLabel;
+    admin.appendChild(overlay);
+    const cancel=overlay.querySelector(".admin-confirm-cancel");
+    const accept=overlay.querySelector(".admin-confirm-accept");
+    let done=false;
+    const finish=value=>{if(done)return;done=true;overlay.remove();resolve(value);};
+    cancel.addEventListener("click",()=>finish(false));
+    accept.addEventListener("click",()=>finish(true));
+    overlay.addEventListener("click",event=>{if(event.target===overlay)finish(false);});
+    const onKey=event=>{if(event.key==="Escape"){document.removeEventListener("keydown",onKey);finish(false);}};
+    document.addEventListener("keydown",onKey);
+    const originalFinish=finish;
+    // Remove the key handler regardless of which action closes the dialog.
+    const cleanup=()=>document.removeEventListener("keydown",onKey);
+    cancel.addEventListener("click",cleanup,{once:true});
+    accept.addEventListener("click",cleanup,{once:true});
+    requestAnimationFrame(()=>cancel.focus());
+  });
+}
+
 function showAdminToast(message,type="success"){
   let el=$("#adminToast");
   if(!el){
@@ -10666,7 +10698,7 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
     showView("settings");
     showAdminToast("Website settings saved successfully.","success");
   }catch(err){
-    alert(err?.message||"Settings could not be saved.");
+    showAdminToast(err?.message||"Settings could not be saved.","error");
   }finally{
     btn.disabled=false;
     btn.textContent=oldText;
@@ -11136,6 +11168,36 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
   box-shadow:none !important;
 }
 #admin .admin-customize{padding-bottom:24px !important;}
+
+/* In-page confirmation dialog replaces browser-native mobile prompts. */
+#admin .admin-confirm-overlay{
+  position:fixed !important; inset:0 !important; z-index:10020 !important;
+  display:flex !important; align-items:center !important; justify-content:center !important;
+  padding:20px !important; background:rgba(20,18,16,.58) !important;
+  backdrop-filter:blur(3px) !important; -webkit-backdrop-filter:blur(3px) !important;
+}
+#admin .admin-confirm-dialog{
+  width:min(100%,360px) !important; box-sizing:border-box !important;
+  padding:22px !important; border:1px solid #E4D8C5 !important;
+  border-radius:8px !important; background:#FAF8F5 !important;
+  color:#1C1917 !important; box-shadow:0 18px 50px rgba(0,0,0,.2) !important;
+}
+#admin .admin-confirm-dialog h3{
+  margin:0 0 10px !important; font:600 20px/1.25 Arial,Helvetica,sans-serif !important;
+  color:#1C1917 !important;
+}
+#admin .admin-confirm-dialog p{
+  margin:0 0 22px !important; font:400 14px/1.55 Arial,Helvetica,sans-serif !important;
+  color:#6F655C !important; overflow-wrap:anywhere !important;
+}
+#admin .admin-confirm-actions{display:flex !important; justify-content:flex-end !important; gap:10px !important;}
+#admin .admin-confirm-actions button{
+  min-height:42px !important; padding:10px 14px !important; border-radius:3px !important;
+  font:600 10px/1 Arial,Helvetica,sans-serif !important; letter-spacing:.08em !important;
+}
+#admin .admin-confirm-cancel{border:1px solid #DED8CF !important; background:transparent !important; color:#1C1917 !important;}
+#admin .admin-confirm-accept{border:1px solid #1C1917 !important; background:#1C1917 !important; color:#FAF8F5 !important;}
+#admin .admin-toast{max-width:calc(100% - 24px) !important; white-space:normal !important; overflow-wrap:anywhere !important;}
 </style>
 
 <script>
