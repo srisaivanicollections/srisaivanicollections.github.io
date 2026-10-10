@@ -10886,6 +10886,12 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
     font-size:16px;
   }
 }
+
+/* Keep the OTP label hidden whenever the OTP field is in its initial hidden state.
+   !important is needed because older admin field rules may set display with !important. */
+#admin #login #otpField[style*="display:none"]{
+  display:none !important;
+}
 </style>
 <script>
 if ("serviceWorker" in navigator) {
