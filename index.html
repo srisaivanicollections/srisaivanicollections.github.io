@@ -11350,7 +11350,7 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js?v=20261010-admin-desktop-layout-cache9", { updateViaCache: "none" }).catch(error => {
+    navigator.serviceWorker.register("./sw.js?v=20261010-product-discount-rowgap16-cache10", { updateViaCache: "none" }).catch(error => {
       console.warn("Offline support could not be enabled:", error);
     });
   });
@@ -12764,6 +12764,56 @@ if ("serviceWorker" in navigator) {
   #admin .admin-settings-grid{grid-template-columns:minmax(0,1fr)!important;gap:12px!important;padding:12px!important;}
   #admin .admin-customize{padding-right:0!important;}
   #admin #adminProductsScroll,#admin .admin-products-scroll{max-height:40vh!important;}
+}
+</style>
+
+
+<style id="ssv-storefront-discount-rowgap16-20261010">
+/* Final desktop storefront correction: exact 16px row gap and legible discount. */
+@media (min-width: 1101px) {
+  #shop #products.products.lux-product-grid,
+  #shop #products.lux-product-grid,
+  #shop .lux-product-grid {
+    display: grid !important;
+    row-gap: 16px !important;
+    grid-row-gap: 16px !important;
+    column-gap: 18px !important;
+  }
+  #shop .lux-item-body {
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+  #shop .lux-item-footer,
+  #shop .lux-pricing-block {
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+  #shop .lux-pricing-block {
+    display: flex !important;
+    flex-flow: row wrap !important;
+    align-items: baseline !important;
+    column-gap: 9px !important;
+    row-gap: 4px !important;
+  }
+  #shop .lux-price-current,
+  #shop .lux-price-original {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+  #shop .lux-price-discount {
+    display: block !important;
+    flex: 0 0 100% !important;
+    width: fit-content !important;
+    margin: 3px 0 0 !important;
+    padding: 0 !important;
+    color: #C2185B !important;
+    font-family: "Inter", Arial, sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
 }
 </style>
 
