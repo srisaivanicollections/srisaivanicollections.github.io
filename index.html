@@ -9010,7 +9010,7 @@ body:not(#admin) [style*="font-size:7px"]{font-size:8px!important}
     <input id="adminEmail" name="admin-email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="Enter trusted email">
   </div>
   <button type="button" id="sendOtpBtn" class="btn dark">SEND OTP</button>
-  <div class="admin-auth-field" id="otpField" style="margin-top:12px;">
+  <div class="admin-auth-field" id="otpField" style="margin-top:12px;display:none;">
     <label for="adminOtp">Verification code</label>
     <input id="adminOtp" name="admin-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="\d{6}" placeholder="6-digit OTP" disabled style="display:none;">
   </div>
@@ -10245,7 +10245,9 @@ function resetOtpScreen(){
   const send=$("#sendOtpBtn");
   const verify=$("#verifyOtpBtn");
   const resend=$("#resendOtpBtn");
+  const otpField=$("#otpField");
   if(email){email.value="";email.disabled=false;}
+  if(otpField)otpField.style.display="none";
   if(otp){otp.value="";otp.disabled=true;otp.style.display="none";}
   if(send){send.disabled=false;send.style.display="";}
   if(verify){verify.disabled=true;verify.style.display="none";}
@@ -10263,7 +10265,9 @@ function showAdminLogin(){
   const send=$("#sendOtpBtn");
   const verify=$("#verifyOtpBtn");
   const resend=$("#resendOtpBtn");
+  const otpField=$("#otpField");
   if(email){email.value="";email.disabled=false;email.focus();}
+  if(otpField)otpField.style.display="none";
   if(otp){otp.value="";otp.disabled=true;otp.style.display="none";}
   if(send){send.disabled=false;send.style.display="";}
   if(verify){verify.disabled=true;verify.style.display="none";}
@@ -10307,7 +10311,9 @@ async function requestAdminOtp(){
     const otp=$("#adminOtp");
     const verify=$("#verifyOtpBtn");
     const resend=$("#resendOtpBtn");
+    const otpField=$("#otpField");
     if($("#adminEmail"))$("#adminEmail").disabled=true;
+    if(otpField)otpField.style.display="";
     if(otp){otp.value="";otp.disabled=false;otp.style.display="";otp.maxLength=6;otp.inputMode="numeric";otp.autocomplete="one-time-code";otp.focus();}
     if(btn)btn.style.display="none";
     if(verify){verify.disabled=false;verify.style.display="";verify.textContent="VERIFY OTP";}
@@ -10377,6 +10383,7 @@ async function verifyAdminOtp(){
     adminPassword="";
     setStorageStatus("Signed in successfully.",true);
     if($("#adminOtp"))$("#adminOtp").value="";
+    if($("#otpField"))$("#otpField").style.display="none";
     updateAdminView();
     showView("products");
     return true;
