@@ -12590,5 +12590,77 @@ if ("serviceWorker" in navigator) {
 @media(max-width:360px){#admin .admin-product-filters{gap:8px!important;padding:9px!important;}#admin .admin-product-filters input,#admin .admin-product-filters select{padding-inline:7px!important;font-size:11px!important;}#admin .admin-filter-clear{font-size:9px!important;padding-inline:5px!important;}}
 </style>
 
+<style id="ssv-admin-filter-layout-final-20261010">
+/* Single source of truth for the Admin Products toolbar. */
+#admin .admin-products-heading{
+  border:0!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  margin:0 0 14px!important;
+  padding:0!important;
+}
+#admin .admin-products-heading::before,
+#admin .admin-products-heading::after,
+#admin .admin-product-counts::before,
+#admin .admin-product-counts::after,
+#admin .admin-product-filters::before,
+#admin .admin-product-filters::after{display:none!important;content:none!important;}
+#admin .admin-product-counts{
+  border:0!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  margin:0 0 14px!important;
+  padding:0!important;
+}
+#admin .admin-product-filters{
+  display:grid!important;
+  grid-template-columns:minmax(150px,1.5fr) repeat(3,minmax(105px,1fr)) auto!important;
+  align-items:end!important;
+  gap:10px!important;
+  width:100%!important;
+  margin:0 0 12px!important;
+  padding:12px!important;
+  border:1px solid #e5ddd1!important;
+  border-radius:8px!important;
+  background:#faf7f2!important;
+  box-shadow:none!important;
+}
+#admin .admin-product-filters>label{display:flex!important;flex-direction:column!important;gap:5px!important;min-width:0!important;margin:0!important;}
+#admin .admin-filter-label{display:block!important;margin:0!important;font-size:9px!important;line-height:1.25!important;letter-spacing:.08em!important;}
+#admin .admin-product-filters input,
+#admin .admin-product-filters select{
+  width:100%!important;min-width:0!important;height:38px!important;min-height:38px!important;
+  margin:0!important;padding:0 10px!important;border:1px solid #ded7cd!important;border-radius:5px!important;
+  background:#fff!important;font:12px Inter,Arial,sans-serif!important;box-shadow:none!important;
+}
+#admin .admin-product-search{grid-column:auto!important;}
+#admin .admin-filter-clear{
+  min-width:72px!important;height:38px!important;min-height:38px!important;margin:0!important;
+  padding:0 12px!important;border:1px solid #c8b28a!important;border-radius:5px!important;
+  background:transparent!important;color:#493a2b!important;font-size:10px!important;letter-spacing:.04em!important;
+}
+#admin #adminProductResults{margin:0 2px 10px!important;padding:0!important;border:0!important;}
+#admin #adminProductsScroll{margin-top:0!important;border-top:0!important;}
+#admin #adminProductsScroll .admin-item:first-child{margin-top:0!important;}
+@media(max-width:900px){
+ #admin .admin-product-filters{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;padding:12px!important;}
+ #admin .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-filter-clear{width:100%!important;min-width:0!important;}
+}
+@media(max-width:600px){
+ #admin .admin-products-heading{margin-bottom:12px!important;padding:0!important;border:0!important;}
+ #admin .admin-product-counts{margin-bottom:12px!important;padding:0!important;border:0!important;}
+ #admin .admin-product-filters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:11px!important;margin-bottom:10px!important;}
+ #admin .admin-product-search{grid-column:1/-1!important;}
+ #admin .admin-product-filters input,#admin .admin-product-filters select{height:40px!important;min-height:40px!important;font-size:12px!important;padding:0 9px!important;}
+ #admin .admin-filter-label{font-size:8px!important;letter-spacing:.06em!important;}
+ #admin .admin-filter-clear{height:40px!important;min-height:40px!important;}
+}
+@media(max-width:360px){
+ #admin .admin-product-filters{gap:8px!important;padding:9px!important;}
+ #admin .admin-product-filters input,#admin .admin-product-filters select{font-size:11px!important;padding-inline:7px!important;}
+}
+</style>
+
 </body>
 </html>
