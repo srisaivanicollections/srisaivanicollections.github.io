@@ -13121,5 +13121,60 @@ if ("serviceWorker" in navigator) {
 }
 </style>
 
+
+<style id="ssv-admin-login-compact-card-20261011">
+/* Keep the unauthenticated Admin Access screen compact; leave the authenticated workspace unchanged. */
+#admin.modal:not(.hidden):has(#login:not(.hidden)) {
+  align-items:center!important;
+  justify-content:center!important;
+  padding:20px!important;
+  overflow:auto!important;
+}
+#admin.modal:not(.hidden):has(#login:not(.hidden)) > .panel {
+  flex:0 1 520px!important;
+  width:min(520px,calc(100vw - 40px))!important;
+  max-width:520px!important;
+  height:auto!important;
+  max-height:calc(100dvh - 40px)!important;
+  min-height:0!important;
+  margin:auto!important;
+  padding:26px 28px!important;
+  overflow-y:auto!important;
+  border:1px solid #E4D8C5!important;
+  border-radius:10px!important;
+  box-shadow:0 18px 55px rgba(28,25,23,.12)!important;
+}
+#admin.modal:not(.hidden):has(#login:not(.hidden)) > .panel > .panel-top {
+  flex:0 0 auto!important;
+  margin-bottom:18px!important;
+}
+#admin.modal:not(.hidden):has(#login:not(.hidden)) #login {
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0 auto!important;
+}
+#admin.modal:not(.hidden):has(#login:not(.hidden)) #login .admin-auth-copy {
+  margin-bottom:20px!important;
+}
+#admin.modal:not(.hidden):has(#login:not(.hidden)) #login .admin-auth-field,
+#admin.modal:not(.hidden):has(#login:not(.hidden)) #login input,
+#admin.modal:not(.hidden):has(#login:not(.hidden)) #login button.btn {
+  width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:600px) {
+  #admin.modal:not(.hidden):has(#login:not(.hidden)) {padding:12px!important;}
+  #admin.modal:not(.hidden):has(#login:not(.hidden)) > .panel {
+    flex-basis:440px!important;
+    width:calc(100vw - 24px)!important;
+    max-width:440px!important;
+    max-height:calc(100dvh - 24px)!important;
+    padding:20px 16px!important;
+  }
+}
+</style>
+
 </body>
 </html>
