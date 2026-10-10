@@ -11077,6 +11077,7 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
   display:none !important;
 }
 </style>
+<style id="ssv-admin-mobile-scroll-fix">
 /* Mobile Admin Studio scrolling fix: keep the modal within the viewport and make its content genuinely scrollable. */
 #admin.modal{touch-action:pan-y !important; overscroll-behavior-y:contain !important;}
 #admin > .panel{touch-action:pan-y !important; -webkit-overflow-scrolling:touch !important; overscroll-behavior-y:contain !important;}
@@ -11096,6 +11097,22 @@ $("#search").oninput=()=>{catalogPage=0;render()};$("#price").onchange=()=>{cata
   #admin .panel-top{position:sticky !important; top:0 !important; z-index:5 !important;}
   #admin #studioBody{padding-bottom:24px !important;}
 }
+/* Additional mobile polish: compact controls and ensure the last form field is reachable. */
+#admin #studioBody .admin-image-preview-wrap{min-height:110px !important; margin:10px 0 14px !important; padding:10px !important;}
+#admin #studioBody .admin-image-preview{width:78px !important; height:104px !important; object-fit:contain !important;}
+#admin #studioBody input[type="file"]{display:block !important; width:100% !important; min-height:48px !important; padding:10px !important; box-sizing:border-box !important; border:1px solid #E4D8C5 !important; background:#FAF8F5 !important;}
+#admin #studioBody input[type="checkbox"]{flex:0 0 auto !important;}
+#admin #studioBody label{overflow-wrap:anywhere !important;}
+@media(max-width:600px){
+  #admin > .panel{min-height:0 !important; align-self:flex-start !important;}
+  #admin .studio-nav{flex:0 0 auto !important;}
+  #admin #studioBody{flex:0 0 auto !important; min-height:min-content !important; padding-bottom:30px !important;}
+  #admin #studioBody .admin-row,#admin #studioBody .upload-row{display:grid !important; grid-template-columns:minmax(0,1fr) !important;}
+  #admin #studioBody .admin-image-preview-wrap{min-height:100px !important;}
+  #admin #studioBody .admin-image-preview{width:70px !important; height:92px !important;}
+  #admin #studioBody button{max-width:100% !important; white-space:normal !important;}
+}
+</style>
 
 <script>
 if ("serviceWorker" in navigator) {
