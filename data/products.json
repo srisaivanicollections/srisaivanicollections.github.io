@@ -1,5 +1,16 @@
 [
   {
+    "id": 1791640980017,
+    "name": "Colour Saree",
+    "category": "Sarees",
+    "color": "",
+    "price": 2500,
+    "image": "assets/products/1791640977525-c047ab260df8-3590s254_3.jpg",
+    "newArrival": true,
+    "bestSeller": false,
+    "availability": true
+  },
+  {
     "id": 1791626458507,
     "name": "Brown dress",
     "category": "Dresses",
