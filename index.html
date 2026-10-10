@@ -12400,7 +12400,7 @@ if ("serviceWorker" in navigator) {
 /* Single source of truth for Admin Products filters. CSS only; existing HTML IDs and JS handlers are preserved. */
 #admin .admin-product-filters{
   display:grid!important;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 34px!important;
   align-items:end!important;
   gap:8px!important;
   padding:12px!important;
@@ -12463,13 +12463,36 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-filters input,
   #admin .admin-product-filters select{height:34px!important;min-height:34px!important;padding:0 6px!important;font-size:11px!important;}
   #admin .admin-product-filters .admin-filter-label{font-size:9px!important;line-height:1.1!important;}
-  #admin .admin-product-filters .admin-filter-clear{grid-column:1/-1!important;height:34px!important;min-height:34px!important;font-size:11px!important;}
+  #admin .admin-product-filters .admin-filter-clear{
+    grid-column:4!important;
+    grid-row:2!important;
+    width:34px!important;
+    min-width:34px!important;
+    height:34px!important;
+    min-height:34px!important;
+    padding:0!important;
+    font-size:0!important;
+    line-height:1!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  #admin .admin-product-filters .admin-filter-clear::before{
+    content:"↻";
+    display:block;
+    font-size:20px!important;
+    line-height:1!important;
+  }
+  #admin .admin-product-filters .admin-filter-clear{
+    border-radius:8px!important;
+  }
   #admin .admin-product-counts{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important;margin-bottom:8px!important;}
   #admin .admin-product-counts strong{font-size:18px!important;}
   #admin .admin-product-results{margin:4px 2px 6px!important;font-size:11px!important;}
 }
 @media(max-width:380px){
-  #admin .admin-product-filters{gap:5px!important;padding:6px!important;}
+  #admin .admin-product-filters{gap:4px!important;padding:6px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 30px!important;}
+  #admin .admin-product-filters .admin-filter-clear{grid-column:4!important;width:30px!important;min-width:30px!important;height:34px!important;min-height:34px!important;}
   #admin .admin-product-filters input,
   #admin .admin-product-filters select{font-size:10px!important;padding-inline:4px!important;}
   #admin .admin-product-filters .admin-filter-label{font-size:8px!important;}
