@@ -12448,6 +12448,40 @@ if ("serviceWorker" in navigator) {
   #admin .admin-filter-label{font-size:8px!important;letter-spacing:.05em!important;}
   #admin .admin-filter-clear{grid-column:1/-1!important;height:40px!important;min-height:40px!important;}
 }
+
+/* Final cleanup: one divider per section and predictable mobile filter alignment. */
+#admin .admin-products-heading{
+  border-bottom:0!important;
+  padding-bottom:0!important;
+  margin-bottom:14px!important;
+}
+#admin .admin-product-counts{
+  border-top:0!important;
+  border-bottom:0!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+#admin .admin-product-filters{
+  border:1px solid #E4D8C5!important;
+  box-shadow:none!important;
+}
+@media(max-width:600px){
+  #admin .admin-product-filters{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    padding:11px!important;
+  }
+  #admin .admin-product-search{grid-column:1/-1!important;}
+  #admin .admin-product-filters>label:nth-of-type(5){grid-column:1!important;}
+  #admin .admin-product-filters>label:nth-of-type(6){grid-column:2!important;}
+  #admin .admin-product-filters .admin-filter-clear{
+    grid-column:2!important;
+    width:100%!important;
+    height:42px!important;
+    min-height:42px!important;
+  }
+}
+
 </style>
 
 </body>
