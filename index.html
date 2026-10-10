@@ -11741,6 +11741,144 @@ if ("serviceWorker" in navigator) {
   }
 }
 
+
+/* Admin Studio final visual pass: header, tabs, and compact status text */
+#admin .panel-top{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  padding:14px 20px 12px !important;
+  margin:0 0 8px !important;
+  border-bottom:1px solid var(--line) !important;
+  min-height:0 !important;
+}
+#admin .panel-top h2{
+  margin:0 !important;
+  font-size:clamp(29px,5vw,36px) !important;
+  line-height:1.05 !important;
+  letter-spacing:-.015em !important;
+}
+#admin .panel-top > button{
+  flex:0 0 36px !important;
+  width:36px !important;
+  height:36px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  color:var(--muted) !important;
+  font-size:27px !important;
+  line-height:1 !important;
+}
+#admin .studio-nav{
+  display:flex !important;
+  align-items:stretch !important;
+  gap:0 !important;
+  margin:0 20px 14px !important;
+  padding:0 !important;
+  border-bottom:1px solid var(--line) !important;
+  background:var(--paper) !important;
+}
+#admin .studio-nav button[data-view],
+#admin .studio-nav #logoutBtn{
+  position:relative !important;
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  min-height:44px !important;
+  margin:0 !important;
+  padding:10px 3px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  color:var(--muted) !important;
+  font-family:"Montserrat","Inter",Arial,sans-serif !important;
+  font-size:clamp(8px,2.4vw,10px) !important;
+  font-weight:600 !important;
+  line-height:1.2 !important;
+  letter-spacing:.025em !important;
+  text-align:center !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+}
+#admin .studio-nav button[data-view].active{
+  color:var(--ink) !important;
+}
+#admin .studio-nav button[data-view].active::after{
+  content:"" !important;
+  position:absolute !important;
+  left:12% !important;
+  right:12% !important;
+  bottom:-1px !important;
+  height:2px !important;
+  background:var(--gold) !important;
+}
+#admin .studio-nav #logoutBtn:hover{
+  color:var(--ink) !important;
+  background:rgba(179,142,93,.07) !important;
+}
+#admin .studio-nav #logoutBtn:focus-visible{
+  outline:2px solid var(--gold) !important;
+  outline-offset:-2px !important;
+}
+/* Text-like status labels: no badge boxes, only compact colored dots */
+#admin .admin-product-status{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  gap:5px 12px !important;
+  margin-top:7px !important;
+  min-width:0 !important;
+}
+#admin .admin-product-status .admin-status{
+  display:inline-flex !important;
+  align-items:center !important;
+  min-height:18px !important;
+  max-width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  font-family:"Montserrat","Inter",Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:600 !important;
+  line-height:1.25 !important;
+  letter-spacing:.025em !important;
+  white-space:nowrap !important;
+  overflow-wrap:normal !important;
+}
+#admin .admin-product-status .admin-status::before{
+  content:"•" !important;
+  display:inline-block !important;
+  margin-right:4px !important;
+  font-size:12px !important;
+  line-height:1 !important;
+}
+#admin .admin-product-status .admin-status.is-new{color:#766343 !important}
+#admin .admin-product-status .admin-status.is-new::before{color:#B38E5D !important}
+#admin .admin-product-status .admin-status.is-best{color:#6E2735 !important}
+#admin .admin-product-status .admin-status.is-best::before{color:#6E2735 !important}
+#admin .admin-product-status .admin-status.is-available{color:#45613D !important}
+#admin .admin-product-status .admin-status.is-available::before{color:#45613D !important}
+#admin .admin-product-status .admin-status.is-unavailable{color:#8A4338 !important}
+#admin .admin-product-status .admin-status.is-unavailable::before{color:#8A4338 !important}
+@media(max-width:600px){
+  #admin .panel-top{padding:12px 16px 10px !important;margin-bottom:6px !important}
+  #admin .studio-nav{margin:0 16px 12px !important}
+  #admin .studio-nav button[data-view],#admin .studio-nav #logoutBtn{
+    min-height:42px !important;
+    padding:9px 1px !important;
+    font-size:8.5px !important;
+    letter-spacing:0 !important;
+  }
+  #admin .admin-product-status{gap:4px 9px !important}
+}
+
 </style>
 </body>
 </html>
