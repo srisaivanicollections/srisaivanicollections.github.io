@@ -9598,7 +9598,7 @@ async function localApi(body){
             throw new Error("Settings were saved but could not be verified. Refresh the page before trying again.");
           }
         }
-        return {ok:true};
+        return {ok:true,settings:verified.value};
       }catch(writeError){
         lastError=writeError;
         if(!isGithubShaConflict(writeError)||attempt===4)throw writeError;
@@ -10672,12 +10672,9 @@ document.addEventListener("click",async e=>{const t=e.target.closest("[data-tab]
   try{
     const saveSettingsOperation=async()=>api({action:"saveSettings",password:adminPassword,settings:nextSettings});
     settingsWriteQueue=settingsWriteQueue.then(saveSettingsOperation,saveSettingsOperation);
-    await settingsWriteQueue;
-    const verified=await githubReadJson("data/settings.json");
-    if(!verified.value||String(verified.value.name||"")!==String(nextSettings.name||"")||String(verified.value.whatsapp||"")!==String(nextSettings.whatsapp||"")||String(verified.value.instagram||"")!==String(nextSettings.instagram||"")||Object.keys(nextSettings).some(key=>String(verified.value[key]??"")!==String(nextSettings[key]??""))){
-      throw new Error("Settings could not be verified after saving.");
-    }
-    settings=verified.value;
+    const result=await settingsWriteQueue;
+    if(!result?.settings) throw new Error("Settings were saved but could not be verified. Refresh before retrying.");
+    settings=result.settings;
     apply();
     render();
     showView("settings");
