@@ -12474,6 +12474,28 @@ if ("serviceWorker" in navigator) {
   #admin .admin-product-filters select{font-size:10px!important;padding-inline:4px!important;}
   #admin .admin-product-filters .admin-filter-label{font-size:8px!important;}
 }
+
+@media(max-width:900px){
+  #admin .admin-product-filters>label:has(#adminProductCategory),
+  #admin .admin-product-filters>label:has(#adminProductColor),
+  #admin .admin-product-filters>label:has(#adminProductStatus){
+    grid-row:2!important;
+    grid-column:auto!important;
+    min-width:0!important;
+  }
+  #admin .admin-product-filters>label:has(#adminProductCategory){grid-column:1!important;}
+  #admin .admin-product-filters>label:has(#adminProductColor){grid-column:2!important;}
+  #admin .admin-product-filters>label:has(#adminProductStatus){grid-column:3!important;}
+  #admin .admin-product-filters>label:has(#adminProductCategory) select,
+  #admin .admin-product-filters>label:has(#adminProductColor) select,
+  #admin .admin-product-filters>label:has(#adminProductStatus) select{
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
+    padding-left:6px!important;
+    padding-right:18px!important;
+  }
+}
 </style>
 <style id="ssv-admin-tab-single-underline-20261010">
 /* Keep one divider treatment: active tab underline only, no second nav baseline. */
