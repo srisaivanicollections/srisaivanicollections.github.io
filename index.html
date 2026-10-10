@@ -13233,465 +13233,63 @@ if ("serviceWorker" in navigator) {
 </style>
 
 
-<style id="ssv-admin-scrollable-products-settings-20261011">
-/* Keep Admin navigation fixed; give the active Products or Settings view its own usable scroll area. */
-#admin.modal:not(.hidden) > .panel > #studio {
-  flex:1 1 auto!important;
-  min-height:0!important;
-  height:auto!important;
-  max-height:100%!important;
-  overflow:hidden!important;
+<style id="ssv-admin-studio-scroll-consolidated-20261011">
+/* Admin Studio only: one constrained panel and one scrollable content region.
+   Login and storefront layout are intentionally excluded. */
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) {
+  position:fixed!important; inset:0!important; display:flex!important;
+  align-items:center!important; justify-content:center!important;
+  overflow:hidden!important; box-sizing:border-box!important;
 }
-#admin.modal:not(.hidden) #studio .studio-nav {
-  flex:0 0 auto!important;
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) > .panel {
+  display:flex!important; flex:0 1 1180px!important; flex-direction:column!important;
+  width:min(1180px,calc(100vw - 32px))!important; max-width:1180px!important;
+  height:calc(100vh - 32px)!important; height:calc(100dvh - 32px)!important;
+  max-height:calc(100vh - 32px)!important; max-height:calc(100dvh - 32px)!important;
+  min-width:0!important; min-height:0!important; overflow:hidden!important; box-sizing:border-box!important;
 }
-#admin.modal:not(.hidden) #studioBody {
-  display:block!important;
-  flex:1 1 0!important;
-  min-height:0!important;
-  height:0!important;
-  max-height:none!important;
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-  -webkit-overflow-scrolling:touch!important;
-  overscroll-behavior-y:contain!important;
-  scrollbar-gutter:stable!important;
-  touch-action:pan-y!important;
-  padding-bottom:24px!important;
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) > .panel > .panel-top {flex:0 0 auto!important;}
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) > .panel > #studio:not(.hidden) {
+  display:flex!important; flex:1 1 0%!important; flex-direction:column!important;
+  min-width:0!important; min-height:0!important; height:auto!important; max-height:none!important; overflow:hidden!important;
 }
-#admin.modal:not(.hidden) #studioBody > * {
-  min-height:min-content!important;
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) #studio .studio-nav {flex:0 0 auto!important; position:static!important;}
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) #studioBody {
+  display:block!important; flex:1 1 0%!important; min-width:0!important; min-height:0!important;
+  width:100%!important; height:auto!important; max-height:none!important;
+  overflow-x:hidden!important; overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important; overscroll-behavior-y:contain!important; touch-action:pan-y!important;
+  scrollbar-width:thin!important; scrollbar-color:#C8B28A #FAF7F2!important;
+  box-sizing:border-box!important; padding:0 4px 28px 0!important;
 }
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {
-  width:10px!important;
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) #studioBody .admin-products-scroll,
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) #studioBody .admin-customize {
+  flex:0 0 auto!important; height:auto!important; max-height:none!important; overflow:visible!important;
 }
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {
-  background:#c8b28a!important;
-  border:2px solid #fff!important;
-  border-radius:10px!important;
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) #studioBody::-webkit-scrollbar {width:10px!important;}
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) #studioBody::-webkit-scrollbar-thumb {
+  background:#C8B28A!important; border:2px solid #FAF7F2!important; border-radius:10px!important;
 }
+#admin.modal:not(.hidden):has(#studio:not(.hidden)) #studioBody::-webkit-scrollbar-track {background:#FAF7F2!important;}
 @media(max-width:900px) {
-  #admin.modal:not(.hidden) #studioBody {padding-bottom:30px!important;}
+  #admin.modal:not(.hidden):has(#studio:not(.hidden)) {padding:10px!important;}
+  #admin.modal:not(.hidden):has(#studio:not(.hidden)) > .panel {
+    width:calc(100vw - 20px)!important;
+    height:calc(100vh - 20px)!important; height:calc(100dvh - 20px)!important;
+    max-height:calc(100vh - 20px)!important; max-height:calc(100dvh - 20px)!important;
+    padding:16px 14px!important;
+  }
 }
-</style>
-
-
-<style id="ssv-admin-products-settings-scroll-20261011">
-/* Restore a real vertical scroll area for both Admin Studio views. */
-#admin.modal:not(.hidden) > .panel > #studio {
-  flex:1 1 auto!important;min-height:0!important;height:auto!important;overflow:hidden!important;
-}
-#admin.modal:not(.hidden) #studioBody {
-  display:block!important;flex:1 1 0!important;min-height:0!important;height:0!important;max-height:none!important;
-  overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;
-  overscroll-behavior-y:contain!important;scrollbar-width:auto!important;scrollbar-gutter:stable!important;
-  padding-bottom:24px!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar{width:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb{background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track{background:#FAF7F2!important;}
-#admin.modal:not(.hidden) #studioBody .admin-customize{min-height:min-content!important;overflow:visible!important;}
-</style>
-
-
-<style id="ssv-admin-visible-scrollbars-products-settings-20261011">
-/* Products and Settings: fixed navigation with a genuinely scrollable content region. */
-#admin.modal:not(.hidden) > .panel > #studio:not(.hidden) {
-  display:flex!important;
-  flex:1 1 auto!important;
-  flex-direction:column!important;
-  min-height:0!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow:hidden!important;
-}
-#admin.modal:not(.hidden) #studio .studio-nav {
-  flex:0 0 auto!important;
-}
-#admin.modal:not(.hidden) #studioBody {
-  display:block!important;
-  flex:1 1 0%!important;
-  min-height:0!important;
-  height:0!important;
-  max-height:none!important;
-  overflow-x:hidden!important;
-  overflow-y:scroll!important;
-  -webkit-overflow-scrolling:touch!important;
-  overscroll-behavior-y:contain!important;
-  scrollbar-gutter:stable!important;
-  scrollbar-width:thin!important;
-  scrollbar-color:#C8B28A #FAF7F2!important;
-  touch-action:pan-y!important;
-  padding-bottom:28px!important;
-  box-sizing:border-box!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {
-  display:block!important;
-  width:10px!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {
-  background:#C8B28A!important;
-  border:2px solid #FAF7F2!important;
-  border-radius:10px!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {
-  background:#FAF7F2!important;
-}
-#admin.modal:not(.hidden) #studioBody .admin-customize {
-  min-height:min-content!important;
-  overflow:visible!important;
-}
-</style>
-
-
-<style id="ssv-admin-scroll-layout-parent-fix-20261011">
-/* Ensure the panel, Studio view, and content area share a definite flex height. */
-#admin.modal:not(.hidden) > .panel {
-  display:flex!important;
-  flex-direction:column!important;
-  min-height:0!important;
-}
-#admin.modal:not(.hidden) > .panel > .panel-top {flex:0 0 auto!important;}
-#admin.modal:not(.hidden) > .panel > #studio:not(.hidden) {
-  display:flex!important;
-  flex:1 1 0%!important;
-  flex-direction:column!important;
-  height:0!important;
-  min-height:0!important;
-  max-height:none!important;
-  overflow:hidden!important;
-}
-#admin.modal:not(.hidden) #studio .studio-nav {flex:0 0 auto!important;}
-#admin.modal:not(.hidden) #studioBody {
-  display:block!important;
-  flex:1 1 auto!important;
-  width:100%!important;
-  min-width:0!important;
-  min-height:0!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-  -webkit-overflow-scrolling:touch!important;
-  overscroll-behavior-y:contain!important;
-  scrollbar-width:auto!important;
-  scrollbar-color:#C8B28A #FAF7F2!important;
-  box-sizing:border-box!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {width:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {
-  background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {background:#FAF7F2!important;}
-</style>
-
-
-<style id="ssv-admin-products-settings-scroll-final-20261011">
-/* Scoped layout fix: keep Admin header/tabs fixed and scroll only Products/Settings content. */
-#admin.modal:not(.hidden) > .panel {
-  display:flex!important;
-  flex-direction:column!important;
-  height:calc(100vh - 36px)!important;
-  height:calc(100dvh - 36px)!important;
-  max-height:calc(100vh - 36px)!important;
-  max-height:calc(100dvh - 36px)!important;
-  min-height:0!important;
-  overflow:hidden!important;
-  box-sizing:border-box!important;
-}
-#admin.modal:not(.hidden) > .panel > .panel-top {flex:0 0 auto!important;}
-#admin.modal:not(.hidden) > .panel > #studio:not(.hidden) {
-  display:flex!important;
-  flex:1 1 0!important;
-  flex-direction:column!important;
-  min-height:0!important;
-  height:0!important;
-  max-height:none!important;
-  overflow:hidden!important;
-}
-#admin.modal:not(.hidden) #studio .studio-nav {flex:0 0 auto!important;}
-#admin.modal:not(.hidden) #studioBody {
-  display:block!important;
-  flex:1 1 0!important;
-  min-height:0!important;
-  height:0!important;
-  max-height:none!important;
-  overflow-x:hidden!important;
-  overflow-y:scroll!important;
-  -webkit-overflow-scrolling:touch!important;
-  overscroll-behavior-y:contain!important;
-  scrollbar-width:auto!important;
-  scrollbar-color:#C8B28A #FAF7F2!important;
-  touch-action:pan-y!important;
-  padding-bottom:28px!important;
-  box-sizing:border-box!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {display:block!important;width:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {background:#FAF7F2!important;}
-@media(max-width:900px) {
-  #admin.modal:not(.hidden) > .panel {
-    height:calc(100dvh - 20px)!important;
-    max-height:calc(100dvh - 20px)!important;
+@media(max-width:600px) {
+  #admin.modal:not(.hidden):has(#studio:not(.hidden)) {padding:8px!important;}
+  #admin.modal:not(.hidden):has(#studio:not(.hidden)) > .panel {
+    width:calc(100vw - 16px)!important;
+    height:calc(100vh - 16px)!important; height:calc(100dvh - 16px)!important;
+    max-height:calc(100vh - 16px)!important; max-height:calc(100dvh - 16px)!important;
+    padding:13px 11px!important;
   }
 }
 </style>
 
-
-<style id="ssv-admin-single-scroll-region-fix-20261011">
-/* Products and Settings: use one full-height scrollbar, not nested short scroll areas. */
-#admin.modal:not(.hidden) #studioBody {
-  flex:1 1 0!important;
-  min-height:0!important;
-  height:0!important;
-  max-height:none!important;
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-  scrollbar-width:thin!important;
-  scrollbar-color:#C8B28A #FAF7F2!important;
-  -webkit-overflow-scrolling:touch!important;
-}
-#admin.modal:not(.hidden) #studioBody .admin-products-scroll {
-  flex:0 0 auto!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow:visible!important;
-}
-#admin.modal:not(.hidden) #studioBody .admin-customize {
-  height:auto!important;
-  max-height:none!important;
-  overflow:visible!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {display:block!important;width:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {background:#FAF7F2!important;}
-</style>
-
-
-
-<style id="ssv-admin-scroll-height-conflict-fix-20261011">
-/* Final scoped rule: a definite flex chain lets Products and Settings scroll without zero-height clipping. */
-#admin.modal:not(.hidden) > .panel{
-  display:flex!important;flex-direction:column!important;min-height:0!important;overflow:hidden!important;
-}
-#admin.modal:not(.hidden) > .panel > .panel-top{flex:0 0 auto!important;}
-#admin.modal:not(.hidden) > .panel > #studio:not(.hidden){
-  display:flex!important;flex:1 1 0%!important;flex-direction:column!important;
-  min-height:0!important;height:auto!important;max-height:none!important;overflow:hidden!important;
-}
-#admin.modal:not(.hidden) #studio .studio-nav{flex:0 0 auto!important;}
-#admin.modal:not(.hidden) #studioBody{
-  display:block!important;flex:1 1 0%!important;min-width:0!important;min-height:0!important;
-  width:100%!important;height:auto!important;max-height:none!important;
-  overflow-x:hidden!important;overflow-y:auto!important;
-  -webkit-overflow-scrolling:touch!important;overscroll-behavior-y:contain!important;
-  scrollbar-width:auto!important;scrollbar-color:#C8B28A #FAF7F2!important;
-  box-sizing:border-box!important;
-}
-#admin.modal:not(.hidden) #studioBody .admin-products-scroll,
-#admin.modal:not(.hidden) #studioBody .admin-customize{
-  flex:0 0 auto!important;height:auto!important;max-height:none!important;overflow:visible!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar{display:block!important;width:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb{background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track{background:#FAF7F2!important;}
-</style>
-
-
-<style id="ssv-admin-products-settings-scroll-definite-height-20261011">
-/* Scoped to Products/Settings content: fixed header/tabs, scrollable content. */
-#admin.modal:not(.hidden) > .panel{display:flex!important;flex-direction:column!important;min-height:0!important;overflow:hidden!important;}
-#admin.modal:not(.hidden) > .panel > .panel-top,#admin.modal:not(.hidden) #studio .studio-nav{flex:0 0 auto!important;}
-#admin.modal:not(.hidden) > .panel > #studio:not(.hidden){display:flex!important;flex:1 1 auto!important;flex-direction:column!important;min-height:0!important;height:0!important;max-height:none!important;overflow:hidden!important;}
-#admin.modal:not(.hidden) #studioBody{display:block!important;flex:1 1 auto!important;min-width:0!important;min-height:0!important;height:0!important;max-height:none!important;overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior-y:contain!important;touch-action:pan-y!important;scrollbar-width:auto!important;scrollbar-color:#C8B28A #FAF7F2!important;box-sizing:border-box!important;padding-bottom:28px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar{display:block!important;width:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb{background:#C8B28A!important;border:2px solid #FAF7F2!important;border-radius:10px!important;}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track{background:#FAF7F2!important;}
-#admin.modal:not(.hidden) #studioBody .admin-products-scroll,#admin.modal:not(.hidden) #studioBody .admin-customize{height:auto!important;max-height:none!important;overflow:visible!important;}
-</style>
-
-
-<style id="ssv-admin-scroll-root-cause-fix-20261011">
-/* Root cause fix: remove zero-height flex sizing that collapses the admin content area.
-   Keep header/tabs fixed; only Products/Settings content scrolls. */
-#admin.modal:not(.hidden) > .panel {
-  display:flex!important;
-  flex-direction:column!important;
-  height:calc(100vh - 36px)!important;
-  height:calc(100dvh - 36px)!important;
-  min-height:0!important;
-  max-height:calc(100dvh - 36px)!important;
-  overflow:hidden!important;
-}
-#admin.modal:not(.hidden) > .panel > .panel-top {
-  flex:0 0 auto!important;
-}
-#admin.modal:not(.hidden) > .panel > #studio:not(.hidden) {
-  display:flex!important;
-  flex:1 1 0!important;
-  flex-direction:column!important;
-  height:auto!important;
-  min-height:0!important;
-  max-height:none!important;
-  overflow:hidden!important;
-}
-#admin.modal:not(.hidden) #studio .studio-nav {
-  flex:0 0 auto!important;
-}
-#admin.modal:not(.hidden) #studioBody {
-  display:block!important;
-  flex:1 1 0!important;
-  width:100%!important;
-  min-width:0!important;
-  min-height:0!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-  -webkit-overflow-scrolling:touch!important;
-  overscroll-behavior-y:contain!important;
-  touch-action:pan-y!important;
-  scrollbar-width:auto!important;
-  scrollbar-color:#C8B28A #FAF7F2!important;
-  box-sizing:border-box!important;
-  padding-bottom:28px!important;
-}
-#admin.modal:not(.hidden) #studioBody .admin-products-scroll,
-#admin.modal:not(.hidden) #studioBody .admin-customize {
-  flex:0 0 auto!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow:visible!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar {
-  display:block!important;
-  width:10px!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-thumb {
-  background:#C8B28A!important;
-  border:2px solid #FAF7F2!important;
-  border-radius:10px!important;
-}
-#admin.modal:not(.hidden) #studioBody::-webkit-scrollbar-track {
-  background:#FAF7F2!important;
-}
-@media(max-width:900px) {
-  #admin.modal:not(.hidden) > .panel {
-    height:calc(100dvh - 20px)!important;
-    max-height:calc(100dvh - 20px)!important;
-  }
-}
-</style>
-
-
-<style id="admin-studio-scroll-final-cascade-fix">
-/* Final cascade guard: later legacy styles must not disable Admin Studio scrolling. */
-#admin.modal:has(#studio:not(.hidden)) {
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-}
-#admin.modal:has(#studio:not(.hidden)) > .panel {
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 0 !important;
-  max-height: calc(100dvh - 32px) !important;
-  height: calc(100dvh - 32px) !important;
-  overflow: hidden !important;
-}
-#admin #studio:not(.hidden) {
-  display: flex !important;
-  flex: 1 1 0% !important;
-  flex-direction: column !important;
-  min-height: 0 !important;
-  height: auto !important;
-  overflow: hidden !important;
-}
-#admin #studio:not(.hidden) .studio-nav {
-  flex: 0 0 auto !important;
-  position: static !important;
-}
-#admin #studio:not(.hidden) #studioBody {
-  display: block !important;
-  flex: 1 1 0% !important;
-  min-height: 0 !important;
-  height: 0 !important;
-  max-height: none !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  -webkit-overflow-scrolling: touch !important;
-  overscroll-behavior: contain !important;
-  padding-bottom: 90px !important;
-}
-#admin #studio:not(.hidden) #adminProductsScroll {
-  display: block !important;
-  overflow-y: visible !important;
-  padding-bottom: 20px !important;
-}
-@media (max-width: 600px) {
-  #admin.modal:has(#studio:not(.hidden)) > .panel {
-    max-height: calc(100dvh - 16px) !important;
-    height: calc(100dvh - 16px) !important;
-  }
-  #admin #studio:not(.hidden) #studioBody {
-    padding-bottom: 110px !important;
-  }
-}
-</style>
-
-<style id="admin-studio-scroll-final-implementation">
-/* Admin Studio only. Activated only while #studio is visible; login and storefront are untouched. */
-#admin.modal:has(#studio:not(.hidden)) > .panel {
-  display: flex !important;
-  flex-direction: column !important;
-  height: min(850px, calc(100dvh - 32px)) !important;
-  max-height: calc(100dvh - 32px) !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-}
-#admin.modal:has(#studio:not(.hidden)) > .panel > .panel-top {
-  flex: 0 0 auto !important;
-  position: relative !important;
-}
-#admin #studio:not(.hidden) {
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 1 0% !important;
-  min-height: 0 !important;
-  height: auto !important;
-  overflow: hidden !important;
-}
-#admin #studio:not(.hidden) .studio-nav {
-  flex: 0 0 auto !important;
-  position: relative !important;
-  top: auto !important;
-}
-#admin #studio:not(.hidden) #studioBody {
-  display: block !important;
-  flex: 1 1 0% !important;
-  min-height: 0 !important;
-  height: 100% !important;
-  max-height: none !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  -webkit-overflow-scrolling: touch !important;
-  overscroll-behavior: contain !important;
-  padding-bottom: 100px !important;
-  scrollbar-gutter: stable;
-}
-#admin #studio:not(.hidden) #adminProductsScroll {
-  display: block !important;
-  overflow-y: visible !important;
-  padding-bottom: 20px !important;
-}
-@media (max-width: 600px) {
-  #admin.modal:has(#studio:not(.hidden)) > .panel {
-    height: calc(100dvh - 20px) !important;
-    max-height: calc(100dvh - 20px) !important;
-  }
-  #admin #studio:not(.hidden) #studioBody {
-    padding-bottom: 110px !important;
-  }
-}
-</style>
 </body>
 </html>
